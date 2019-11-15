@@ -28,6 +28,23 @@ public class PresentationMapper {
 	protected PresentationMapper() {
 
 	}
+	
+	/**
+	 * Methode zum Sicherstellen der Singleton-Eigenschaft. Diese sorgt dafür, dass
+	 * nur eine einzige Instanz der PresentationMapper-Klasse existiert. Aufgerufen wird
+	 * die Klasse somit über PresentationMapper.presentationMapper() und nicht über den
+	 * New-Operator.
+	 * 
+	 * @return Das <code/>presentationMapper<code/> Objekt.
+	 */
 
+	public static PresentationMapper PresentationMapper() {
+		if (presentationMapper == null) {
+			presentationMapper = new PresentationMapper();
+		}
+		return presentationMapper;
+	}
+
+	
 
 }
