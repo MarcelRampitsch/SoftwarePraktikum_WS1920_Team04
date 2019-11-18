@@ -14,7 +14,7 @@ public class DBConnection {
 	private static Connection con = null;
 	
 																		//AnmeldeName in MySQL-Workbench(local)-->root, Passwort dazu-->student
-	private static String localUrl = "jdbc:mysql://localhost:3306/SoftwarePraktikum_WS1920?user=root&password=student&useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static String localUrl = "jdbc:mysql://localhost:3306/SoftwarePraktikum_WS1920?user=root&password=passwort&useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static String googleUrl = "";
 	
 	/*
