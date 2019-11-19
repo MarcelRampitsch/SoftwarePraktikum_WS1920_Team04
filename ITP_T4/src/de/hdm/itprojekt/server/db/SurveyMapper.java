@@ -1,9 +1,9 @@
 package de.hdm.itprojekt.server.db;
 
-public class MovieMapper {
+public class SurveyMapper {
 	
 	/**
-	 * Die Klasse MovieMapper bildet <code>Movie</code> Objekte auf eine
+	 * Die Klasse SurveyMapper bildet <code>Survey</code> Objekte auf eine
 	 * relationale Datenbank ab. Ebenfalls ist es möglich aus Datenbank-Tupel
 	 * Java-Objekte zu erzeugen.
 	 * 
@@ -11,39 +11,36 @@ public class MovieMapper {
 	 * Methoden wie z.B. (insert, delete,update..).
 	 */
 	
-	private static MovieMapper movieMapper =null;
+	private static SurveyMapper surveyMapper =null;
 	
 
 	/**
-	 * Die Klasse MovieMapper wird nur einmal instantiiert
+	 * Die Klasse SurveyMapper wird nur einmal instantiiert
 	 * (Singleton-Eigenschaft). Damit diese Eigenschaft erfüllt werden kann, wird
 	 * zunächst eine Variable mit dem Schlüsselwort static und dem Standardwert null
 	 * erzeugt. Sie speichert die Instanz dieser Klasse.
 	 */
 	
-	protected MovieMapper() {
+	protected SurveyMapper() {
 		
 	}
 	
 	
 	/**
 	 * Methode zum Sicherstellen der Singleton-Eigenschaft. Diese sorgt dafür, dass
-	 * nur eine einzige Instanz der MovieMapper-Klasse existiert. Aufgerufen wird
-	 * die Klasse somit über MovieMapper.movieMapper() und nicht über den
+	 * nur eine einzige Instanz der SurveyMapper-Klasse existiert. Aufgerufen wird
+	 * die Klasse somit über SurveyMapper.surveyMapper() und nicht über den
 	 * New-Operator.
 	 * 
-	 * @return Das <code/>MovieMapper<code/> Objekt.
+	 * @return Das <code/>SurveyMapper<code/> Objekt.
 	 */
 
 	
-	public static MovieMapper MovieMapper() {
-		if (movieMapper == null) {
-			movieMapper = new MovieMapper();
+	public static SurveyMapper SurveyMapper() {
+		if (surveyMapper == null) {
+			surveyMapper = new SurveyMapper();
 		}
-		return movieMapper;
+		return surveyMapper;
 	}
 	
-	
-	
-
 }
