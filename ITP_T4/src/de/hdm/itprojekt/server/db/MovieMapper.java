@@ -1,5 +1,9 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class MovieMapper {
 	
 	/**
@@ -43,7 +47,30 @@ public class MovieMapper {
 		return movieMapper;
 	}
 	
-	
-	
+	public Movie findByMovieID(int id){
+		Movie m = null;
+		
+		// Aufbau der DB-Verbindung
+		Connection con = DBConnection.getConnection();
 
+		try {
+		// Erstellung des Prepared Statement um alle Filme anhand der MovieID zufinden
+
+			PreparedStatement findByMovieID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 WHERE movieID=? ;");
+		findByMovieID.setInt(1,  id);
+		
+		// ausführen des Queries
+		ResultSet rs = findByMovieID.executeQuery();
+		
+		m = new Movie(rs.getInt("presentationID"), rs.getInt("id"), rs.getString("name"), rs.getTimestamp("creationDate"));
+		
+		//Fehlerbehandlung (Fangen der SQLException und Ausgabe des Fehlers)
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		//Rückgabe des Movie
+		return m;
+	}
 }
+
