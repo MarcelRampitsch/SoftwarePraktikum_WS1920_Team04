@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client.gui;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -54,7 +55,44 @@ public class EditorForm extends VerticalPanel {
 	
 	public void onLoad() {
 		super.onLoad();
+		
+		
+		/*
+		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
+		 */
+		
+		this.addStyleName("EditorForm");
+		header.addStyleName("Header");
+		main.addStyleName("Main");
+		center.addStyleName("Center");
+		west.addStyleName("West");
+		east.addStyleName("East");
+		
+		
+		/*
+		 * Instanzierung aller nötigen Formen, die in der EditorForm angezeigt werden sollen. 
+		 */
+		
+	//	GruppenForm gruppenForm = new GruppenForm(currentUser);
+	//	VoteForm voteForm = new VoteForm(currentUser);
+	//	UmfrageForm umfrageForm = new UmfrageForm(currentUser);
+	//	GruppenCell gruppenCell = new GruppenCell(currentUser);
 	
+		
+
+		/**
+		 *  Jede Form wird demjeweiligen Panel hinzugefügt.
+		 */
+		
+	//	center.add(voteForm);
+	//	east.add(umfrageForm);
+	//	west.add(gruppenForm);
+		
+	//	main.add(center);
+	//	main.add(east);
+	//	main.add(west);
+		
+		
 	}
 
 }
