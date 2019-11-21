@@ -3,6 +3,7 @@ package de.hdm.itprojekt.server.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MovieMapper {
 	
@@ -71,6 +72,36 @@ public class MovieMapper {
 		}
 		//Rückgabe des Movie
 		return m;
+	}
+	public Movie insert(Movie m) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			PreparedSatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(id, name, creationDate) VALUES(?,?,?);");
+			
+			insert.setInt(1, m.getID());
+			insert.setString(2, m.getName());
+			insert.setTimestamp(3, m.getCreationDate());
+			
+			insert.executeUpdate();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+	}
+	public Movie delete(Movie m) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE `MovieID`=?;");
+		deleteByMovieID.setInt(1,  id);
+		deleteByMovieID.executeUpdate();
+		
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 	}
 }
 
