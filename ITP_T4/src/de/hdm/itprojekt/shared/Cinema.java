@@ -8,16 +8,18 @@ public class Cinema extends BusinessObject{
 	
 	private static final long serialversionUID = 1L;
 	
+		//Benötigte Klassenvariable erstellt
 		private int cinemaID;
 		private Timestamp creationDate;
 		private String location;
 		private String name;
 		
-		
+		//Fremdschlüsselattribute erzeugt
 		private int cinemaGroupID;
 		private int userID;
 	
 	
+		//Konstruktor, der bei der Erzeugung dieser Klasse zum tragen kommt
 		public Cinema(int cinemaID, Timestamp creationDate, String location, String name, int cinemaGroupID, int userID) {
 			
 			this.cinemaGroupID=cinemaID;
