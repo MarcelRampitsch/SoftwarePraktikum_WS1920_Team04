@@ -6,15 +6,17 @@ public class CinemaGroup extends BusinessObject {
 
 	private static final long serialversionUID = 1l;
 	
+	//Klassenvariablen 
 	private int cinemaGroupID;
 	private Timestamp creationDate;
 	private String name;
 	
+	//Fremdschlüsselattribute
 	private int userID;
 	
 	
 	
-	
+	//Konstruktor, der zum tragen kommt, falls eine Instanz dieser Klasse erstellt wird
 	public CinemaGroup(int cinemaGroupID, Timestamp creationDate, String name, int userID) {
 		this.cinemaGroupID=cinemaGroupID;
 		this.creationDate=creationDate;
