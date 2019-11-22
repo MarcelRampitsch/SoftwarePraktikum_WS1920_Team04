@@ -154,6 +154,35 @@ public class CinemaGroupMapper {
 	}
 	
 	
+	public void deleteCinemaGroupByID(int id) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		
+		
+		try {
+			
+			PreparedStatement deleteCinemaGroupById =
+					
+					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemagroup WHERE 'cinemaGroupID' = ?;");
+					
+			deleteCinemaGroupById.setInt(1, id);
+			
+			deleteCinemaGroupById.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 		
