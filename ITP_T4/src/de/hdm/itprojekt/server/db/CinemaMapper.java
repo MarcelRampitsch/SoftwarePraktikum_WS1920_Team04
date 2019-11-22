@@ -123,7 +123,54 @@ public class CinemaMapper {
 	}
 	
 	
-}
+	public Cinema updateCinema(Cinema cinema) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		
+		try {
+			
+			PreparedStatement update = 
+					
+					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET creationDate=?, location=?, name=?, cinemaGroupID=?, userID=? WHERE cinemaID=?;");
+					
+					update.setTimestamp(2, cinema.getCreationDate());
+					update.setString(3, cinema.getLocation());
+					update.setString(4, cinema.getName());
+					update.setInt(5, cinema.getCinemaGroupID());
+					update.setInt(6, cinema.getUserID());
+
+					
+					update.executeUpdate();
+					
+					PreparedStatement stm  = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE 'cinemaID'=?;");
+	
+					update.setInt(1, cinema.getId());
+					
+					ResultSet rs  = stm.executeQuery();
+					
+					if(rs.next()) {
+						
+						return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID") , rs.getInt("userID"));          
+								
+								
+								
+					}
+					
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+
+		} 
+		return null;
+		}
+		
+		
+		
+	}
+	
+	
+
 	
 	
 	
