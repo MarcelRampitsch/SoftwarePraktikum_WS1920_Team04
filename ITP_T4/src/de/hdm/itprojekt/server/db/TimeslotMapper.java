@@ -97,6 +97,39 @@ public class TimeslotMapper {
 			}
 			return t;
 		}
+	 
+	 public Timeslot insert(Timeslot t)  {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+
+			try {
+				// Prepared Statement erstellen um einen Timeslot in die Datenbank einzufügen
+				PreparedStatement insert = con
+						.prepareStatement("INSERT INTO softwarepraktikum_ws1920.timeslot(time, userID) VALUES (?,?);");
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+				insert.setTimestamp(1, t.getTime());
+				
+				insert.executeUpdate();
+
+				PreparedStatement getnewTimeslot = con
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot ORDER BY creationDate DESC LIMIT 1;");
+				// Ergebnis-Tupel in Objekt umwandeln
+				ResultSet rs = getnewTimeslot.executeQuery();
+				if (rs.next()) {
+					return new Timeslot(rs.getTimestamp("time"),rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+				}
+			
+				 // Fehlerbehandlung hinzufügen
+		} catch (SQLException e2) {
+		      e2.printStackTrace();
+		      return null;
+
+				
+			}
+
+		
+			return null;
+		}
 	  
 	  
 }
