@@ -130,6 +130,33 @@ public class TimeslotMapper {
 		
 			return null;
 		}
+	 
+	 public Timeslot update(Timeslot t) {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+
+			try {
+	              // Updaten eines bestimmten Timeslot  
+				PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.timeslot SET time=? WHERE timeslotID=?;");
+				update.setTimestamp(1, t.getTime());
+				
+				// PreparedStatement aufrufen und als Query an die DB schicken.
+				update.executeUpdate();
+				PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
+				stm.setInt(1, t.getId());
+				ResultSet rs = stm.executeQuery();
+				if (rs.next()) {
+					// Ergebnis-Tupel in Objekt umwandeln
+					return new Timeslot(rs.getTimestamp("time"),rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+				}
+				 // Fehlerbehandlung hinzufügen
+			} catch (SQLException e2) {
+			      e2.printStackTrace();
+			      return null;
+			      
+			} 
+			return null;
+		}
 	  
 	  
 }
