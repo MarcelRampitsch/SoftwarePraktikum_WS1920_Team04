@@ -1,6 +1,15 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+import de.hdm.itprojekt.shared.bo.Cinema;
+
 public class CinemaMapper {
+	
 	
 	/**
 	 * Die Klasse CinemaMapper bildet <code>Cinema</code> Objekte auf eine
@@ -42,8 +51,50 @@ public class CinemaMapper {
 		}
 		return cinemaMapper;
 	}
+
 	
 	
 	
-	
+	public Cinema insertCinema(Cinema c) {
+		
+		Connection con = DBConnection.getConnection();
+
+		try { 
+			
+			PreparedStatement  insert = 
+					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,cinemaGroupID,userID) VALUES (?,?,?,?);");
+					
+				insert.setString(3, c.getLocation());
+				insert.setString(4, c.getName());
+				insert.setInt(5, c.getCinemaGroupID());
+				insert.setInt(6, c.getUserID());
+					
+				
+				insert.executeUpdate();
+				
+				PreparedStatement getnewCinema = 
+						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema ORDER BY creationDate DESC LIMIT 1;");
+						
+						ResultSet rs = getnewCinema.executeQuery();
+						
+						if(rs.next()) {
+							
+							return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationdate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+							
+		} 
+
+		} catch (SQLException e2) {
+		      e2.printStackTrace();
+		      return null;
+
+
+			}
+
+
+			return null;
+		}
 }
+	
+	
+	
+
