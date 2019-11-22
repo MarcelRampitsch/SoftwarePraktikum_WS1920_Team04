@@ -93,6 +93,36 @@ public class CinemaMapper {
 
 			return null;
 		}
+	
+	
+	
+	public void deleteCinemaByCinemaID(int id) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			
+			PreparedStatement deleteCinemaByCinemaID =
+					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema WHERE 'cinemaID' =?;");
+			
+			deleteCinemaByCinemaID.setInt(1, id);
+			
+			
+			deleteCinemaByCinemaID.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+			
+			
+		}
+		
+		
+		
+	}
+	
+	
 }
 	
 	
