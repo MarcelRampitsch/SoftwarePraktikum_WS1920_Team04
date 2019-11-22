@@ -258,9 +258,9 @@ public class PresentationMapper {
 					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 					insert.setInt(1, p.getDate());
 					insert.setInt(2, p.getUserID());
-					insert.setInt(2, p.getCinemaID());
-					insert.setInt(2, p.getTimeslotID());
-					insert.setInt(3, p.getMovieID());
+					insert.setInt(3, p.getCinemaID());
+					insert.setInt(4, p.getTimeslotID());
+					insert.setInt(5, p.getMovieID());
 
 					
 					
