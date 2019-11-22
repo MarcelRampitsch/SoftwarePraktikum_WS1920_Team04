@@ -1,5 +1,14 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import de.hdm.itprojekt.shared.bo.Timeslot;
+
+
+
 public class TimeslotMapper {
 	
 	/**
@@ -42,4 +51,29 @@ public class TimeslotMapper {
 		}
 		return timeslotMapper;
 	}
+	
+	 public Timeslot findByTimeslotID(int id) {
+			// DB-Verbindung holen
+		  Timeslot t = null;
+			Connection con = DBConnection.getConnection();
+			
+			try {
+				// Prepared Statement erstellen um einen Timeslot zu finden
+				PreparedStatement findByTimeslotID = con
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotid=?;");
+				findByTimeslotID.setInt(1, id);
+
+				// Statement ausfüllen und als Query an die DB schicken
+				ResultSet rs = findByTimeslotID.executeQuery();
+				// Ergebnis-Tupel in Objekt umwandeln
+				t = new Timeslot(rs.getTimestamp("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+				// Fehlerbehandlung hinzufügen
+			} catch (SQLException e2) {
+			      e2.printStackTrace();
+			      return null;
+
+			} // Presentation zurückgeben
+			return t;
+		}
+	  
 }
