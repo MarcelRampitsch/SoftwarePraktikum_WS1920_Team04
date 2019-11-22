@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 
@@ -88,4 +89,73 @@ public class CinemaGroupMapper {
 		
 	}
 	
+	public CinemaGroup findCinemaGroupByID(int id) {
+		CinemaGroup cg = null;
+		
+		Connection con = DBConnection.getConnection();
+		
+		
+		try {
+			
+			PreparedStatement findCinemaGroupByID = 
+					con.prepareStatement("SELECT softwarepraktikum_ws1920.cinemagroup WHERE presentationdID=?;");
+			
+			findCinemaGroupByID.setInt(1, id);
+			
+			
+			ResultSet rs = findCinemaGroupByID.executeQuery();
+			
+			cg = new CinemaGroup(rs.getInt("cinemaGroupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+			
+
+		} catch (SQLException e2) {
+		      e2.printStackTrace();
+		      return null;
+
+		}
+		
+		return cg;
+			
 }
+	
+	
+	
+	public CinemaGroup updateCinemaGroup(CinemaGroup cinemaGroup) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		
+		
+		try {
+			
+			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinemagroup SET userID=?, creationDate=?, name=? WHERE cinemaGroupID=?;");
+			
+			update.setInt(4, cinemaGroup.getUserID());
+			update.setTimestamp(2, cinemaGroup.getCreationDate());
+			update.setString(3, cinemaGroup.getName());
+			update.setInt(1, cinemaGroup.getId());
+
+			update.executeUpdate();
+			PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemagroup WHERE cinemaGroupID=?;");
+			stm.setInt(1, cinemaGroup.getId());
+			ResultSet rs = stm.executeQuery();
+			if (rs.next()) {
+				
+				
+				return new CinemaGroup(rs.getInt("cinemaGroupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+			}
+			 // Fehlerbehandlung hinzufügen
+		} catch (SQLException e2) {
+		      e2.printStackTrace();
+		      return null;
+
+		} 
+		return null;
+	}
+	
+	
+	
+	
+		
+}
+	
