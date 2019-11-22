@@ -157,6 +157,24 @@ public class TimeslotMapper {
 			} 
 			return null;
 		}
+	 
+	 public void deleteByTimeslotID(int id)  {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+
+			try {
+				// Prepared Statement zum Löschen eines bestimmten Timeslot in der Datenbank 
+				PreparedStatement deleteByTimeslotID = con
+				        .prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE `timeslotID`=?;");
+				deleteByTimeslotID.setInt(1, id);
+				// Statement ausfüllen und als Query an die DB schicken
+				deleteByTimeslotID.executeUpdate();
+				
+				 // Fehlerbehandlung hinzufügen
+			} catch (SQLException e2) {
+			      e2.printStackTrace();
+		}
+	  }
 	  
 	  
 }
