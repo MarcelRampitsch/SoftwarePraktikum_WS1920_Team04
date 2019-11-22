@@ -75,5 +75,28 @@ public class TimeslotMapper {
 			} // Presentation zurückgeben
 			return t;
 		}
+	 
+	 public Timeslot findByTime(int id) {
+			// DB-Verbindung holen
+		  Timeslot t = null;
+			Connection con = DBConnection.getConnection();
+			
+			try {
+				// Prepared Statement erstellen um einen Timeslot zu finden
+				PreparedStatement findByTime = con
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE time=?;");
+				findByTime.setInt(1, id);
+
+				// Statement ausfüllen und als Query an die DB schicken
+				ResultSet rs = findByTime.executeQuery();
+				t = new Timeslot(rs.getTimestamp("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+			} catch (SQLException e2) {
+			      e2.printStackTrace();
+			      return null;
+
+			}
+			return t;
+		}
+	  
 	  
 }
