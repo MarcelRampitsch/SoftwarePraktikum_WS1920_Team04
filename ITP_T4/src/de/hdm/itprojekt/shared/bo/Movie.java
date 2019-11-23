@@ -3,7 +3,7 @@ package de.hdm.itprojekt.shared.bo;
 import java.sql.Timestamp;
 
 
-public class Movie{
+public class Movie extends BusinessObject{
 	
 private static final long serialversionUID = 1l;
 
@@ -11,12 +11,18 @@ private static final long serialversionUID = 1l;
 	private String name;
 	private Timestamp creationDate;
 	
+	//Fremdschlüsselattribute
+	private int presentationID;
+	private int userID;
 	
-	public Movie(int movieID, String name, Timestamp creationDate) {
+	//Konstruktor
+	public Movie(int movieID, String name, Timestamp creationDate, int presentationID, int userID) {
 
 		this.movieID = movieID;
 		this.name = name;
 		this.creationDate = creationDate;
+		this.presentationID= presentationID;
+		this.userID= userID;
 	}
 	
 	
@@ -38,5 +44,17 @@ private static final long serialversionUID = 1l;
 	}
 	public void setCreationDate() {
 		this.creationDate = creationDate;
+	}
+	public int getPresentationID(int presentationID) {
+		return presentationID;
+	}
+	public void setPresentationID(int presentationID) {
+		this.presentationID = presentationID;
+	}
+	public int getUserID(int userID) {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 }
