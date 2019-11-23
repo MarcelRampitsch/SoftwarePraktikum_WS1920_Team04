@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Cinema;
 
@@ -167,11 +168,104 @@ public class CinemaMapper {
 		
 		
 		
+	
+	//KEIN FREMDSCHLÜSSEL-PRESENTATIONID in cinema BO enthalten??
+
+//	public void deleteAllCinemaByPresentationID(int id) {
+//		
+//			Connection con = DBConnection.getConnection();
+//	
+//	
+//	
+//	try {
+//		PreparedStatement deleteAllCinemaByPresentationID =
+//										con.prepareStatement("DELETE FROM  softwarepraktikum.cinema WHERE presentationID=?;");
+//		
+//		
+//		deleteAllCinemaByPresentationID.setInt(parameterIndex, x);
+//	}
+
+	public void deleteAllCinemaByUserID(int id) {
+		
+		Connection con  = DBConnection.getConnection();
+		
+		try {
+			
+			PreparedStatement deleteAllCinemaByUserID = 
+							con.prepareStatement("SELECT FROM softwarepraktikum.cinema WHERE userID=?;");
+			
+			deleteAllCinemaByUserID.setInt(6, id);
+			
+			deleteAllCinemaByUserID.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
 	}
 	
+	public Cinema findCinemaByCinemaID(int id) {
+		Cinema c= null;
+		
+		Connection con  = DBConnection.getConnection();
+		
+		
+		try {
+			
+			PreparedStatement findCinemaByCinemaID = 
+						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE cinemaID=?;");
+			
+			findCinemaByCinemaID.setInt(1, id);
+			
+			
+			ResultSet rs = findCinemaByCinemaID.executeQuery();
+			
+			c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+			
+			
+										
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+
+		} // Presentation zurückgeben
+		return c;
+	}
 	
+	public Vector<Cinema> findCinemaByLocation(String location) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		Cinema c = null;
+		
+		Vector<Cinema> result  = new Vector <Cinema>();
+		
+		try {
+			
+			PreparedStatement findCinemaByLocation = 
+						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE location=?;");
+			
+			findCinemaByLocation.setString(3, location);
+			
+			ResultSet rs = findCinemaByLocation.executeQuery();
+			
+			while (rs.next()) {
+				
+				c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+			
+				result.addElement(c);
+			}
+			
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+		}
+		return result;
+
+	} 
+		
+	}
 
 	
 	
-	
-
