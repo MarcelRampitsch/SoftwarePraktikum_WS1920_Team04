@@ -29,7 +29,7 @@ public class Group extends BusinessObject{
 			return this.name = name;
 		}
 		
-		public int UserID(){
+		public int getUserID(){
 			return userID;
 		}
 		
