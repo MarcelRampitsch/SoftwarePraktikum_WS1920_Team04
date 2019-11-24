@@ -27,7 +27,6 @@ package de.hdm.itprojekt.shared.bo;
 			this.id =id;
 		}
 		
-//		Author David: Wollten wir eig vermeiden, brauche ich aber vorerst für LoginAdministration.
 		public void setId(int id) {
 			this.id = id;
 		}

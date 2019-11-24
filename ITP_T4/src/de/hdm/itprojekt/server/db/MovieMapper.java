@@ -1,5 +1,14 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Vector;
+
+import de.hdm.itprojekt.shared.bo.Movie;
+
 public class MovieMapper {
 	
 	/**
@@ -43,7 +52,81 @@ public class MovieMapper {
 		return movieMapper;
 	}
 	
-	
-	
+	public Movie findByMovieID(int id){
+		Movie m = null;
+		
+		// Aufbau der DB-Verbindung
+		Connection con = DBConnection.getConnection();
 
+		try {
+		// Erstellung des Prepared Statement um alle Filme anhand der MovieID zufinden
+
+			PreparedStatement findByMovieID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 WHERE movieID=? ;");
+		findByMovieID.setInt(1,  id);
+		
+		// ausführen des Queries
+		ResultSet rs = findByMovieID.executeQuery();
+		
+		m = new Movie(rs.getInt("movieID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("presentationID"), rs.getInt("userID"));
+		
+		//Fehlerbehandlung (Fangen der SQLException und Ausgabe des Fehlers)
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		//Rückgabe des Movie
+		return m;
+	}
+	
+	public Movie findByName(String name) {
+		//Aufbau der DB-Verbindung
+		Movie m = null;
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			PreparedStatement findByName = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie WHERE name=?;");
+			findByName.setString(2, name);
+			
+			ResultSet rs = findByName.executeQuery();
+			m = new Movie(rs.getInt("movieID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("presentationID"), rs.getInt("userID"));
+			
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		return m;
+	}
+	public Movie insert(Movie m) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(movieID, name, creationDate) VALUES(?,?,?);");
+			
+			insert.setInt(1, m.getMovieID());
+			insert.setString(2, m.getName());
+			insert.setTimestamp(3, m.getCreationDate());
+
+			insert.executeUpdate();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		
+		return null;
+	}
+	public void deleteMovieByMovieID (int id) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE `MovieID`=?;");
+		deleteByMovieID.setInt(1, id);
+		deleteByMovieID.executeUpdate();
+		
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
 }
+
