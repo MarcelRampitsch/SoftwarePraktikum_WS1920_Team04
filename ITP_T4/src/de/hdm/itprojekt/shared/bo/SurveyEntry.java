@@ -7,6 +7,13 @@ public class SurveyEntry extends BusinessObject {
 	private int surveyID;
 	private int presentationID;
 
+	public SurveyEntry(int surveyID, int presentationID) {
+		
+		this.surveyID = surveyID;
+		this.presentationID = presentationID;
+		
+	}
+	
 	
 	
 }
