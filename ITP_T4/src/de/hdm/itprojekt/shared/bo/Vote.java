@@ -7,6 +7,12 @@ public class Vote extends BusinessObject {
 	private int surveyentryID;
 	private int userID;
 	
+	public Vote(int surveyentryID, int userID) {
+		
+		this.surveyentryID = surveyentryID;
+		this.userID = userID;
+		
+	}
 	
 	
 	
