@@ -14,7 +14,20 @@ public class Vote extends BusinessObject {
 		
 	}
 	
+	public int getSurveyEntryID() {
+		return surveyentryID;
+	}
 	
+	public void setSurveyEntryID(int surveyentryID) {
+		this.surveyentryID = surveyentryID;
+	}
 	
+	public int getUserID() {
+		return userID;
+	}
+	
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	
 }
