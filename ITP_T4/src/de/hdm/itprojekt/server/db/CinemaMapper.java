@@ -80,7 +80,7 @@ public class CinemaMapper {
 						
 						if(rs.next()) {
 							
-							return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationdate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+							return new Cinema( rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 							
 		} 
 
@@ -152,7 +152,7 @@ public class CinemaMapper {
 					
 					if(rs.next()) {
 						
-						return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID") , rs.getInt("userID"));          
+						return new Cinema( rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID") , rs.getInt("userID"));          
 								
 								
 								
@@ -221,7 +221,7 @@ public class CinemaMapper {
 			
 			ResultSet rs = findCinemaByCinemaID.executeQuery();
 			
-			c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+			c = new Cinema(rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 			
 			
 										
@@ -252,7 +252,7 @@ public class CinemaMapper {
 			
 			while (rs.next()) {
 				
-				c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+				c = new Cinema(rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 			
 				result.addElement(c);
 			}
