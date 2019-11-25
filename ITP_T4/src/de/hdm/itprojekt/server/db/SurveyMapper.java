@@ -153,8 +153,7 @@ public class SurveyMapper {
 			  ResultSet rs = stmt.executeQuery();
 			  
 			  if(rs.next()) {
-				  //TODO
-				  return new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
+				  return new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
 			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace();
@@ -162,7 +161,36 @@ public class SurveyMapper {
 		  }
 		  return null;
 	  }
-	  //TODO DeleteAllByUserID DeleteAllByGroupID
 	  
+	  public void DeleteAllByUserID(int id) {
+		  // Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  
+			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.userID WHERE userID =?;");
+			  deleteAllByUserID.setInt(1,  id);
+			  
+			  deleteAllByUserID.executeUpdate();
+			  
+		  } catch(SQLException e) {
+			  e.printStackTrace();
+		  }
+	  }
+	  public void DeleteAllByGroupID (int id) {
+		  //Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  
+			  PreparedStatement deleteAllByGroupID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.groupID WHERE groupID =?;");
+			  deleteAllByGroupID.setInt(1, id);
+			  
+			  deleteAllByGroupID.executeUpdate();
+			  
+		  } catch(SQLException e) {
+			  e.printStackTrace();
+		  }
+	  }
 	  
 }
