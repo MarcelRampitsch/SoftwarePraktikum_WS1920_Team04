@@ -61,23 +61,24 @@ public class MovieMapper {
 		try {
 		// Erstellung des Prepared Statement um alle Filme anhand der MovieID zufinden
 
-			PreparedStatement findByMovieID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 WHERE movieID=? ;");
+			PreparedStatement findByMovieID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie WHERE movieID=? ;");
 		findByMovieID.setInt(1,  id);
 		
 		// ausführen des Queries
 		ResultSet rs = findByMovieID.executeQuery();
 		
 		m = new Movie(rs.getInt("movieID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("presentationID"), rs.getInt("userID"));
+		//int id, Timestamp creationDate, String name, int userID Korrektur
 		
 		//Fehlerbehandlung (Fangen der SQLException und Ausgabe des Fehlers)
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 		//Rückgabe des Movie
 		return m;
 	}
-	
+	//wird findByName benötigt?
 	public Movie findByName(String name) {
 		Movie m = null;
 		//Aufbau der DB-Verbindung
@@ -88,10 +89,10 @@ public class MovieMapper {
 			findByName.setString(2, name);
 			
 			ResultSet rs = findByName.executeQuery();
+			//anpassen - siehe BusinessObject?
 			m = new Movie(rs.getInt("movieID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("presentationID"), rs.getInt("userID"));
-			
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 		return m;
@@ -101,15 +102,15 @@ public class MovieMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(movieID, name, creationDate) VALUES(?,?,?);");
-			
-			insert.setInt(1, m.getMovieID());
-			insert.setString(2, m.getName());
-			insert.setTimestamp(3, m.getCreationDate());
+			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(name) VALUES(?);");
+
+			insert.setString(1, m.getName());
 
 			insert.executeUpdate();
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+			
+			// getNewMovie erweitern
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 		return null;
@@ -123,9 +124,12 @@ public class MovieMapper {
 		deleteByMovieID.setInt(1, id);
 		deleteByMovieID.executeUpdate();
 		
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
+		//ToDo public void deleteAllMovieByUserID und deleteAllMovieByCinemaID
+		//Ergänzung cinemaID als fremdschlüssel im BO
 	}
 }
 

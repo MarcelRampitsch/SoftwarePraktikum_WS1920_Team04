@@ -60,16 +60,17 @@ public class SurveyMapper {
 		  try {
 			  // Erstellung des Prepared Statement um alle Surveys anhand der SurveyID zu finden
 			  
-			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 WHERE surveyID=? ;");
+			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=? ;");
 			  findBySurveyID.setInt(1, id);
 			  
 			  // ausführen des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
 			  
+			  //TODO siehe BusinessObject
 			  s = new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
 			  
-		  } catch (SQLException e2) {
-			  e2.printStackTrace();
+		  } catch (SQLException e) {
+			  e.printStackTrace();
 			  return null;
 		  }
 		  //Rückgabe des Survey
@@ -83,12 +84,14 @@ public class SurveyMapper {
 		  
 		  try {
 			  PreparedStatement findByName = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE name=?;");
-			  findByName.setString(2, name);
+			  findByName.setString(1, name);
 			  
 			  ResultSet rs = findByName.executeQuery();
+			  
+			  //TODO siehe Busienss Object
 			  s = new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
-		  } catch (SQLException e2) {
-			  e2.printStackTrace();
+		  } catch (SQLException e) {
+			  e.printStackTrace();
 			  return null;
 		  }
 		  return s;
@@ -99,15 +102,15 @@ public class SurveyMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(surveyID, name, creationDate) VALUES(?,?,?);");
+			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(name) VALUES(?);");
 			  
-			  insert.setInt(1,  s.getUserID());
 			  insert.setString(2, s.getName());
-			  insert.setTimestamp(3, s.getCreationDate());
 			  
 			  insert.executeUpdate();
-		  } catch (SQLException e2) {
-			  e2.printStackTrace();
+			  
+			  //TODO getnewSurveyID
+		  } catch (SQLException e) {
+			  e.printStackTrace();
 			  return null;
 		  }
 		  return null;
@@ -123,8 +126,8 @@ public class SurveyMapper {
 			  deleteBySurveyID.setInt(1, id);
 			  deleteBySurveyID.executeUpdate();
 			  
-		  } catch (SQLException e2) {
-			  e2.printStackTrace();
+		  } catch (SQLException e) {
+			  e.printStackTrace();
 		  }
 	  }
 	  
@@ -133,14 +136,9 @@ public class SurveyMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET surveyID=?, name=?, creationDate=?, surveyEntryID=?, userID=?, groupID=?;");
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET name=?;");
 			  
-			  update.setInt(1, survey.getSurveyID());
-			  update.setString(2, survey.getName());
-			  update.setTimestamp(3, survey.getCreationDate());
-			  update.setInt(4, survey.getSurveyEntryID());
-			  update.setInt(5, survey.getUserID());
-			  update.setInt(6, survey.getGroupID());
+			  update.setString(1, survey.getName());
 			  
 			  update.executeUpdate();
 			  
@@ -151,7 +149,7 @@ public class SurveyMapper {
 			  ResultSet rs = stmt.executeQuery();
 			  
 			  if(rs.next()) {
-				  
+				  //TODO
 				  return new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
 			  }
 		  } catch (SQLException e) {
@@ -160,6 +158,7 @@ public class SurveyMapper {
 		  }
 		  return null;
 	  }
+	  //TODO DeleteAllByUserID DeleteAllByGroupID
 	  
 	  
 }

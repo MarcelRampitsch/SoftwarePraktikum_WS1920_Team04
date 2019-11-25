@@ -82,8 +82,8 @@ public class PresentationMapper {
 					// Objekt in einen Ergebinsvektor übergeben
 					result.addElement(p);
 				}// Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 			      return null;
 			}
 			// Ergebnisvektor zurückgeben
@@ -115,8 +115,8 @@ public class PresentationMapper {
 
 					result.addElement(p);
 				}// Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 			      return null;
 			}
 			// Ergebnisvektor zurückgeben
@@ -147,8 +147,8 @@ public class PresentationMapper {
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 			      return null;
 			}
 			// Ergebnisvektor zurückgeben
@@ -179,8 +179,8 @@ public class PresentationMapper {
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 			      return null;
 			}
 			// Ergebnisvektor zurückgeben
@@ -205,8 +205,8 @@ public class PresentationMapper {
 				// Ergebnis-Tupel in Objekt umwandeln
 				p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 				 // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 			      return null;
 
 			} // Presentation zurückgeben
@@ -237,8 +237,8 @@ public class PresentationMapper {
                      // Objekt an ein Präsentationsvektor übergeben
 						result.addElement(p);
 					} 				 // Fehlerbehandlung hinzufügen
-				} catch (SQLException e2) {
-				      e2.printStackTrace();
+				} catch (SQLException e) {
+				      e.printStackTrace();
 				      return null;
 				}
 				// Ergebnisvektor zurückgeben
@@ -275,8 +275,8 @@ public class PresentationMapper {
 						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
-				} catch (SQLException e2) {
-				      e2.printStackTrace();
+				} catch (SQLException e) {
+				      e.printStackTrace();
 				      return null;
 
 						
@@ -309,8 +309,8 @@ public class PresentationMapper {
 						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
-				} catch (SQLException e2) {
-				      e2.printStackTrace();
+				} catch (SQLException e) {
+				      e.printStackTrace();
 				      return null;
 				      
 				} 
@@ -332,8 +332,8 @@ public class PresentationMapper {
 			  //    deleteByPresentationID.executeDeletion();
 
 					 // Fehlerbehandlung hinzufügen
-				} catch (SQLException e2) {
-				      e2.printStackTrace();
+				} catch (SQLException e) {
+				      e.printStackTrace();
 			}
 		  }
 		 
@@ -352,8 +352,8 @@ public class PresentationMapper {
 
 				
 			 // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 		}
 			
 						
@@ -373,8 +373,8 @@ public class PresentationMapper {
 				deleteAllByTimeslotID.executeUpdate();
 
 			 // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 		}
 			
 						
@@ -395,8 +395,8 @@ public class PresentationMapper {
 
 				
 				 // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 		}
 			
 						
@@ -417,8 +417,8 @@ public class PresentationMapper {
 
 				
 				 // Fehlerbehandlung hinzufügen
-			} catch (SQLException e2) {
-			      e2.printStackTrace();
+			} catch (SQLException e) {
+			      e.printStackTrace();
 		}
 			
 						
