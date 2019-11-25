@@ -65,9 +65,8 @@ public class SurveyMapper {
 			  
 			  // ausführen des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
-			  
-			  //TODO siehe BusinessObject
-			  s = new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
+
+			  s = new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
 			  
 		  } catch (SQLException e) {
 			  e.printStackTrace();
@@ -87,9 +86,8 @@ public class SurveyMapper {
 			  findByName.setString(1, name);
 			  
 			  ResultSet rs = findByName.executeQuery();
-			  
-			  //TODO siehe Busienss Object
-			  s = new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
+
+			  s = new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
 		  } catch (SQLException e) {
 			  e.printStackTrace();
 			  return null;
@@ -104,11 +102,17 @@ public class SurveyMapper {
 		  try {
 			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(name) VALUES(?);");
 			  
-			  insert.setString(2, s.getName());
+			  insert.setString(1, s.getName());
 			  
 			  insert.executeUpdate();
 			  
-			  //TODO getnewSurveyID
+			  PreparedStatement getnewSurvey= con.prepareStatement("SELECT *FROM softwarepraktikum_ws1920.survey ORDER BY creationDate DESC LIMIT 1;");
+			  
+			  ResultSet rs = getnewSurvey.executeQuery();
+			  if (rs.next()) {
+				  
+				  return new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
+			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace();
 			  return null;
