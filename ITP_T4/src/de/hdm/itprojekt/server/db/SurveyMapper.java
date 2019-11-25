@@ -1,5 +1,14 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Vector;
+
+import de.hdm.itprojekt.shared.bo.Survey;
+
 public class SurveyMapper {
 	
 	/**
@@ -42,5 +51,28 @@ public class SurveyMapper {
 		}
 		return surveyMapper;
 	}
-	
+	  public Survey findBySurveyID(int id) {
+		  Survey s = null;
+		  
+		  // Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  // Erstellung des Prepared Statement um alle Surveys anhand der SurveyID zu finden
+			  
+			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 WHERE surveyID=? ;");
+			  findBySurveyID.setInt(1, id);
+			  
+			  // ausführen des Queries
+			  ResultSet rs = findBySurveyID.executeQuery();
+			  
+			  s = new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
+			  
+		  } catch (SQLException e2) {
+			  e2.printStackTrace();
+			  return null;
+		  }
+		  //Rückgabe des Survey
+		  return s;
+	  }
 }
