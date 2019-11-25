@@ -10,13 +10,9 @@ package de.hdm.itprojekt.shared.bo;
 		
 		private int id;
 		private Timestamp creationDate;
-		private Timestamp deletionDate;
-		
 
 		public BusinessObject() {
-			
 		}
-		
 
 		public BusinessObject(int id, Timestamp creationDate) {
 			this.id =id;
@@ -31,6 +27,9 @@ package de.hdm.itprojekt.shared.bo;
 			this.id = id;
 		}
 
+		public void setCreationDate(Timestamp creationDate) {
+			this.creationDate = creationDate;
+		}
 
 		public int getId() {
 			return id;
@@ -38,10 +37,6 @@ package de.hdm.itprojekt.shared.bo;
 
 		public Timestamp getCreationDate() {
 			return creationDate;
-		}
-		
-		public Timestamp getDeletionDate() {
-			return deletionDate;
 		}
 	}
 

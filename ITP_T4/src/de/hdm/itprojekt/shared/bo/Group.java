@@ -25,15 +25,15 @@ public class Group extends BusinessObject{
 			return name;
 		}
 		
-		public String setName(String name){
-			return this.name = name;
+		public void setName(String name){
+			this.name = name;
 		}
 		
 		public int getUserID(){
 			return userID;
 		}
 		
-		public int setUserID(int userID){
-			return this.userID = userID;
+		public void setUserID(int userID){
+			this.userID = userID;
 		}
 }

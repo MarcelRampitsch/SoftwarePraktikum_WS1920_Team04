@@ -17,8 +17,8 @@ public class Cinema extends BusinessObject{
 	
 	
 		//Konstruktor, der bei der Erzeugung dieser Klasse zum tragen kommt
-		public Cinema(String location, String name, int cinemaGroupID, int userID) {
-			
+		public Cinema(int id, Timestamp creationDate, String location, String name, int cinemaGroupID, int userID) {
+			super (id, creationDate);
 			
 			this.location=location;
 			this.name=name;
@@ -30,42 +30,31 @@ public class Cinema extends BusinessObject{
 			return location;
 		}
 
-
 		public void setLocation(String location) {
 			this.location = location;
 		}
-
 
 		public String getName() {
 			return name;
 		}
 
-
 		public void setName(String name) {
 			this.name = name;
 		}
-
 
 		public int getCinemaGroupID() {
 			return cinemaGroupID;
 		}
 
-
 		public void setCinemaGroupID(int cinemaGroupID) {
 			this.cinemaGroupID = cinemaGroupID;
 		}
-
 
 		public int getUserID() {
 			return userID;
 		}
 
-
 		public void setUserID(int userID) {
 			this.userID = userID;
 		}
-		
-		
-		
-
 }

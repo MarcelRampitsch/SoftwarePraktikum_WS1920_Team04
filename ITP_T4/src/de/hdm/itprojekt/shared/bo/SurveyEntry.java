@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
+import java.sql.Timestamp;
+
 public class SurveyEntry extends BusinessObject {
 
 	private static final long serialversionUID = 1l;
@@ -7,8 +9,8 @@ public class SurveyEntry extends BusinessObject {
 	private int surveyID;
 	private int presentationID;
 
-	public SurveyEntry(int surveyID, int presentationID) {
-		
+	public SurveyEntry(int id, Timestamp creationDate, int surveyID, int presentationID) {
+		super(id, creationDate);
 		this.surveyID = surveyID;
 		this.presentationID = presentationID;
 		

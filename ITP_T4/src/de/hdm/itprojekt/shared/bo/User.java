@@ -17,8 +17,8 @@ public class User extends BusinessObject {
 		return nickname;
 	}
 	
-	public String setNickname(String nickname) {
-		return this.nickname = nickname;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }
 

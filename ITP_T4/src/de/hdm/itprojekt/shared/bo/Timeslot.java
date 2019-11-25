@@ -17,8 +17,6 @@ private static final long serialversionUID = 1l;
 		this.userID = userID;
 	}
 
-	
-
 	public int getUserID() {
 		return userID;
 	}
