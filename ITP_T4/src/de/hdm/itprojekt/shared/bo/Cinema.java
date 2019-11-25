@@ -6,7 +6,7 @@ public class Cinema extends BusinessObject{
 	
 	private static final long serialversionUID = 1L;
 	
-		//Benötigte Klassenvariable erstellt
+		//Benötigte Instanzvariable erstellt
 
 		private String location;
 		private String name;

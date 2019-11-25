@@ -6,7 +6,7 @@ public class CinemaGroup extends BusinessObject {
 
 	private static final long serialversionUID = 1l;
 	
-	//Klassenvariablen 
+	//Instanzvariable 
 	private String name;
 	
 	//Fremdschlüsselattribute
