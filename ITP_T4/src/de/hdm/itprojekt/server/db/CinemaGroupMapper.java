@@ -61,10 +61,10 @@ public class CinemaGroupMapper {
 			
 			PreparedStatement insert  = 
 					
-					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinemaGroupname(name, userID) VALUES (?,?);");
+					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinemaGroup(name, userID) VALUES (?,?);");
 			
-					insert.setString(3, c.getName());
-					insert.setInt(4, c.getUserID());
+					insert.setString(1, c.getName());
+					insert.setInt(2, c.getUserID());
 					
 					insert.executeUpdate();
 					
@@ -75,18 +75,14 @@ public class CinemaGroupMapper {
 					ResultSet rs = getnewCinemaGroup.executeQuery();
 					if (rs.next()) {
 
-						return new CinemaGroup(rs.getString("name"), rs.getInt("userID"));
+						return new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 					}
 					 // Fehlerbehandlung hinzufügen
-				} catch (SQLException e2) {
-				      e2.printStackTrace();
+				} catch (SQLException e) {
+				      e.printStackTrace();
 				      return null;
-
-
 					}
-
 					return null;
-		
 	}
 	
 	public CinemaGroup findCinemaGroupByID(int id) {
@@ -98,24 +94,21 @@ public class CinemaGroupMapper {
 		try {
 			
 			PreparedStatement findCinemaGroupByID = 
-					con.prepareStatement("SELECT softwarepraktikum_ws1920.cinemagroup WHERE presentationdID=?;");
+					con.prepareStatement("SELECT softwarepraktikum_ws1920.cinemaGroup WHERE cinemaGroupID=?;");
 			
 			findCinemaGroupByID.setInt(1, id);
 			
 			
 			ResultSet rs = findCinemaGroupByID.executeQuery();
 			
-			cg = new CinemaGroup(rs.getString("name"), rs.getInt("userID"));
+			cg = new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 			
 
-		} catch (SQLException e2) {
-		      e2.printStackTrace();
+		} catch (SQLException e) {
+		      e.printStackTrace();
 		      return null;
-
 		}
-		
 		return cg;
-			
 }
 	
 	
@@ -128,25 +121,23 @@ public class CinemaGroupMapper {
 		
 		try {
 			
-			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinemagroup SET userID=?, creationDate=?, name=? WHERE cinemaGroupID=?;");
+			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinemaGroup SET name=? WHERE cinemaGroupID=?;");
 			
-			update.setInt(4, cinemaGroup.getUserID());
-			update.setTimestamp(2, cinemaGroup.getCreationDate());
-			update.setString(3, cinemaGroup.getName());
-			update.setInt(1, cinemaGroup.getId());
+			update.setString(1, cinemaGroup.getName());
+			update.setInt(2, cinemaGroup.getId());
 
 			update.executeUpdate();
-			PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemagroup WHERE cinemaGroupID=?;");
+			PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemaGroup WHERE cinemaGroupID=?;");
 			stm.setInt(1, cinemaGroup.getId());
 			ResultSet rs = stm.executeQuery();
 			if (rs.next()) {
 				
 				
-				return new CinemaGroup(rs.getString("name"), rs.getInt("userID"));
+				return new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 			}
 			 // Fehlerbehandlung hinzufügen
-		} catch (SQLException e2) {
-		      e2.printStackTrace();
+		} catch (SQLException e) {
+		      e.printStackTrace();
 		      return null;
 
 		} 
@@ -158,13 +149,9 @@ public class CinemaGroupMapper {
 		
 		Connection con = DBConnection.getConnection();
 		
-		
-		
 		try {
-			
 			PreparedStatement deleteCinemaGroupById =
-					
-					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemagroup WHERE 'cinemaGroupID' = ?;");
+					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemaGroup WHERE 'cinemaGroupID' = ?;");
 					
 			deleteCinemaGroupById.setInt(1, id);
 			

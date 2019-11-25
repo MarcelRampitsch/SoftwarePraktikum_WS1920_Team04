@@ -65,10 +65,10 @@ public class CinemaMapper {
 			PreparedStatement  insert = 
 					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,cinemaGroupID,userID) VALUES (?,?,?,?);");
 					
-				insert.setString(3, c.getLocation());
-				insert.setString(4, c.getName());
-				insert.setInt(5, c.getCinemaGroupID());
-				insert.setInt(6, c.getUserID());
+				insert.setString(1, c.getLocation());
+				insert.setString(2, c.getName());
+				insert.setInt(3, c.getCinemaGroupID());
+				insert.setInt(4, c.getUserID());
 					
 				
 				insert.executeUpdate();
@@ -80,7 +80,7 @@ public class CinemaMapper {
 						
 						if(rs.next()) {
 							
-							return new Cinema( rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+							return new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 							
 		} 
 
@@ -113,10 +113,7 @@ public class CinemaMapper {
 			
 			
 		}catch(SQLException e) {
-			e.printStackTrace();
-			
-			
-			
+			e.printStackTrace();		
 		}
 		
 		
@@ -133,13 +130,12 @@ public class CinemaMapper {
 			
 			PreparedStatement update = 
 					
-					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET creationDate=?, location=?, name=?, cinemaGroupID=?, userID=? WHERE cinemaID=?;");
+					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET location=?, name=?, cinemaGroupID=?, WHERE cinemaID=?;");
 					
-					update.setTimestamp(2, cinema.getCreationDate());
-					update.setString(3, cinema.getLocation());
-					update.setString(4, cinema.getName());
-					update.setInt(5, cinema.getCinemaGroupID());
-					update.setInt(6, cinema.getUserID());
+					update.setString(1, cinema.getLocation());
+					update.setString(2, cinema.getName());
+					update.setInt(3, cinema.getCinemaGroupID());
+					update.setInt(4, cinema.getUserID());
 
 					
 					update.executeUpdate();
@@ -152,38 +148,15 @@ public class CinemaMapper {
 					
 					if(rs.next()) {
 						
-						return new Cinema( rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID") , rs.getInt("userID"));          
-								
-								
-								
+						return new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));          
 					}
 					
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
-
 		} 
 		return null;
-		}
-		
-		
-		
-	
-	//KEIN FREMDSCHLÜSSEL-PRESENTATIONID in cinema BO enthalten??
-
-//	public void deleteAllCinemaByPresentationID(int id) {
-//		
-//			Connection con = DBConnection.getConnection();
-//	
-//	
-//	
-//	try {
-//		PreparedStatement deleteAllCinemaByPresentationID =
-//										con.prepareStatement("DELETE FROM  softwarepraktikum.cinema WHERE presentationID=?;");
-//		
-//		
-//		deleteAllCinemaByPresentationID.setInt(parameterIndex, x);
-//	}
+	}
 
 	public void deleteAllCinemaByUserID(int id) {
 		
@@ -194,14 +167,13 @@ public class CinemaMapper {
 			PreparedStatement deleteAllCinemaByUserID = 
 							con.prepareStatement("SELECT FROM softwarepraktikum.cinema WHERE userID=?;");
 			
-			deleteAllCinemaByUserID.setInt(6, id);
+			deleteAllCinemaByUserID.setInt(1, id);
 			
 			deleteAllCinemaByUserID.executeUpdate();
 			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
-			
 		}
 	}
 	
@@ -217,14 +189,8 @@ public class CinemaMapper {
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE cinemaID=?;");
 			
 			findCinemaByCinemaID.setInt(1, id);
-			
-			
 			ResultSet rs = findCinemaByCinemaID.executeQuery();
-			
-			c = new Cinema(rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
-			
-			
-										
+			c = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
@@ -252,7 +218,7 @@ public class CinemaMapper {
 			
 			while (rs.next()) {
 				
-				c = new Cinema(rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+				c = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 			
 				result.addElement(c);
 			}

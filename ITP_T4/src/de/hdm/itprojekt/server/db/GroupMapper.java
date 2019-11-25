@@ -173,8 +173,7 @@ public class GroupMapper {
 			try {
 				// Prepared Statement zum Löschen einer bestimmten Group in der Datenbank 
 				PreparedStatement deleteByPresentationID = con
-						.prepareStatement("UPDATE softwarepraktikum_ws1920.group SET `DeleteDate`=NOW() WHERE `groupID`=?;");
-				//      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.group WHERE `groupID`=?;");
+				      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.group WHERE `groupID`=?;");
 				deleteByPresentationID.setInt(1, id);
 				deleteByPresentationID.executeUpdate();
 		  //    deleteByPresentationID.executeDeletion();
