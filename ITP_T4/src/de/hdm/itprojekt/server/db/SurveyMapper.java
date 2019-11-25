@@ -75,4 +75,56 @@ public class SurveyMapper {
 		  //Rückgabe des Survey
 		  return s;
 	  }
+	  
+	  public Survey findByName(String name) {
+		  Survey s = null;
+		  //Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement findByName = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE name=?;");
+			  findByName.setString(2, name);
+			  
+			  ResultSet rs = findByName.executeQuery();
+			  s = new Survey(rs.getInt("surveyID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("surveyEntryID"), rs.getInt("userID"), rs.getInt("groupID"));
+		  } catch (SQLException e2) {
+			  e2.printStackTrace();
+			  return null;
+		  }
+		  return s;
+	  }
+	  
+	  public Survey insert(Survey s) {
+		  
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(surveyID, name, creationDate) VALUES(?,?,?);");
+			  
+			  insert.setInt(1,  s.getUserID());
+			  insert.setString(2, s.getName());
+			  insert.setTimestamp(3, s.getCreationDate());
+			  
+			  insert.executeUpdate();
+		  } catch (SQLException e2) {
+			  e2.printStackTrace();
+			  return null;
+		  }
+		  return null;
+		  
+	  }
+	  
+	  public void deleteSurveyBySurveyID (int id) {
+		  
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement deleteBySurveyID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.survey WHERE `SurveyID`=?;");
+			  deleteBySurveyID.setInt(1, id);
+			  deleteBySurveyID.executeUpdate();
+			  
+		  } catch (SQLException e2) {
+			  e2.printStackTrace();
+		  }
+	  }
 }

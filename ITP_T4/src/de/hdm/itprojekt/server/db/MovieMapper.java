@@ -79,8 +79,8 @@ public class MovieMapper {
 	}
 	
 	public Movie findByName(String name) {
-		//Aufbau der DB-Verbindung
 		Movie m = null;
+		//Aufbau der DB-Verbindung
 		Connection con = DBConnection.getConnection();
 		
 		try {
@@ -112,7 +112,6 @@ public class MovieMapper {
 			e2.printStackTrace();
 			return null;
 		}
-		
 		return null;
 	}
 	public void deleteMovieByMovieID (int id) {
