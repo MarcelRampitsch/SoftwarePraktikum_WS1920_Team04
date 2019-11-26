@@ -127,6 +127,44 @@ public class SurveyEntryMapper {
 	  }
 	  
 	  
+	  public SurveyEntry update(SurveyEntry se) {
+
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET id=?, creationDate=?, surveyID=?, presentationID=?  WHERE surveyID=?;");
+			  
+			  update.setInt(1, se.getId());
+			  //update.setInt(2, se.getCreationDate());
+			  update.setInt(3, se.getSurveyID());
+			  update.setInt(4, se.getPresentationID());
+			  
+			  update.executeUpdate();
+			  
+			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=?;");
+			  
+			  stm.setInt(1, se.getId());
+			  ResultSet rs = stm.executeQuery();
+			  
+			  if (rs.next()) {
+				  
+					return new SurveyEntry(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
+			
+			  }
+			  
+		  } catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+		      
+		  } 
+			  
+		  return null;
+		  
+	  }
 	  
 
+	  
+	 
+	  
 }
