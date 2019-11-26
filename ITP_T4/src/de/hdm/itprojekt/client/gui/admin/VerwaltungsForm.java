@@ -49,8 +49,7 @@ public class VerwaltungsForm extends VerticalPanel {
 
 				
 				VerwaltungsOpenForm gr = new VerwaltungsOpenForm();
-			//	gr.openVerwaltungEditForm();
-				// Anpassen!!
+				gr.openSpielPlanForm();
 
 	    }}
 	
