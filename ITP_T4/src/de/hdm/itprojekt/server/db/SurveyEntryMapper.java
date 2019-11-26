@@ -164,7 +164,26 @@ public class SurveyEntryMapper {
 	  }
 	  
 
+	  public void deleteBySurveyEntryID(int id)  {
 	  
-	 
+		 Connection con = DBConnection.getConnection();
+		  
+		 try {
+			 
+			 PreparedStatement deleteBySurveyEntryID = con
+					 .prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET `DeleteDate`=NOW() WHERE `SurveyEntryID`=?;");
+			 
+			 deleteBySurveyEntryID.setInt(1, id);
+			 deleteBySurveyEntryID.executeUpdate();
+		 
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		}
+		 
+		 
+	  }
+		  
+	  
+	  
 	  
 }
