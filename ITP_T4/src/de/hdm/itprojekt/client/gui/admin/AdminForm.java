@@ -79,7 +79,7 @@ public class AdminForm extends VerticalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Window.Location.replace("/Kinofix_Test.html");
+				Window.Location.replace("/ITP_T4.html");
 			}
 		});
 		west.add(toBesucher);
