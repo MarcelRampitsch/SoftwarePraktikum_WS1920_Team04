@@ -1,5 +1,12 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
 
 /**
  * Die Klasse SurveyEntryMapper bildet <code>SurveyEntry</code> Objekte auf eine
@@ -46,9 +53,42 @@ public class SurveyEntryMapper {
 	  
 	  //TODO surveyEntryMapper
 
+	  public Vector<SurveyEntry> findSurveyEntryBySurveyEntryID(int id) {
+		  
+			Connection con = DBConnection.getConnection();
 
+			SurveyEntry se = null;
+			
+			Vector<SurveyEntry> result = new Vector<SurveyEntry>();
+
+			try {
+				
+				PreparedStatement findSurveyEntryBySurveyEntryID = con.prepareStatement( 
+						"SELECT * FROM softwarepraktikum_ws1920.survey" + "WHERE surveyID=?");
+				findSurveyEntryBySurveyEntryID.setInt(1, id);
+				
+				ResultSet rs = findSurveyEntryBySurveyEntryID.executeQuery();
+
+				while (rs.next()) {
+				
+					se = new SurveyEntry(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
+
+					result.addElement(se);
+				}
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			    return null;
+				
+			}
+		  
+			return result;
+			
+	  }
 
 	
 	
+	  
 
 }
