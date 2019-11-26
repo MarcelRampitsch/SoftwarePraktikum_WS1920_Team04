@@ -5,6 +5,12 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * 
+ * @author serhatulus
+ *
+ */
+
 public class GruppenForm extends VerticalPanel {
 
 	
