@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 
 /**
@@ -88,7 +89,44 @@ public class SurveyEntryMapper {
 	  }
 
 	
-	
+	  public SurveyEntry insert(SurveyEntry se) {
+		  
+			Connection con = DBConnection.getConnection();
+
+			try {
+				
+				PreparedStatement insert = con
+						.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(id, creationDate, surveyID, presentationID) VALUES(?,?,?,?);");
+				
+				insert.setInt(1, se.getId());
+				//insert.setInt(2, se.getCreationDate());
+				insert.setInt(3, se.getSurveyID());
+				insert.setInt(4, se.getPresentationID());
+				
+				insert.executeUpdate();
+				
+				PreparedStatement getnewSurveyEntry= con
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey ORDER BY creationDate DESC LIMIT 1;");
+				
+				ResultSet rs = getnewSurveyEntry.executeQuery();
+
+				if (rs.next()) {
+					
+					return new SurveyEntry(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
+				
+				}
+				
+			} catch (SQLException e) {
+			      e.printStackTrace();
+			      return null;
+
+			}
+				
+			return null;
+		  
+	  }
+	  
+	  
 	  
 
 }
