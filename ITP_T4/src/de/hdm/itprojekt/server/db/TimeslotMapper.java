@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 
 
@@ -165,7 +167,7 @@ public class TimeslotMapper {
 			try {
 				// Prepared Statement zum Löschen eines bestimmten Timeslot in der Datenbank 
 				PreparedStatement deleteByTimeslotID = con
-				        .prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE `timeslotID`=?;");
+				        .prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
 				deleteByTimeslotID.setInt(1, id);
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteByTimeslotID.executeUpdate();
@@ -175,7 +177,88 @@ public class TimeslotMapper {
 			      e2.printStackTrace();
 		}
 	  }
-	 //TODO DeleteAllByMovieID
+	 
+	 public void deleteAllTimeslotByUserID(int id) {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+			
+			
+			try {
+				
+				// Prepared Statement zum Löschen aller Timeslots in der Datenbank 
+				PreparedStatement deleteAllCinemaGroupByUserID =
+						con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE userID=?;");
+				deleteAllCinemaGroupByUserID.setInt(1, id);
+				
+				// Statement ausfüllen und als Query an die DB schicken
+				deleteAllCinemaGroupByUserID.executeUpdate();
+				
+				 // Fehlerbehandlung hinzufügen
+			} catch (SQLException e) {
+			      e.printStackTrace();
+		}
+			
+						
+		}
+	 
+	 public Vector<Timeslot> findAllTimeslotByUserID(int id)  {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+			Timeslot t = null;
+			// Ergebnisvektor vorbereiten
+			Vector<Timeslot> result = new Vector<Timeslot>();
+			try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema zu finden
+				PreparedStatement findAllByUSerID = con.prepareStatement(
+						"SELECT * From softwarepraktikum_ws1920.timeslot "
+						+ "WHERE UserID=? ");
+				findAllByUSerID.setInt(1, id);
+				
+				// Ergebnis-Tupel erstellen
+
+				ResultSet rs = findAllByUSerID.executeQuery();
+
+				while (rs.next()) {
+					// Ergebnis-Tupel in Objekt umwandeln
+					t = new Timeslot(rs.getTimestamp("time"), rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+
+					result.addElement(t);
+				} // Fehlerbehandlung hinzufügen
+			} catch (SQLException e) {
+			      e.printStackTrace();
+			      return null;
+			}
+			// Ergebnisvektor zurückgeben
+			return result;
+		
+		}
+	 //TODO DeleteAllByMovieID SINN?
+
+	 
+	 public void deleteAllTimeslotByMovieID(int id) {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+			
+			
+			try {
+				
+				// Prepared Statement zum Löschen aller Timeslots in der Datenbank 
+				PreparedStatement deleteAllCinemaGroupByUserID =
+						con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE MovieID=?;");
+				deleteAllCinemaGroupByUserID.setInt(1, id);
+				
+				// Statement ausfüllen und als Query an die DB schicken
+				deleteAllCinemaGroupByUserID.executeUpdate();
+				
+				 // Fehlerbehandlung hinzufügen
+			} catch (SQLException e) {
+			      e.printStackTrace();
+		}
+			
+						
+		}
+	 
+	 
+	 
 	  
 	  
 }
