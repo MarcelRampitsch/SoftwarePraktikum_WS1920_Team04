@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class GruppenForm extends VerticalPanel {
 
+	
 	public GruppenForm() {
 
 	}
@@ -27,6 +28,7 @@ public class GruppenForm extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			//Methode, um das anzeigen der DialogBox(GruppenErstellung) zu realisieren
 			GruppenOpenForm open = new GruppenOpenForm();
 			open.openGruppenForm();
 		}

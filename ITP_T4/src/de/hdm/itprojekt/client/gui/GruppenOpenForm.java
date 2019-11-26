@@ -10,8 +10,13 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
- 
-	
+/**
+ * 
+ * @author serhatulus
+ * DialogBox, die angezeigt wird, wenn der Nutzer eine Gruppe erstellen möchte.
+ * Die Klasse enthält entsprechende ClickHandler & Methoden zum Bestätigen oder Abbrechen der Aktion.
+ */
+ 	
 	public class GruppenOpenForm extends DialogBox{
 		
 
@@ -25,12 +30,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 		Button edit = new Button("editieren");
 		Button close  = new Button("X");
 		
-		TextBox tb =new TextBox();
-		TextBox tb2 = new TextBox();
+		TextBox gruppennamebox =new TextBox();
+		TextBox nicknamebox = new TextBox();
 		
 		Button speichern = new Button("sichern");
 		
-		TextArea ta = new TextArea();
+		//TextArea ta = new TextArea();
 
 		
 		
@@ -38,6 +43,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 			
 		}
 		
+		
+		/*
+		 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+		 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+		 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+		 */
 		
 		public void onLoad() {
 			super.onLoad();
@@ -47,10 +58,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 			inhalt.add(gruppenerstellung);
 			gruppenerstellung.addStyleName("Überschrift");
 			inhalt.add(gruppenname);
-			inhalt.add(tb);
+			inhalt.add(gruppennamebox);
 			
 			inhalt.add(nickname);
-			inhalt.add(tb2);
+			inhalt.add(nicknamebox);
 			
 			inhalt.add(speichern);
 			inhalt.add(edit);
