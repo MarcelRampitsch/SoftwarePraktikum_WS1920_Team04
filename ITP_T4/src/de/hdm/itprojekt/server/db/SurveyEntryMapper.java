@@ -65,7 +65,7 @@ public class SurveyEntryMapper {
 			try {
 				
 				PreparedStatement findSurveyEntryBySurveyEntryID = con.prepareStatement( 
-						"SELECT * FROM softwarepraktikum_ws1920.survey" + "WHERE surveyID=?");
+						"SELECT * FROM softwarepraktikum_ws1920.survey" + "WHERE id=?");
 				findSurveyEntryBySurveyEntryID.setInt(1, id);
 				
 				ResultSet rs = findSurveyEntryBySurveyEntryID.executeQuery();
@@ -133,7 +133,7 @@ public class SurveyEntryMapper {
 		  
 		  try {
 			  
-			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET id=?, creationDate=?, surveyID=?, presentationID=?  WHERE surveyID=?;");
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET id=?, creationDate=?, surveyID=?, presentationID=?  WHERE id=?;");
 			  
 			  update.setInt(1, se.getId());
 			  //update.setInt(2, se.getCreationDate());
@@ -142,7 +142,7 @@ public class SurveyEntryMapper {
 			  
 			  update.executeUpdate();
 			  
-			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=?;");
+			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE id=?;");
 			  
 			  stm.setInt(1, se.getId());
 			  ResultSet rs = stm.executeQuery();
@@ -164,14 +164,14 @@ public class SurveyEntryMapper {
 	  }
 	  
 
-	  public void deleteBySurveyEntryID(int id)  {
+	  public void deleteSurveyEntryBySurveyEntryID(int id)  {
 	  
 		 Connection con = DBConnection.getConnection();
 		  
 		 try {
 			 
 			 PreparedStatement deleteBySurveyEntryID = con
-					 .prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET `DeleteDate`=NOW() WHERE `SurveyEntryID`=?;");
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.survey WHERE id=?;");
 			 
 			 deleteBySurveyEntryID.setInt(1, id);
 			 deleteBySurveyEntryID.executeUpdate();
@@ -183,7 +183,5 @@ public class SurveyEntryMapper {
 		 
 	  }
 		  
-	  
-	  
 	  
 }
