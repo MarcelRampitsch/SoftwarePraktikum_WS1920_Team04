@@ -64,6 +64,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 		
 		public void closeGruppenForm() {
 			this.hide();
+			this.clear();
+			this.removeFromParent();
+			this.setAnimationEnabled(false);
+			this.setGlassEnabled(false);
 		}
 
 		
