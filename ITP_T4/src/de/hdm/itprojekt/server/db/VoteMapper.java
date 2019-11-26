@@ -1,5 +1,14 @@
 package de.hdm.itprojekt.server.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
+import de.hdm.itprojekt.shared.bo.Vote;
+
 /**
  * Die Klasse VoteMapper bildet <code>Vote</code> Objekte auf eine
  * relationale Datenbank ab. Ebenfalls ist es möglich aus Datenbank-Tupel
@@ -50,4 +59,45 @@ public class VoteMapper {
 		}
 		return voteMapper;
 	}
+	
+	public Vector<Vote> findVoteByUserID(int userID) {
+
+		Connection con = DBConnection.getConnection();
+
+		Vote v = null;
+			
+		Vector<Vote> result = new Vector<Vote>();
+
+
+		try {
+				
+			PreparedStatement findVoteByUserID = con.prepareStatement( 
+					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE userID=?");
+			findVoteByUserID.setInt(1, userID);
+				
+			ResultSet rs = findVoteByUserID.executeQuery();
+
+			while (rs.next()) {
+					
+				v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"), rs.getInt("userID"), rs.getInt("voteResult"));
+
+				result.addElement(v);
+				
+			}
+					
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			return null;
+					
+		}
+				
+		return result;
+				
+	}
+	  
+	  
+	 
+			
+	
 }
