@@ -133,7 +133,45 @@ public class VoteMapper {
 	}
 	
 	
+	public Vote insert(Vote v) {
 	
+		Connection con = DBConnection.getConnection();
+		
+		try {
 			
+			PreparedStatement insert = con
+					.prepareStatement("INSERT INTO softwarepraktikum_ws1920.vote(id, creationDate, surveyentryID, userID, voteResult) VALUES(?,?,?,?,?);");
+		
+			insert.setInt(1, v.getId());
+			//insert.setInt(2, v.getCreationDate());
+			insert.setInt(3, v.getSurveyEntryID());
+			insert.setInt(4, v.getUserID());
+			insert.setInt(5, v.getVoteResult());
+			
+			insert.executeUpdate();
+	
+			PreparedStatement getnewVote= con
+					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.vote ORDER BY creationDate DESC LIMIT 1;");
+		
+			ResultSet rs = getnewVote.executeQuery();
+			
+			if (rs.next()) {
+				
+				return new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"), rs.getInt("userID"), rs.getInt("voteResult"));
+			
+			}
+				
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+
+		}
+
+		return null;
+		
+	}
+	
+	
+	
 	
 }
