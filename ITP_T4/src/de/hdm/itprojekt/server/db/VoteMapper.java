@@ -271,7 +271,7 @@ public class VoteMapper {
 		try {
 			 
 			 PreparedStatement deleteAllVote = con
-					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE id=?;");
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE creationDate=?;");
 		
 			 deleteAllVote.setInt(1, id);
 			 deleteAllVote.executeUpdate();
@@ -282,6 +282,22 @@ public class VoteMapper {
 	}
 	
 	
+	public void deleteAllVoteBySurveyEntryID(int id)  {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			 
+			 PreparedStatement eleteAllVoteBySurveyEntryID = con
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE surveyentryID=?;");
+		
+			 eleteAllVoteBySurveyEntryID.setInt(1, id);
+			 eleteAllVoteBySurveyEntryID.executeUpdate();
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		}
+	
+	}
 	
 	
 }
