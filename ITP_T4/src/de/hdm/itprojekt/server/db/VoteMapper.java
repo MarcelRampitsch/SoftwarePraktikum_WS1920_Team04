@@ -253,10 +253,28 @@ public class VoteMapper {
 		try {
 			 
 			 PreparedStatement deleteVoteByVoteID = con
-					 .prepareStatement("UPDATE softwarepraktikum_ws1920.vote SET `DeleteDate`=NOW() WHERE `id`=?;");
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE id=?;");
 		
 			 deleteVoteByVoteID.setInt(1, id);
 			 deleteVoteByVoteID.executeUpdate();
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		}
+	
+	}
+	
+	
+	public void deleteAllVote(int id)  {
+		
+		Connection con = DBConnection.getConnection();
+		
+		try {
+			 
+			 PreparedStatement deleteAllVote = con
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE id=?;");
+		
+			 deleteAllVote.setInt(1, id);
+			 deleteAllVote.executeUpdate();
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		}
