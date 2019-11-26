@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.Presentation;
 
 public class CinemaGroupMapper {
 	
@@ -161,17 +163,68 @@ public class CinemaGroupMapper {
 			
 			e.printStackTrace();
 		}
-		
+	
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 		
-}
+
+	public Vector<CinemaGroup> findcinemagroupbyuserID (int id){
+		
+		Connection con = DBConnection.getConnection();
+		CinemaGroup cinemagroup = null;  
+		
+		Vector<CinemaGroup> result = new Vector<CinemaGroup>();
+		
+		try {
+			PreparedStatement findCinemaGroupByUserID = 
+					con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 " 
+									+ "wHERE UserID=? ");
+			findCinemaGroupByUserID.setInt(1, id);
+			
+			
+			
+			ResultSet rs = findCinemaGroupByUserID.executeQuery();
+					
+					
+					while(rs.next()) {
+						
+						cinemagroup = new CinemaGroup(rs.getInt("id"),rs.getTimestamp("creationDate"),rs.getString("name"),rs.getInt("userID"));
+					
+						result.addElement(cinemagroup);
+					}
+				} catch (SQLException e) {
+				      e.printStackTrace();
+				      return null;
+				}
+		
+				return result;
+			
+			}
+	
+	
+	
+	
+	public void deleteAllCinemaGroupByUserID(int id) {
+		
+		Connection con = DBConnection.getConnection();
+		
+		
+		try {
+			
+			PreparedStatement deleteAllCinemaGroupByUserID =
+					con.prepareStatement("DELETE FROM softwarepraktiku_ws1920.cinemagroup WHERE userID=?;");
+			deleteAllCinemaGroupByUserID.setInt(1, id);
+			
+			deleteAllCinemaGroupByUserID.executeUpdate();
+			
+		} catch (SQLException e) {
+		      e.printStackTrace();
+	}
+		
+					
+	}
+			
+		
+	}
+
 	
