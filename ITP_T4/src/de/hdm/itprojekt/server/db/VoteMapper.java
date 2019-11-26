@@ -60,6 +60,42 @@ public class VoteMapper {
 		return voteMapper;
 	}
 	
+	public Vector<Vote> findVoteByVoteID(int id) {
+		
+		Connection con = DBConnection.getConnection();
+
+		Vote v = null;
+			
+		Vector<Vote> result = new Vector<Vote>();
+		
+		try {
+			
+			PreparedStatement findVoteByUserID = con.prepareStatement( 
+					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE id=?");
+			findVoteByUserID.setInt(1, id);
+				
+			ResultSet rs = findVoteByUserID.executeQuery();
+
+			while (rs.next()) {
+					
+				v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"), rs.getInt("userID"), rs.getInt("voteResult"));
+
+				result.addElement(v);
+				
+			}
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			return null;
+					
+		}
+			
+		return result;
+		
+	}
+	
+	
 	public Vector<Vote> findVoteByUserID(int userID) {
 
 		Connection con = DBConnection.getConnection();
