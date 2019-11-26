@@ -1,5 +1,8 @@
 package de.hdm.itprojekt.client.gui;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
@@ -9,7 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
  
 	
-	public class GruppenForm extends DialogBox{
+	public class GruppenDeleteForm extends DialogBox{
 		
 
 		VerticalPanel inhalt = new VerticalPanel();
@@ -31,10 +34,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 		
 		
-		public GruppenForm() {
+		public GruppenDeleteForm() {
+			
+		}
+		
+		
+		public void onLoad() {
+			super.onLoad();
 			
 			inhalt.add(close);
-			//close.addClickHandler(new closegruppenform());
+			close.addClickHandler(new closegruppenform());
 			inhalt.add(gruppenerstellung);
 			gruppenerstellung.addStyleName("Überschrift");
 			inhalt.add(gruppenname);
@@ -47,12 +56,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 			inhalt.add(edit);
 						
 			
-//			speichern.addClickHandler(new sichernhandler());
-//			this.add(inhalt);
-
+			speichern.addClickHandler(new sichernhandler());
+			this.add(inhalt);
 
 			
-		}
+	}
+		
 		
 		public void openGruppenForm() {
 			this.setGlassEnabled(true);
@@ -70,34 +79,30 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 			this.setGlassEnabled(false);
 		}
 
+	
 		
-
-		public void onLoad() {
+		
+		private class closegruppenform implements ClickHandler{
+	
+			@Override
+			public void onClick(ClickEvent event) {
+				closeGruppenForm();
+				
+			}
+	
+		
+			
+		}
+		
+		private class sichernhandler implements ClickHandler{
+	
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.alert("EINGABE GESICHERT");
+			}
 			
 	}
-		
-		
-//		private class closegruppenform implements ClickHandler{
-	//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				closeGruppenForm();
-//				
-//			}
-	//
-	//	
-//			
-//		}
-	//	
-//		private class sichernhandler implements ClickHandler{
-	//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				Window.alert("EINGABE GESICHERT");
-//			}
-			
 	}
-
 
 		
 
