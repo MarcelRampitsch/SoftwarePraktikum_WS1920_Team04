@@ -67,8 +67,7 @@ public class MovieMapper {
 		// ausführen des Queries
 		ResultSet rs = findByMovieID.executeQuery();
 		
-		m = new Movie(rs.getInt("movieID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("presentationID"), rs.getInt("userID"));
-		//int id, Timestamp creationDate, String name, int userID Korrektur
+		m = new Movie(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
 		
 		//Fehlerbehandlung (Fangen der SQLException und Ausgabe des Fehlers)
 		} catch (SQLException e) {
@@ -78,7 +77,7 @@ public class MovieMapper {
 		//Rückgabe des Movie
 		return m;
 	}
-	//wird findByName benötigt?
+	//TODO wird findByName benötigt?
 	public Movie findByName(String name) {
 		Movie m = null;
 		//Aufbau der DB-Verbindung
@@ -89,8 +88,7 @@ public class MovieMapper {
 			findByName.setString(2, name);
 			
 			ResultSet rs = findByName.executeQuery();
-			//anpassen - siehe BusinessObject?
-			m = new Movie(rs.getInt("movieID"), rs.getString("name"), rs.getTimestamp("creationDate"), rs.getInt("presentationID"), rs.getInt("userID"));
+			m = new Movie(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -108,7 +106,12 @@ public class MovieMapper {
 
 			insert.executeUpdate();
 			
-			// getNewMovie erweitern
+			PreparedStatement getnewMovie = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie ORDER BY creationDate DESC LIMIT 1;");
+			
+			ResultSet rs = getnewMovie.executeQuery();
+			if (rs.next()) {
+				return new Movie(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -127,9 +130,32 @@ public class MovieMapper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		//ToDo public void deleteAllMovieByUserID und deleteAllMovieByCinemaID
-		//Ergänzung cinemaID als fremdschlüssel im BO
 	}
+
+		public void DeleteAllByUserID(int id) {
+			//Aufbau der DB-Verbindung
+			Connection con = DBConnection.getConnection();
+			
+			try {
+				PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.userID WHERE userID =?;");
+				deleteAllByUserID.setInt(1, id);
+				deleteAllByUserID.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public void DeleteAllByCinemaID(int id) {
+			//Aufbau der DB-Verbindung
+			Connection con = DBConnection.getConnection();
+			
+			try {
+				PreparedStatement deleteAllByCinemaID = con.prepareStatement("DELETE FROM softwareprakikum_ws1920.cinemaID WHERE cinemaID =?;");
+				deleteAllByCinemaID.setInt(1, id);
+				deleteAllByCinemaID.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 }
 
