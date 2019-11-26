@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
  
 	
-	public class GruppenDeleteForm extends DialogBox{
+	public class GruppenOpenForm extends DialogBox{
 		
 
 		VerticalPanel inhalt = new VerticalPanel();
@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 		
 		
-		public GruppenDeleteForm() {
+		public GruppenOpenForm() {
 			
 		}
 		

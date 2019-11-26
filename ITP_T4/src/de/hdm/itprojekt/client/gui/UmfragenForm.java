@@ -60,7 +60,7 @@ public class UmfragenForm extends VerticalPanel {
 		
 		 public void onClick(ClickEvent event) {
 			
-			UmfragenDeleteForm uf = new UmfragenDeleteForm();
+			UmfragenOpenForm uf = new UmfragenOpenForm();
 			uf.umfrageEditForm();
 		}
 	}

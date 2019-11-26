@@ -27,7 +27,7 @@ public class GruppenForm extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
-			GruppenDeleteForm open = new GruppenDeleteForm();
+			GruppenOpenForm open = new GruppenOpenForm();
 			open.openGruppenForm();
 		}
 

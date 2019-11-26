@@ -14,8 +14,17 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 
+/**
+ * 
+ * @author DominikThumm
+ * DialogBox, die angezeigt wird, wenn der Nutzer eine Umfrage erstellen möchte.
+ * Die Klasse enthält entsprechende ClickHandler & Methoden zum Bestätigen oder Abbrechen der Aktion.
+ */
 
-public class UmfragenDeleteForm extends DialogBox {
+
+public class UmfragenOpenForm extends DialogBox {
+	
+	
 	
 	Label umfrageErstellung = new Label("Umfrageerstellung:");
 	Button closeButton = new Button("X");
@@ -32,7 +41,7 @@ public class UmfragenDeleteForm extends DialogBox {
  //   private ArrayList<String> umfagen = new ArrayList<String>();
 
 
-    private CloseUmfrageDeleteFormClickHandler closeHandler;
+    private CloseUmfrageOpenFormClickHandler closeHandler;
     private safehandler umfageSpeichern;
     
 
@@ -44,9 +53,16 @@ public class UmfragenDeleteForm extends DialogBox {
 	
 	VerticalPanel content = new VerticalPanel();
 	
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+	 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+	 */
+	
 	public void onLoad() {
 		super.onLoad();
-		closeHandler = new CloseUmfrageDeleteFormClickHandler();
+		closeHandler = new CloseUmfrageOpenFormClickHandler();
 		umfageSpeichern = new safehandler();
 		
 		closeButton.addStyleName("UmfrageCloser");
@@ -97,7 +113,7 @@ public class UmfragenDeleteForm extends DialogBox {
 		this.show();
 	}
 	
-	public void closeUmfrageDeleteForm() {
+	public void closeUmfrageOpenForm() {
 		this.hide();
 		this.clear();
 		this.removeFromParent();
@@ -105,14 +121,22 @@ public class UmfragenDeleteForm extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
     
     	
+	
+	/**
+	 * CloseUmfrageOpenFormClickHandler: Wird beim Click auf <code> closeButton </code> ausgelöst.
+	 * Der User kann damit das Umfragefenster schließen.
+	 */
 
-	class CloseUmfrageDeleteFormClickHandler implements ClickHandler {
+	class CloseUmfrageOpenFormClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			closeUmfrageDeleteForm();
+			closeUmfrageOpenForm();
 			
 		}
 		
@@ -122,6 +146,11 @@ public class UmfragenDeleteForm extends DialogBox {
 	}
 	
 	//Bisher nur Testweise Window Alert
+	
+	/**
+	 * safehandler: Wird beim Click auf <code> safeUmfrage </code> Button ausgelöst.
+	 * Der User kann damit die Umfrage speichern.
+	 */
 	private class safehandler implements ClickHandler {
 
 		@Override
