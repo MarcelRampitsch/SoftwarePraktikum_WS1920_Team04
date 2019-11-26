@@ -57,14 +57,15 @@ public class CinemaGroupMapper {
 	
 	public CinemaGroup insert(CinemaGroup c) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		try {
 			
+			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement insert  = 
-					
 					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinemaGroup(name, userID) VALUES (?,?);");
-			
+			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 					insert.setString(1, c.getName());
 					insert.setInt(2, c.getUserID());
 					
@@ -85,27 +86,29 @@ public class CinemaGroupMapper {
 				      return null;
 					}
 					return null;
+					
 	}
 	
 	public CinemaGroup findCinemaGroupByID(int id) {
 		CinemaGroup cg = null;
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		
 		try {
-			
+			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement findCinemaGroupByID = 
 					con.prepareStatement("SELECT softwarepraktikum_ws1920.cinemaGroup WHERE cinemaGroupID=?;");
 			
+			
 			findCinemaGroupByID.setInt(1, id);
-			
-			
 			ResultSet rs = findCinemaGroupByID.executeQuery();
 			
+			// Ergebnis-Tupel in Objekt umwandeln
 			cg = new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 			
-
+			// Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
@@ -117,24 +120,25 @@ public class CinemaGroupMapper {
 	
 	public CinemaGroup updateCinemaGroup(CinemaGroup cinemaGroup) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
-		
-		
-		
+	
 		try {
-			
+			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinemaGroup SET name=? WHERE cinemaGroupID=?;");
 			
+			// PreparedStatement aufrufen und als Query an die DB schicken.
 			update.setString(1, cinemaGroup.getName());
 			update.setInt(2, cinemaGroup.getId());
 
 			update.executeUpdate();
+			
 			PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemaGroup WHERE cinemaGroupID=?;");
 			stm.setInt(1, cinemaGroup.getId());
 			ResultSet rs = stm.executeQuery();
 			if (rs.next()) {
 				
-				
+				// Ergebnis-Tupel in Objekt umwandeln
 				return new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 			}
 			 // Fehlerbehandlung hinzufügen
@@ -147,18 +151,22 @@ public class CinemaGroupMapper {
 	}
 	
 	
+	
 	public void deleteCinemaGroupByID(int id) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		try {
+			
+			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement deleteCinemaGroupById =
 					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemaGroup WHERE 'cinemaGroupID' = ?;");
 					
-			deleteCinemaGroupById.setInt(1, id);
-			
+			 // Löschen der CinemaGroups die einen bestimmten UserID enthalten
 			deleteCinemaGroupById.executeUpdate();
 			
+			 // Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -170,35 +178,40 @@ public class CinemaGroupMapper {
 
 	public Vector<CinemaGroup> findcinemagroupbyuserID (int id){
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		CinemaGroup cinemagroup = null;  
 		
+		// Ergebnisvektor vorbereiten
 		Vector<CinemaGroup> result = new Vector<CinemaGroup>();
 		
 		try {
+			
+			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement findCinemaGroupByUserID = 
 					con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920 " 
 									+ "wHERE UserID=? ");
 			findCinemaGroupByUserID.setInt(1, id);
 			
-			
-			
+			// Statement ausfüllen und als Query an die DB schicken
 			ResultSet rs = findCinemaGroupByUserID.executeQuery();
 					
 					
 					while(rs.next()) {
 						
+						// Ergebnis-Tupel in Objekt umwandeln
 						cinemagroup = new CinemaGroup(rs.getInt("id"),rs.getTimestamp("creationDate"),rs.getString("name"),rs.getInt("userID"));
 					
 						result.addElement(cinemagroup);
 					}
+					
+					// Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
 				      e.printStackTrace();
 				      return null;
 				}
-		
+				// Ergebnisvektor zurückgeben
 				return result;
-			
 			}
 	
 	
@@ -206,17 +219,22 @@ public class CinemaGroupMapper {
 	
 	public void deleteAllCinemaGroupByUserID(int id) {
 		
+		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		
 		try {
-			
+			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement deleteAllCinemaGroupByUserID =
 					con.prepareStatement("DELETE FROM softwarepraktiku_ws1920.cinemagroup WHERE userID=?;");
+			
+			// Löschen der CinemaGroups die einen bestimmten UserID enthalten
 			deleteAllCinemaGroupByUserID.setInt(1, id);
 			
 			deleteAllCinemaGroupByUserID.executeUpdate();
 			
+			// Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {
 		      e.printStackTrace();
 	}

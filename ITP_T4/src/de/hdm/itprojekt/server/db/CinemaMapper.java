@@ -58,13 +58,15 @@ public class CinemaMapper {
 	
 	public Cinema insertCinema(Cinema c) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 
 		try { 
-			
+			// Prepared Statement erstellen um ein Cinema zu finden
 			PreparedStatement  insert = 
 					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,cinemaGroupID,userID) VALUES (?,?,?,?);");
-					
+				
+			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				insert.setString(1, c.getLocation());
 				insert.setString(2, c.getName());
 				insert.setInt(3, c.getCinemaGroupID());
@@ -76,22 +78,20 @@ public class CinemaMapper {
 				PreparedStatement getnewCinema = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema ORDER BY creationDate DESC LIMIT 1;");
 						
-						ResultSet rs = getnewCinema.executeQuery();
+				// Ergebnis-Tupel in Objekt umwandeln
+				ResultSet rs = getnewCinema.executeQuery();
 						
 						if(rs.next()) {
 							
 							return new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 							
 		} 
-
+		// Fehlerbehandlung hinzufügen
 		} catch (SQLException e2) {
 		      e2.printStackTrace();
 		      return null;
-
-
+		      
 			}
-
-
 			return null;
 		}
 	
@@ -99,19 +99,20 @@ public class CinemaMapper {
 	
 	public void deleteCinemaByCinemaID(int id) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			
+			// Prepared Statement erstellen um ein Cinema zu finden
 			PreparedStatement deleteCinemaByCinemaID =
 					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema WHERE 'cinemaID' =?;");
 			
+			// PreparedStatement zum Löschen einer bestimmten Cinema in der Datenbank
 			deleteCinemaByCinemaID.setInt(1, id);
-			
 			
 			deleteCinemaByCinemaID.executeUpdate();
 			
-			
+			// Fehlerbehandlung hinzufügen
 		}catch(SQLException e) {
 			e.printStackTrace();		
 		}
@@ -123,21 +124,23 @@ public class CinemaMapper {
 	
 	public Cinema updateCinema(Cinema cinema) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		
 		try {
-			
+            // Updaten einer bestimmten Cinema  
 			PreparedStatement update = 
 					
 					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET location=?, name=?, cinemaGroupID=?, WHERE cinemaID=?;");
 					
+		
 					update.setString(1, cinema.getLocation());
 					update.setString(2, cinema.getName());
 					update.setInt(3, cinema.getCinemaGroupID());
 					update.setInt(4, cinema.getUserID());
 
-					
+					// PreparedStatement aufrufen und als Query an die DB schicken.
 					update.executeUpdate();
 					
 					PreparedStatement stm  = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE 'cinemaID'=?;");
@@ -147,23 +150,25 @@ public class CinemaMapper {
 					ResultSet rs  = stm.executeQuery();
 					
 					if(rs.next()) {
-						
+						// Ergebnis-Tupel in Objekt umwandeln
 						return new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));          
 					}
-					
+					 // Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
 		} 
 		return null;
 	}
+	
 
 	public void deleteAllCinemaByUserID(int id) {
 		
+		// DB-Verbindung holen
 		Connection con  = DBConnection.getConnection();
 		
 		try {
-			
+			// Prepared Statement zum Löschen eines Cinemas.
 			PreparedStatement deleteAllCinemaByUserID = 
 							con.prepareStatement("SELECT FROM softwarepraktikum.cinema WHERE userID=?;");
 			
@@ -171,58 +176,70 @@ public class CinemaMapper {
 			
 			deleteAllCinemaByUserID.executeUpdate();
 			
-			
+			 // Fehlerbehandlung hinzufügen	
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	
+	
 	public Cinema findCinemaByCinemaID(int id) {
 		Cinema c= null;
 		
+		// DB-Verbindung holen
 		Connection con  = DBConnection.getConnection();
 		
 		
 		try {
-			
+			// PreparedStatement erstellen um ein Cinema  anhand der cinemaID zu finden
 			PreparedStatement findCinemaByCinemaID = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE cinemaID=?;");
 			
 			findCinemaByCinemaID.setInt(1, id);
+			
+			// Ergebnis-Tupel erstellen
 			ResultSet rs = findCinemaByCinemaID.executeQuery();
+			
+			// Ergebnis-Tupel in Objekt umwandeln
 			c = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
 
-		} // Presentation zurückgeben
+		} // Cinema zurückgeben
 		return c;
 	}
 	
+	
 	public Vector<Cinema> findCinemaByLocation(String location) {
 		
+		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		
 		Cinema c = null;
 		
+		// Ergebnisvektor vorbereiten
 		Vector<Cinema> result  = new Vector <Cinema>();
 		
 		try {
-			
+			// PreparedStatement erstellen um ein Cinema  anhand der location zu finden
 			PreparedStatement findCinemaByLocation = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE location=?;");
 			
 			findCinemaByLocation.setString(3, location);
 			
+			// Ergebnis-Tupel erstellen
 			ResultSet rs = findCinemaByLocation.executeQuery();
 			
 			while (rs.next()) {
 				
+				// Ergebnis-Tupel in Objekt umwandeln
 				c = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 			
 				result.addElement(c);
 			}
-			
+			// Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
