@@ -208,6 +208,44 @@ public class VoteMapper {
 	}
 	
 	
+	public Vote update(Vote v) {
+		
+		  Connection con = DBConnection.getConnection();
+
+		  try {
+			  
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.vote SET id=?, creationDate=?, surveyentryID=?, userID=?, voteResult  WHERE id=?;");
+			  
+			  update.setInt(1, v.getId());
+			  //update.setInt(2, v.getCreationDate());
+			  update.setInt(3, v.getSurveyEntryID());
+			  update.setInt(4, v.getUserID());
+			  update.setInt(5, v.getVoteResult());
+			  
+			  update.executeUpdate();
+			  
+			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.vote WHERE id=?;");
+			  
+			  stm.setInt(1, v.getId());
+			  ResultSet rs = stm.executeQuery();
+			  
+			  if (rs.next()) {
+				  
+				  return new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"), rs.getInt("userID"), rs.getInt("voteResult"));
+			
+			  }
+			  
+		  } catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+		      
+		  } 
+	
+		  return null;
+		
+	}
+	
+	
 	
 	
 }
