@@ -16,6 +16,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.gui.EditorForm;
+
+
 /**
  * Entry-Point-Klasse des Projekts <b>ITP_T4</b>.
  */
@@ -32,7 +35,9 @@ public class ITP_T4 implements EntryPoint {
 	
 	public void onModuleLoad() {
 		
-	//	Diese ist das GWT-Pendant der  <code>main()</code>-Methode normaler Java-Applikationen.
+		RootPanel.get().add(new EditorForm());
+
+		
 	
 		
 	}

@@ -43,8 +43,7 @@ public class EditorForm extends VerticalPanel {
 	 * 
 	 */
 	
-	public EditorForm(User currentUser) {
-		this.currentUser = currentUser;
+	public EditorForm(){
 	}
 	
 	
@@ -73,9 +72,9 @@ public class EditorForm extends VerticalPanel {
 		 * Instanzierung aller nötigen Formen, die in der EditorForm angezeigt werden sollen. 
 		 */
 		
-	//	GruppenForm gruppenForm = new GruppenForm(currentUser);
+		GruppenForm gruppenForm = new GruppenForm();
 	//	VoteForm voteForm = new VoteForm(currentUser);
-	//	UmfrageForm umfrageForm = new UmfrageForm(currentUser);
+		UmfragenForm umfrageForm = new UmfragenForm();
 	//	GruppenCell gruppenCell = new GruppenCell(currentUser);
 	
 		
@@ -85,12 +84,12 @@ public class EditorForm extends VerticalPanel {
 		 */
 		
 	//	center.add(voteForm);
-	//	east.add(umfrageForm);
-	//	west.add(gruppenForm);
+		east.add(umfrageForm);
+		west.add(gruppenForm);
 		
-	//	main.add(center);
-	//	main.add(east);
-	//	main.add(west);
+		main.add(center);
+		main.add(east);
+		main.add(west);
 		
 		
 	}
