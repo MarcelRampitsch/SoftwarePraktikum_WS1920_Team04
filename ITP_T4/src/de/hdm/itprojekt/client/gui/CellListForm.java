@@ -4,7 +4,8 @@ package de.hdm.itprojekt.client.gui;
 /**
  * 
  * @author serhatulus
- *
+ * Klasse, die das Anzeigen der Gruppen untereinander anzeigen lässt. 
+ * Diese wiederum wird in der BasisKlasse EditorForm instanziiert.
  */	
 
 import java.util.Arrays;

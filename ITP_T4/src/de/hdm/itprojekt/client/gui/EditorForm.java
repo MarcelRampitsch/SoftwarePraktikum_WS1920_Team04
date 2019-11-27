@@ -75,7 +75,7 @@ public class EditorForm extends VerticalPanel {
 		GruppenForm gruppenForm = new GruppenForm();
 	//	VoteForm voteForm = new VoteForm(currentUser);
 		UmfragenForm umfrageForm = new UmfragenForm();
-	//	GruppenCell gruppenCell = new GruppenCell(currentUser);
+		CellListForm celllistform = new CellListForm();
 	
 		
 
@@ -86,10 +86,15 @@ public class EditorForm extends VerticalPanel {
 	//	center.add(voteForm);
 		east.add(umfrageForm);
 		west.add(gruppenForm);
+		west.add(celllistform);
+		
 		
 		main.add(center);
 		main.add(east);
 		main.add(west);
+		
+		this.add(main);
+
 		
 		
 	}

@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * 
  * @author serhatulus
- *
+ * BasisKlasse für GruppenOpenForm. Diese Klasse wird in dieser Klasse instanziiert. 
  */
 
 public class GruppenForm extends VerticalPanel {

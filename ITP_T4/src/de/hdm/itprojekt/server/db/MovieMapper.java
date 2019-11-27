@@ -78,6 +78,7 @@ public class MovieMapper {
 		// Rückgabe des Movieobjekt
 		return m;
 	}
+	//TODO findAllMovieByUserID
 	//TODO wird findByName benötigt?
 	public Movie findByName(String name) {
 		Movie m = null;
@@ -106,13 +107,15 @@ public class MovieMapper {
 		
 		try {
 			// Erstellung des Prepared Statement insert
-			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(name) VALUES(?);");
+			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(name, userID, cinemaID) VALUES(?,?,?);");
 
 			insert.setString(1, m.getName());
+			insert.setInt(2, m.getUserID());
+			insert.setInt(3, m.getCinemaID());
 
 			insert.executeUpdate();
 			
-			// Erstellung des PreparedStatement getnewMovie
+			// Erstellung des PreparedStatement getnewMovie Wählt das zuletzt erstellte absteigend.
 			PreparedStatement getnewMovie = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie ORDER BY creationDate DESC LIMIT 1;");
 			
 			ResultSet rs = getnewMovie.executeQuery();
@@ -132,7 +135,7 @@ public class MovieMapper {
 		
 		try {
 			// Erstellung des PreparedStatement deleteMovieID
-			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE `MovieID`=?;");
+			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE movieID=?;");
 		deleteByMovieID.setInt(1, id);
 		deleteByMovieID.executeUpdate();
 		
@@ -146,7 +149,7 @@ public class MovieMapper {
 			Connection con = DBConnection.getConnection();
 			
 			try {
-				PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.userID WHERE userID =?;");
+				PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE userID =?;");
 				deleteAllByUserID.setInt(1, id);
 				deleteAllByUserID.executeUpdate();
 			} catch (SQLException e) {
@@ -159,7 +162,7 @@ public class MovieMapper {
 			
 			try {
 				// Erstellung des PreparedStatement deleteAllByCinemaID
-				PreparedStatement deleteAllByCinemaID = con.prepareStatement("DELETE FROM softwareprakikum_ws1920.cinemaID WHERE cinemaID =?;");
+				PreparedStatement deleteAllByCinemaID = con.prepareStatement("DELETE FROM softwareprakikum_ws1920.movie WHERE cinemaID =?;");
 				deleteAllByCinemaID.setInt(1, id);
 				deleteAllByCinemaID.executeUpdate();
 			} catch (SQLException e) {
