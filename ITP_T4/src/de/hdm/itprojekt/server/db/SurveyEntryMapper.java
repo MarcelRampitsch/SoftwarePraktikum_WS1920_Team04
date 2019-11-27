@@ -86,7 +86,36 @@ public class SurveyEntryMapper {
 	  }
 	  
 	  
-	  //findSurveyEntryBySurveyID
+	  public SurveyEntry findSurveyEntryBySurveyID(int id) {
+
+			Connection con = DBConnection.getConnection();
+
+			SurveyEntry se = null;
+
+			try {
+				
+				PreparedStatement findSurveyEntryBySurveyID = con.prepareStatement( 
+						"SELECT * FROM softwarepraktikum_ws1920.surveyentry" + "WHERE surveyID=?");
+				findSurveyEntryBySurveyID.setInt(1, id);
+
+				ResultSet rs = findSurveyEntryBySurveyID.executeQuery();
+
+				while (rs.next()) {
+					
+					se = new SurveyEntry(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
+
+				}
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			    return null;
+				
+			}
+				
+			return se;
+		  
+	  }
 
 	
 	  public SurveyEntry insert(SurveyEntry se) {
