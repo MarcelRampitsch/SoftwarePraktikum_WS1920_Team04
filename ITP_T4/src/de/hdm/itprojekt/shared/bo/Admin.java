@@ -8,8 +8,8 @@ public class Admin extends User {
 
 	private int admin;
 
-	public Admin(String nickname, int id, Timestamp creationDate, int admin) {
-		super(nickname, id, creationDate);
+	public Admin(String nickname, String email, int id, Timestamp creationDate, int admin) {
+		super(nickname, email, id, creationDate );
 		this.admin = admin;
 	}
 	
