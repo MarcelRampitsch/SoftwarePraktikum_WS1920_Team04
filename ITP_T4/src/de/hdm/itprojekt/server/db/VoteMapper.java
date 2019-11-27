@@ -60,27 +60,23 @@ public class VoteMapper {
 		return voteMapper;
 	}
 	
-	public Vector<Vote> findVoteByVoteID(int id) {
+	public Vote findVoteByVoteID(int id) {
 		
 		Connection con = DBConnection.getConnection();
 
 		Vote v = null;
-			
-		Vector<Vote> result = new Vector<Vote>();
 		
 		try {
 			
 			PreparedStatement findVoteByUserID = con.prepareStatement( 
-					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE id=?");
+					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE voteID=?");
 			findVoteByUserID.setInt(1, id);
 				
 			ResultSet rs = findVoteByUserID.executeQuery();
 
 			while (rs.next()) {
 					
-				v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"), rs.getInt("userID"), rs.getInt("voteResult"));
-
-				result.addElement(v);
+				return v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"), rs.getInt("userID"), rs.getInt("voteResult"));
 				
 			}
 		
@@ -91,11 +87,11 @@ public class VoteMapper {
 					
 		}
 			
-		return result;
+		return null;
 		
 	}
 	
-	
+	//TODO Ist diese Methode relevant?
 	public Vector<Vote> findVoteByUserID(int userID) {
 
 		Connection con = DBConnection.getConnection();
@@ -176,13 +172,11 @@ public class VoteMapper {
 		try {
 			
 			PreparedStatement insert = con
-					.prepareStatement("INSERT INTO softwarepraktikum_ws1920.vote(id, creationDate, surveyentryID, userID, voteResult) VALUES(?,?,?,?,?);");
+					.prepareStatement("INSERT INTO softwarepraktikum_ws1920.vote(surveyentryID, userID, voteResult) VALUES(?,?,?);");
 		
-			insert.setInt(1, v.getId());
-			//insert.setInt(2, v.getCreationDate());
-			insert.setInt(3, v.getSurveyEntryID());
-			insert.setInt(4, v.getUserID());
-			insert.setInt(5, v.getVoteResult());
+			insert.setInt(1, v.getSurveyEntryID());
+			insert.setInt(2, v.getUserID());
+			insert.setInt(3, v.getVoteResult());
 			
 			insert.executeUpdate();
 	
@@ -214,17 +208,13 @@ public class VoteMapper {
 
 		  try {
 			  
-			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.vote SET id=?, creationDate=?, surveyentryID=?, userID=?, voteResult  WHERE id=?;");
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.vote SET voteResult  WHERE voteID=?;");
 			  
-			  update.setInt(1, v.getId());
-			  //update.setInt(2, v.getCreationDate());
-			  update.setInt(3, v.getSurveyEntryID());
-			  update.setInt(4, v.getUserID());
-			  update.setInt(5, v.getVoteResult());
+			  update.setInt(1, v.getVoteResult());
 			  
 			  update.executeUpdate();
 			  
-			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.vote WHERE id=?;");
+			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.vote WHERE voteID=?;");
 			  
 			  stm.setInt(1, v.getId());
 			  ResultSet rs = stm.executeQuery();
@@ -253,7 +243,7 @@ public class VoteMapper {
 		try {
 			 
 			 PreparedStatement deleteVoteByVoteID = con
-					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE id=?;");
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE voteID=?;");
 		
 			 deleteVoteByVoteID.setInt(1, id);
 			 deleteVoteByVoteID.executeUpdate();
@@ -264,14 +254,14 @@ public class VoteMapper {
 	}
 	
 	
-	public void deleteAllVote(int id)  {
+	public void deleteAllVoteByUserID(int id)  {
 		
 		Connection con = DBConnection.getConnection();
 		
 		try {
 			 
 			 PreparedStatement deleteAllVote = con
-					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE creationDate=?;");
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE userID=?;");
 		
 			 deleteAllVote.setInt(1, id);
 			 deleteAllVote.executeUpdate();
