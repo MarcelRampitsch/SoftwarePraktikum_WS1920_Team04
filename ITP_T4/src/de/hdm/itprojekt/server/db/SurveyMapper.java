@@ -75,7 +75,7 @@ public class SurveyMapper {
 		  //Rückgabe des Survey
 		  return s;
 	  }
-	  
+	  //TODO notwendig?
 	  public Survey findByName(String name) {
 		  Survey s = null;
 		  //Aufbau der DB-Verbindung
@@ -94,7 +94,7 @@ public class SurveyMapper {
 		  }
 		  return s;
 	  }
-	  
+	  // TODO UserID und groupID hinzufügen
 	  public Survey insert(Survey s) {
 		  
 		  Connection con = DBConnection.getConnection();
@@ -126,7 +126,7 @@ public class SurveyMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  PreparedStatement deleteBySurveyID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.survey WHERE `SurveyID`=?;");
+			  PreparedStatement deleteBySurveyID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.survey WHERE surveyID=?;");
 			  deleteBySurveyID.setInt(1, id);
 			  deleteBySurveyID.executeUpdate();
 			  
@@ -162,13 +162,13 @@ public class SurveyMapper {
 		  return null;
 	  }
 	  
-	  public void DeleteAllByUserID(int id) {
+	  public void deleteAllByUserID(int id) {
 		  // Aufbau der DB-Verbindung
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  
-			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.userID WHERE userID =?;");
+			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyID WHERE userID =?;");
 			  deleteAllByUserID.setInt(1,  id);
 			  
 			  deleteAllByUserID.executeUpdate();
@@ -183,7 +183,7 @@ public class SurveyMapper {
 		  
 		  try {
 			  
-			  PreparedStatement deleteAllByGroupID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.groupID WHERE groupID =?;");
+			  PreparedStatement deleteAllByGroupID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyID WHERE groupID =?;");
 			  deleteAllByGroupID.setInt(1, id);
 			  
 			  deleteAllByGroupID.executeUpdate();

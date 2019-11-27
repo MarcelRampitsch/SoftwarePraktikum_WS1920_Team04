@@ -27,10 +27,16 @@ private static final long serialversionUID = 1l;
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getUserID(int userID) {
+	public int getUserID() {
 		return userID;
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+	public int getCinemaID() {
+		return cinemaID;
+	}
+	public void setCinemaID(int cinemaID){
+		this.cinemaID = cinemaID;
 	}
 }
