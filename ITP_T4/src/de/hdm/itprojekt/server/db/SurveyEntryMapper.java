@@ -52,7 +52,6 @@ public class SurveyEntryMapper {
 	    return surveyEntryMapper;
 	  }
 	  
-	  //TODO surveyEntryMapper
 
 	  public SurveyEntry findSurveyEntryBySurveyEntryID(int id) {
 		  
@@ -200,36 +199,49 @@ public class SurveyEntryMapper {
 			 deleteBySurveyEntryID.setInt(1, id);
 			 deleteBySurveyEntryID.executeUpdate();
 		 
-		} catch (SQLException e) {
-		      e.printStackTrace();
-		}
-		 
+		 } catch (SQLException e) {
+			 e.printStackTrace();
+		 }
 		 
 	  }
 	  
 	  
 	  public void deleteAllBySurveyID(int id)  {
 		  
-			 Connection con = DBConnection.getConnection();
+		  Connection con = DBConnection.getConnection();
 			  
-			 try {
+		  try {
 				 
-				 PreparedStatement deleteAllBySurveyID = con
-						 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE surveyID=?;");
+			  PreparedStatement deleteAllBySurveyID = con
+					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE surveyID=?;");
 				 
-				 deleteAllBySurveyID.setInt(1, id);
-				 deleteAllBySurveyID.executeUpdate();
+			  deleteAllBySurveyID.setInt(1, id);
+			  deleteAllBySurveyID.executeUpdate();
 			 
-			} catch (SQLException e) {
-			      e.printStackTrace();
-			}
-			 
-			 
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+		  }
+			 	 
 	  }
 	  
 	  
-	  //deleteAllBySurveyID
-	  //deleteAllByPresentationID
+	  public void deleteAllByPresentationID(int id)  {
 		  
-	  
+		  Connection con = DBConnection.getConnection();
+			  
+		  try {
+				 
+			  PreparedStatement deleteAllByPresentationID = con
+					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE presentationID=?;");
+				 
+			  deleteAllByPresentationID.setInt(1, id);
+			  deleteAllByPresentationID.executeUpdate();
+			 
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+		  }
+			 	 
+	  }
+
+		  
 }
