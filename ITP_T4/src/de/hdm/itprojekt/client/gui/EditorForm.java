@@ -75,7 +75,7 @@ public class EditorForm extends VerticalPanel {
 		GruppenForm gruppenForm = new GruppenForm();
 	//	VoteForm voteForm = new VoteForm(currentUser);
 		UmfragenForm umfrageForm = new UmfragenForm();
-	//	GruppenCell gruppenCell = new GruppenCell(currentUser);
+		CellListForm celllistform = new CellListForm();
 	
 		
 
