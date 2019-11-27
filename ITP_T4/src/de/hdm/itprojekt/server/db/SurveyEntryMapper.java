@@ -54,18 +54,16 @@ public class SurveyEntryMapper {
 	  
 	  //TODO surveyEntryMapper
 
-	  public Vector<SurveyEntry> findSurveyEntryBySurveyEntryID(int id) {
+	  public SurveyEntry findSurveyEntryBySurveyEntryID(int id) {
 		  
 			Connection con = DBConnection.getConnection();
-
+			
 			SurveyEntry se = null;
 			
-			Vector<SurveyEntry> result = new Vector<SurveyEntry>();
-
 			try {
 				
 				PreparedStatement findSurveyEntryBySurveyEntryID = con.prepareStatement( 
-						"SELECT * FROM softwarepraktikum_ws1920.survey" + "WHERE id=?");
+						"SELECT * FROM softwarepraktikum_ws1920.surveyentry" + "WHERE surveyEntryID=?");
 				findSurveyEntryBySurveyEntryID.setInt(1, id);
 				
 				ResultSet rs = findSurveyEntryBySurveyEntryID.executeQuery();
@@ -74,7 +72,6 @@ public class SurveyEntryMapper {
 				
 					se = new SurveyEntry(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
 
-					result.addElement(se);
 				}
 				
 			} catch (SQLException e) {
@@ -84,9 +81,12 @@ public class SurveyEntryMapper {
 				
 			}
 		  
-			return result;
+			return se;
 			
 	  }
+	  
+	  
+	  //findSurveyEntryBySurveyID
 
 	
 	  public SurveyEntry insert(SurveyEntry se) {
@@ -96,17 +96,15 @@ public class SurveyEntryMapper {
 			try {
 				
 				PreparedStatement insert = con
-						.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(id, creationDate, surveyID, presentationID) VALUES(?,?,?,?);");
+						.prepareStatement("INSERT INTO softwarepraktikum_ws1920.surveyentry(surveyID, presentationID) VALUES(?,?);");
 				
-				insert.setInt(1, se.getId());
-				//insert.setInt(2, se.getCreationDate());
-				insert.setInt(3, se.getSurveyID());
-				insert.setInt(4, se.getPresentationID());
+				insert.setInt(1, se.getSurveyID());
+				insert.setInt(2, se.getPresentationID());
 				
 				insert.executeUpdate();
 				
 				PreparedStatement getnewSurveyEntry= con
-						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey ORDER BY creationDate DESC LIMIT 1;");
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.surveyentry ORDER BY creationDate DESC LIMIT 1;");
 				
 				ResultSet rs = getnewSurveyEntry.executeQuery();
 
@@ -133,16 +131,13 @@ public class SurveyEntryMapper {
 		  
 		  try {
 			  
-			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET id=?, creationDate=?, surveyID=?, presentationID=?  WHERE id=?;");
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.surveyentry SET presentationID=?  WHERE surveyEntryID=?;");
 			  
-			  update.setInt(1, se.getId());
-			  //update.setInt(2, se.getCreationDate());
-			  update.setInt(3, se.getSurveyID());
-			  update.setInt(4, se.getPresentationID());
+			  update.setInt(1, se.getPresentationID());
 			  
 			  update.executeUpdate();
 			  
-			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE id=?;");
+			  PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.surveyentry WHERE surveyEntryID=?;");
 			  
 			  stm.setInt(1, se.getId());
 			  ResultSet rs = stm.executeQuery();
@@ -171,7 +166,7 @@ public class SurveyEntryMapper {
 		 try {
 			 
 			 PreparedStatement deleteBySurveyEntryID = con
-					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.survey WHERE id=?;");
+					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE surveyEntryID=?;");
 			 
 			 deleteBySurveyEntryID.setInt(1, id);
 			 deleteBySurveyEntryID.executeUpdate();
@@ -182,6 +177,10 @@ public class SurveyEntryMapper {
 		 
 		 
 	  }
+	  
+	  
+	  //deleteAllBySurveyID
+	  //deleteAllByPresentationID
 		  
 	  
 }
