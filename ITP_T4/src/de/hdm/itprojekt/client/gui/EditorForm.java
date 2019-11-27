@@ -93,6 +93,11 @@ public class EditorForm extends VerticalPanel {
 		main.add(east);
 		main.add(west);
 		
+		this.add(east);
+		this.add(west);
+		this.add(main);
+
+		
 		
 	}
 
