@@ -86,6 +86,8 @@ public class EditorForm extends VerticalPanel {
 	//	center.add(voteForm);
 		east.add(umfrageForm);
 		west.add(gruppenForm);
+		west.add(celllistform);
+		
 		
 		main.add(center);
 		main.add(east);
