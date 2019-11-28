@@ -191,6 +191,64 @@ public class VerwaltungsForm extends VerticalPanel {
 		    panel.add(timeslotGes, "Timeslot");
 		    
 		    //Timeslot
+		    
+		  //Presentation
+		    // Beispielhafte Datenhinzufügung (Später aus der Datenbank)
+		    cinemaDrop.addItem("UFA- Palast");
+		    cinemaDrop.addItem("Traumpalast");
+		    cinemaDrop.addItem("Central und union");
+		    
+		    movieDrop.addItem("Spiderman");
+		    movieDrop.addItem("Der böse Film");
+		    movieDrop.addItem("Spiderman 3");
+		    
+		    timeslotDrop.addItem("18:00");
+		    timeslotDrop.addItem("18:30");
+		    timeslotDrop.addItem("19:00");
+		    timeslotDrop.addItem("19:30");
+		    timeslotDrop.addItem("20:00");
+		    timeslotDrop.addItem("20:30");
+		    timeslotDrop.addItem("21:00");
+		    timeslotDrop.addItem("21:30");
+		    timeslotDrop.addItem("22:00");
+		    timeslotDrop.addItem("22:30");
+		    timeslotDrop.addItem("23:00");
+		    timeslotDrop.addItem("23:30");
+		    timeslotDrop.addItem("00:00");
+
+
+		    
+		    VerticalPanel presentationGes = new VerticalPanel();
+		    presentationGes.add(pcinemaLabel);
+		    presentationGes.add(cinemaDrop);
+		    presentationGes.add(pmovieLabel);
+		    presentationGes.add(movieDrop);
+		    presentationGes.add(ptimeslotLabel);
+		    presentationGes.add(timeslotDrop);
+		    presentationGes.add(dateLabel);
+		    presentationGes.add(datePicker);
+		    presentationGes.add(search);
+		    
+		    
+		    
+		    HorizontalPanel presentationboxaddHorizont = new HorizontalPanel();
+		    presentationboxaddHorizont.add(presentationbox);
+		    presentationboxaddHorizont.add(presentationAdd);
+		    
+		    HorizontalPanel presentationCrud = new HorizontalPanel();
+		    presentationCrud.add(presentationEdit);
+		    presentationCrud.add(presentationNew);
+		    presentationCrud.add(presentationDelete);
+		    
+
+		    VerticalPanel PresentationGes2 = new VerticalPanel();
+		    PresentationGes2.add(presentationGes);
+		    PresentationGes2.add(presentationLabel);
+		    PresentationGes2.add(presentationboxaddHorizont);
+		    PresentationGes2.add(presentationCrud);
+
+		    
+		    panel.add(PresentationGes2, "Presentation");
 
 		    
 		
