@@ -151,7 +151,29 @@ public class VerwaltungsForm extends VerticalPanel {
 		    
 		    panel.add(CinemaGes, "Cinema/ CinemaGroup");
 		    //Cinema
+		    
+		    // Movie
+		    HorizontalPanel movieboxaddHorizont = new HorizontalPanel();
+		    movieboxaddHorizont.add(moviebox);
+		    movieboxaddHorizont.add(movieAdd);
+		    
+		    HorizontalPanel movieCrud = new HorizontalPanel();
+		    movieCrud.add(movieEdit);
+		    movieCrud.add(movieNew);
+		    movieCrud.add(movieDelete);
 
+		   
+		    // Hinzufügen im Haupt Vertical Panel
+		    VerticalPanel movieGes = new VerticalPanel();
+		    movieGes.add(movieLabel);
+		    movieGes.add(movieboxaddHorizont);
+		    movieGes.add(movieCrud);
+		    
+		    
+		    panel.add(movieGes, "Movie");
+		    //Movie
+
+		    
 		
 	}
 	
