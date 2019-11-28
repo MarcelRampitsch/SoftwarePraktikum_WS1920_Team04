@@ -100,6 +100,11 @@ public class VerwaltungsForm extends VerticalPanel {
 	
 	public void onLoad() {
 		super.onLoad();
+		
+		
+		// Fixierung der Größe (wird später mit CSS umgesetzt)
+		 panel.setPixelSize(290,600);
+		    
 
 //		sp1.addStyleName("verwaltung");
 		
