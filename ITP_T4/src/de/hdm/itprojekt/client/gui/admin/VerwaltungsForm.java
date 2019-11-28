@@ -113,6 +113,44 @@ public class VerwaltungsForm extends VerticalPanel {
 //		this.add(test);
 		
 //		sp1.addClickHandler(new OpenVUpClickHandler());
+		 
+		 // Cinema Group
+		    HorizontalPanel cinemaGroupPanel1 = new HorizontalPanel();
+		    cinemaGroupPanel1.add(cinemaGroupBox);
+		    cinemaGroupPanel1.add(cinemaGroupAdd);
+		    
+		    
+		    
+		    HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
+		    cinemaGroupPanel2.add(cinemaGroupEdit);
+		    cinemaGroupPanel2.add(cinemaGroupNew);
+		    cinemaGroupPanel2.add(cinemaGroupDelete);
+		    
+		    
+		    //Cinema
+		    HorizontalPanel cinemaPanel1 = new HorizontalPanel();
+		    cinemaPanel1.add(cinemaBox);
+		    cinemaPanel1.add(cinemaAdd);
+		    
+		    HorizontalPanel cinemaPanel2 = new HorizontalPanel();
+		    cinemaPanel2.add(cinemaEdit);
+		    cinemaPanel2.add(cinemaNew);
+		    cinemaPanel2.add(cinemaDelete);
+		    
+		    
+		    // Hinzufügen im Haupt Vertical Panel
+		    VerticalPanel CinemaGes = new VerticalPanel();
+		    CinemaGes.add(cinemaGroupLabel);
+		    CinemaGes.add(cinemaGroupPanel1);
+		    CinemaGes.add(cinemaGroupPanel2);
+		    
+		    CinemaGes.add(cinemaLabel);
+		    CinemaGes.add(cinemaPanel1);
+		    CinemaGes.add(cinemaPanel2);
+
+		    
+		    panel.add(CinemaGes, "Cinema/ CinemaGroup");
+		    //Cinema
 
 		
 	}
