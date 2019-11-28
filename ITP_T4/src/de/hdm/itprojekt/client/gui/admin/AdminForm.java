@@ -29,12 +29,17 @@ public class AdminForm extends VerticalPanel{
 	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels
 	 */
 	
+	/*
 	VerticalPanel main = new VerticalPanel();
-	
 	Button cinemaButton = new Button("Cinema");
 	Button movieButton = new Button("Movie");
 	Button timeslotButton = new Button("Timeslot");
-	Button presentationButton = new Button("Presentation");
+	Button presentationButton = new Button("Presentation");  */
+	
+	VerticalPanel main = new VerticalPanel();
+
+	
+	
 
 	
 	/**
@@ -62,19 +67,29 @@ public class AdminForm extends VerticalPanel{
 
 		this.addStyleName("AdminForm");
 		
-		main.addStyleName("AdminMain");
+	//	main.addStyleName("AdminMain");
+		
+		VerwaltungsForm verwaltungsForm = new VerwaltungsForm();
+
+		
+		main.add(verwaltungsForm);
+		
+		
+
 		
 		Image logo = new Image("Offical_Logo.png");
-		VerwaltungsForm verwaltungsForm = new VerwaltungsForm();
 	
-		main.add(cinemaButton);
-		main.add(movieButton);
-		main.add(timeslotButton);
-		main.add(presentationButton);
+	//	main.add(cinemaButton);
+	//	main.add(movieButton);
+	//	main.add(timeslotButton);
+	//	main.add(presentationButton);
 
-		this.add(main);
+	//	this.add(main);
 	
-		RootPanel.get("container").add(main);
+	//	RootPanel.get("container").add(main);
+		
+		this.add(main);
+
 
 	}
 
