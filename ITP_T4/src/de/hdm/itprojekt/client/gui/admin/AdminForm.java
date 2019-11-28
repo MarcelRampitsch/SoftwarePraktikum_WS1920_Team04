@@ -1,4 +1,5 @@
-package de.hdm.client.gui.admin;
+package de.hdm.itprojekt.client.gui.admin;
+
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -7,7 +8,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.shared.bo.Administrator;
 
 /**
  * 
@@ -22,7 +22,7 @@ public class AdminForm extends VerticalPanel{
 	/* 
 	 * currentUser speichert den aktuellen Nutzer
 	 */
-	protected Administrator adminUser = null;
+	//protected Administrator adminUser = null;
 	
 	/**
 	 * 
@@ -43,9 +43,9 @@ public class AdminForm extends VerticalPanel{
 	 * Der aktuelle Nutzer (Admin) wird der AdminForm übergeben. So können alle anderen Formen diesen bei Bedarf verwenden.
 	 * 
 	 */
-	public AdminForm(Administrator adminUser) {
-		this.adminUser = adminUser;
-	}
+//	public AdminForm(Administrator adminUser) {
+//		this.adminUser = adminUser;
+//	}
 	
 	
 	/*
@@ -65,7 +65,7 @@ public class AdminForm extends VerticalPanel{
 		main.addStyleName("AdminMain");
 		
 		Image logo = new Image("Offical_Logo.png");
-		VerwaltungForm verwaltungsForm = new VerwaltungForm(adminUser);
+		VerwaltungsForm verwaltungsForm = new VerwaltungsForm();
 	
 		main.add(cinemaButton);
 		main.add(movieButton);
