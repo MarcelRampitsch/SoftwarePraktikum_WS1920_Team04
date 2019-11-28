@@ -28,4 +28,9 @@ public class CinemaForm extends VerticalPanel {
 	HorizontalPanel cinemaContent1 = new HorizontalPanel();
 	HorizontalPanel cinemaContent2 = new HorizontalPanel();
 	
+	public CinemaForm() {
+		
+		
+	}
+	
 }
