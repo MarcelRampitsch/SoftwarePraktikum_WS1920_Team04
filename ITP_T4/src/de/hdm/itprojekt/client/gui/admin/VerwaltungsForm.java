@@ -172,6 +172,25 @@ public class VerwaltungsForm extends VerticalPanel {
 		    
 		    panel.add(movieGes, "Movie");
 		    //Movie
+		    
+		    //Timeslot
+		    HorizontalPanel timeslotboxaddHorizont = new HorizontalPanel();
+		    timeslotboxaddHorizont.add(timeslotbox);
+		    timeslotboxaddHorizont.add(timeslotAdd);
+		    
+		    HorizontalPanel timeslotCrud = new HorizontalPanel();
+		    timeslotCrud.add(timeslotEdit);
+		    timeslotCrud.add(timeslotNew);
+		    timeslotCrud.add(timeslotDelete);
+		    
+		    VerticalPanel timeslotGes = new VerticalPanel();
+		    timeslotGes.add(timeslotLabel);
+		    timeslotGes.add(timeslotboxaddHorizont);
+		    timeslotGes.add(timeslotCrud);
+
+		    panel.add(timeslotGes, "Timeslot");
+		    
+		    //Timeslot
 
 		    
 		
