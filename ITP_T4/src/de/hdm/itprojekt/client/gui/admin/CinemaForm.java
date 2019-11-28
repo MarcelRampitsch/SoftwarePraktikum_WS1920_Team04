@@ -28,9 +28,39 @@ public class CinemaForm extends VerticalPanel {
 	HorizontalPanel cinemaContent1 = new HorizontalPanel();
 	HorizontalPanel cinemaContent2 = new HorizontalPanel();
 	
+	
 	public CinemaForm() {
 		
 		
 	}
+	
+	
+	public void onLoad() {
+		
+		super.onLoad();
+		
+		this.add(cinemaGroup);
+		
+		cinemaGroupContent1.add(cinemaGroupBox);
+		cinemaGroupContent1.add(addCinema);
+		cinemaGroupContent2.add(editCinemaGroup);
+		cinemaGroupContent2.add(newCinemaGroup);
+		cinemaGroupContent2.add(deleteCinemaGroup);
+		
+		this.add(cinema);
+		
+		cinemaContent1.add(cinemaBox);
+		cinemaContent1.add(addCinema);
+		cinemaContent2.add(editCinema);
+		cinemaContent2.add(newCinema);
+		cinemaContent2.add(deleteCinema);
+		
+		this.add(cinemaGroupContent1);
+		this.add(cinemaGroupContent2);
+		this.add(cinemaContent1);
+		this.add(cinemaContent2);
+		
+	}
+	
 	
 }
