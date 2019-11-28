@@ -249,6 +249,9 @@ public class VerwaltungsForm extends VerticalPanel {
 
 		    
 		    panel.add(PresentationGes2, "Presentation");
+		    
+		    this.add(panel);
+
 
 		    
 		
