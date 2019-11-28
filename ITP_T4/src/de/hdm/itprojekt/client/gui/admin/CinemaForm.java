@@ -6,6 +6,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * 
+ * @author DominikThumm, VanDuyHo
+ * 
+ */
+
 public class CinemaForm extends VerticalPanel {
 
 	Label cinemaGroup = new Label("CinemaGroup");
