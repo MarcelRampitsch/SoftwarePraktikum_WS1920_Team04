@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -23,7 +24,7 @@ public class TimeslotForm extends VerticalPanel {
 	
 	
 	
-	TextBox timeslotbox = new TextBox();
+	ListBox timeslotbox = new ListBox();
     Label timeslotLabel = new Label("Timeslot");
     
     Button timeslotEdit = new Button("Edit");
@@ -48,6 +49,17 @@ public class TimeslotForm extends VerticalPanel {
     	this.add(timeslotLabel);
     	
     	timeslotaddbox.add(timeslotbox);
+    	timeslotbox.addItem("18:00uhr");
+    	timeslotbox.addItem("18:30uhr");
+    	timeslotbox.addItem("19:00uhr");
+    	timeslotbox.addItem("19:30uhr");
+    	timeslotbox.addItem("20:00uhr");
+    	timeslotbox.addItem("20:30uhr");
+    	timeslotbox.addItem("21:00uhr");
+
+
+
+    	
     	timeslotaddbox.add(timeslotAdd);
     	
     	buttonbox.add(timeslotEdit);
