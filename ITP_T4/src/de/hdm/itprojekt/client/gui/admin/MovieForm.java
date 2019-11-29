@@ -88,4 +88,30 @@ public class MovieForm  extends VerticalPanel{
 		}
 		
 	}
+	
+	/**
+	 * ClickHandler zum editieren eines Movie
+	 */
+	public class editMovieClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class editMovieCallback implements AsyncCallback <Movie>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Movie result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 }
