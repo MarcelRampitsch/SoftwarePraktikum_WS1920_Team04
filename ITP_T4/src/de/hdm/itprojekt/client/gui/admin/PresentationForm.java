@@ -1,5 +1,8 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -7,6 +10,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+
+import de.hdm.itprojekt.shared.bo.Presentation;
 
 /**
  * 
@@ -105,8 +110,41 @@ public class PresentationForm extends VerticalPanel{
 		    
 	    
 	    }
-	    
 
+	    
+	    /*
+		 * Ab hier folgen die CLICKHANDLER und CALLBACKS dieser Klasse!
+		 */
+		
+		/**ClickHandler für die Erstellung einer Presentation
+		 * 
+		 */
+	    
+	   public class addPresentationClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+		   
+	   }
+	   
+	   private  class addPresentationCallback implements AsyncCallback<Presentation>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Presentation result) {
+			// TODO Auto-generated method stub
+			
+		}
+	   
+}
 }
 
 
