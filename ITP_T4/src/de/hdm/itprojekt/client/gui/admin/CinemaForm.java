@@ -56,6 +56,10 @@ public class CinemaForm extends VerticalPanel {
 		this.add(cinemaGroup);
 		
 		cinemaGroupPanel1.add(cinemaGroupBox);
+		cinemaGroupBox.addItem("kette1");
+		cinemaGroupBox.addItem("kette2");
+		cinemaGroupBox.addItem("kette3");
+
 		cinemaGroupPanel1.add(addCinemaGroup);
 		cinemaGroupPanel1.add(addCinema);
 		
@@ -69,6 +73,11 @@ public class CinemaForm extends VerticalPanel {
 		this.add(cinema);
 		
 		cinemaPanel1.add(cinemaBox);
+		cinemaBox.addItem("ufa-palast");
+		cinemaBox.addItem("arthaus filmtheater");
+		cinemaBox.addItem("innenstadtkino");
+
+		
 		cinemaPanel1.add(addCinema);
 		
 		cinemaPanel2.add(editCinema);
