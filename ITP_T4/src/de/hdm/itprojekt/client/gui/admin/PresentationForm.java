@@ -36,7 +36,7 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    Button search = new Button("Search");
 
-	    TextBox presentationbox = new TextBox();
+	    ListBox presentationbox = new ListBox();
 	    Label presentationLabel = new Label("Presentation");
 	    
 	    Button presentationEdit = new Button("Edit");
@@ -95,6 +95,11 @@ public class PresentationForm extends VerticalPanel{
 		    this.add(presentationLabel);
 
 		    presentationadder.add(presentationbox);
+		    presentationbox.addItem("erste");
+		    presentationbox.addItem("zweite");
+		    presentationbox.addItem("dritte");
+
+		    
 		    presentationadder.add(presentationAdd);
 		    
 		    this.add(presentationadder);
