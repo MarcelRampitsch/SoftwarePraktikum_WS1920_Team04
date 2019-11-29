@@ -11,7 +11,12 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-
+/**
+ * 
+ * @author DominikThum, SerhatUlus
+ * diese Klasse ist die Basisklasse für die Klassen CinemaForm, TimeslotForm, MovieForm, PresentationForm
+ *
+ */
 
 public class VerwaltungsForm extends VerticalPanel {
 	
