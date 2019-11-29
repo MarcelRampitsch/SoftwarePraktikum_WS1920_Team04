@@ -62,6 +62,8 @@ public class MovieMapper {
 		try {
 		// Erstellung des Prepared Statement findByMovieID
 		PreparedStatement findByMovieID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie WHERE movieID=? ;");
+		
+		// Hinzufügen der ID
 		findByMovieID.setInt(1,  id);
 		
 		// Ausführen des Queries
@@ -78,8 +80,8 @@ public class MovieMapper {
 		// Rückgabe des Movieobjekt
 		return m;
 	}
-	//TODO findAllMovieByUserID
-	//TODO wird findByName benötigt?
+	
+	// Methode zum Finden von Filmen anhand des Filmtitels
 	public Movie findByName(String name) {
 		Movie m = null;
 		
@@ -100,7 +102,35 @@ public class MovieMapper {
 		}
 		return m;
 	}
-	// Methode um der Datenbank Filme hinzuzufügen
+	
+	// Methode zum Finden aller von einem User erstellten Filme
+	public Vector<Movie> findAllByUserID(int id) {
+		
+		Connection con = DBConnection.getConnection();
+		Movie m = null;
+		// Ergebnisvektor vorbereiten
+		Vector<Movie> result = new Vector<Movie>();
+		
+		try {
+			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie" + "WHERE UserID=?");
+			findAllByUserID.setInt(1, id);
+			
+			ResultSet rs = findAllByUserID.executeQuery();
+			
+			while (rs.next()) {
+				m = new Movie(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
+				result.addElement(m);
+			}
+			
+		} catch (SQLException e) {
+			      e.printStackTrace();
+			      return null;
+			}
+			// Ergebnisvektor zurückgeben
+			return result;
+	}
+	
+	// Methode um der Datenbank Filme hinzuzufügen und den hinzugefügten anzuzeigen
 	public Movie insert(Movie m) {
 		
 		Connection con = DBConnection.getConnection();
@@ -115,26 +145,29 @@ public class MovieMapper {
 
 			insert.executeUpdate();
 			
-			// Erstellung des PreparedStatement getnewMovie Wählt das zuletzt erstellte absteigend.
+			// Erstellung des PreparedStatement getnewMovie (Wählt den zuletzt erstellten Film absteigend).
 			PreparedStatement getnewMovie = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie ORDER BY creationDate DESC LIMIT 1;");
 			
 			ResultSet rs = getnewMovie.executeQuery();
+			
 			if (rs.next()) {
 				return new Movie(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		return null;
 	}
+	
 	// Methode zum löschen von Filmen aus der Datenbank anhand der MovieID
-	public void deleteMovieByMovieID (int id) {
+	public void deleteByMovieID (int id) {
 		
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			// Erstellung des PreparedStatement deleteMovieID
+			// Erstellung des PreparedStatement deleteByMovieID
 			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE movieID=?;");
 		deleteByMovieID.setInt(1, id);
 		deleteByMovieID.executeUpdate();
@@ -143,31 +176,36 @@ public class MovieMapper {
 			e.printStackTrace();
 		}
 	}
+	
 	// Methode zum löschen aller von einem Anwender erstellten Filme aus der Datenbank
-	public void DeleteAllByUserID(int id) {
-			//Aufbau der DB-Verbindung
-			Connection con = DBConnection.getConnection();
+	public void deleteAllByUserID(int id) {
+
+		Connection con = DBConnection.getConnection();
 			
-			try {
-				PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE userID =?;");
-				deleteAllByUserID.setInt(1, id);
-				deleteAllByUserID.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE userID =?;");
+			deleteAllByUserID.setInt(1, id);
+			deleteAllByUserID.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	}
+	
 	// Methode zum löschen aller Filme aus der Datenbank, die mit einem bestimmten Kino verknüpft sind
 	public void DeleteAllByCinemaID(int id) {
-			Connection con = DBConnection.getConnection();
+		
+		Connection con = DBConnection.getConnection();
 			
-			try {
-				// Erstellung des PreparedStatement deleteAllByCinemaID
-				PreparedStatement deleteAllByCinemaID = con.prepareStatement("DELETE FROM softwareprakikum_ws1920.movie WHERE cinemaID =?;");
-				deleteAllByCinemaID.setInt(1, id);
-				deleteAllByCinemaID.executeUpdate();
-			} catch (SQLException e) {
+		try {
+			// Erstellung des PreparedStatement deleteAllByCinemaID
+			PreparedStatement deleteAllByCinemaID = con.prepareStatement("DELETE FROM softwareprakikum_ws1920.movie WHERE cinemaID =?;");
+			deleteAllByCinemaID.setInt(1, id);
+			deleteAllByCinemaID.executeUpdate();
+			
+		} catch (SQLException e) {
 				e.printStackTrace();
-			}
 		}
+	}
 }
 
