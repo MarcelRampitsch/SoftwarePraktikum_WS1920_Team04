@@ -56,6 +56,14 @@ public class TimeslotForm extends VerticalPanel {
     	timeslotbox.addItem("20:00uhr");
     	timeslotbox.addItem("20:30uhr");
     	timeslotbox.addItem("21:00uhr");
+    	timeslotbox.addItem("21:30uhr");
+    	timeslotbox.addItem("22:00uhr");
+    	timeslotbox.addItem("22:30uhr");
+    	timeslotbox.addItem("23:00uhr");
+    	timeslotbox.addItem("23:30uhr");
+    	timeslotbox.addItem("00:00uhr");
+
+
 
 
 

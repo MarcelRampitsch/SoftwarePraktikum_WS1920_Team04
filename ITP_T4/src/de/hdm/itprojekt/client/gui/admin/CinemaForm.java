@@ -74,8 +74,8 @@ public class CinemaForm extends VerticalPanel {
 		
 		cinemaPanel1.add(cinemaBox);
 		cinemaBox.addItem("ufa-palast");
-		cinemaBox.addItem("arthaus filmtheater");
-		cinemaBox.addItem("innenstadtkino");
+		cinemaBox.addItem("traumpalast");
+		cinemaBox.addItem("central und union");
 
 		
 		cinemaPanel1.add(addCinema);

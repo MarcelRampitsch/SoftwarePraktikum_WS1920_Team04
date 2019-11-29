@@ -47,9 +47,9 @@ public class MovieForm  extends VerticalPanel{
     	this.add(movieLabel);
     	
     	movieaddbox.add(moviebox);
-    	moviebox.addItem("Joker");
-    	moviebox.addItem("Titanic");
-    	moviebox.addItem("Karate kid");
+    	moviebox.addItem("spidermann");
+    	moviebox.addItem("Der böse Film");
+    	moviebox.addItem("Spiderman 3");
 
     	
     	movieaddbox.add(movieAdd);
