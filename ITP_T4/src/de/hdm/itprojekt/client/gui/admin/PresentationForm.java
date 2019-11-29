@@ -10,7 +10,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 /**
  * 
- * @author SerhatUlus
+ * @author Dominik Thumm, SerhatUlus
  *
  */
 
@@ -47,9 +47,9 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    
 	    
-public void Presentation() {
+       public void Presentation() {
 	    	
-	    }
+	   }
 	    
 	    
 	    public void onLoad() {
@@ -58,15 +58,15 @@ public void Presentation() {
 	    	this.add(pcinemaLabel);
 	    	this.add(cinemaDrop);
 	    	 cinemaDrop.addItem("UFA- Palast");
-			    cinemaDrop.addItem("Traumpalast");
-			    cinemaDrop.addItem("Central und union");
+			 cinemaDrop.addItem("Traumpalast");
+			 cinemaDrop.addItem("Central und union");
 	    	
 	    	
 	    	this.add(pmovieLabel);
 	    	this.add(movieDrop);
 	    	 movieDrop.addItem("Spiderman");
-			    movieDrop.addItem("Der böse Film");
-			    movieDrop.addItem("Spiderman 3");
+			 movieDrop.addItem("Der böse Film");
+			 movieDrop.addItem("Spiderman 3");
 			    
 	    	
 	    	this.add(ptimeslotLabel);

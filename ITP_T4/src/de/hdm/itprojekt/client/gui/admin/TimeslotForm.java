@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * 
- * @author SerhatUlus
+ * @author Dominik Thumm, SerhatUlus
  *
  */
 public class TimeslotForm extends VerticalPanel {
@@ -24,7 +24,7 @@ public class TimeslotForm extends VerticalPanel {
     Button timeslotNew = new Button("New");
     Button timeslotDelete = new Button("Delete");
     
-    Button timeslotAdd = new Button("add");
+    Button timeslotAdd = new Button("+");
     
     HorizontalPanel timeslotaddbox = new HorizontalPanel();
     HorizontalPanel buttonbox = new HorizontalPanel();

@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * 
- * @author SerhatUlus
+ * @author Dominik Thumm, SerhatUlus
  *
  */
 
@@ -22,7 +22,7 @@ public class MovieForm  extends VerticalPanel{
     Button movieNew = new Button("New");
     Button movieDelete = new Button("Delete");
     
-    Button movieAdd = new Button("add");
+    Button movieAdd = new Button("+");
     
     HorizontalPanel movieaddbox = new HorizontalPanel();
     HorizontalPanel buttonbox = new HorizontalPanel();
