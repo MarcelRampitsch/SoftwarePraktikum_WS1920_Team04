@@ -114,4 +114,30 @@ public class MovieForm  extends VerticalPanel{
 		}
 		
 	}
+	
+	/**
+	 * ClickHandler zum löschen eines Movie
+	 */
+	public class deleteMovieClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class deleteMovieCallback implements AsyncCallback <Movie>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Movie result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 }
