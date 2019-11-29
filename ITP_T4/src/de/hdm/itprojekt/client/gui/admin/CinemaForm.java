@@ -30,10 +30,11 @@ public class CinemaForm extends VerticalPanel {
 	Button addCinemaGroup = new Button("+");
 	Button addCinema = new Button("+");
 	
-	HorizontalPanel cinemaGroupContent1 = new HorizontalPanel();
-	HorizontalPanel cinemaGroupContent2 = new HorizontalPanel();
-	HorizontalPanel cinemaContent1 = new HorizontalPanel();
-	HorizontalPanel cinemaContent2 = new HorizontalPanel();
+	HorizontalPanel cinemaGroupPanel1 = new HorizontalPanel();
+	HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
+	
+	HorizontalPanel cinemaPanel1 = new HorizontalPanel();
+	HorizontalPanel cinemaPanel2 = new HorizontalPanel();
 	
 	
 	public CinemaForm() {
@@ -48,27 +49,29 @@ public class CinemaForm extends VerticalPanel {
 		
 		this.add(cinemaGroup);
 		
-		cinemaGroupContent1.add(cinemaGroupBox);
-		cinemaGroupContent1.add(addCinemaGroup);
-		cinemaGroupContent1.add(addCinema);
-		cinemaGroupContent2.add(editCinemaGroup);
-		cinemaGroupContent2.add(newCinemaGroup);
-		cinemaGroupContent2.add(deleteCinemaGroup);
+		cinemaGroupPanel1.add(cinemaGroupBox);
+		cinemaGroupPanel1.add(addCinemaGroup);
+		cinemaGroupPanel1.add(addCinema);
 		
-		this.add(cinemaGroupContent1);
-		this.add(cinemaGroupContent2);
+		cinemaGroupPanel2.add(editCinemaGroup);
+		cinemaGroupPanel2.add(newCinemaGroup);
+		cinemaGroupPanel2.add(deleteCinemaGroup);
+		
+		this.add(cinemaGroupPanel1);
+		this.add(cinemaGroupPanel2);
 		
 		this.add(cinema);
 		
-		cinemaContent1.add(cinemaBox);
-		cinemaContent1.add(addCinema);
-		cinemaContent2.add(editCinema);
-		cinemaContent2.add(newCinema);
-		cinemaContent2.add(deleteCinema);
+		cinemaPanel1.add(cinemaBox);
+		cinemaPanel1.add(addCinema);
+		
+		cinemaPanel2.add(editCinema);
+		cinemaPanel2.add(newCinema);
+		cinemaPanel2.add(deleteCinema);
 		
 
-		this.add(cinemaContent1);
-		this.add(cinemaContent2);
+		this.add(cinemaPanel1);
+		this.add(cinemaPanel2);
 		
 	}
 	
