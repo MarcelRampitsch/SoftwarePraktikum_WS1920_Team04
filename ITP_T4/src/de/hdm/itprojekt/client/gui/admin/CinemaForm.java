@@ -1,11 +1,16 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 
 /**
  * 
@@ -74,6 +79,45 @@ public class CinemaForm extends VerticalPanel {
 		this.add(cinemaPanel2);
 		
 	}
+	
+
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
+	
+	/**
+	 * Ein neue neue CinemaGroup wird 
+	 * erzeugt.
+	 * 
+	 */
+	public class addCinemaGroupClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+		
+	}
+	
+	private class addCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(CinemaGroup result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 }
