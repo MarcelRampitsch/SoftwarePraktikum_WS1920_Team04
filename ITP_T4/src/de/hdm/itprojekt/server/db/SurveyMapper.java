@@ -58,12 +58,12 @@ public class SurveyMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  // Erstellung des Prepared Statement um alle Surveys anhand der SurveyID zu finden
 			  
+			  // Erstellung des Prepared Statement um alle Surveys anhand der SurveyID zu finden
 			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=? ;");
 			  findBySurveyID.setInt(1, id);
 			  
-			  // ausführen des Queries
+			  // Ausführen des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
 
 			  s = new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
@@ -75,10 +75,11 @@ public class SurveyMapper {
 		  //Rückgabe des Survey
 		  return s;
 	  }
-	  //TODO notwendig?
+	  
+	  // Methode zum Finden eines Surveys anhand des Namens
 	  public Survey findByName(String name) {
 		  Survey s = null;
-		  //Aufbau der DB-Verbindung
+
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
@@ -88,13 +89,15 @@ public class SurveyMapper {
 			  ResultSet rs = findByName.executeQuery();
 
 			  s = new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
+			  
 		  } catch (SQLException e) {
 			  e.printStackTrace();
 			  return null;
 		  }
 		  return s;
 	  }
-	  // TODO UserID und groupID hinzufügen
+	  
+	  // Methode zum einfügen von Surveys in die Datenbank
 	  public Survey insert(Survey s) {
 		  
 		  Connection con = DBConnection.getConnection();
@@ -109,18 +112,19 @@ public class SurveyMapper {
 			  PreparedStatement getnewSurvey= con.prepareStatement("SELECT *FROM softwarepraktikum_ws1920.survey ORDER BY creationDate DESC LIMIT 1;");
 			  
 			  ResultSet rs = getnewSurvey.executeQuery();
+			  
 			  if (rs.next()) {
-				  
 				  return new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
 			  }
+			  
 		  } catch (SQLException e) {
 			  e.printStackTrace();
 			  return null;
 		  }
 		  return null;
-		  
 	  }
 	  
+	  // Methode zum Löschen eines Surveys anhand der SurveyID
 	  public void deleteSurveyBySurveyID (int id) {
 		  
 		  Connection con = DBConnection.getConnection();
@@ -135,6 +139,8 @@ public class SurveyMapper {
 		  }
 	  }
 	  
+	  //TODO Methode korrekt umgesetzt?
+	  // Methode zum aktualisieren von Surveys
 	  public Survey updateSurvey(Survey survey) {
 		  
 		  Connection con = DBConnection.getConnection();
@@ -155,6 +161,7 @@ public class SurveyMapper {
 			  if(rs.next()) {
 				  return new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
 			  }
+			  
 		  } catch (SQLException e) {
 			  e.printStackTrace();
 			  return null;
@@ -162,8 +169,9 @@ public class SurveyMapper {
 		  return null;
 	  }
 	  
+	  // Methode zum löschen aller Surveys die von einem User erstellt wurden
 	  public void deleteAllByUserID(int id) {
-		  // Aufbau der DB-Verbindung
+
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
@@ -177,8 +185,10 @@ public class SurveyMapper {
 			  e.printStackTrace();
 		  }
 	  }
+	  
+	  // Methode zum Löschen aller Surveys die einer Gruppe zugeordnet sind
 	  public void DeleteAllByGroupID (int id) {
-		  //Aufbau der DB-Verbindung
+
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
@@ -192,5 +202,4 @@ public class SurveyMapper {
 			  e.printStackTrace();
 		  }
 	  }
-	  
 }

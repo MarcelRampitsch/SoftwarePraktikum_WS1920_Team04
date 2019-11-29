@@ -2,14 +2,14 @@ package de.hdm.itprojekt.shared.bo;
 
 import java.sql.Timestamp;
 
-
+//Movie erbt id und creationDate von BusinessObject
 public class Movie extends BusinessObject{
 	
 private static final long serialversionUID = 1l;
 
 	private String name;
 	
-	//Fremdschlï¿½sselattribute
+	//Fremdschlüsselattribute
 	private int userID;
 	private int cinemaID;
 	
@@ -20,7 +20,9 @@ private static final long serialversionUID = 1l;
 		this.userID = userID;
 		this.cinemaID = cinemaID;
 	}
-
+	
+	// Getter und Setter
+	
 	public String getName() {
 		return name;
 	}
