@@ -116,6 +116,32 @@ public class TimeslotForm extends VerticalPanel {
 		}
 		
 	}
+	
+	/**
+	 * ClickHandler zum löschen eines Timeslot
+	 */
+	public class deleteTimeslotClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class deleteTimeslotCallback implements AsyncCallback <Timeslot>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Timeslot result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 
 }
 
