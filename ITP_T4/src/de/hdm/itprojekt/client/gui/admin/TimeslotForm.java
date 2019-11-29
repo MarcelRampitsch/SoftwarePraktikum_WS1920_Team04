@@ -90,6 +90,32 @@ public class TimeslotForm extends VerticalPanel {
 		}
 		
 	}
+	
+	/**
+	 * ClickHandler zum editieren eines Timeslot
+	 */
+	public class editTimeslotClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class editTimeslotCallback implements AsyncCallback <Timeslot>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Timeslot result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 
 }
 
