@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client.gui.admin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -72,7 +73,6 @@ public class AdminForm extends VerticalPanel{
 		VerwaltungsForm verwaltungsForm = new VerwaltungsForm();
 
 		
-		main.add(verwaltungsForm);
 		
 		
 
@@ -88,7 +88,25 @@ public class AdminForm extends VerticalPanel{
 	
 	//	RootPanel.get("container").add(main);
 		
+
+		//Button, dessen ClickEvent zum Admin Mode führt.		
+		Button toBesucher = new Button("EditorModus", new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						Window.Location.replace("/ITP_T4.html");
+					}
+				});
+		
+		main.add(toBesucher);
+		main.add(verwaltungsForm);
+
+
 		this.add(main);
+
+		
+				
+		
 
 
 	}
