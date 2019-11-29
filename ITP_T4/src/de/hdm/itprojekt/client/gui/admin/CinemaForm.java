@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 
 /**
@@ -166,7 +167,7 @@ public class CinemaForm extends VerticalPanel {
 	}
 	
 	/**
-	 * ClickHandler für Erstellung einer CinemaGroup
+	 * ClickHandler für Erstellung eines Cinema
 	 */
      public class addCinemaClickHandler implements ClickHandler{
 		
@@ -176,7 +177,7 @@ public class CinemaForm extends VerticalPanel {
 		
 	}
 	
-	private class addCinemaCallback implements AsyncCallback <CinemaGroup>{
+	private class addCinemaCallback implements AsyncCallback <Cinema>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -185,12 +186,66 @@ public class CinemaForm extends VerticalPanel {
 		}
 
 		@Override
-		public void onSuccess(CinemaGroup result) {
+		public void onSuccess(Cinema result) {
 			// TODO Auto-generated method stub
 			
 		}
 		
 	}
+	
+	/**
+	 * ClickHandler zum editieren eines Cinema
+	 */
+	public class editCinemaClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class editCinemaCallback implements AsyncCallback <Cinema>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Cinema result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	/**
+	 * ClickHandler zum löschen eines Cinema
+	 */
+	public class deleteCinemaClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class deleteCinemaCallback implements AsyncCallback <Cinema>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Cinema result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	
 	
 	
 	
