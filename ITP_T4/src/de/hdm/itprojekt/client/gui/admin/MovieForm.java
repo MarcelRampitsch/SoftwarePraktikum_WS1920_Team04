@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -21,7 +22,7 @@ import de.hdm.itprojekt.shared.bo.Movie;
 public class MovieForm  extends VerticalPanel{
 	
 	
-	TextBox moviebox = new TextBox();
+	ListBox moviebox = new ListBox();
     Label movieLabel = new Label("Movie");
     
     Button movieEdit = new Button("Edit");
@@ -46,6 +47,11 @@ public class MovieForm  extends VerticalPanel{
     	this.add(movieLabel);
     	
     	movieaddbox.add(moviebox);
+    	moviebox.addItem("Joker");
+    	moviebox.addItem("Titanic");
+    	moviebox.addItem("Karate kid");
+
+    	
     	movieaddbox.add(movieAdd);
     	
     	buttonbox.add(movieEdit);
