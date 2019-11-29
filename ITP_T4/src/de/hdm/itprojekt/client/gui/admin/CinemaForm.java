@@ -139,6 +139,34 @@ public class CinemaForm extends VerticalPanel {
 	}
 	
 	
+	/**
+	 * ClickHandler zum löschen einer CinemaGroup
+	 */
+	public class deleteCinemaGroupClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class deleteCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(CinemaGroup result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	
+	
 	
 	
 	
