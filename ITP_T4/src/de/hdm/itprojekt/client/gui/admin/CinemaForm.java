@@ -24,8 +24,8 @@ public class CinemaForm extends VerticalPanel {
 	Label cinemaGroup = new Label("CinemaGroup");
 	Label cinema = new Label("Cinema");
 	
-	TextBox cinemaGroupBox = new TextBox();
-	TextBox cinemaBox = new TextBox();
+	ListBox cinemaGroupBox = new ListBox();
+	ListBox cinemaBox = new ListBox();
 	
 	Button editCinemaGroup = new Button("Edit");
 	Button newCinemaGroup = new Button("New");
