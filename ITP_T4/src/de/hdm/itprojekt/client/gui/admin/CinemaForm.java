@@ -86,9 +86,7 @@ public class CinemaForm extends VerticalPanel {
 	 */
 	
 	/**
-	 * Ein neue neue CinemaGroup wird 
-	 * erzeugt.
-	 * 
+	 * ClickHandler für Erstellung einer CinemaGroup
 	 */
 	public class addCinemaGroupClickHandler implements ClickHandler{
 		
@@ -113,6 +111,35 @@ public class CinemaForm extends VerticalPanel {
 		}
 		
 	}
+	
+	/**
+	 * ClickHandler zum editieren einer CinemaGroup
+	 */
+	public class editCinemaGroupClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+		}
+	}
+	
+	private class editCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(CinemaGroup result) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	
+	
 	
 	
 	
