@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 
@@ -22,10 +24,10 @@ import de.hdm.itprojekt.shared.bo.Timeslot;
 public class TimeslotForm extends VerticalPanel {
 	
 	
-	
-	
 	ListBox timeslotbox = new ListBox();
     Label timeslotLabel = new Label("Timeslot");
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+
     
     Button timeslotEdit = new Button("Edit");
     Button timeslotNew = new Button("New");

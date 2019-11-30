@@ -11,6 +11,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Presentation;
 
 /**
@@ -25,6 +27,8 @@ public class PresentationForm extends VerticalPanel{
 	 	Label pcinemaLabel = new Label("Cinema");
 	    Label pmovieLabel = new Label("Movie");
 	    Label ptimeslotLabel = new Label("Timeslot");
+		EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+
 
 	    ListBox cinemaDrop = new ListBox();
 	    ListBox movieDrop = new ListBox();
