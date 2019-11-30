@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 
@@ -23,6 +25,9 @@ public class CinemaForm extends VerticalPanel {
 
 	Label cinemaGroup = new Label("CinemaGroup");
 	Label cinema = new Label("Cinema");
+	
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+
 	
 	ListBox cinemaGroupBox = new ListBox();
 	ListBox cinemaBox = new ListBox();
