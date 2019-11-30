@@ -27,7 +27,7 @@ public class PresentationForm extends VerticalPanel{
 	 	Label pcinemaLabel = new Label("Cinema");
 	    Label pmovieLabel = new Label("Movie");
 	    Label ptimeslotLabel = new Label("Timeslot");
-		EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+//		EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
 
 	    ListBox cinemaDrop = new ListBox();

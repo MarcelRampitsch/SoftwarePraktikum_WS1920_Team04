@@ -26,7 +26,7 @@ public class TimeslotForm extends VerticalPanel {
 	
 	ListBox timeslotbox = new ListBox();
     Label timeslotLabel = new Label("Timeslot");
-	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+//	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
     
     Button timeslotEdit = new Button("Edit");

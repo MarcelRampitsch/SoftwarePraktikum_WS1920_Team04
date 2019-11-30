@@ -26,7 +26,7 @@ public class CinemaForm extends VerticalPanel {
 	Label cinemaGroup = new Label("CinemaGroup");
 	Label cinema = new Label("Cinema");
 	
-	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+//	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
 	
 	ListBox cinemaGroupBox = new ListBox();

@@ -26,7 +26,7 @@ public class MovieForm  extends VerticalPanel{
 	
 	ListBox moviebox = new ListBox();
     Label movieLabel = new Label("Movie");
-	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+//	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
     
     Button movieEdit = new Button("Edit");

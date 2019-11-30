@@ -21,7 +21,7 @@ import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 */
 
 public class ClientSideSettings extends CommonSettings {
-	
+/*	
 	private static EditorAdministrationAsync editorAdministration = null;
 	private static AdminAdministrationAsync adminAdministration = null;
 //	private static LoginAdministrationAsync loginAdministration = null;
@@ -78,7 +78,7 @@ public class ClientSideSettings extends CommonSettings {
 			// Nothing happens!
 		}
 
-	}
+	} */
 
 	
 
