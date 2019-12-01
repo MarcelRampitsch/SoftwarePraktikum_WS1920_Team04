@@ -37,7 +37,7 @@ public class AdminForm extends VerticalPanel{
 	Button timeslotButton = new Button("Timeslot");
 	Button presentationButton = new Button("Presentation");  */
 	
-	VerticalPanel main = new VerticalPanel();
+	private VerticalPanel main = new VerticalPanel();
 
 	
 	
