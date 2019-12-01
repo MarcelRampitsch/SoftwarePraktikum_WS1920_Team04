@@ -1,23 +1,24 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-
 
 
 /**
  * 
- * @author DominikThumm
+ * @author DominikThumm, VanDuyHo
  * AdminForm vereint alle grafischen Elemente dieses Packages, zur kompletten Anzeige
  * des Admin-Client
+ * 
  */
 
-public class AdminForm extends VerticalPanel {
+public class AdminForm extends VerticalPanel{
 	
 	/* 
 	 * currentUser speichert den aktuellen Nutzer
@@ -25,15 +26,22 @@ public class AdminForm extends VerticalPanel {
 	//protected Administrator adminUser = null;
 	
 	/**
-	 * <code>header</code>: Oberer Teil des Fensters. Erstreckt sich über die ganze Länge der Anwendung
-	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels, außer <code>header</code>
-	 * <code>west</code>: Linke Seite der Anwendung. Enhält die Formen <code>VerwaltungsForm</code>
+	 * 
+	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels
 	 */
 	
-	HorizontalPanel header = new HorizontalPanel();
-	HorizontalPanel main = new HorizontalPanel();
+	/*
+	VerticalPanel main = new VerticalPanel();
+	Button cinemaButton = new Button("Cinema");
+	Button movieButton = new Button("Movie");
+	Button timeslotButton = new Button("Timeslot");
+	Button presentationButton = new Button("Presentation");  */
 	
-	VerticalPanel west = new VerticalPanel();
+	VerticalPanel main = new VerticalPanel();
+
+	
+	
+
 	
 	/**
 	 * 
@@ -41,55 +49,78 @@ public class AdminForm extends VerticalPanel {
 	 * Der aktuelle Nutzer (Admin) wird der AdminForm übergeben. So können alle anderen Formen diesen bei Bedarf verwenden.
 	 * 
 	 */
+//	public AdminForm(Administrator adminUser) {
+//		this.adminUser = adminUser;
+//	}
 	
-	//public AdminForm(Administrator adminUser) {
-	//	this.adminUser = adminUser;
-	//}
 	
 	/*
 	 * onLoad-Methode: Wird ausgeführt, wenn das Panel, dem Browser hinzugefügt wurde. 
 	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Panel hinzugefügt.
 	 */
 	public void onLoad() {
-		super.onLoad();
 		
+		super.onLoad();
+
 		/*
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
-	//	Button b1 = new Button("sdv");
 
-		this.addStyleName("AdminForm");
-		header.addStyleName("AdminHeader");
-		main.addStyleName("AdminMain");
-		west.addStyleName("AdminWest");
+		this.setStylePrimaryName("AdminForm");
 		
-		/**
-		 *  Jede Form wird demjeweiligen Panel hinzugefügt.
-		 */
+	//	main.addStyleName("AdminMain");
 		
 		VerwaltungsForm verwaltungsForm = new VerwaltungsForm();
 
 		
-		west.add(verwaltungsForm);
 		
-	//	header.add(logo);
 		
-		//Button, dessen ClickEvent zum Admin Mode führt.
-		Button toBesucher = new Button("Kinobesucher", new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				Window.Location.replace("/ITP_T4.html");
-			}
-		});
-		west.add(toBesucher);
+
 		
-		//Die zwei Hauptpanels werden der AdminForm hinzugefügt.
-		this.add(header);
+		Image logo = new Image("Offical_Logo.png");
+	
+	//	main.add(cinemaButton);
+	//	main.add(movieButton);
+	//	main.add(timeslotButton);
+	//	main.add(presentationButton);
+
+	//	this.add(main);
+	
+	//	RootPanel.get("container").add(main);
+		
+
+		//Button, dessen ClickEvent zum Admin Mode führt.		
+		Button toBesucher = new Button("EditorModus", new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						Window.Location.replace("/ITP_T4.html");
+					}
+				});
+		
+		main.add(toBesucher);
+		main.add(verwaltungsForm);
+
+
 		this.add(main);
-		this.add(west);
+
+		
+				
+		
+
+
+	}
+
+	private class CinemaHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+
+			
+		}
+		
 	}
 	
 	
-
 }

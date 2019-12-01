@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.gui.EditorForm;
+import de.hdm.itprojekt.client.gui.admin.AdminForm;
 
 
 /**
@@ -35,7 +36,7 @@ public class ITP_T4 implements EntryPoint {
 	
 	public void onModuleLoad() {
 		
-		RootPanel.get().add(new EditorForm());
+		RootPanel.get().add(new AdminForm());
 
 		
 	

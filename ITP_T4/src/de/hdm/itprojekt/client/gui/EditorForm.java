@@ -60,12 +60,12 @@ public class EditorForm extends VerticalPanel {
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
 		
-		this.addStyleName("EditorForm");
-		header.addStyleName("Header");
-		main.addStyleName("Main");
-		center.addStyleName("Center");
-		west.addStyleName("West");
-		east.addStyleName("East");
+		this.setStylePrimaryName("EditorForm");
+		header.setStylePrimaryName("Header");
+		main.setStylePrimaryName("Main");
+		center.setStylePrimaryName("Center");
+		west.setStylePrimaryName("West");
+		east.setStylePrimaryName("East");
 		
 		
 		/*
