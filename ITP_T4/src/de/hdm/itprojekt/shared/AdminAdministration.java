@@ -6,7 +6,4 @@ public interface AdminAdministration extends RemoteService {
 
 	void init();
 
-	
-
-
 }
