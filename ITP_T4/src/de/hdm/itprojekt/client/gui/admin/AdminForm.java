@@ -66,7 +66,7 @@ public class AdminForm extends VerticalPanel{
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
 
-		this.addStyleName("AdminForm");
+		this.setStylePrimaryName("AdminForm");
 		
 	//	main.addStyleName("AdminMain");
 		
