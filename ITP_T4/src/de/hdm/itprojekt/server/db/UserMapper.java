@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.User;
-import de.hdm.itprojekt.shared.bo.Admin;
 
 /**
  * Die Klasse UserMapper bildet <code>User</code> Objekte auf eine
@@ -53,4 +52,114 @@ public class UserMapper {
 		}
 		return userMapper;
 	}
+	  public User findByNickname(String n) {
+		  User u = null;
+		  
+		  // Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  // Erstellung des Prepared Statement um einen User per Nickname zu finden
+			  
+			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE nickname=? ;");
+			  findBySurveyID.setString(1, n);
+			  
+			  // ausf�hren des Queries
+			  ResultSet rs = findBySurveyID.executeQuery();
+
+			  u = new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+			  
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+			  return null;
+		  }
+		  //R�ckgabe des User
+		  return u;
+	  }
+	  
+	  public User findByEmail(String e) {
+		  User u = null;
+		  //Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement findByEmail = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE email=?;");
+			  findByEmail.setString(1, e);
+			  
+			  ResultSet rs = findByEmail.executeQuery();
+
+			  u = new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+		  } catch (SQLException e2) {
+			  e2.printStackTrace();
+			  return null;
+		  }
+		  return u;
+	  }
+	  
+	  public User insert(User u) {
+		  
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.user(nickname, email) VALUES(?,?);");
+			  
+			  insert.setString(1, u.getNickname());
+			  insert.setString(2, u.getEmail());
+			  
+			  insert.executeUpdate();
+			  
+			  PreparedStatement getnewUser= con.prepareStatement("SELECT *FROM softwarepraktikum_ws1920.user ORDER BY creationDate DESC LIMIT 1;");
+			  
+			  ResultSet rs = getnewUser.executeQuery();
+			  if (rs.next()) {
+				  
+				  return new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+			  }
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+			  return null;
+		  }
+		  return null;
+	  }
+	  
+	  public User updateUser(User user) {
+		  
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.user SET nickname=?;");
+			  
+			  update.setString(1, user.getNickname());
+			  
+			  update.executeUpdate();
+			  
+			  PreparedStatement stmt = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE 'userID'=?;");
+			  
+			  update.setInt(1, user.getId());
+			  
+			  ResultSet rs = stmt.executeQuery();
+			  
+			  if(rs.next()) {
+				  return new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+			  }
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+			  return null;
+		  }
+		  return null;
+	  }
+
+	public void deleteUserByUserID (int id) {
+		  
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement deleteByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.user WHERE userID=?;");
+			  deleteByUserID.setInt(1, id);
+			  deleteByUserID.executeUpdate();
+			  
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+		  }
+	  }
 }
