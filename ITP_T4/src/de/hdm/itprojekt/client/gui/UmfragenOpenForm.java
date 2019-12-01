@@ -26,18 +26,18 @@ public class UmfragenOpenForm extends DialogBox {
 	
 	
 	
-	Label umfrageErstellung = new Label("Umfrageerstellung:");
-	Button closeButton = new Button("X");
-	TextBox namenBox = new TextBox();
-	Label changeLabel = new Label("Umfragenname:");
-	Label datum = new Label("Datum wählen:");
-	Label film = new Label ("Film wählen:");
-    final ListBox dropBoxFilm = new ListBox();
-    Label kino = new Label("Kino wählen:");
-    final ListBox dropBoxKino = new ListBox();
-    Label spielzeit = new Label("Spielzeit wählen");
-    final ListBox dropBoxSpielzeit = new ListBox();
-    Button safeUmfrage = new Button("Umfrage speichern");
+	private Label umfrageErstellung = new Label("Umfrageerstellung:");
+	private Button closeButton = new Button("X");
+	private TextBox namenBox = new TextBox();
+	private Label changeLabel = new Label("Umfragenname:");
+	private Label datum = new Label("Datum wählen:");
+	private Label film = new Label ("Film wählen:");
+	private final ListBox dropBoxFilm = new ListBox();
+	private Label kino = new Label("Kino wählen:");
+	private final ListBox dropBoxKino = new ListBox();
+	private Label spielzeit = new Label("Spielzeit wählen");
+	private final ListBox dropBoxSpielzeit = new ListBox();
+	private Button safeUmfrage = new Button("Umfrage speichern");
  //   private ArrayList<String> umfagen = new ArrayList<String>();
 
 
@@ -46,12 +46,12 @@ public class UmfragenOpenForm extends DialogBox {
     
 
 	
-    DatePicker datePicker = new DatePicker();
+    private DatePicker datePicker = new DatePicker();
 
 
 
 	
-	VerticalPanel content = new VerticalPanel();
+    private VerticalPanel content = new VerticalPanel();
 	
 	
 	/*
