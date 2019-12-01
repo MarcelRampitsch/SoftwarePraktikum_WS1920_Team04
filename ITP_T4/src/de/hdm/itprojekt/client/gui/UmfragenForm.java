@@ -17,12 +17,12 @@ public class UmfragenForm extends VerticalPanel {
 		
 	}
 
-    private Button umfrageErstellung = new Button("Neue Umfrage erstellen:");
+     Button umfrageErstellung = new Button("Neue Umfrage erstellen:");
 
-    private HorizontalPanel umfrageEintragPanel =new HorizontalPanel();
+     HorizontalPanel umfrageEintragPanel =new HorizontalPanel();
     
     
-    private FlexTable umfrageEintrag = new FlexTable();  
+     FlexTable umfrageEintrag = new FlexTable();  
 
 	
 	public void onLoad() {

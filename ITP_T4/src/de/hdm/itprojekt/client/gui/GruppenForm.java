@@ -18,7 +18,7 @@ public class GruppenForm extends VerticalPanel {
 
 	}
 
-	private Button GruppenErstellung = new Button("Neue Gruppe erstellen");
+	 Button GruppenErstellung = new Button("Neue Gruppe erstellen");
 
 	public void onLoad() {
 		super.onLoad();

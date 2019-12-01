@@ -29,12 +29,12 @@ public class EditorForm extends VerticalPanel {
 	 * <code>west</code>: Linke Seite der Anwendung. Enhält die Formen <code>gruppenForm</code>
 	 */
 	
-	private HorizontalPanel header = new HorizontalPanel();
-	private HorizontalPanel main = new HorizontalPanel();
+	 HorizontalPanel header = new HorizontalPanel();
+	 HorizontalPanel main = new HorizontalPanel();
 
-	private VerticalPanel center = new VerticalPanel();
-	private VerticalPanel west = new VerticalPanel();
-	private VerticalPanel east = new VerticalPanel();
+	 VerticalPanel center = new VerticalPanel();
+	 VerticalPanel west = new VerticalPanel();
+	 VerticalPanel east = new VerticalPanel();
 	
 	/**
 	 * 

@@ -23,8 +23,8 @@ import de.hdm.itprojekt.shared.bo.CinemaGroup;
 
 public class CinemaForm extends VerticalPanel {
 
-	Label cinemaGroup = new Label("CinemaGroup");
-	Label cinema = new Label("Cinema");
+	private Label cinemaGroup = new Label("CinemaGroup");
+	private Label cinema = new Label("Cinema");
 	
 //	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
