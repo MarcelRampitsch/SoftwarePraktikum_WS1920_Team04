@@ -20,20 +20,20 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 	public class GruppenOpenForm extends DialogBox{
 		
 
-		VerticalPanel inhalt = new VerticalPanel();
+		 private VerticalPanel inhalt = new VerticalPanel();
 		
 		
-		Label gruppenerstellung = new Label("Gruppenerstellung:");
-		Label gruppenname = new Label("Gruppenname");
-		Label nickname = new Label("Nickname");
+		 private Label gruppenerstellung = new Label("Gruppenerstellung:");
+		 private Label gruppenname = new Label("Gruppenname");
+		 private Label nickname = new Label("Nickname");
 		
-		Button edit = new Button("editieren");
-		Button close  = new Button("X");
+		 private Button edit = new Button("editieren");
+		 private Button close  = new Button("X");
 		
-		TextBox gruppennamebox =new TextBox();
-		TextBox nicknamebox = new TextBox();
+		 private TextBox gruppennamebox =new TextBox();
+		 private TextBox nicknamebox = new TextBox();
 		
-		Button speichern = new Button("sichern");
+		 private Button speichern = new Button("sichern");
 		
 		//TextArea ta = new TextArea();
 
