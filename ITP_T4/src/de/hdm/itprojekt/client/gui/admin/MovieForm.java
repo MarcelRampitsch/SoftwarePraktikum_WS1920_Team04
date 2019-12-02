@@ -50,6 +50,11 @@ public class MovieForm  extends VerticalPanel{
     	this.add(movieLabel);
     	
     	movieaddbox.add(moviebox);
+    	
+    	movieEdit.addClickHandler(new editMovieClickHandler());
+    	movieNew.addClickHandler(new addMovieClickHandler());
+    	movieDelete.addClickHandler(new deleteMovieClickHandler());
+    	
     	moviebox.addItem("spidermann");
     	moviebox.addItem("Der böse Film");
     	moviebox.addItem("Spiderman 3");
@@ -76,9 +81,38 @@ public class MovieForm  extends VerticalPanel{
     public class addMovieClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
+			MovieAddDialogbox cinemagroup = new MovieAddDialogbox();
+			cinemagroup.openMovieAdd();
+			
 			
 		}
 		
+	}
+    
+    /**
+	 * ClickHandler zum editieren eines Movie
+	 */
+	public class editMovieClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+
+			EditMovieDialogBox editMovie = new EditMovieDialogBox();
+			editMovie.openMovieEdit();
+			
+		}
+	}
+	
+	/**
+	 * ClickHandler zum löschen eines Movie
+	 */
+	public class deleteMovieClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			DeleteMovieDialogBox deleteMovie = new DeleteMovieDialogBox();
+			deleteMovie.openMovieDelete();
+					
+			
+		}
 	}
 	
 	private class addCinemaGroupCallback implements AsyncCallback <Movie>{
@@ -97,15 +131,7 @@ public class MovieForm  extends VerticalPanel{
 		
 	}
 	
-	/**
-	 * ClickHandler zum editieren eines Movie
-	 */
-	public class editMovieClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			
-		}
-	}
+	
 	
 	private class editMovieCallback implements AsyncCallback <Movie>{
 
@@ -123,15 +149,7 @@ public class MovieForm  extends VerticalPanel{
 		
 	}
 	
-	/**
-	 * ClickHandler zum löschen eines Movie
-	 */
-	public class deleteMovieClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			
-		}
-	}
+	
 	
 	private class deleteMovieCallback implements AsyncCallback <Movie>{
 
