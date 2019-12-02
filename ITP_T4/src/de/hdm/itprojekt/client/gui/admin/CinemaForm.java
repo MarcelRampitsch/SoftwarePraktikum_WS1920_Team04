@@ -38,7 +38,6 @@ public class CinemaForm extends VerticalPanel {
 	Button editCinema = new Button("Edit");
 	Button newCinema = new Button("New");
 	Button deleteCinema = new Button("Delete");
-	Button addCinemaGroup = new Button("+");
 	Button addCinema = new Button("+");
 	
 	HorizontalPanel cinemaGroupPanel1 = new HorizontalPanel();
@@ -65,11 +64,11 @@ public class CinemaForm extends VerticalPanel {
 		cinemaGroupBox.addItem("kette2");
 		cinemaGroupBox.addItem("kette3");
 
-		cinemaGroupPanel1.add(addCinemaGroup);
 		cinemaGroupPanel1.add(addCinema);
 		
 		cinemaGroupPanel2.add(editCinemaGroup);
 		cinemaGroupPanel2.add(newCinemaGroup);
+		newCinemaGroup.addClickHandler(new addCinemaGroupClickHandler());
 		cinemaGroupPanel2.add(deleteCinemaGroup);
 		
 		this.add(cinemaGroupPanel1);
@@ -106,10 +105,20 @@ public class CinemaForm extends VerticalPanel {
 	public class addCinemaGroupClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
+			CinemaGroupDialogbox cinemagroup = new CinemaGroupDialogbox();
+			cinemagroup.openCinemaGroup();
 			
 		}
 		
+		
+		
+		
+	
+		
 	}
+	
+	
+	
 	
 	private class addCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
 
@@ -257,6 +266,9 @@ public class CinemaForm extends VerticalPanel {
 			
 		}
 		
+		
+		
+	
 	}
 	
 	
