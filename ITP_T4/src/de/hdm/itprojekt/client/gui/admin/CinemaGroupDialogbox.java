@@ -20,7 +20,7 @@ public class CinemaGroupDialogbox extends DialogBox {
 	TextBox cinemagroupbox = new TextBox();
 	
 	Button close = new Button("X");
-	Button safe = new Button("safe");
+	Button safe = new Button("save");
 	
 	
 	public CinemaGroupDialogbox() {

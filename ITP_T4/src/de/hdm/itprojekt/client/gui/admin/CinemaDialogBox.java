@@ -24,7 +24,7 @@ public class CinemaDialogBox extends DialogBox {
 	TextBox box = new TextBox();
 	
 	
-	Button safe = new Button("safe");
+	Button safe = new Button("save");
 	
 	
 	public CinemaDialogBox() {
