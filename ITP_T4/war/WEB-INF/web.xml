@@ -16,10 +16,21 @@
     <url-pattern>/itp_t4/editor</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+		<servlet-name>Admin</servlet-name>
+		<servlet-class>de.hdm.itprojekt.server.AdminAdministrationImpl</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>Admin</servlet-name>
+		<url-pattern>/admin/admin</url-pattern>
+	</servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>ITP_T4.html</welcome-file>
     <welcome-file>Admin.html</welcome-file>
   </welcome-file-list>
-
+  
 </web-app>
