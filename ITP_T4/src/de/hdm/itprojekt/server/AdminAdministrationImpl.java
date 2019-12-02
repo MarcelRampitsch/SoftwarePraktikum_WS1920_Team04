@@ -3,6 +3,8 @@ package de.hdm.itprojekt.server;
 import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.bo.*;
 
+import java.util.Vector;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.DBConnection;
@@ -41,12 +43,35 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.tMapper = TimeslotMapper.TimeslotMapper();
 	}
 	
+	// Methode zur Erstellung eines Cinema Objektes
 	public Cinema addCinema(Cinema c) {
 		if (c != null) {
 			Cinema tempCinema = new Cinema();
 			tempCinema = cMapper.insertCinema(c);
-			return c;
+			return tempCinema;
 		}
 		return null;
 	}
+	// Methode zur Aktualisierung eines Cinema Objektes
+	public Cinema updateCinema(Cinema upCinema) throws IllegalArgumentException {
+		if (upCinema != null) {
+			Cinema tempCinema = cMapper.updateCinema(upCinema);
+			return tempCinema;
+		}
+		return null;
+	}
+	// Methode zum Löschen eines bestimmten Kinos
+	public void deleteCinema (int cinemaID) throws IllegalArgumentException {
+		cMapper.deleteCinemaByCinemaID(cinemaID);
+	}
+	// Methode um alle Cinema eines User zu finden
+	public Vector<Cinema> findAllCinemaByUser(int userID) throws IllegalArgumentException{
+		Vector<Cinema> rs = cMapper.findallCinemabyUserID(userID);
+		return rs;
+	}
+	public Vector<Cinema> findAllCinemaByCinemaGroupID(int cinemaGroupID) throws IllegalArgumentException{
+		Vector<Cinema> rs = cMapper.findAllCinemaByCinemaGroupID(cinemaGroupID);
+		return rs;
+	}
 }
+
