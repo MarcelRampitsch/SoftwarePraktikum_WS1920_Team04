@@ -71,6 +71,7 @@ public class TimeslotForm extends VerticalPanel {
     	
     	
     	buttonbox.add(timeslotEdit);
+    	timeslotEdit.addClickHandler(new editTimeslotClickHandler());
     	buttonbox.add(timeslotNew);
     	buttonbox.add(timeslotDelete);
     	
@@ -117,6 +118,8 @@ public class TimeslotForm extends VerticalPanel {
 	public class editTimeslotClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
+			EditTimeSlot timeslotedit  = new EditTimeSlot();
+			timeslotedit.openEditTimeSlot();
 			
 		}
 	}
