@@ -17,11 +17,15 @@ public class CinemaDialogBox extends DialogBox {
 	
 	HorizontalPanel horzcontent = new HorizontalPanel();
 	
+	HorizontalPanel horzcontent2 = new HorizontalPanel();
+	
 	Button close = new Button ("X");
 	
 	Label cinema = new Label("Cinema");
 	
 	TextBox box = new TextBox();
+	
+	Label location = new Label("Location");
 	
 	
 	Button safe = new Button("save");
@@ -40,7 +44,9 @@ public class CinemaDialogBox extends DialogBox {
 
 		
 		horzcontent.add(box);
+		
 		content.add(horzcontent);
+		content.add(horzcontent2);
 		close.addClickHandler(new closeCinemaForm());
 		content.add(safe);
 		safe.addClickHandler(new safeCinemaForm());
