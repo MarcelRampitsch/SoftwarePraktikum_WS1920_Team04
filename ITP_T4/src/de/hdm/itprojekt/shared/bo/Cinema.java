@@ -25,6 +25,9 @@ public class Cinema extends BusinessObject{
 			this.cinemaGroupID=cinemaGroupID;
 			this.userID=userID;
 		}
+		
+		public Cinema() {
+		}
 
 		public String getLocation() {
 			return location;
