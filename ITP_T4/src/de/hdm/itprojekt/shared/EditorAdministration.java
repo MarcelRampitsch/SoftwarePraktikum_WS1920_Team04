@@ -13,6 +13,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
 	
+	
 	public Survey createSurvey(String name)
 			throws IllegalArgumentException;
 	
@@ -47,5 +48,16 @@ public interface EditorAdministration extends RemoteService {
 	public Groupmember getGroupmember() throws IllegalArgumentException;
 	
 	public void setGroupmember(Groupmember gm) throws IllegalArgumentException;
+	
+	
+	public void delete(Survey s) throws IllegalArgumentException;
+	
+	public void delete(SurveyEntry se) throws IllegalArgumentException;
+	
+	public void delete(User u) throws IllegalArgumentException;
+	
+	public void delete(Group g) throws  IllegalArgumentException;
+	
+	public void delete(Groupmember gm) throws IllegalArgumentException;
 	
 }

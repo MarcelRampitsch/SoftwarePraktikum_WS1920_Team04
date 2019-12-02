@@ -45,4 +45,15 @@ public interface EditorAdministrationAsync {
 
 	void setUser(User u, AsyncCallback<Void> callback);
 
+
+	void delete(Survey s, AsyncCallback<Void> callback);
+	
+	void delete(SurveyEntry se, AsyncCallback<Void> callback);
+	
+	void delete(User u, AsyncCallback<Void> callback);
+
+	void delete(Group g, AsyncCallback<Void> callback);
+
+	void delete(Groupmember gm, AsyncCallback<Void> callback);
+
 }
