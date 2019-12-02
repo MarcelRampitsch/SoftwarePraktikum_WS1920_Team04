@@ -23,7 +23,6 @@ public class CinemaDialogBox extends DialogBox {
 	
 	TextBox box = new TextBox();
 	
-	Button add = new Button ("+");
 	
 	Button safe = new Button("safe");
 	
@@ -41,7 +40,6 @@ public class CinemaDialogBox extends DialogBox {
 
 		
 		horzcontent.add(box);
-		horzcontent.add(add);
 		content.add(horzcontent);
 		close.addClickHandler(new closeCinemaForm());
 		content.add(safe);
