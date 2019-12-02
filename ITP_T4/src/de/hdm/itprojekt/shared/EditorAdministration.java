@@ -2,6 +2,13 @@ package de.hdm.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 
+import de.hdm.itprojekt.shared.bo.Survey;
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
+import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Groupmember;
+
+
 public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
@@ -18,7 +25,7 @@ public interface EditorAdministration extends RemoteService {
 	public Group createGroup(String name)
 		throws IllegalArgumentException;
 	
-	public GroupMember createGroupMember()
+	public Groupmember createGroupMember()
 		throws IllegalArgumentException;
 	
 	public Survey getSurvey() throws IllegalArgumentException;
@@ -37,9 +44,8 @@ public interface EditorAdministration extends RemoteService {
 	
 	public void setGroup(Group g) throws IllegalArgumentException;
 	
-	public GroupMember getGroupMember() throws IllegalArgumentException;
+	public Groupmember getGroupmember() throws IllegalArgumentException;
 	
-	public void setGroupMember(GroupMember gm) throws IllegalArgumentException;
+	public void setGroupmember(Groupmember gm) throws IllegalArgumentException;
 	
-	}
 }
