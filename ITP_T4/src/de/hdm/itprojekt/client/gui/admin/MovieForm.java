@@ -33,7 +33,6 @@ public class MovieForm  extends VerticalPanel{
     Button movieNew = new Button("New");
     Button movieDelete = new Button("Delete");
     
-    Button movieAdd = new Button("+");
     
     HorizontalPanel movieaddbox = new HorizontalPanel();
     HorizontalPanel buttonbox = new HorizontalPanel();
@@ -56,7 +55,6 @@ public class MovieForm  extends VerticalPanel{
     	moviebox.addItem("Spiderman 3");
 
     	
-    	movieaddbox.add(movieAdd);
     	
     	buttonbox.add(movieEdit);
     	buttonbox.add(movieNew);
