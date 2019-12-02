@@ -68,6 +68,7 @@ public class CinemaForm extends VerticalPanel {
 		cinemaGroupPanel2.add(newCinemaGroup);
 		newCinemaGroup.addClickHandler(new addCinemaGroupClickHandler());
 		newCinema.addClickHandler(new addCinemaClickHandler() );
+		editCinema.addClickHandler(new editCinemaClickHandler());
 		
 		cinemaGroupPanel2.add(deleteCinemaGroup);
 		
@@ -119,6 +120,16 @@ public class CinemaForm extends VerticalPanel {
 			
 		}
 			
+	}
+    
+   public class editCinemaClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			
+			EditCinemaDialogBox edit = new EditCinemaDialogBox();
+			edit.openCinemaEdit();
+			
+		}
 	}
 	
 	
@@ -218,12 +229,7 @@ public class CinemaForm extends VerticalPanel {
 	/**
 	 * ClickHandler zum editieren eines Cinema
 	 */
-	public class editCinemaClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			
-		}
-	}
+	
 	
 	private class editCinemaCallback implements AsyncCallback <Cinema>{
 
