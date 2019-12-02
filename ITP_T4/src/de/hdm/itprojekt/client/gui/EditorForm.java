@@ -1,5 +1,9 @@
 package de.hdm.itprojekt.client.gui;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -92,6 +96,17 @@ public class EditorForm extends VerticalPanel {
 		main.add(center);
 		main.add(east);
 		main.add(west);
+		
+		//Button, dessen ClickEvent zum Admin Mode führt.
+		Button toAdmin = new Button("Admin", new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Window.Location.replace("/Admin.html");
+			}
+		});
+		
+		main.add(toAdmin);
 		
 		this.add(main);
 
