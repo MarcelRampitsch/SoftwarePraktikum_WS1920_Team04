@@ -38,7 +38,6 @@ public class CinemaForm extends VerticalPanel {
 	Button editCinema = new Button("Edit");
 	Button newCinema = new Button("New");
 	Button deleteCinema = new Button("Delete");
-	Button addCinema = new Button("+");
 	
 	HorizontalPanel cinemaGroupPanel1 = new HorizontalPanel();
 	HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
@@ -64,11 +63,12 @@ public class CinemaForm extends VerticalPanel {
 		cinemaGroupBox.addItem("kette2");
 		cinemaGroupBox.addItem("kette3");
 
-		cinemaGroupPanel1.add(addCinema);
 		
 		cinemaGroupPanel2.add(editCinemaGroup);
 		cinemaGroupPanel2.add(newCinemaGroup);
 		newCinemaGroup.addClickHandler(new addCinemaGroupClickHandler());
+		newCinema.addClickHandler(new addCinemaClickHandler() );
+		
 		cinemaGroupPanel2.add(deleteCinemaGroup);
 		
 		this.add(cinemaGroupPanel1);
@@ -82,7 +82,6 @@ public class CinemaForm extends VerticalPanel {
 		cinemaBox.addItem("central und union");
 
 		
-		cinemaPanel1.add(addCinema);
 		
 		cinemaPanel2.add(editCinema);
 		cinemaPanel2.add(newCinema);
@@ -109,13 +108,19 @@ public class CinemaForm extends VerticalPanel {
 			cinemagroup.openCinemaGroup();
 			
 		}
-		
-		
-		
-		
-	
-		
+			
 	}
+	
+    public class addCinemaClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			CinemaDialogBox cinema = new CinemaDialogBox();
+			cinema.openCinema();
+			
+		}
+			
+	}
+	
 	
 	
 	
@@ -192,13 +197,7 @@ public class CinemaForm extends VerticalPanel {
 	/**
 	 * ClickHandler für Erstellung eines Cinema
 	 */
-     public class addCinemaClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			
-		}
-		
-	}
+    
 	
 	private class addCinemaCallback implements AsyncCallback <Cinema>{
 
