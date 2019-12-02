@@ -70,6 +70,8 @@ public class CinemaForm extends VerticalPanel {
 		newCinemaGroup.addClickHandler(new addCinemaGroupClickHandler());
 		newCinema.addClickHandler(new addCinemaClickHandler() );
 		editCinema.addClickHandler(new editCinemaClickHandler());
+		deleteCinema.addClickHandler(new deleteCinemaClickHandler());
+		deleteCinemaGroup.addClickHandler(new deleteCinemaGroupClickHandler());
 		
 		cinemaGroupPanel2.add(deleteCinemaGroup);
 		
@@ -132,6 +134,30 @@ public class CinemaForm extends VerticalPanel {
 			
 		}
 	}
+   
+   /**
+	 * ClickHandler zum löschen eines Cinema
+	 */
+	public class deleteCinemaClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			DeleteCinemaDialogBox deleteCinema = new DeleteCinemaDialogBox();
+			deleteCinema.openCimemaDelete();
+					
+			
+		}
+	}
+	
+	/**
+	 * ClickHandler zum löschen einer CinemaGroup
+	 */
+	public class deleteCinemaGroupClickHandler implements ClickHandler{
+		
+		public void onClick(ClickEvent event) {
+			DeleteCinemaGroupDialogBox deleteCinemaGroup = new DeleteCinemaGroupDialogBox();
+			deleteCinemaGroup.openCimemaGroupDelete();
+		}
+	}
 	
 	
 	
@@ -165,6 +191,8 @@ public class CinemaForm extends VerticalPanel {
 		}
 	}
 	
+	
+	
 	private class editCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
 
 		@Override
@@ -182,15 +210,7 @@ public class CinemaForm extends VerticalPanel {
 	}
 	
 	
-	/**
-	 * ClickHandler zum löschen einer CinemaGroup
-	 */
-	public class deleteCinemaGroupClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			
-		}
-	}
+	
 	
 	private class deleteCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
 
@@ -250,15 +270,7 @@ public class CinemaForm extends VerticalPanel {
 		
 	}
 	
-	/**
-	 * ClickHandler zum löschen eines Cinema
-	 */
-	public class deleteCinemaClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			
-		}
-	}
+	
 	
 	private class deleteCinemaCallback implements AsyncCallback <Cinema>{
 
