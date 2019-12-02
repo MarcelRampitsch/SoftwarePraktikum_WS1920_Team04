@@ -9,6 +9,7 @@ import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.bo.Presentation;
 
 public interface EditorAdministrationAsync {
 	
@@ -34,6 +35,8 @@ public interface EditorAdministrationAsync {
 	void getSurveyEntry(AsyncCallback<SurveyEntry> callback);
 
 	void getUser(AsyncCallback<User> callback);
+	
+	void getPresentation(AsyncCallback<Presentation> callback);
 
 	void setGroup(Group g, AsyncCallback<Void> callback);
 
@@ -44,6 +47,8 @@ public interface EditorAdministrationAsync {
 	void setSurveyEntry(SurveyEntry se, AsyncCallback<Void> callback);
 
 	void setUser(User u, AsyncCallback<Void> callback);
+	
+	void setPresentation(Presentation p, AsyncCallback<Void> callback);
 
 
 	void delete(Survey s, AsyncCallback<Void> callback);
@@ -55,5 +60,7 @@ public interface EditorAdministrationAsync {
 	void delete(Group g, AsyncCallback<Void> callback);
 
 	void delete(Groupmember gm, AsyncCallback<Void> callback);
+	
+	void delete(Presentation p, AsyncCallback<Void> callback);
 
 }
