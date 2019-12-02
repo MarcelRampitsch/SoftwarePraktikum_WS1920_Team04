@@ -33,7 +33,6 @@ public class TimeslotForm extends VerticalPanel {
     Button timeslotNew = new Button("New");
     Button timeslotDelete = new Button("Delete");
     
-    Button timeslotAdd = new Button("+");
     
     HorizontalPanel timeslotaddbox = new HorizontalPanel();
     HorizontalPanel buttonbox = new HorizontalPanel();
@@ -70,7 +69,6 @@ public class TimeslotForm extends VerticalPanel {
 
 
     	
-    	timeslotaddbox.add(timeslotAdd);
     	
     	buttonbox.add(timeslotEdit);
     	buttonbox.add(timeslotNew);
