@@ -151,7 +151,7 @@ public class TimeslotForm extends VerticalPanel {
 		
 		public void onClick(ClickEvent event) {
 			DeleteTimeSlotDialogBox deletetimeslot = new DeleteTimeSlotDialogBox();
-			deletetimeslot.open();
+			deletetimeslot.closeTimeSlot();
 			
 		}
 	}

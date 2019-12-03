@@ -8,6 +8,12 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/*
+ * 
+ * @author SerhatUlus
+ * Klasse, die das Anzeigen einer DialogBox mitsamt ihrem inhalt realisiert
+ *
+ */
 public class DeleteTimeSlotDialogBox extends DialogBox {
 
 	VerticalPanel content = new VerticalPanel();
@@ -46,16 +52,20 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 	
 	
 	
-	
-	public void open() {
+	/*
+	 * Methode die das Anzeigen der DialogBox realisiert
+	 */
+	public void openTimeSlot() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
 		this.center();
 		this.show();	
 	}
 	
-	
-	public void close() {
+	/*
+	 * Methode die das schließen des Fensters realisiert
+	 */
+	public void closeTimeSlot() {
 		this.hide();
 		this.clear();
 		this.removeFromParent();
@@ -63,12 +73,14 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 	
-	
+	/*
+	 * Der ClickHandler der zum Tragen kommt, falls auf den no-button geklickt wird
+	 */
     private class closetimeslot implements ClickHandler{
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			close();
+			closeTimeSlot();
 			
 	
 
