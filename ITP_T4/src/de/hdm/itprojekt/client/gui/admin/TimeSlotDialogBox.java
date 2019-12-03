@@ -58,7 +58,9 @@ public class TimeSlotDialogBox extends DialogBox {
 	
 	
 	
-	
+	/*
+	 * Methode die das schließen des Fensters realisiert
+	 */
 	public void closetimeslot() {
 		this.hide();
 		this.clear();
@@ -69,6 +71,9 @@ public class TimeSlotDialogBox extends DialogBox {
 
 }
 	
+	/*
+	 * Methode die das Anzeigen der DialogBox realisiert
+	 */
 	public void opentimeslot() {
 			this.setGlassEnabled(true);
 			this.setAnimationEnabled(true);
@@ -76,7 +81,9 @@ public class TimeSlotDialogBox extends DialogBox {
 			this.show();
 	}
 	
-	
+	/*
+	 * Der ClickHandler, der die Methode closetimeslot beinhaltet, das wiederum dafür führt, dass sich das Fenster schließt
+	 */
 	private class closehandler implements ClickHandler {
 		
 		public void onClick(ClickEvent event) {
@@ -85,7 +92,9 @@ public class TimeSlotDialogBox extends DialogBox {
 		
 		
 	}
-	
+	/*Der ClickHandler, der zum Tragen kommt, falls der safe-Button geklickt wird
+	 * 
+	 */
 	private class safehandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
