@@ -105,6 +105,7 @@ public class PresentationForm extends VerticalPanel{
 
 		    
 		    presentationadder.add(presentationAdd);
+		    presentationAdd.addClickHandler(new addPresentationClickHandler());
 		    
 		    this.add(presentationadder);
 		    
@@ -133,8 +134,8 @@ public class PresentationForm extends VerticalPanel{
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				
+				PresentationAddDialogBox presentationadd = new PresentationAddDialogBox();
+				presentationadd.openPresentation();
 			}
 		   
 	   }
