@@ -37,6 +37,8 @@ public class PresentationAddDialogBox extends DialogBox {
     	content.add(buttoncontent);
     	
     	
+    	this.add(content);
+    	
     }
 
     
