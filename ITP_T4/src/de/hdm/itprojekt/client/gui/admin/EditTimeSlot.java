@@ -9,6 +9,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * 
+ * @author SerhatUlus
+ * Klasse, die das Anzeigen einer DialogBox mitsamt ihrem Inahlt realisiert. 
+ * Klasse kommt zum Tragen, wenn man auf den Button "Edit" klickt
+ *
+ */
 public class EditTimeSlot extends DialogBox	 {
 	
 	VerticalPanel content = new VerticalPanel();
@@ -48,7 +55,9 @@ public class EditTimeSlot extends DialogBox	 {
 		
 	}
 	
-	
+	/*
+	 * Methode die das Anzeigen der DialogBox realisiert
+	 */
 	public void openEditTimeSlot() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
@@ -57,6 +66,10 @@ public class EditTimeSlot extends DialogBox	 {
 	}
 	
 	
+	
+	/*
+	 * Methode die das schließen des Fensters realisiert
+	 */
 	public void closeEditTimeSlot() {
 		this.hide();
 		this.clear();
@@ -66,6 +79,9 @@ public class EditTimeSlot extends DialogBox	 {
 	}
 	
 	
+/*
+ * Dieser ClickHandler kommt zum Tragen, wenn auf den closeButton geklickt wird
+ */
 	private class closehandler implements ClickHandler{
 
 		@Override
@@ -77,6 +93,10 @@ public class EditTimeSlot extends DialogBox	 {
 		
 		
 	}
+	
+	/*
+	 * Diser ClickHandler kommt zum Tragen, falls auf den saveButton geklickt wird
+	 */
 	private class safehandler implements ClickHandler{
 
 		@Override
