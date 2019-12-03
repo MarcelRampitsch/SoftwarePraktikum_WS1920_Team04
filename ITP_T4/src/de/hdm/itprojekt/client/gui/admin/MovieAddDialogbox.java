@@ -1,12 +1,20 @@
 package de.hdm.itprojekt.client.gui.admin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
+
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+/**
+* 
+* @author DominikThumm
+* Diese Klasse ermöglicht das Anzeigen einer DialogBox, wenn der Nutzer auf den "new" Button klickt in der <code>MovieForm</code>
+*
+*/
 
 
 public class MovieAddDialogbox extends DialogBox {
@@ -26,6 +34,11 @@ public class MovieAddDialogbox extends DialogBox {
 		
 	
 	}
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Panel, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Panel hinzugefügt.
+	 */
 
 	
 	public void onLoad() {
@@ -59,7 +72,7 @@ public class MovieAddDialogbox extends DialogBox {
 	}
 	
 	
-	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
 	
 	private class closeHandler implements ClickHandler{
 
@@ -70,6 +83,7 @@ public class MovieAddDialogbox extends DialogBox {
 		}
 		
 	}
+	// ClickHandler der das Speichern eines Cinemas/Location ermöglicht
 	
 	private class safeHandler implements ClickHandler{
 
