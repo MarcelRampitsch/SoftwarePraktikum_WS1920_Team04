@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Klasse die das Anzeigen einer DialogBox realisiert, falls man auf den Button Add klickt in der TimeslotForm
  *
  */
-public class TimeSlotDialogBox extends DialogBox {
+public class TimeSlotAddDialogBox extends DialogBox {
 	
 	HorizontalPanel timeslotcontent = new HorizontalPanel();
 	
@@ -31,7 +31,7 @@ public class TimeSlotDialogBox extends DialogBox {
 	
 	
 	
-	public TimeSlotDialogBox () {
+	public TimeSlotAddDialogBox () {
 		
 		
 	}

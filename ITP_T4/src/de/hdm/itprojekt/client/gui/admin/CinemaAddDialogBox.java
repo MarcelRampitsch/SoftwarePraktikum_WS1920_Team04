@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 */
 
 
-public class CinemaDialogBox extends DialogBox {
+public class CinemaAddDialogBox extends DialogBox {
 	
 	VerticalPanel content = new VerticalPanel();
 	
@@ -38,7 +38,7 @@ public class CinemaDialogBox extends DialogBox {
 	Button safe = new Button("save");
 	
 	
-	public CinemaDialogBox() {
+	public CinemaAddDialogBox() {
 		
 	}
 	
