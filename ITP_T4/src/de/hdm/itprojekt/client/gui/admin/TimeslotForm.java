@@ -93,7 +93,7 @@ public class TimeslotForm extends VerticalPanel {
     public class addTimeslotClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			TimeSlotDialogBox timeslotbox = new TimeSlotDialogBox();
+			TimeSlotAddDialogBox timeslotbox = new TimeSlotAddDialogBox();
 			timeslotbox.opentimeslot();
 			
 		}
