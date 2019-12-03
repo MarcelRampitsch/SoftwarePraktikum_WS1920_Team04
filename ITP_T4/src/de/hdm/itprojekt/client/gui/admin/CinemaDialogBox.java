@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.client.gui.admin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
+
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -9,6 +10,13 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+/**
+* 
+* @author DominikThumm
+* Diese Klasse ermöglicht das Anzeigen einer DialogBox, wenn der Nutzer auf den "new" Button klickt in der <code>CinemaForm</code>
+*
+*/
 
 
 public class CinemaDialogBox extends DialogBox {
@@ -33,6 +41,11 @@ public class CinemaDialogBox extends DialogBox {
 	public CinemaDialogBox() {
 		
 	}
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Panel, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Panel hinzugefügt.
+	 */
 	
 	public void onLoad() {
 		super.onLoad();
@@ -67,6 +80,8 @@ public class CinemaDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
+	
 	private class closeCinemaForm implements ClickHandler{
 		
 		@Override
@@ -78,6 +93,8 @@ public class CinemaDialogBox extends DialogBox {
 	
 		
 	}
+	// ClickHandler der das Speichern eines Cinemas/Location ermöglicht
+
 	
 	private class safeCinemaForm implements ClickHandler{
 		
