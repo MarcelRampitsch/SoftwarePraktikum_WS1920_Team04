@@ -10,6 +10,7 @@ import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Vote;
 
 public interface EditorAdministrationAsync {
 	
@@ -25,7 +26,10 @@ public interface EditorAdministrationAsync {
 	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
 
 	void createUser(String nickname, String email, AsyncCallback<User> callback);
+	
+	void createVote(int voteResult, AsyncCallback<Vote> callback);
 
+	
 	void getGroup(AsyncCallback<Group> callback);
 
 	void getGroupmember(AsyncCallback<Groupmember> callback);
@@ -38,6 +42,9 @@ public interface EditorAdministrationAsync {
 	
 	void getPresentation(AsyncCallback<Presentation> callback);
 
+	void getVote(AsyncCallback<Vote> callback);
+	
+	
 	void setGroup(Group g, AsyncCallback<Void> callback);
 
 	void setGroupmember(Groupmember gm, AsyncCallback<Void> callback);
@@ -49,6 +56,8 @@ public interface EditorAdministrationAsync {
 	void setUser(User u, AsyncCallback<Void> callback);
 	
 	void setPresentation(Presentation p, AsyncCallback<Void> callback);
+	
+	void setVote(Vote v, AsyncCallback<Void> callback);
 
 
 	void delete(Survey s, AsyncCallback<Void> callback);
@@ -62,5 +71,7 @@ public interface EditorAdministrationAsync {
 	void delete(Groupmember gm, AsyncCallback<Void> callback);
 	
 	void delete(Presentation p, AsyncCallback<Void> callback);
+	
+	void delete(Vote v, AsyncCallback<Void> callback);
 
 }
