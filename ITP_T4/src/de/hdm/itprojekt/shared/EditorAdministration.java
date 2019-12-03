@@ -8,7 +8,7 @@ import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Presentation;
-
+import de.hdm.itprojekt.shared.bo.Vote;
 
 public interface EditorAdministration extends RemoteService {
 	
@@ -16,7 +16,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	
 	public Survey createSurvey(String name)
-			throws IllegalArgumentException;
+		throws IllegalArgumentException;
 	
 	public SurveyEntry createSurveyEntry()
 		throws IllegalArgumentException;
@@ -28,6 +28,9 @@ public interface EditorAdministration extends RemoteService {
 		throws IllegalArgumentException;
 	
 	public Groupmember createGroupMember()
+		throws IllegalArgumentException;
+	
+	public Vote createVote(int voteResult)
 		throws IllegalArgumentException;
 	
 	public Survey getSurvey() throws IllegalArgumentException;
@@ -54,6 +57,10 @@ public interface EditorAdministration extends RemoteService {
 	
 	public void setPresentation(Presentation p) throws IllegalArgumentException;
 	
+	public Vote getVote() throws IllegalArgumentException;
+	
+	public void setVote(Vote v) throws IllegalArgumentException;
+	
 	
 	public void delete(Survey s) throws IllegalArgumentException;
 	
@@ -66,5 +73,7 @@ public interface EditorAdministration extends RemoteService {
 	public void delete(Groupmember gm) throws IllegalArgumentException;
 	
 	public void delete(Presentation p) throws IllegalArgumentException;
+	
+	public void delete(Vote v) throws IllegalArgumentException;
 	
 }
