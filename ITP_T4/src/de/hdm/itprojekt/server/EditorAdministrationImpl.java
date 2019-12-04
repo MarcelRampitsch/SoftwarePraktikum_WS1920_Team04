@@ -9,6 +9,7 @@ import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.bo.Vote;
 
 public class EditorAdministrationImpl extends RemoteServiceServlet implements EditorAdministration {
 	
@@ -149,6 +150,30 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 
 	@Override
 	public void delete(Presentation p) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Vote createVote(int voteResult) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vote getVote() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setVote(Vote v) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Vote v) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		
 	}
