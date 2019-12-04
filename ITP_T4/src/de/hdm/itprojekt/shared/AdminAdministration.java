@@ -19,4 +19,7 @@ public interface AdminAdministration extends RemoteService {
 	Vector<Cinema> findAllCinemaByCinemaGroupID(int cinemaGroupID) throws IllegalArgumentException;
 	Vector<Cinema> findAllCinemaByUser(int userID) throws IllegalArgumentException;
 	
+	
+//	Cinema greetServer(String input) throws IllegalArgumentException;
+
 }

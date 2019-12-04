@@ -4,12 +4,17 @@ import com.google.gwt.event.dom.client.ClickEvent;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
 
 /**
 * 
@@ -20,6 +25,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 
 public class CinemaAddDialogBox extends DialogBox {
+	
+	private static AdminAdministrationAsync greetingService = ClientSideSettings.getAdminAdministration() ;
+
 	
 	VerticalPanel content = new VerticalPanel();
 	
@@ -100,9 +108,31 @@ public class CinemaAddDialogBox extends DialogBox {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			Window.alert("EINGABE GESICHERT");
+
+			
+		/*	greetingService.greetServer(box.getText(), new AsyncCallback<Cinema>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					
+					cinema.setText(caught.getMessage());
+					
+				}
+
+			
+
+				@Override
+				public void onSuccess(Cinema result) {
+					// TODO Auto-generated method stub
+					
+				}				
+	});*/
+			
 			
 		}
+			
+			
+		
 		
 		
 	}

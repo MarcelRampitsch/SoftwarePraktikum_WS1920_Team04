@@ -19,5 +19,7 @@ public interface AdminAdministrationAsync {
 	void findAllCinemaByUser(int userID, AsyncCallback<Vector<Cinema>> callback);
 
 
+	//void greetServer(String string, AsyncCallback<Cinema> callback);
+
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Vector;
 
@@ -95,6 +96,15 @@ public class CinemaMapper {
 			return null;
 		}
 	
+/*public void insert(String l) throws SQLException {  // Inhalte einfügen in die Datenbank
+		
+		Connection con = DBConnection.getConnection();
+		
+		Statement stm = con.createStatement();
+		
+		stm.executeUpdate("INSERT INTO cinema (name) VALUES ('" + l + "')");	
+	
+	} */
 	
 	
 	public void deleteCinemaByCinemaID(int id) {

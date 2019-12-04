@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client.gui.admin;
 
 import java.util.Vector;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.sun.java.swing.plaf.windows.resources.windows;
+
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.server.AdminAdministrationImpl;
@@ -35,6 +37,8 @@ public class CinemaForm extends VerticalPanel {
 	private Label cinema = new Label("Cinema");
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+	
+
 
 	
 	ListBox cinemaGroupBox = new ListBox();
@@ -140,6 +144,7 @@ public class CinemaForm extends VerticalPanel {
 		
 		public void onClick(ClickEvent event) {
 			CinemaAddDialogBox cinema = new CinemaAddDialogBox();
+			
 			cinema.openCinema();
 			
 		}

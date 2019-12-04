@@ -3,6 +3,7 @@ package de.hdm.itprojekt.server;
 import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.bo.*;
 
+import java.sql.SQLException;
 import java.util.Vector;
 
 import com.google.gwt.user.client.Window;
@@ -76,5 +77,18 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		Vector<Cinema> rs = cMapper.findAllCinemaByCinemaGroupID(cinemaGroupID);
 		return rs;
 	}
+
+	/*@Override
+	public Cinema greetServer(String input) throws IllegalArgumentException {
+
+		try {
+			CinemaMapper.CinemaMapper().insert(input);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	
+	} */
 }
 
