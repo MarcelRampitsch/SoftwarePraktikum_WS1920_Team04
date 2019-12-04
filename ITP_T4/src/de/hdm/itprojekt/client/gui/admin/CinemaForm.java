@@ -1,7 +1,10 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -9,8 +12,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.server.AdminAdministrationImpl;
+import de.hdm.itprojekt.server.EditorAdministrationImpl;
+import de.hdm.itprojekt.shared.AdminAdministration;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
@@ -26,7 +34,7 @@ public class CinemaForm extends VerticalPanel {
 	private Label cinemaGroup = new Label("CinemaGroup");
 	private Label cinema = new Label("Cinema");
 	
-//	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
 	
 	ListBox cinemaGroupBox = new ListBox();
@@ -81,10 +89,23 @@ public class CinemaForm extends VerticalPanel {
 		this.add(cinema);
 		
 		cinemaPanel1.add(cinemaBox);
-		cinemaBox.addItem("ufa-palast");
-		cinemaBox.addItem("traumpalast");
-		cinemaBox.addItem("central und union");
+		
+		
+		adminAdministration.findAllCinemaByUser(1, new AsyncCallback<Vector<Cinema>>() {
+		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Wir sind in der IMPL");
+			}
 
+			@Override 
+			public void onSuccess(Vector<Cinema> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					cinemaBox.addItem(result.elementAt(i).getName());
+				}
+			}
+		});
 		
 		
 		cinemaPanel2.add(editCinema);
@@ -143,8 +164,7 @@ public class CinemaForm extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			DeleteCinemaDialogBox deleteCinema = new DeleteCinemaDialogBox();
 			deleteCinema.openCimemaDelete();
-					
-			
+											
 		}
 	}
 	

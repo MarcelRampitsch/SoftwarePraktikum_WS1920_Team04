@@ -5,6 +5,7 @@ import de.hdm.itprojekt.shared.bo.*;
 
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.DBConnection;
@@ -66,7 +67,9 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}
 	// Methode um alle Cinema eines User zu finden
 	public Vector<Cinema> findAllCinemaByUser(int userID) throws IllegalArgumentException{
-		Vector<Cinema> rs = cMapper.findallCinemabyUserID(userID);
+		Window.alert("Wir sind in der IMPL");
+		Vector<Cinema> rs = new Vector<Cinema>();
+		rs = cMapper.findallCinemabyUserID(userID);
 		return rs;
 	}
 	public Vector<Cinema> findAllCinemaByCinemaGroupID(int cinemaGroupID) throws IllegalArgumentException{

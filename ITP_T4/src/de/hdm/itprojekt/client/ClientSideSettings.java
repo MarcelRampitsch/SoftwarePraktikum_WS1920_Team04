@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.CommonSettings;
 import de.hdm.itprojekt.shared.EditorAdministration;
@@ -21,10 +22,11 @@ import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 */
 
 public class ClientSideSettings extends CommonSettings {
+	
+	private static AdminAdministrationAsync adminAdministration = null;
 /*	
 	private static EditorAdministrationAsync editorAdministration = null;
-	private static AdminAdministrationAsync adminAdministration = null;
-//	private static LoginAdministrationAsync loginAdministration = null;
+	private static LoginAdministrationAsync loginAdministration = null;
 	
 	public static EditorAdministrationAsync getEditorAdministration() {
 
@@ -35,32 +37,17 @@ public class ClientSideSettings extends CommonSettings {
 
 		return editorAdministration;
 	}
-	
+	*/
 	
 	public static AdminAdministrationAsync getAdminAdministration() {
 		
 		if (adminAdministration == null) { 
-			adminAdministration= GWT.create(AdminAdministrationAsync.class); 
+			adminAdministration = GWT.create(AdminAdministration.class); 
 			adminAdministration.init(new ClientSideSettings().new InitCallback()); 
 			  }
-			
+		
 		return adminAdministration; 
 		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	class InitCallback implements AsyncCallback<Void> {
 
@@ -77,9 +64,5 @@ public class ClientSideSettings extends CommonSettings {
 
 			// Nothing happens!
 		}
-
-	} */
-
-	
-
+	} 
 }

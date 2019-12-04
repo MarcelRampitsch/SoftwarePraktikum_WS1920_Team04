@@ -21,7 +21,6 @@
 		<servlet-class>de.hdm.itprojekt.server.AdminAdministrationImpl</servlet-class>
 	</servlet>
 
-
 	<servlet-mapping>
 		<servlet-name>Admin</servlet-name>
 		<url-pattern>/admin/admin</url-pattern>
