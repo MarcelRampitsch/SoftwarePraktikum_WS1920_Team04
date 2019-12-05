@@ -34,7 +34,7 @@ public interface EditorAdministrationAsync {
 
 	void getGroupmember(AsyncCallback<Groupmember> callback);
 
-	void getSurvey(AsyncCallback<Survey> callback);
+	void findBySurveyID(AsyncCallback<Survey> callback);
 
 	void getSurveyEntry(AsyncCallback<SurveyEntry> callback);
 
@@ -42,7 +42,7 @@ public interface EditorAdministrationAsync {
 	
 	void getPresentation(AsyncCallback<Presentation> callback);
 
-	void getVote(AsyncCallback<Vote> callback);
+	void findVoteByVoteID(AsyncCallback<Vote> callback);
 	
 	
 	void setGroup(Group g, AsyncCallback<Void> callback);

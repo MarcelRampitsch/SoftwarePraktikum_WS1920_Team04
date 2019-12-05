@@ -33,7 +33,7 @@ public interface EditorAdministration extends RemoteService {
 	public Vote createVote(int voteResult)
 		throws IllegalArgumentException;
 	
-	public Survey getSurvey() throws IllegalArgumentException;
+	public Survey findBySurveyID() throws IllegalArgumentException;
 	
 	public void setSurvey(Survey s) throws IllegalArgumentException;
 	
@@ -57,7 +57,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	public void setPresentation(Presentation p) throws IllegalArgumentException;
 	
-	public Vote getVote() throws IllegalArgumentException;
+	public Vote findVoteByVoteID() throws IllegalArgumentException;
 	
 	public void setVote(Vote v) throws IllegalArgumentException;
 	
