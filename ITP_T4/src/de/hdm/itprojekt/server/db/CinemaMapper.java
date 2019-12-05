@@ -261,7 +261,7 @@ public class CinemaMapper {
 		
 		try {
 			PreparedStatement findallCinemabyUserID  =
-						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemamapper " + "WHERE UserID=? ");
+						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE UserID=? ");
 			
 			findallCinemabyUserID.setInt(1, id);
 			
