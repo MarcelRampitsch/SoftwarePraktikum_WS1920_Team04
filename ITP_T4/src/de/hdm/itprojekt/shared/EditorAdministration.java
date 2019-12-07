@@ -14,16 +14,29 @@ public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
 	
+	// Einen User anlegen.
+	public User createUser(String nickname, String email)
+		throws IllegalArgumentException;
+	
+	// Suchen von User Objekten deren Nickname bekannt ist.
+	public User getUserByNickname() throws IllegalArgumentException;
+	
+	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
+	public User getUserByEmail() throws IllegalArgumentException;
+	
+	// Aktualisieren eines User Objekts.
+	public void updateUser(User upUser) throws IllegalArgumentException;
+	
+	// Löschen des übergebenen Users.
+	public void delete(User u) throws IllegalArgumentException;
+	
 	
 	public Survey createSurvey(String name)
 		throws IllegalArgumentException;
 	
 	public SurveyEntry createSurveyEntry()
 		throws IllegalArgumentException;
-	
-	public User createUser(String nickname, String email)
-		throws IllegalArgumentException;
-	
+
 	public Group createGroup(String name)
 		throws IllegalArgumentException;
 	
@@ -40,10 +53,6 @@ public interface EditorAdministration extends RemoteService {
 	public SurveyEntry getSurveyEntry() throws IllegalArgumentException;
 	
 	public void setSurveyEntry(SurveyEntry se) throws IllegalArgumentException;
-	
-	public User getUser() throws IllegalArgumentException;
-	
-	public void setUser(User u) throws IllegalArgumentException;
 	
 	public Group getGroup() throws IllegalArgumentException;
 	
@@ -65,8 +74,6 @@ public interface EditorAdministration extends RemoteService {
 	public void delete(Survey s) throws IllegalArgumentException;
 	
 	public void delete(SurveyEntry se) throws IllegalArgumentException;
-	
-	public void delete(User u) throws IllegalArgumentException;
 	
 	public void delete(Group g) throws  IllegalArgumentException;
 	
