@@ -15,7 +15,6 @@ public interface AdminAdministrationAsync {
 	void updateCinema(Cinema upCinema, AsyncCallback<Cinema> callback);
 	void deleteCinema(int cinemaID, AsyncCallback<Void> callback);
 	void findAllCinemaByCinemaGroupID(int cinemaGroupID, AsyncCallback<Vector<Cinema>> callback);
-
 	void findAllCinemaByUser(int userID, AsyncCallback<Vector<Cinema>> callback);
 
 
