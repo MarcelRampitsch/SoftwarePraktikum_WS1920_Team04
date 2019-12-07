@@ -279,7 +279,7 @@ public class CinemaMapper {
 			
 			while(rs.next()) {
 				
-				cm = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+				cm = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 						
 			
 			result.addElement(cm);
