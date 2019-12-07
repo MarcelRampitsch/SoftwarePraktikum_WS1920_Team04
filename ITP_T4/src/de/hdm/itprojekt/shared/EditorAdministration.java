@@ -81,10 +81,30 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException;
 	
 	
+	// Survey Methoden
 	
-	
+	// Eine Ummfage anlegen.
 	public Survey createSurvey(String name)
 			throws IllegalArgumentException;
+
+	// Survey anhand der SurveyID suchen.
+	public Survey getSurveyBySurveyID() throws IllegalArgumentException;
+	
+	Survey getSurveyBySurveyName(Survey s);
+	
+	// Aktualisieren des Survey Objekts.
+	public void updateSurvey(Survey upSurvey) throws IllegalArgumentException;
+	
+	// Löschen des Survey anhand der SurveyID.
+	public void deleteBySurveyID(Survey s) throws IllegalArgumentException;
+	
+	// Löschen aller Surveys anhand der GruppenID.
+	public void deleteAllByGroupID(Survey s) throws IllegalArgumentException;
+	
+	// Löschen aller Surveys anhand der UserID.
+	public void deleteAllByUserID(Survey s) throws IllegalArgumentException;
+	
+	
 	
 	public SurveyEntry createSurveyEntry()
 		throws IllegalArgumentException;
@@ -92,9 +112,7 @@ public interface EditorAdministration extends RemoteService {
 	public Vote createVote(int voteResult)
 		throws IllegalArgumentException;
 	
-	public Survey findBySurveyID() throws IllegalArgumentException;
 	
-	public void setSurvey(Survey s) throws IllegalArgumentException;
 	
 	public SurveyEntry getSurveyEntry() throws IllegalArgumentException;
 	
@@ -108,8 +126,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	public void setVote(Vote v) throws IllegalArgumentException;
 	
-	
-	public void delete(Survey s) throws IllegalArgumentException;
+
 	
 	public void delete(SurveyEntry se) throws IllegalArgumentException;
 	

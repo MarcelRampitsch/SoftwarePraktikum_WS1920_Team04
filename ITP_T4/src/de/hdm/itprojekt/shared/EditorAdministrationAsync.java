@@ -57,18 +57,30 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Groupmember gm, AsyncCallback<Void> callback);
 	
-	
-	
+	// Survey
 	
 	void createSurvey(String name, AsyncCallback<Survey> callback);
 
+	void getSurveyBySurveyID(AsyncCallback<Survey> callback);
+	
+	void getSurveyBySurveyName(Survey s, AsyncCallback<Survey> callback);
+
+	void updateSurvey(Survey upServey, AsyncCallback<Void> callback);
+
+	void deleteBySurveyID(Survey s, AsyncCallback<Void> callback);
+	
+	void deleteAllByGroupID(Survey s, AsyncCallback<Void> callback);
+	
+	void deleteAllByUserID(Survey s, AsyncCallback<Void> callback);
+	
+	
+	
 	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
 	
 	void createVote(int voteResult, AsyncCallback<Vote> callback);
 
 
 
-	void findBySurveyID(AsyncCallback<Survey> callback);
 
 	void getSurveyEntry(AsyncCallback<SurveyEntry> callback);
 	
@@ -78,7 +90,6 @@ public interface EditorAdministrationAsync {
 	
 
 
-	void setSurvey(Survey s, AsyncCallback<Void> callback);
 
 	void setSurveyEntry(SurveyEntry se, AsyncCallback<Void> callback);
 
@@ -86,8 +97,6 @@ public interface EditorAdministrationAsync {
 	
 	void setVote(Vote v, AsyncCallback<Void> callback);
 
-
-	void delete(Survey s, AsyncCallback<Void> callback);
 	
 	void delete(SurveyEntry se, AsyncCallback<Void> callback);
 	
