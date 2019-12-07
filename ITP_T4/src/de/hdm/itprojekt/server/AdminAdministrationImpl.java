@@ -68,7 +68,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}
 	// Methode um alle Cinema eines User zu finden
 	public Vector<Cinema> findAllCinemaByUser(int userID) throws IllegalArgumentException{
-		Window.alert("Wir sind in der IMPL");
+		
 		Vector<Cinema> rs = new Vector<Cinema>();
 		rs = cMapper.findallCinemabyUserID(userID);
 		return rs;
