@@ -16,7 +16,7 @@ public interface EditorAdministrationAsync {
 	
 	void init(AsyncCallback<Void> callback);
 	
-	
+	// User
 	void createUser(String nickname, String email, AsyncCallback<User> callback);
 	
 	void getUserByNickname(AsyncCallback<User> callback);
@@ -27,11 +27,22 @@ public interface EditorAdministrationAsync {
 	
 	void delete(User u, AsyncCallback<Void> callback);
 	
+	// Group
+
+	void createGroup(String name, AsyncCallback<Group> callback);
+
+	void getGroupByGroupID(AsyncCallback<Group> callback);
+	
+	void getAllGroupByUserID(Group g, AsyncCallback<Void> callback);
+	
+	void updateGroup(Group upGroup, AsyncCallback<Void> callback);
+
+	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
+	
+	void deleteAllByUserID(Group g, AsyncCallback<Void> callback);
 	
 
 	void createSurvey(String name, AsyncCallback<Survey> callback);
-
-	void createGroup(String name, AsyncCallback<Group> callback);
 
 	void createGroupMember(AsyncCallback<Groupmember> callback);
 
@@ -39,8 +50,6 @@ public interface EditorAdministrationAsync {
 	
 	void createVote(int voteResult, AsyncCallback<Vote> callback);
 
-	
-	void getGroup(AsyncCallback<Group> callback);
 
 	void getGroupmember(AsyncCallback<Groupmember> callback);
 
@@ -52,8 +61,6 @@ public interface EditorAdministrationAsync {
 
 	void findVoteByVoteID(AsyncCallback<Vote> callback);
 	
-	
-	void setGroup(Group g, AsyncCallback<Void> callback);
 
 	void setGroupmember(Groupmember gm, AsyncCallback<Void> callback);
 
@@ -69,8 +76,6 @@ public interface EditorAdministrationAsync {
 	void delete(Survey s, AsyncCallback<Void> callback);
 	
 	void delete(SurveyEntry se, AsyncCallback<Void> callback);
-
-	void delete(Group g, AsyncCallback<Void> callback);
 
 	void delete(Groupmember gm, AsyncCallback<Void> callback);
 	

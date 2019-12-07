@@ -14,6 +14,8 @@ public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
 	
+	// User Methoden
+	
 	// Einen User anlegen.
 	public User createUser(String nickname, String email)
 		throws IllegalArgumentException;
@@ -31,13 +33,32 @@ public interface EditorAdministration extends RemoteService {
 	public void delete(User u) throws IllegalArgumentException;
 	
 	
+	// Group Methoden
+
+	// Eine Gruppe anlegen.
+	public Group createGroup(String name)
+		throws IllegalArgumentException;
+	
+	// Suchen von Gruppen Objekten nach GroupID.
+	public Group getGroupByGroupID() throws IllegalArgumentException;
+	
+	// Suchen aller Gruppen Objekte nach UserID.
+	public void getAllGroupByUserID(Group g) throws IllegalArgumentException;
+	
+	// Aktualisieren eines Gruppen Objekts.
+	public void updateGroup(Group upGroup) throws IllegalArgumentException;
+	
+	// Löschen der Gruppe anhand der ID.
+	public void deleteByGroupID(Group g) throws  IllegalArgumentException;
+	
+	// Löschen aller Gruppen die einer bestimmten UserID zugeordnet sind.
+	public void deleteAllByUserID(Group g) throws IllegalArgumentException;
+	
+	
 	public Survey createSurvey(String name)
 		throws IllegalArgumentException;
 	
 	public SurveyEntry createSurveyEntry()
-		throws IllegalArgumentException;
-
-	public Group createGroup(String name)
 		throws IllegalArgumentException;
 	
 	public Groupmember createGroupMember()
@@ -53,11 +74,7 @@ public interface EditorAdministration extends RemoteService {
 	public SurveyEntry getSurveyEntry() throws IllegalArgumentException;
 	
 	public void setSurveyEntry(SurveyEntry se) throws IllegalArgumentException;
-	
-	public Group getGroup() throws IllegalArgumentException;
-	
-	public void setGroup(Group g) throws IllegalArgumentException;
-	
+
 	public Groupmember getGroupmember() throws IllegalArgumentException;
 	
 	public void setGroupmember(Groupmember gm) throws IllegalArgumentException;
@@ -74,9 +91,7 @@ public interface EditorAdministration extends RemoteService {
 	public void delete(Survey s) throws IllegalArgumentException;
 	
 	public void delete(SurveyEntry se) throws IllegalArgumentException;
-	
-	public void delete(Group g) throws  IllegalArgumentException;
-	
+
 	public void delete(Groupmember gm) throws IllegalArgumentException;
 	
 	public void delete(Presentation p) throws IllegalArgumentException;
