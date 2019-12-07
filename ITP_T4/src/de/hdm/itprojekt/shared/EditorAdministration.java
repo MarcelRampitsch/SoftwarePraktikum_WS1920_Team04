@@ -14,6 +14,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
 	
+	
 	// User Methoden
 	
 	// Einen User anlegen.
@@ -55,15 +56,39 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteAllByUserID(Group g) throws IllegalArgumentException;
 	
 	
-	public Survey createSurvey(String name)
+	// GroupMember Methoden
+	
+	// Einen Groupmember anlegen.
+	public Groupmember createGroupMember()
 		throws IllegalArgumentException;
+
+	// Alle Gruppenmitglieder anhand der GruppenID suchen.
+	public Groupmember getAllByGroupID() throws IllegalArgumentException;
+	
+	// Alle Gruppenmitglieder anhand der UserID suchen.
+	public Groupmember getAllByUserID() throws IllegalArgumentException;
+	
+	// Aktualisieren des Gruppenmitglied Objekts.
+	public void updateGroupmember(Groupmember upGroupMember) throws IllegalArgumentException;
+
+	// Löschen des Gruppenmitglieds anhand der ID.
+	public void deleteByID(Groupmember gm) throws IllegalArgumentException;
+	
+	// Löschen aller Gruppenmitglieder anhand der GruppenID.
+	public void deleteAllByGroupID(Groupmember gm) throws IllegalArgumentException;
+	
+	// Löschen aller Gruppenmitglieder anhand der UserID.
+	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException;
+	
+	
+	
+	
+	public Survey createSurvey(String name)
+			throws IllegalArgumentException;
 	
 	public SurveyEntry createSurveyEntry()
 		throws IllegalArgumentException;
-	
-	public Groupmember createGroupMember()
-		throws IllegalArgumentException;
-	
+
 	public Vote createVote(int voteResult)
 		throws IllegalArgumentException;
 	
@@ -74,10 +99,6 @@ public interface EditorAdministration extends RemoteService {
 	public SurveyEntry getSurveyEntry() throws IllegalArgumentException;
 	
 	public void setSurveyEntry(SurveyEntry se) throws IllegalArgumentException;
-
-	public Groupmember getGroupmember() throws IllegalArgumentException;
-	
-	public void setGroupmember(Groupmember gm) throws IllegalArgumentException;
 	
 	public Presentation getPresentation() throws IllegalArgumentException;
 	
@@ -91,8 +112,6 @@ public interface EditorAdministration extends RemoteService {
 	public void delete(Survey s) throws IllegalArgumentException;
 	
 	public void delete(SurveyEntry se) throws IllegalArgumentException;
-
-	public void delete(Groupmember gm) throws IllegalArgumentException;
 	
 	public void delete(Presentation p) throws IllegalArgumentException;
 	
