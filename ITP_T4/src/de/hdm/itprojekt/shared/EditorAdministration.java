@@ -105,19 +105,36 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteAllByUserID(Survey s) throws IllegalArgumentException;
 	
 	
+	//SurveyEntry Methoden
 	
+	// Einen Umfrageeintrag erstelleln.
 	public SurveyEntry createSurveyEntry()
 		throws IllegalArgumentException;
-
+	
+	// Einen Umfrageeintrag anhand der ID suchen.
+	public SurveyEntry getSurveyEntryBySurveyEntryID() throws IllegalArgumentException;
+	
+	// Einen Umfrageeintrag anhand der SurveyID suchen.
+	public void getSurveyEntryBySurveyID() throws IllegalArgumentException;
+	
+	// Aktualisieren des SurveyEntry Objekts.
+	public void updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException;
+	
+	// Löschen des Umfrageeintrag anhand der SurveyEntryID.
+	public void deleteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException;
+	
+	// Löschen aller Umfrageeinträge anhand der SurveyID.
+	public void deleteAllBySurveyID(SurveyEntry se) throws IllegalArgumentException;
+	
+	// Löschen aller Umfrageeinträge anhand der PresentationID.
+	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException;
+	
+	
+	
 	public Vote createVote(int voteResult)
 		throws IllegalArgumentException;
 	
-	
-	
-	public SurveyEntry getSurveyEntry() throws IllegalArgumentException;
-	
-	public void setSurveyEntry(SurveyEntry se) throws IllegalArgumentException;
-	
+
 	public Presentation getPresentation() throws IllegalArgumentException;
 	
 	public void setPresentation(Presentation p) throws IllegalArgumentException;
@@ -127,9 +144,7 @@ public interface EditorAdministration extends RemoteService {
 	public void setVote(Vote v) throws IllegalArgumentException;
 	
 
-	
-	public void delete(SurveyEntry se) throws IllegalArgumentException;
-	
+
 	public void delete(Presentation p) throws IllegalArgumentException;
 	
 	public void delete(Vote v) throws IllegalArgumentException;

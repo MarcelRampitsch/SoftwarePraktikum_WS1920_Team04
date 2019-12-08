@@ -28,7 +28,6 @@ public interface EditorAdministrationAsync {
 	void delete(User u, AsyncCallback<Void> callback);
 	
 	// Group
-
 	void createGroup(String name, AsyncCallback<Group> callback);
 
 	void getGroupByGroupID(AsyncCallback<Group> callback);
@@ -42,7 +41,6 @@ public interface EditorAdministrationAsync {
 	void deleteAllByUserID(Group g, AsyncCallback<Void> callback);
 	
 	// GroupMember
-
 	void createGroupMember(AsyncCallback<Groupmember> callback);
 
 	void getAllByGroupID(AsyncCallback<Groupmember> callback);
@@ -58,14 +56,13 @@ public interface EditorAdministrationAsync {
 	void deleteAllByUserID(Groupmember gm, AsyncCallback<Void> callback);
 	
 	// Survey
-	
 	void createSurvey(String name, AsyncCallback<Survey> callback);
 
 	void getSurveyBySurveyID(AsyncCallback<Survey> callback);
 	
 	void getSurveyBySurveyName(Survey s, AsyncCallback<Survey> callback);
 
-	void updateSurvey(Survey upServey, AsyncCallback<Void> callback);
+	void updateSurvey(Survey upSurvey, AsyncCallback<Void> callback);
 
 	void deleteBySurveyID(Survey s, AsyncCallback<Void> callback);
 	
@@ -73,17 +70,27 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Survey s, AsyncCallback<Void> callback);
 	
-	
-	
+	// SurveyEntry
 	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
+
+	void getSurveyEntryBySurveyEntryID(AsyncCallback<SurveyEntry> callback);
+
+	void getSurveyEntryBySurveyID(AsyncCallback<Void> callback);
+
+	void updateSurveyEntry(SurveyEntry upSurvey, AsyncCallback<Void> callback);
+	
+	void deleteBySurveyEntryID(SurveyEntry se, AsyncCallback<Void> callback);
+	
+	void deleteAllBySurveyID(SurveyEntry se, AsyncCallback<Void> callback);
+	
+	void deleteAllByPresentationID(SurveyEntry se, AsyncCallback<Void> callback);
+	
+	
 	
 	void createVote(int voteResult, AsyncCallback<Vote> callback);
 
 
 
-
-	void getSurveyEntry(AsyncCallback<SurveyEntry> callback);
-	
 	void getPresentation(AsyncCallback<Presentation> callback);
 
 	void findVoteByVoteID(AsyncCallback<Vote> callback);
@@ -91,14 +98,12 @@ public interface EditorAdministrationAsync {
 
 
 
-	void setSurveyEntry(SurveyEntry se, AsyncCallback<Void> callback);
 
 	void setPresentation(Presentation p, AsyncCallback<Void> callback);
 	
 	void setVote(Vote v, AsyncCallback<Void> callback);
 
 	
-	void delete(SurveyEntry se, AsyncCallback<Void> callback);
 	
 	void delete(Presentation p, AsyncCallback<Void> callback);
 	
