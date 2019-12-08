@@ -16,59 +16,89 @@ public interface EditorAdministrationAsync {
 	
 	void init(AsyncCallback<Void> callback);
 	
+	// User
+	void createUser(String nickname, String email, AsyncCallback<User> callback);
+	
+	void getUserByNickname(AsyncCallback<User> callback);
 
-	void createSurvey(String name, AsyncCallback<Survey> callback);
+	void getUserByEmail(AsyncCallback<User> callback);
+	
+	void updateUser(User upUser, AsyncCallback<Void> callback);
+	
+	void delete(User u, AsyncCallback<Void> callback);
+	
+	// Group
 
 	void createGroup(String name, AsyncCallback<Group> callback);
 
+	void getGroupByGroupID(AsyncCallback<Group> callback);
+	
+	void getAllGroupByUserID(Group g, AsyncCallback<Void> callback);
+	
+	void updateGroup(Group upGroup, AsyncCallback<Void> callback);
+
+	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
+	
+	void deleteAllByUserID(Group g, AsyncCallback<Void> callback);
+	
+	// GroupMember
+
 	void createGroupMember(AsyncCallback<Groupmember> callback);
 
-	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
+	void getAllByGroupID(AsyncCallback<Groupmember> callback);
+	
+	void getAllByUserID(AsyncCallback<Groupmember> callback);
 
-	void createUser(String nickname, String email, AsyncCallback<User> callback);
+	void updateGroupmember(Groupmember upGroupmember, AsyncCallback<Void> callback);
+
+	void deleteByID(Groupmember gm, AsyncCallback<Void> callback);
+	
+	void deleteAllByGroupID(Groupmember gm, AsyncCallback<Void> callback);
+	
+	void deleteAllByUserID(Groupmember gm, AsyncCallback<Void> callback);
+	
+	// Survey
+	
+	void createSurvey(String name, AsyncCallback<Survey> callback);
+
+	void getSurveyBySurveyID(AsyncCallback<Survey> callback);
+	
+	void getSurveyBySurveyName(Survey s, AsyncCallback<Survey> callback);
+
+	void updateSurvey(Survey upServey, AsyncCallback<Void> callback);
+
+	void deleteBySurveyID(Survey s, AsyncCallback<Void> callback);
+	
+	void deleteAllByGroupID(Survey s, AsyncCallback<Void> callback);
+	
+	void deleteAllByUserID(Survey s, AsyncCallback<Void> callback);
+	
+	
+	
+	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
 	
 	void createVote(int voteResult, AsyncCallback<Vote> callback);
 
-	
-	void getGroup(AsyncCallback<Group> callback);
 
-	void getGroupmember(AsyncCallback<Groupmember> callback);
 
-	void findBySurveyID(AsyncCallback<Survey> callback);
 
 	void getSurveyEntry(AsyncCallback<SurveyEntry> callback);
-
-	void getUser(AsyncCallback<User> callback);
 	
 	void getPresentation(AsyncCallback<Presentation> callback);
 
 	void findVoteByVoteID(AsyncCallback<Vote> callback);
 	
-	
-	void setGroup(Group g, AsyncCallback<Void> callback);
 
-	void setGroupmember(Groupmember gm, AsyncCallback<Void> callback);
 
-	void setSurvey(Survey s, AsyncCallback<Void> callback);
 
 	void setSurveyEntry(SurveyEntry se, AsyncCallback<Void> callback);
 
-	void setUser(User u, AsyncCallback<Void> callback);
-	
 	void setPresentation(Presentation p, AsyncCallback<Void> callback);
 	
 	void setVote(Vote v, AsyncCallback<Void> callback);
 
-
-	void delete(Survey s, AsyncCallback<Void> callback);
 	
 	void delete(SurveyEntry se, AsyncCallback<Void> callback);
-	
-	void delete(User u, AsyncCallback<Void> callback);
-
-	void delete(Group g, AsyncCallback<Void> callback);
-
-	void delete(Groupmember gm, AsyncCallback<Void> callback);
 	
 	void delete(Presentation p, AsyncCallback<Void> callback);
 	
