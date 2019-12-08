@@ -75,7 +75,7 @@ public interface EditorAdministrationAsync {
 
 	void getSurveyEntryBySurveyEntryID(AsyncCallback<SurveyEntry> callback);
 
-	void getSurveyEntryBySurveyID(AsyncCallback<Void> callback);
+	void getSurveyEntryBySurveyID(AsyncCallback<SurveyEntry> callback);
 
 	void updateSurveyEntry(SurveyEntry upSurvey, AsyncCallback<Void> callback);
 	
@@ -85,28 +85,32 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByPresentationID(SurveyEntry se, AsyncCallback<Void> callback);
 	
-	
-	
+	// Vote
 	void createVote(int voteResult, AsyncCallback<Vote> callback);
 
-
-
-	void getPresentation(AsyncCallback<Presentation> callback);
-
-	void findVoteByVoteID(AsyncCallback<Vote> callback);
+	void getVoteByVoteID(AsyncCallback<Vote> callback);
 	
+	void getAllVoteByUserID(AsyncCallback<Vote> callback);
+	
+	void getAllVoteBySurveyEntryID(AsyncCallback<Vote> callback);
 
-
+	void updateVote(Vote upVote, AsyncCallback<Void> callback);
+	
+	void deleteByVoteID(Vote v, AsyncCallback<Void> callback);
+	
+	void deleteAllBySurveyEntryID(Vote v, AsyncCallback<Void> callback);
+	
+	void deleteAllByUserID(Vote v, AsyncCallback<Void> callback);
+	
+	
+	
+	
+	void getPresentation(AsyncCallback<Presentation> callback);
 
 
 	void setPresentation(Presentation p, AsyncCallback<Void> callback);
-	
-	void setVote(Vote v, AsyncCallback<Void> callback);
 
-	
-	
+
 	void delete(Presentation p, AsyncCallback<Void> callback);
-	
-	void delete(Vote v, AsyncCallback<Void> callback);
 
 }

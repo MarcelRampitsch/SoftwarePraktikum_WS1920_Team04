@@ -105,9 +105,9 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteAllByUserID(Survey s) throws IllegalArgumentException;
 	
 	
-	//SurveyEntry Methoden
+	// SurveyEntry Methoden
 	
-	// Einen Umfrageeintrag erstelleln.
+	// Einen Umfrageeintrag erstellen.
 	public SurveyEntry createSurveyEntry()
 		throws IllegalArgumentException;
 	
@@ -115,7 +115,7 @@ public interface EditorAdministration extends RemoteService {
 	public SurveyEntry getSurveyEntryBySurveyEntryID() throws IllegalArgumentException;
 	
 	// Einen Umfrageeintrag anhand der SurveyID suchen.
-	public void getSurveyEntryBySurveyID() throws IllegalArgumentException;
+	public SurveyEntry getSurveyEntryBySurveyID() throws IllegalArgumentException;
 	
 	// Aktualisieren des SurveyEntry Objekts.
 	public void updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException;
@@ -130,23 +130,39 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException;
 	
 	
+	// Vote Methoden
 	
+	// Einen Vote erstellen.
 	public Vote createVote(int voteResult)
 		throws IllegalArgumentException;
 	
+	// Einen Vote anhand der VoteID suchen.
+	public Vote getVoteByVoteID() throws IllegalArgumentException;
+	
+	// Einen Vote anhand der UserID suchen.
+	public Vote getAllVoteByUserID() throws IllegalArgumentException;
+	
+	// Alle Votes anhand einer UmfrageeintragID suchen.
+	public Vote getAllVoteBySurveyEntryID() throws IllegalArgumentException;
+	
+	// Aktualisieren des Vote Objekts.
+	public void updateVote(Vote upVote) throws IllegalArgumentException;
+	
+	// Löschen des Vote anhand der VoteID.
+	public void deleteByVoteID(Vote v) throws IllegalArgumentException;
+	
+	// Löschen aller Votes anhand der UmfrageeintragID.
+	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException;
+	
+	// Löschen aller Votes anhand der UserID.
+	public void deleteAllByUserID(Vote v) throws IllegalArgumentException;
+	
 
+	
 	public Presentation getPresentation() throws IllegalArgumentException;
 	
 	public void setPresentation(Presentation p) throws IllegalArgumentException;
-	
-	public Vote findVoteByVoteID() throws IllegalArgumentException;
-	
-	public void setVote(Vote v) throws IllegalArgumentException;
-	
-
 
 	public void delete(Presentation p) throws IllegalArgumentException;
-	
-	public void delete(Vote v) throws IllegalArgumentException;
 	
 }
