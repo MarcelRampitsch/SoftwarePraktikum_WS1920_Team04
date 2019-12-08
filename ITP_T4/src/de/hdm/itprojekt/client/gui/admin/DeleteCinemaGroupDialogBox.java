@@ -2,11 +2,17 @@ package de.hdm.itprojekt.client.gui.admin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.admin.DeleteCinemaDialogBox.DeleteCallBack;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 
 
 public class DeleteCinemaGroupDialogBox extends DialogBox {
@@ -15,7 +21,7 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 	
 	HorizontalPanel horzcontent = new HorizontalPanel();
 
-	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
 	
 	Label cinemaLabel = new Label("CinemaGroup wirklich löschen?");
@@ -35,7 +41,8 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		horzcontent.add(yes);
 		horzcontent.add(no);
 		content.add(horzcontent);
-		no.addClickHandler(new closeCinemaForm());
+		no.addClickHandler(new closeCinemaGroupForm());
+		yes.addClickHandler(new deleteCinemaGroup());
 		
 		this.add(content);
 		
@@ -59,8 +66,20 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
 	
-    private class closeCinemaForm implements ClickHandler{
+	
+	
+	/**
+	 * closeCinemaGroupForm ClickHandler: Wird beim Click auf <code> no </code> Button ausgelöst.
+	 * Der User bestätigt damit, dass die CinemaGroup nicht gelöscht werden soll.
+	 */
+	
+	
+	
+    private class closeCinemaGroupForm implements ClickHandler{
 		
 		@Override
 		public void onClick(ClickEvent event) {
@@ -70,13 +89,45 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 
 	}
     
- private class deleteCinema implements ClickHandler{
+    /**
+	 * deleteCinemaGroup ClickHandler: Wird beim Click auf <code> yes </code> Button ausgelöst.
+	 * Der User bestätigt damit, dass die CinemaGroup gelöscht werden soll.
+	 */
+    
+    private class deleteCinemaGroup implements ClickHandler{
 		
 		@Override
 		public void onClick(ClickEvent event) {
+	//		adminAdministration.deleteCinemaGroup(1, new DeleteCallBack());     //deleteCinemaGroup Ergänzen! 
+
 			
 		}
 
 	}
+    
+    /**
+   	 * CallBack des Clickhandlers <code> deleteCinemaGroup ClickHandler </code>
+   	 * Bei erfolgreichem Rückruf (onSucess) wird das CinemaGroup Objekt gelöscht. Danach wird die dazugehörige <code> DeleteCinemaGroupDialogBox </code> geschlossen. 
+   	 * 
+   	 */
+   	class DeleteCallBack implements AsyncCallback<Void>{
+
+   		@Override
+   		public void onFailure(Throwable caught) {
+   			Window.alert("Fehler");
+   			
+   		}
+
+   		@Override
+   		public void onSuccess(Void result) {
+   			Window.alert("Erfolg");
+   			closeCinemaGroupForm();
+
+   			
+   		}
+       
+
+       
+   	}
     
 }
