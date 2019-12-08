@@ -103,8 +103,7 @@ public class DeleteCinemaDialogBox extends DialogBox {
 			
 			Window.alert("Wir sind im ClickHandler");
 
-			adminAdministration.deleteCinema(cinema.getId(), new DeleteCallBack());
-
+			adminAdministration.deleteCinema(1, new DeleteCallBack());
 
 		}
 
@@ -126,7 +125,6 @@ public class DeleteCinemaDialogBox extends DialogBox {
 		@Override
 		public void onSuccess(Void result) {
 			Window.alert("Erfolg");
-
 			closeCinemaForm();
 
 			

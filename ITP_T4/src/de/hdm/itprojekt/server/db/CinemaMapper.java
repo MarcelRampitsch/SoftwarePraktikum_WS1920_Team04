@@ -84,7 +84,7 @@ public class CinemaMapper {
 						
 						if(rs.next()) {
 							
-							return new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+							return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 							
 		} 
 		// Fehlerbehandlung hinzufügen
@@ -95,18 +95,7 @@ public class CinemaMapper {
 			}
 			return null;
 		}
-	
-/*public void insert(String l) throws SQLException {  // Inhalte einfügen in die Datenbank
 		
-		Connection con = DBConnection.getConnection();
-		
-		Statement stm = con.createStatement();
-		
-		stm.executeUpdate("INSERT INTO cinema (name) VALUES ('" + l + "')");	
-	
-	} */
-	
-	
 	public void deleteCinemaByCinemaID(int id) {
 		
 		// DB-Verbindung holen
@@ -115,7 +104,7 @@ public class CinemaMapper {
 		try {
 			// Prepared Statement erstellen um ein Cinema zu finden
 			PreparedStatement deleteCinemaByCinemaID =
-					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema WHERE 'cinemaID' =?;");
+					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema " + "WHERE cinemaID=? ");
 			
 			// PreparedStatement zum Löschen einer bestimmten Cinema in der Datenbank
 			deleteCinemaByCinemaID.setInt(1, id);
@@ -148,7 +137,7 @@ public class CinemaMapper {
 					update.setString(1, cinema.getLocation());
 					update.setString(2, cinema.getName());
 					update.setInt(3, cinema.getCinemaGroupID());
-					update.setInt(4, cinema.getUserID());
+					update.setInt(4, cinema.getId());
 
 					// PreparedStatement aufrufen und als Query an die DB schicken.
 					update.executeUpdate();
@@ -161,7 +150,7 @@ public class CinemaMapper {
 					
 					if(rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						return new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));          
+						return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));          
 					}
 					 // Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {
@@ -180,7 +169,7 @@ public class CinemaMapper {
 		try {
 			// Prepared Statement zum Löschen eines Cinemas.
 			PreparedStatement deleteAllCinemaByUserID = 
-							con.prepareStatement("SELECT FROM softwarepraktikum.cinema WHERE userID=?;");
+							con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
 			
 			deleteAllCinemaByUserID.setInt(1, id);
 			
@@ -212,7 +201,7 @@ public class CinemaMapper {
 			ResultSet rs = findCinemaByCinemaID.executeQuery();
 			
 			// Ergebnis-Tupel in Objekt umwandeln
-			c = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+			c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 		} catch (SQLException e) {
 		      e.printStackTrace();
 		      return null;
@@ -237,7 +226,7 @@ public class CinemaMapper {
 			PreparedStatement findCinemaByLocation = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE location=?;");
 			
-			findCinemaByLocation.setString(3, location);
+			findCinemaByLocation.setString(1, location);
 			
 			// Ergebnis-Tupel erstellen
 			ResultSet rs = findCinemaByLocation.executeQuery();
@@ -245,7 +234,7 @@ public class CinemaMapper {
 			while (rs.next()) {
 				
 				// Ergebnis-Tupel in Objekt umwandeln
-				c = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+				c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 			
 				result.addElement(c);
 			}
@@ -271,7 +260,7 @@ public class CinemaMapper {
 		
 		try {
 			PreparedStatement findallCinemabyUserID  =
-						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE UserID=? ");
+						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
 			
 			findallCinemabyUserID.setInt(1, id);
 			
@@ -306,7 +295,7 @@ public Vector<Cinema> findAllCinemaByCinemaGroupID(int id){
 			ResultSet rs = findallCinemabyCinemaGroupID.executeQuery();
 			
 			while(rs.next()) {
-				cm = new Cinema(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+				cm = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
 				result.addElement(cm);
 		}// Fehlerbehandlung hinzufügen
 	} catch (SQLException e) {
