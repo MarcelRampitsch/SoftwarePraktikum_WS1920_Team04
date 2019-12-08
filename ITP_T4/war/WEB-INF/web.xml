@@ -16,6 +16,8 @@
     <url-pattern>/itp_t4/editor</url-pattern>
   </servlet-mapping>
   
+  
+  
   <servlet>
 		<servlet-name>Admin</servlet-name>
 		<servlet-class>de.hdm.itprojekt.server.AdminAdministrationImpl</servlet-class>
@@ -25,6 +27,20 @@
 		<servlet-name>Admin</servlet-name>
 		<url-pattern>/admin/admin</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>de.hdm.itprojekt.server.LoginAdministrationImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/editor/login</url-pattern>
+		<url-pattern>/report/login</url-pattern>
+	</servlet-mapping>
+	
   
   <!-- Default page to serve -->
   <welcome-file-list>
