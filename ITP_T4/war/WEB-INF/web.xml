@@ -38,7 +38,7 @@
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/editor/login</url-pattern>
-		<url-pattern>/report/login</url-pattern>
+		<url-pattern>/admin/login</url-pattern>
 	</servlet-mapping>
 	
   

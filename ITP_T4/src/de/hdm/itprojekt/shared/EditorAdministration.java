@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
@@ -10,6 +11,7 @@ import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Vote;
 
+@RemoteServiceRelativePath("editor")
 public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
@@ -30,7 +32,7 @@ public interface EditorAdministration extends RemoteService {
 	// Aktualisieren eines User Objekts.
 	public void updateUser(User upUser) throws IllegalArgumentException;
 	
-	// Löschen des übergebenen Users.
+	// Lï¿½schen des ï¿½bergebenen Users.
 	public void delete(User u) throws IllegalArgumentException;
 	
 	
@@ -49,10 +51,10 @@ public interface EditorAdministration extends RemoteService {
 	// Aktualisieren eines Gruppen Objekts.
 	public void updateGroup(Group upGroup) throws IllegalArgumentException;
 	
-	// Löschen der Gruppe anhand der ID.
+	// Lï¿½schen der Gruppe anhand der ID.
 	public void deleteByGroupID(Group g) throws  IllegalArgumentException;
 	
-	// Löschen aller Gruppen die einer bestimmten UserID zugeordnet sind.
+	// Lï¿½schen aller Gruppen die einer bestimmten UserID zugeordnet sind.
 	public void deleteAllByUserID(Group g) throws IllegalArgumentException;
 	
 	
@@ -71,13 +73,13 @@ public interface EditorAdministration extends RemoteService {
 	// Aktualisieren des Gruppenmitglied Objekts.
 	public void updateGroupmember(Groupmember upGroupMember) throws IllegalArgumentException;
 
-	// Löschen des Gruppenmitglieds anhand der ID.
+	// Lï¿½schen des Gruppenmitglieds anhand der ID.
 	public void deleteByID(Groupmember gm) throws IllegalArgumentException;
 	
-	// Löschen aller Gruppenmitglieder anhand der GruppenID.
+	// Lï¿½schen aller Gruppenmitglieder anhand der GruppenID.
 	public void deleteAllByGroupID(Groupmember gm) throws IllegalArgumentException;
 	
-	// Löschen aller Gruppenmitglieder anhand der UserID.
+	// Lï¿½schen aller Gruppenmitglieder anhand der UserID.
 	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException;
 	
 	
@@ -95,13 +97,13 @@ public interface EditorAdministration extends RemoteService {
 	// Aktualisieren des Survey Objekts.
 	public void updateSurvey(Survey upSurvey) throws IllegalArgumentException;
 	
-	// Löschen des Survey anhand der SurveyID.
+	// Lï¿½schen des Survey anhand der SurveyID.
 	public void deleteBySurveyID(Survey s) throws IllegalArgumentException;
 	
-	// Löschen aller Surveys anhand der GruppenID.
+	// Lï¿½schen aller Surveys anhand der GruppenID.
 	public void deleteAllByGroupID(Survey s) throws IllegalArgumentException;
 	
-	// Löschen aller Surveys anhand der UserID.
+	// Lï¿½schen aller Surveys anhand der UserID.
 	public void deleteAllByUserID(Survey s) throws IllegalArgumentException;
 	
 	
@@ -120,13 +122,13 @@ public interface EditorAdministration extends RemoteService {
 	// Aktualisieren des SurveyEntry Objekts.
 	public void updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException;
 	
-	// Löschen des Umfrageeintrag anhand der SurveyEntryID.
+	// Lï¿½schen des Umfrageeintrag anhand der SurveyEntryID.
 	public void deleteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException;
 	
-	// Löschen aller Umfrageeinträge anhand der SurveyID.
+	// Lï¿½schen aller Umfrageeintrï¿½ge anhand der SurveyID.
 	public void deleteAllBySurveyID(SurveyEntry se) throws IllegalArgumentException;
 	
-	// Löschen aller Umfrageeinträge anhand der PresentationID.
+	// Lï¿½schen aller Umfrageeintrï¿½ge anhand der PresentationID.
 	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException;
 	
 	
@@ -148,13 +150,13 @@ public interface EditorAdministration extends RemoteService {
 	// Aktualisieren des Vote Objekts.
 	public void updateVote(Vote upVote) throws IllegalArgumentException;
 	
-	// Löschen des Vote anhand der VoteID.
+	// Lï¿½schen des Vote anhand der VoteID.
 	public void deleteByVoteID(Vote v) throws IllegalArgumentException;
 	
-	// Löschen aller Votes anhand der UmfrageeintragID.
+	// Lï¿½schen aller Votes anhand der UmfrageeintragID.
 	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException;
 	
-	// Löschen aller Votes anhand der UserID.
+	// Lï¿½schen aller Votes anhand der UserID.
 	public void deleteAllByUserID(Vote v) throws IllegalArgumentException;
 	
 
