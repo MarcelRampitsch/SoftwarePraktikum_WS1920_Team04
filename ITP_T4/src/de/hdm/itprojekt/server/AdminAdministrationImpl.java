@@ -67,10 +67,10 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		cMapper.deleteCinemaByCinemaID(cinemaID);
 	}
 	// Methode um alle Cinema eines User zu finden
-	public Vector<Cinema> findAllCinemaByUser(int userID) throws IllegalArgumentException{
+	public Vector<Cinema> findAllCinemaByUser(int cine) throws IllegalArgumentException{
 		
 		Vector<Cinema> rs = new Vector<Cinema>();
-		rs = cMapper.findallCinemabyUserID(userID);
+		rs = cMapper.findallCinemabyUserID(cine);
 		return rs;
 	}
 	public Vector<Cinema> findAllCinemaByCinemaGroupID(int cinemaGroupID) throws IllegalArgumentException{

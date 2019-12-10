@@ -161,7 +161,7 @@ public class CinemaMapper {
 	}
 	
 
-	public void deleteAllCinemaByUserID(int id) {
+	public void deleteAllCinemaByUserID(Cinema cine) {
 		
 		// DB-Verbindung holen
 		Connection con  = DBConnection.getConnection();
@@ -171,7 +171,7 @@ public class CinemaMapper {
 			PreparedStatement deleteAllCinemaByUserID = 
 							con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
 			
-			deleteAllCinemaByUserID.setInt(1, id);
+			deleteAllCinemaByUserID.setInt(1, cine.getUserID());
 			
 			deleteAllCinemaByUserID.executeUpdate();
 			
@@ -183,7 +183,7 @@ public class CinemaMapper {
 	
 	
 	
-	public Cinema findCinemaByCinemaID(int id) {
+	public Cinema findCinemaByCinemaID(Cinema cine) {
 		Cinema c= null;
 		
 		// DB-Verbindung holen
@@ -195,7 +195,7 @@ public class CinemaMapper {
 			PreparedStatement findCinemaByCinemaID = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE cinemaID=?;");
 			
-			findCinemaByCinemaID.setInt(1, id);
+			findCinemaByCinemaID.setInt(1, cine.getId());
 			
 			// Ergebnis-Tupel erstellen
 			ResultSet rs = findCinemaByCinemaID.executeQuery();
@@ -211,7 +211,7 @@ public class CinemaMapper {
 	}
 	
 	
-	public Vector<Cinema> findCinemaByLocation(String location) {
+	public Vector<Cinema> findCinemaByLocation(Cinema cine) {
 		
 		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
@@ -226,7 +226,7 @@ public class CinemaMapper {
 			PreparedStatement findCinemaByLocation = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE location=?;");
 			
-			findCinemaByLocation.setString(1, location);
+			findCinemaByLocation.setString(1, cine.getLocation());
 			
 			// Ergebnis-Tupel erstellen
 			ResultSet rs = findCinemaByLocation.executeQuery();
@@ -250,7 +250,7 @@ public class CinemaMapper {
 	
 	
 	
-	public Vector<Cinema> findallCinemabyUserID(int id){
+	public Vector<Cinema> findallCinemabyUserID(int cine){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -262,7 +262,7 @@ public class CinemaMapper {
 			PreparedStatement findallCinemabyUserID  =
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
 			
-			findallCinemabyUserID.setInt(1, id);
+			findallCinemabyUserID.setInt(1, cine);
 			
 			ResultSet rs = findallCinemabyUserID.executeQuery();
 			
