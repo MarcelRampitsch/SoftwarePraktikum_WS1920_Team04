@@ -51,7 +51,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 
 	@Override
 	public Survey createSurvey(String name) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		if (name != null) {
+			Survey s = new Survey();
+			s.setName();
+			s.setId(1);
+			return this.sMapper.insert(s);
+		}
 		return null;
 	}
 
