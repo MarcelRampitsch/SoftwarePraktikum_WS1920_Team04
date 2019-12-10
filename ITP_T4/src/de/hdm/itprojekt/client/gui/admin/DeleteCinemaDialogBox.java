@@ -87,6 +87,7 @@ public class DeleteCinemaDialogBox extends DialogBox {
 		public void onClick(ClickEvent event) {
 			closeCinemaForm();
 			
+
 		}
 
 	}
@@ -103,7 +104,20 @@ public class DeleteCinemaDialogBox extends DialogBox {
 			
 			Window.alert("Wir sind im ClickHandler");
 
-			adminAdministration.deleteCinema(1, new DeleteCallBack());
+			adminAdministration.deleteCinema(4, new AsyncCallback<Void>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(Void result) {
+					// TODO Auto-generated method stub
+					closeCinemaForm();
+				}
+			});
 
 		}
 
@@ -114,6 +128,7 @@ public class DeleteCinemaDialogBox extends DialogBox {
 	 * Bei erfolgreichem Rückruf (onSucess) wird das Cinema Objekt gelöscht. Danach wird die dazugehörige <code> DeleteCinemaDialogBox </code> geschlossen. 
 	 * 
 	 */
+    /**
 	class DeleteCallBack implements AsyncCallback<Void>{
 
 		@Override
@@ -132,6 +147,6 @@ public class DeleteCinemaDialogBox extends DialogBox {
     
 
     
-	}
+	}*/
 
 }
