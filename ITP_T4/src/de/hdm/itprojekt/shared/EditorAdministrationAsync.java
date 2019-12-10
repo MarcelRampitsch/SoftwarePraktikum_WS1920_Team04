@@ -86,13 +86,13 @@ public interface EditorAdministrationAsync {
 	void deleteAllByPresentationID(SurveyEntry se, AsyncCallback<Void> callback);
 	
 	// Vote
-	void createVote(int voteResult, AsyncCallback<Vote> callback);
+	void createVote(AsyncCallback<Vote> callback);
 
 	void getVoteByVoteID(AsyncCallback<Vote> callback);
 	
-	void getAllVoteByUserID(AsyncCallback<Vote> callback);
+	void getAllVoteByUserID(Vote v, AsyncCallback<Vote> callback);
 	
-	void getAllVoteBySurveyEntryID(AsyncCallback<Vote> callback);
+	void getAllVoteBySurveyEntryID(Vote v, AsyncCallback<Vote> callback);
 
 	void updateVote(Vote upVote, AsyncCallback<Void> callback);
 	

@@ -133,17 +133,17 @@ public interface EditorAdministration extends RemoteService {
 	// Vote Methoden
 	
 	// Einen Vote erstellen.
-	public Vote createVote(int voteResult)
+	public Vote createVote()
 		throws IllegalArgumentException;
 	
 	// Einen Vote anhand der VoteID suchen.
 	public Vote getVoteByVoteID() throws IllegalArgumentException;
 	
 	// Einen Vote anhand der UserID suchen.
-	public Vote getAllVoteByUserID() throws IllegalArgumentException;
+	public Vote getAllVoteByUserID(Vote v) throws IllegalArgumentException;
 	
 	// Alle Votes anhand einer UmfrageeintragID suchen.
-	public Vote getAllVoteBySurveyEntryID() throws IllegalArgumentException;
+	public Vote getAllVoteBySurveyEntryID(Vote v) throws IllegalArgumentException;
 	
 	// Aktualisieren des Vote Objekts.
 	public void updateVote(Vote upVote) throws IllegalArgumentException;
