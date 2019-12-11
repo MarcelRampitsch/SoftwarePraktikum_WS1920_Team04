@@ -11,6 +11,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.shared.bo.User;
+
 /**
  * 
  * @author DominikThum, SerhatUlus
@@ -28,6 +30,7 @@ public class VerwaltungsForm extends VerticalPanel {
 	
 	// Cinema/ CinemaGroup, Movie, Timeslot und Präsentation werden einem StackPanel hinzugefügt
     StackPanel panel = new StackPanel();
+	private User user = null;
  
 //    //Cinema/ CinemaGroup
 //    TextBox cinemaGroupBox = new TextBox();
@@ -95,8 +98,8 @@ public class VerwaltungsForm extends VerticalPanel {
 
 
 	
-	VerwaltungsForm(){
-		
+	public VerwaltungsForm(User u){
+		this.user  = u;
 	}
 	
 	//VerwaltungForm(Administrator a){
@@ -125,7 +128,7 @@ public class VerwaltungsForm extends VerticalPanel {
 //		    cinemaGroupPanel1.add(cinemaGroupBox);
 //		    cinemaGroupPanel1.add(cinemaGroupAdd);
 		    
-		 	CinemaForm cinemaPanle = new CinemaForm();
+		 	CinemaForm cinemaPanle = new CinemaForm(user);
 		    
 //		    
 //		    HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
@@ -166,7 +169,7 @@ public class VerwaltungsForm extends VerticalPanel {
 		    
 		    
 		    
-		    MovieForm moviePanel = new MovieForm();
+		    MovieForm moviePanel = new MovieForm(user);
 		    // Movie
 //		    HorizontalPanel movieboxaddHorizont = new HorizontalPanel();
 //		    movieboxaddHorizont.add(moviebox);
@@ -197,7 +200,7 @@ public class VerwaltungsForm extends VerticalPanel {
 //		    
 //		    //Timeslot
 		    
-		    TimeslotForm timeslotpanel = new TimeslotForm();
+		    TimeslotForm timeslotpanel = new TimeslotForm(user);
 		    
 		    
 //		    HorizontalPanel timeslotboxaddHorizont = new HorizontalPanel();
@@ -220,7 +223,7 @@ public class VerwaltungsForm extends VerticalPanel {
 		    
 		    
 		  //Presentation
-		    PresentationForm presentationpanel =new PresentationForm();
+		    PresentationForm presentationpanel =new PresentationForm(user);
 		    
 		    
 		    // Beispielhafte Datenhinzufügung (Später aus der Datenbank)

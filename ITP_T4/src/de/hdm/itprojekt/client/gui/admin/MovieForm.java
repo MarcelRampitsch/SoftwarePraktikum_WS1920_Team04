@@ -14,6 +14,7 @@ import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * 
@@ -36,10 +37,11 @@ public class MovieForm  extends VerticalPanel{
     
     HorizontalPanel movieaddbox = new HorizontalPanel();
     HorizontalPanel buttonbox = new HorizontalPanel();
+	private User user = null;
 
     
-    public MovieForm() {
-    	
+    public MovieForm(User user) {
+    	this.user  = user;
     }
 
     

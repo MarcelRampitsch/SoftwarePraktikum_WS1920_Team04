@@ -17,13 +17,10 @@ import com.sun.java.swing.plaf.windows.resources.windows;
 
 
 import de.hdm.itprojekt.client.ClientSideSettings;
-import de.hdm.itprojekt.server.AdminAdministrationImpl;
-import de.hdm.itprojekt.server.EditorAdministrationImpl;
-import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
-import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * 
@@ -56,10 +53,11 @@ public class CinemaForm extends VerticalPanel {
 	
 	HorizontalPanel cinemaPanel1 = new HorizontalPanel();
 	HorizontalPanel cinemaPanel2 = new HorizontalPanel();
+	private User user = null;
 	
 	
-	public CinemaForm() {
-		
+	public CinemaForm(User user) {
+		this.user = user;
 		
 	}
 	
@@ -95,7 +93,7 @@ public class CinemaForm extends VerticalPanel {
 		cinemaPanel1.add(cinemaBox);
 		
 		
-		adminAdministration.findAllCinemaByUser(1, new AsyncCallback<Vector<Cinema>>() {
+		adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
 		
 			@Override
 			public void onFailure(Throwable caught) {

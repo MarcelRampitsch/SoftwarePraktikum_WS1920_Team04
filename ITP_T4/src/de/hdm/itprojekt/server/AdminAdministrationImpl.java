@@ -45,6 +45,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.tMapper = TimeslotMapper.TimeslotMapper();
 	}
 	
+	// Cinema
 	// Methode zur Erstellung eines Cinema Objektes
 	public Cinema addCinema(Cinema c) {
 		if (c != null) {
@@ -63,19 +64,51 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		return null;
 	}
 	// Methode zum Löschen eines bestimmten Kinos
-	public void deleteCinema (int cinemaID) throws IllegalArgumentException {
-		cMapper.deleteCinemaByCinemaID(cinemaID);
+	public void deleteCinema (Cinema c) throws IllegalArgumentException {
+		cMapper.deleteCinemaByCinemaID(c.getId());
 	}
 	// Methode um alle Cinema eines User zu finden
-	public Vector<Cinema> findAllCinemaByUser(int cine) throws IllegalArgumentException{
+	public Vector<Cinema> findAllCinemaByUser(User u) throws IllegalArgumentException{
 		
 		Vector<Cinema> rs = new Vector<Cinema>();
-		rs = cMapper.findallCinemabyUserID(cine);
+		rs = cMapper.findallCinemabyUserID(u.getId());
 		return rs;
 	}
-	public Vector<Cinema> findAllCinemaByCinemaGroupID(int cinemaGroupID) throws IllegalArgumentException{
-		Vector<Cinema> rs = cMapper.findAllCinemaByCinemaGroupID(cinemaGroupID);
+	public Vector<Cinema> findAllCinemaByCinemaGroupID(Cinema c) throws IllegalArgumentException{
+		Vector<Cinema> rs = cMapper.findAllCinemaByCinemaGroupID(c.getCinemaGroupID());
 		return rs;
+	}
+	
+	
+	// User
+	public User getUserbyNickname (User u) throws IllegalArgumentException{
+		User user = uMapper.findByNickname(u);
+		return user;
+	}
+	
+	public User getUserbyEmail (User u) throws IllegalArgumentException{
+		User currentUser = uMapper.findByEmail(u);
+		return currentUser;
+	}
+	
+	// CinemaGroup
+	
+	public CinemaGroup addCinemaGroup (CinemaGroup cg) throws IllegalArgumentException{
+		if(cg != null) {
+			CinemaGroup cineg = null;
+			cineg = cgMapper.insert(cg);
+			return cineg;
+		}
+		return null;
+	}
+	
+	public CinemaGroup updateCinemaGroup (CinemaGroup cg) throws IllegalArgumentException{
+		if(cg != null) {
+			CinemaGroup cineg = null;
+			cineg = cgMapper.updateCinemaGroup(cineg);
+			return cineg;
+		}
+		return null;
 	}
 
 	/*@Override

@@ -52,7 +52,7 @@ public class UserMapper {
 		}
 		return userMapper;
 	}
-	  public User findByNickname(String n) {
+	  public User findByNickname(User user) {
 		  User u = null;
 		  
 		  // Aufbau der DB-Verbindung
@@ -62,12 +62,12 @@ public class UserMapper {
 			  // Erstellung des Prepared Statement um einen User per Nickname zu finden
 			  
 			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE nickname=? ;");
-			  findBySurveyID.setString(1, n);
+			  findBySurveyID.setString(1, user.getNickname());
 			  
 			  // ausf�hren des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
 
-			  u = new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+			  u = new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
 			  
 		  } catch (SQLException e) {
 			  e.printStackTrace();
@@ -77,23 +77,23 @@ public class UserMapper {
 		  return u;
 	  }
 	  
-	  public User findByEmail(String e) {
-		  User u = null;
+	  public User findByEmail(User u) {
+		  User user = null;
 		  //Aufbau der DB-Verbindung
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  PreparedStatement findByEmail = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE email=?;");
-			  findByEmail.setString(1, e);
+			  findByEmail.setString(1, u.getEmail());
 			  
 			  ResultSet rs = findByEmail.executeQuery();
 
-			  u = new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+			  user = new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
 		  } catch (SQLException e2) {
 			  e2.printStackTrace();
 			  return null;
 		  }
-		  return u;
+		  return user;
 	  }
 	  
 	  public User insert(User u) {
@@ -113,7 +113,7 @@ public class UserMapper {
 			  ResultSet rs = getnewUser.executeQuery();
 			  if (rs.next()) {
 				  
-				  return new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+				  return new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
 			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace();
@@ -140,7 +140,7 @@ public class UserMapper {
 			  ResultSet rs = stmt.executeQuery();
 			  
 			  if(rs.next()) {
-				  return new User(rs.getString("namename"), rs.getString("email"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+				  return new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
 			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace();

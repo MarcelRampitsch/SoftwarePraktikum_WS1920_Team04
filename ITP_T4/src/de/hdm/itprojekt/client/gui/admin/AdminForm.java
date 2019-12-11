@@ -1,13 +1,22 @@
 package de.hdm.itprojekt.client.gui.admin;
 
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministration;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 
 
 /**
@@ -19,16 +28,18 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 
 public class AdminForm extends VerticalPanel{
-	
 	/* 
 	 * currentUser speichert den aktuellen Nutzer
 	 */
-	//protected Administrator adminUser = null;
 	
 	/**
 	 * 
 	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels
 	 */
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+	
+	private User currentUser;
 	
 	/*
 	VerticalPanel main = new VerticalPanel();
@@ -40,18 +51,15 @@ public class AdminForm extends VerticalPanel{
 	private VerticalPanel main = new VerticalPanel();
 
 	
-	
-
-	
 	/**
 	 * 
 	 * @param currentUser 
 	 * Der aktuelle Nutzer (Admin) wird der AdminForm übergeben. So können alle anderen Formen diesen bei Bedarf verwenden.
 	 * 
 	 */
-//	public AdminForm(Administrator adminUser) {
-//		this.adminUser = adminUser;
-//	}
+	public AdminForm(User currentUser) {
+		this.currentUser = currentUser;
+	}
 	
 	
 	/*
@@ -61,21 +69,27 @@ public class AdminForm extends VerticalPanel{
 	public void onLoad() {
 		
 		super.onLoad();
-
 		/*
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
 
 		this.setStylePrimaryName("AdminForm");
 		
+		adminAdministration.getUserbyEmail(currentUser, new AsyncCallback<User>() {
+
+			@Override
+			public void onFailure(Throwable caught) {	
+			}
+
+			@Override
+			public void onSuccess(User result) {
+			currentUser = result;
+				
+			}
+		});
+		
 	//	main.addStyleName("AdminMain");
-		
-		VerwaltungsForm verwaltungsForm = new VerwaltungsForm();
-
-		
-		
-		
-
+		VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser);
 		
 		Image logo = new Image("Offical_Logo.png");
 	

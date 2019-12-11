@@ -20,6 +20,9 @@ public class CinemaGroup extends BusinessObject {
 		this.name=name;
 		this.userID=userID;
 	}
+	
+	public CinemaGroup() {
+	}
 
 	public String getName() {
 		return name;
