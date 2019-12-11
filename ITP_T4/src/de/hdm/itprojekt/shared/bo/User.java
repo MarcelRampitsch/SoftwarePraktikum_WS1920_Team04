@@ -4,15 +4,25 @@ import java.sql.Timestamp;
 
 public class User extends BusinessObject {
 	
-	private static final long serialversionUID = 1l;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String nickname;
 	private String email;
 
-	public User(String nickname, String email, int id, Timestamp creationDate) {
+	public User(int id, String nickname, String email, Timestamp creationDate) {
 		super(id, creationDate);
 		this.nickname = nickname;
 		this.email = email;
+	}
+	
+	public User(String email) {
+		this.email = email;
+	}
+	
+	public User() {
 	}
 	
 	public String getNickname() {
@@ -22,6 +32,7 @@ public class User extends BusinessObject {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	
 	public String getEmail() {
 		return email;
 	}

@@ -104,7 +104,7 @@ public class DeleteCinemaDialogBox extends DialogBox {
 			
 			Window.alert("Wir sind im ClickHandler");
 
-			adminAdministration.deleteCinema(4, new AsyncCallback<Void>() {
+			adminAdministration.deleteCinema(cinema, new AsyncCallback<Void>() {
 
 				@Override
 				public void onFailure(Throwable caught) {

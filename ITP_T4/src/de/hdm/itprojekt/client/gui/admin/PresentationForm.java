@@ -14,6 +14,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * 
@@ -53,10 +54,16 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    HorizontalPanel presentationadder = new HorizontalPanel();
 	    VerticalPanel buttonbox  = new VerticalPanel();
+		private User user = null;
 	    
 	    
 	    
-       public void Presentation() {
+       public PresentationForm(User user) {
+			this.user  = user;
+		}
+
+
+	public void Presentation() {
 	    	
 	   }
 	    
