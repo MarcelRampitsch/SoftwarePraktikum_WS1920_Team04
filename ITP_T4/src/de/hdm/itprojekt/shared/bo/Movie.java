@@ -9,7 +9,7 @@ private static final long serialversionUID = 1l;
 
 	private String name;
 	
-	//Fremdschlüsselattribute
+	//Fremdschlï¿½sselattribute
 	private int userID;
 	private int cinemaID;
 	
@@ -19,6 +19,9 @@ private static final long serialversionUID = 1l;
 		this.name = name;
 		this.userID = userID;
 		this.cinemaID = cinemaID;
+	}
+	
+	public Movie() {
 	}
 	
 	// Getter und Setter

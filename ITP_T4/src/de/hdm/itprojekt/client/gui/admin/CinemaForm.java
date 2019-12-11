@@ -97,7 +97,7 @@ public class CinemaForm extends VerticalPanel {
 		
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Wir sind in der IMPL");
+				Window.alert("was ist falsch geloffen");
 			}
 
 			@Override 
