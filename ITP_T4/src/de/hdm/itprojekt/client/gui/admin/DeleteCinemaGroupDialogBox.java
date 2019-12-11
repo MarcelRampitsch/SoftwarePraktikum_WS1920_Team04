@@ -11,7 +11,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
-import de.hdm.itprojekt.client.gui.admin.DeleteCinemaDialogBox.DeleteCallBack;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 
 
