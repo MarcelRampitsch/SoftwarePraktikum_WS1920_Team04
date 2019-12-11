@@ -53,7 +53,7 @@ public class VoteMapper {
 	 * @return Das <code/>VoteMapper<code/> Objekt.
 	 */
 	
-	public static VoteMapper PresentationMapper() {
+	public static VoteMapper VoteMapper() {
 		if (voteMapper == null) {
 			voteMapper = new VoteMapper();
 		}
