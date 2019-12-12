@@ -25,10 +25,9 @@ private static final long serialversionUID = 1l;
 		this.date= date;
 	}
 	
-	
-	
-	
-	
+	public Presentation() {
+		
+	}
 	
 	public int getCinemaID() {
 		return cinemaID;

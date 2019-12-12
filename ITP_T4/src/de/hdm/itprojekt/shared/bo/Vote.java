@@ -17,6 +17,10 @@ public class Vote extends BusinessObject {
 		this.voteResult = voteResult;
 	}
 	
+	public Vote() {
+		
+	}
+	
 	public int getVoteResult() {
 		return voteResult;
 	}

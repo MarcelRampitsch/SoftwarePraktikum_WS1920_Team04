@@ -20,6 +20,10 @@ private static final long serialversionUID = 1l;
 		this.userID = userID;
 		this.groupID = groupID;
 		}
+	
+	public Survey() {
+		
+	}
 
 	public String getName() {
 		return name;

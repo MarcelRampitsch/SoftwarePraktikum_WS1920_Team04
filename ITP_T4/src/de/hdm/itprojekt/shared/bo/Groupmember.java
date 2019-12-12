@@ -16,6 +16,10 @@ public class Groupmember extends BusinessObject{
 			this.groupID=groupID;
 			this.userID=userID;
 		}
+		
+		public Groupmember() {
+			
+		}
 
 		public int getUserID() {
 			return userID;

@@ -21,6 +21,10 @@ public class Group extends BusinessObject{
 			this.userID=userID;
 		}
 		
+		public Group() {
+			
+		}
+		
 		public String getName(){
 			return name;
 		}

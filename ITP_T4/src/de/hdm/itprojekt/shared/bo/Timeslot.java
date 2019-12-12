@@ -16,6 +16,10 @@ private static final long serialversionUID = 1l;
 		this.time = time;
 		this.userID = userID;
 	}
+	
+	public Timeslot() {
+		
+	}
 
 	public int getUserID() {
 		return userID;

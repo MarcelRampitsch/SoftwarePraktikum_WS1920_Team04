@@ -16,6 +16,9 @@ public class SurveyEntry extends BusinessObject {
 		
 	}
 	
+	public SurveyEntry() {
+		
+	}
 	public int getSurveyID() {
 		return surveyID;
 	}

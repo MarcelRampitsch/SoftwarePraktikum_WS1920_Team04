@@ -21,6 +21,10 @@ private static final long serialversionUID = 1l;
 		this.cinemaID = cinemaID;
 	}
 	
+	public Movie() {
+		
+	}
+	
 	// Getter und Setter
 	
 	public String getName() {
