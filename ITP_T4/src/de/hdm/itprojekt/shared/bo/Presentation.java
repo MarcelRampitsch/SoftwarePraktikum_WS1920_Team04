@@ -14,7 +14,7 @@ private static final long serialversionUID = 1l;
 	private int timeslotID;
 	private int date;
 	
-	
+	// Konstruktor für die find methoden der Mapper
 	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, int date, int id, Timestamp creationDate) {
 		super(id, creationDate);
 
@@ -24,9 +24,23 @@ private static final long serialversionUID = 1l;
 		this.timeslotID = timeslotID;
 		this.date= date;
 	}
+<<<<<<< HEAD
 	
 	public Presentation() {
 		
+=======
+	//Konstrucktor für die insert methoden der Mapper
+	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, int date) {
+		
+		this.cinemaID = cinemaID;
+		this.movieID = movieID;
+		this.userID = userID;
+		this.timeslotID = timeslotID;
+		this.date= date;
+	}
+	//Default Konstruktor für ?????????????????????????????????????????????????????????????
+	public Presentation() {
+>>>>>>> branch 'master' of https://github.com/MarcelRampitsch/SoftwarePraktikum_WS1920_Team04.git
 	}
 	
 	public int getCinemaID() {

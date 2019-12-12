@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.User;
 
 public interface AdminAdministrationAsync {
@@ -26,6 +27,14 @@ public interface AdminAdministrationAsync {
 	// CinemaGroup
 	void addCinemaGroup(CinemaGroup cg, AsyncCallback<CinemaGroup> callback);
 	void updateCinemaGroup(CinemaGroup cg, AsyncCallback<CinemaGroup> callback);
+	void deleteCinemaGroup(CinemaGroup cg, AsyncCallback<Void> callback);
+	void getAllCinemaGroupByUserID(User u, AsyncCallback<Vector<CinemaGroup>> callback);
+
+	// Movie
+	void addMovie(Movie m, AsyncCallback<Movie> callback);
+	void updateMovie(Movie m, AsyncCallback<Void> callback);
+	void deleteMovie(Movie m, AsyncCallback<Void> callback);
+	void getAllMovieByUserID(User u, AsyncCallback<Vector<Movie>> callback);
 	
 	// Movie
 	

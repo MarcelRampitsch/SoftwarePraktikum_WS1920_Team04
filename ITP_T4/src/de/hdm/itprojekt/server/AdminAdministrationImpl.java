@@ -110,6 +110,40 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		}
 		return null;
 	}
+	
+	public void deleteCinemaGroup (CinemaGroup cg) throws IllegalArgumentException{
+		cgMapper.deleteCinemaGroupByID(cg);
+	}
+	
+	public Vector<CinemaGroup> getAllCinemaGroupByUserID(User u) throws IllegalArgumentException{
+		Vector<CinemaGroup> rs = cgMapper.findcinemagroupbyuserID(u);
+		return rs;
+	}
+	
+	// Movie
+	public Movie addMovie(Movie m) throws IllegalArgumentException{
+		if(m != null) {
+			Movie mo = mMapper.insert(m);
+			return mo;
+		}
+		return null;
+	}
+	
+	public void updateMovie(Movie m) throws IllegalArgumentException{
+		if (m != null) {
+		mMapper.updateMovie(m);
+		}	
+	}		
+	
+	public void deleteMovie(Movie m) throws IllegalArgumentException{
+		mMapper.deleteByMovieID(m);
+	}
+	
+	public Vector<Movie> getAllMovieByUserID(User u) throws IllegalArgumentException{
+		Vector<Movie> re = mMapper.findAllByUserID(u);
+		return re;
+	}
+	
 
 	/*@Override
 	public Cinema greetServer(String input) throws IllegalArgumentException {
