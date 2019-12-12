@@ -15,7 +15,10 @@ import de.hdm.itprojekt.shared.bo.Vote;
 public interface EditorAdministrationAsync {
 	
 	void init(AsyncCallback<Void> callback);
+
+	void getAllGroupnameByUserID(User u, AsyncCallback<Vector<Group>> callback);
 	
+	/*
 	// User
 	void createUser(String nickname, String email, AsyncCallback<User> callback);
 	
@@ -112,5 +115,5 @@ public interface EditorAdministrationAsync {
 
 
 	void delete(Presentation p, AsyncCallback<Void> callback);
-
+*/
 }

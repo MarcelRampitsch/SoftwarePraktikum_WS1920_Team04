@@ -5,6 +5,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+
 /**
  * 
  * @author serhatulus
@@ -12,7 +16,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 
 public class GruppenForm extends VerticalPanel {
-
+	
 	
 	public GruppenForm() {
 

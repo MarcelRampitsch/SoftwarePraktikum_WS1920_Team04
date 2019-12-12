@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * Die Klasse GroupMapper bildet <code>Group</code> Objekte auf eine
@@ -53,7 +54,7 @@ public class GroupMapper {
 		return groupMapper;
 	}
 	
-	public Vector<Group> findAllByUserID(int id)  {
+	public Vector<Group> findAllByUserID(User u)  {
 		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		Group g = null;
@@ -63,7 +64,7 @@ public class GroupMapper {
 			PreparedStatement findAllByUserID = con.prepareStatement(
 					"SELECT * From softwarepraktikum_ws1920.group "
 					+ "WHERE userID=? ");
-			findAllByUserID.setInt(1, id);
+			findAllByUserID.setInt(1, u.getId());
 
 			// Ergebnis-Tupel erstellen
 
@@ -72,10 +73,12 @@ public class GroupMapper {
 
 			while (rs.next()) {
 				// Ergebnis-Tupel in Objekt umwandeln
-				g = new Group(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+				g = new Group(rs.getInt("groupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 
 				result.addElement(g);
-			}// Fehlerbehandlung hinzufügen
+			}
+			
+			// Fehlerbehandlung hinzufügen
 		} catch (SQLException e2) {
 		      e2.printStackTrace();
 		      return null;
@@ -84,8 +87,41 @@ public class GroupMapper {
 		return result;
 	}
 	
-	public Group findByGroupID(int id) {
-		  Group g = null;
+	public Vector<Group> findAllGroupnameByUserID(User u)  {
+		// DB-Verbindung holen
+		Connection con = DBConnection.getConnection();
+		Group g = null;
+		// Ergebnisvektor vorbereiten
+		Vector<Group> result = new Vector<Group>();
+		try { // Prepared Statement erstellen um alle Group eines bestimmten User zu finden
+			PreparedStatement findAllByUserID = con.prepareStatement(
+					"SELECT * From softwarepraktikum_ws1920.group "
+					+ "WHERE userID=? ");
+			findAllByUserID.setInt(1, u.getId());
+
+			// Ergebnis-Tupel erstellen
+
+
+			ResultSet rs = findAllByUserID.executeQuery();
+
+			while (rs.next()) {
+				// Ergebnis-Tupel in Objekt umwandeln
+				g = new Group( rs.getString("name"));
+
+				result.addElement(g);
+			}
+			
+			// Fehlerbehandlung hinzufügen
+		} catch (SQLException e2) {
+		      e2.printStackTrace();
+		      return null;
+		}
+		// Ergebnisvektor zurückgeben
+		return result;
+	}
+	
+	public Group findByGroupID(Group g) {
+		  Group gr = null;
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			
@@ -93,18 +129,18 @@ public class GroupMapper {
 				// Prepared Statement erstellen um eine Group zu finden
 				PreparedStatement findByGroupID = con
 						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.group WHERE groupID=? ;");
-				findByGroupID.setInt(1, id);
+				findByGroupID.setInt(1, g.getId());
 
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByGroupID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				g = new Group(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+				gr = new Group(rs.getInt("groupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
 			      e2.printStackTrace();
 			      return null;
 			} // Group zurückgeben
-			return g;
+			return gr;
 		}
 	
 	  public Group insertGroup(Group g)  {
@@ -127,7 +163,7 @@ public class GroupMapper {
 				ResultSet rs = getnewGroup.executeQuery();
 				if (rs.next()) {
 					
-					return new Group(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+					return new Group(rs.getInt("groupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 				}
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
@@ -156,7 +192,7 @@ public class GroupMapper {
 				ResultSet rs = stm.executeQuery();
 				if (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					return new Group(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+					return new Group(rs.getInt("groupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 				}
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
@@ -166,7 +202,7 @@ public class GroupMapper {
 			return null;
 		}
 		
-	  public void deleteByGroupID(int id)  {
+	  public void deleteByGroupID(Group g)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -174,7 +210,7 @@ public class GroupMapper {
 				// Prepared Statement zum Löschen einer bestimmten Group in der Datenbank 
 				PreparedStatement deleteByPresentationID = con
 				      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.group WHERE `groupID`=?;");
-				deleteByPresentationID.setInt(1, id);
+				deleteByPresentationID.setInt(1, g.getId());
 				deleteByPresentationID.executeUpdate();
 		  //    deleteByPresentationID.executeDeletion();
 
@@ -184,18 +220,16 @@ public class GroupMapper {
 		}
 	  }
 	  
-	  public void deleteAllByUserID(int id)  {
+	  public void deleteAllByUserID(User u)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
 			try {
 				// Prepared Statement zum Löschen einer bestimmten Präsentation in der Datenbank 
 				PreparedStatement deleteByPresentationID = con
-						.prepareStatement("UPDATE softwarepraktikum_ws1920.group SET `DeleteDate`=NOW() WHERE `userID`=?;");
-				//      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE `PresentationID`=?;");
-				deleteByPresentationID.setInt(1, id);
+						.prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE `PresentationID`=?;");
+				deleteByPresentationID.setInt(1, u.getId());
 				deleteByPresentationID.executeUpdate();
-		  //    deleteByPresentationID.executeDeletion();
 
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {

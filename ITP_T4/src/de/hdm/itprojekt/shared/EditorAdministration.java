@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.shared;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -15,8 +17,9 @@ import de.hdm.itprojekt.shared.bo.Vote;
 public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
+	public Vector<Group> getAllGroupnameByUserID(User u) throws IllegalArgumentException;
 	
-	
+	/*
 	// User Methoden
 	
 	// Einen User anlegen.
@@ -110,8 +113,7 @@ public interface EditorAdministration extends RemoteService {
 	// SurveyEntry Methoden
 	
 	// Einen Umfrageeintrag erstellen.
-	public SurveyEntry createSurveyEntry()
-		throws IllegalArgumentException;
+	public SurveyEntry createSurveyEntry()throws IllegalArgumentException;
 	
 	// Einen Umfrageeintrag anhand der ID suchen.
 	public SurveyEntry getSurveyEntryBySurveyEntryID() throws IllegalArgumentException;
@@ -166,5 +168,5 @@ public interface EditorAdministration extends RemoteService {
 	public void setPresentation(Presentation p) throws IllegalArgumentException;
 
 	public void delete(Presentation p) throws IllegalArgumentException;
-	
+	*/
 }

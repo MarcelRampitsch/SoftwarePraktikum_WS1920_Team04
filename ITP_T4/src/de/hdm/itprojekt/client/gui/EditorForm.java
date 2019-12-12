@@ -23,8 +23,7 @@ public class EditorForm extends VerticalPanel {
 	/* 
 	 * currentUser speichert den aktuellen Nutzer
 	 */
-	protected User currentUser = null;
-	
+	User user = null;
 	/**
 	 * <code>header</code>: Oberer Teil des Fensters. Erstreckt sich über die ganze Länge der Anwendung
 	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels, außer <code>header</code>
@@ -47,7 +46,8 @@ public class EditorForm extends VerticalPanel {
 	 * 
 	 */
 	
-	public EditorForm(){
+	public EditorForm(User user){
+		this.user = user;
 	}
 	
 	
@@ -79,7 +79,7 @@ public class EditorForm extends VerticalPanel {
 		GruppenForm gruppenForm = new GruppenForm();
 	//	VoteForm voteForm = new VoteForm(currentUser);
 		UmfragenForm umfrageForm = new UmfragenForm();
-		CellListForm celllistform = new CellListForm();
+		CellListForm celllistform = new CellListForm(user);
 	
 		
 

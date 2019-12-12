@@ -48,7 +48,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		this.uMapper = UserMapper.UserMapper();
 		this.vMapper = VoteMapper.VoteMapper();
 	}
-
+	
+	public Vector<Group> getAllGroupnameByUserID (User u) throws IllegalArgumentException{
+		Vector<Group> gr;
+		gr = gMapper.findAllGroupnameByUserID(u);
+		return gr;
+	}
+/*
 	@Override
 	public Survey createSurvey(String name) throws IllegalArgumentException {
 		if (name != null) {
@@ -59,160 +65,5 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 	}
-
-	@Override
-	public SurveyEntry createSurveyEntry() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User createUser(String nickname, String email) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Group createGroup(String name) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Groupmember createGroupMember() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Survey getSurvey() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSurvey(Survey s) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public SurveyEntry getSurveyEntry() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSurveyEntry(SurveyEntry se) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public User getUser() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setUser(User u) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Group getGroup() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setGroup(Group g) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Groupmember getGroupmember() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setGroupmember(Groupmember gm) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Presentation getPresentation() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setPresentation(Presentation p) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Survey s) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(SurveyEntry se) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(User u) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Group g) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Groupmember gm) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Presentation p) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Vote createVote(int voteResult) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Vote getVote() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setVote(Vote v) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Vote v) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
+	*/
 }

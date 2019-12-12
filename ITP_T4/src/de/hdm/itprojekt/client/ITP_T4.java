@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.gui.EditorForm;
 import de.hdm.itprojekt.client.gui.admin.AdminForm;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 /**
@@ -25,6 +26,7 @@ import de.hdm.itprojekt.client.gui.admin.AdminForm;
  */
 public class ITP_T4 implements EntryPoint {
 	
+	protected User currentUser = new User(1, "Basti", "a", null);
 	/**
 	   * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
 	   * zusichert, benötigen wir eine Methode
@@ -36,8 +38,7 @@ public class ITP_T4 implements EntryPoint {
 	
 	public void onModuleLoad() {
 		
-		RootPanel.get().add(new AdminForm());
-
+		RootPanel.get().add(new EditorForm(currentUser));
 		
 	
 		

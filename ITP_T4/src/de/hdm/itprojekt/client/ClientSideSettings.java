@@ -26,10 +26,10 @@ import de.hdm.itprojekt.shared.LoginAdministrationAsync;
 
 public class ClientSideSettings extends CommonSettings {
 	
-	private static AdminAdministrationAsync adminAdministration = null;
-/*	
+	private static AdminAdministrationAsync adminAdministration = null;	
 	private static EditorAdministrationAsync editorAdministration = null;
-	private static LoginAdministrationAsync loginAdministration = null;
+	
+	//private static LoginAdministrationAsync loginAdministration = null;
 	
 	public static EditorAdministrationAsync getEditorAdministration() {
 
@@ -40,7 +40,6 @@ public class ClientSideSettings extends CommonSettings {
 
 		return editorAdministration;
 	}
-	*/
 	
 	public static AdminAdministrationAsync getAdminAdministration() {
 		
