@@ -43,6 +43,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.mMapper = MovieMapper.MovieMapper();
 		this.pMapper = PresentationMapper.PresentationMapper();
 		this.tMapper = TimeslotMapper.TimeslotMapper();
+		this.uMapper = UserMapper.UserMapper();
 	}
 	
 	// Cinema
@@ -71,7 +72,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	public Vector<Cinema> findAllCinemaByUser(User u) throws IllegalArgumentException{
 		
 		Vector<Cinema> rs = new Vector<Cinema>();
-		rs = cMapper.findallCinemabyUserID(u.getId());
+		rs = cMapper.findallCinemabyUserID(u);
 		return rs;
 	}
 	public Vector<Cinema> findAllCinemaByCinemaGroupID(Cinema c) throws IllegalArgumentException{

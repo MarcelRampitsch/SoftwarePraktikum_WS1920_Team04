@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministration;
@@ -74,11 +75,12 @@ public class AdminForm extends VerticalPanel{
 		 */
 
 		this.setStylePrimaryName("AdminForm");
-		
+		Window.alert(currentUser.getEmail());
 		adminAdministration.getUserbyEmail(currentUser, new AsyncCallback<User>() {
 
 			@Override
-			public void onFailure(Throwable caught) {	
+			public void onFailure(Throwable caught) {
+				Window.alert(currentUser.getEmail());
 			}
 
 			@Override
