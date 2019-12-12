@@ -114,6 +114,11 @@ public class VerwaltungsForm extends VerticalPanel {
 		 panel.setPixelSize(290,600);
 		    
 
+		 CinemaGroupForm cinemagroupform = new CinemaGroupForm(user);
+		 
+		 
+		 
+		 panel.add(cinemagroupform, "CinemaGroup");
 //		sp1.addStyleName("verwaltung");
 		
 //		test.add(sp1);
@@ -129,7 +134,13 @@ public class VerwaltungsForm extends VerticalPanel {
 //		    cinemaGroupPanel1.add(cinemaGroupAdd);
 		    
 		 	CinemaForm cinemaPanle = new CinemaForm(user);
+		 	
+		
+		 	
+		 	
+		 	
 		    
+		 	
 //		    
 //		    HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
 //		    cinemaGroupPanel2.add(cinemaGroupEdit);
@@ -161,7 +172,7 @@ public class VerwaltungsForm extends VerticalPanel {
 		 	
 
 		    
-		    panel.add(cinemaPanle, "Cinema/ CinemaGroup");
+		    panel.add(cinemaPanle, "Cinema");
 		    //Cinema
 		    
 		    

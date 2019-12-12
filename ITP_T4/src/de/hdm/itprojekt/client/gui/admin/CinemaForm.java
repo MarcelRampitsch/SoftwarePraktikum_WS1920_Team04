@@ -30,7 +30,7 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class CinemaForm extends VerticalPanel {
 
-	private Label cinemaGroup = new Label("CinemaGroup");
+	//private Label cinemaGroup = new Label("CinemaGroup");
 	private Label cinema = new Label("Cinema");
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
@@ -38,18 +38,18 @@ public class CinemaForm extends VerticalPanel {
 
 
 	
-	ListBox cinemaGroupBox = new ListBox();
+	//ListBox cinemaGroupBox = new ListBox();
 	ListBox cinemaBox = new ListBox();
 	
-	Button editCinemaGroup = new Button("Edit");
-	Button newCinemaGroup = new Button("New");
-	Button deleteCinemaGroup = new Button("Delete");
+//	Button editCinemaGroup = new Button("Edit");
+//	Button newCinemaGroup = new Button("New");
+//	Button deleteCinemaGroup = new Button("Delete");
 	Button editCinema = new Button("Edit");
 	Button newCinema = new Button("New");
 	Button deleteCinema = new Button("Delete");
 	
-	HorizontalPanel cinemaGroupPanel1 = new HorizontalPanel();
-	HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
+//	HorizontalPanel cinemaGroupPanel1 = new HorizontalPanel();
+//	HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
 	
 	HorizontalPanel cinemaPanel1 = new HorizontalPanel();
 	HorizontalPanel cinemaPanel2 = new HorizontalPanel();
@@ -66,27 +66,27 @@ public class CinemaForm extends VerticalPanel {
 		
 		super.onLoad();
 		
-		this.add(cinemaGroup);
+		//this.add(cinemaGroup);
 		
-		cinemaGroupPanel1.add(cinemaGroupBox);
-		cinemaGroupBox.addItem("kette1");
-		cinemaGroupBox.addItem("kette2");
-		cinemaGroupBox.addItem("kette3");
+//		cinemaGroupPanel1.add(cinemaGroupBox);
+//		cinemaGroupBox.addItem("kette1");
+//		cinemaGroupBox.addItem("kette2");
+//		cinemaGroupBox.addItem("kette3");
 
 		
-		cinemaGroupPanel2.add(editCinemaGroup);
-		editCinemaGroup.addClickHandler(new editCinemaGroupClickHandler());
-		cinemaGroupPanel2.add(newCinemaGroup);
-		newCinemaGroup.addClickHandler(new addCinemaGroupClickHandler());
+//		cinemaGroupPanel2.add(editCinemaGroup);
+//		editCinemaGroup.addClickHandler(new editCinemaGroupClickHandler());
+//		cinemaGroupPanel2.add(newCinemaGroup);
+//		newCinemaGroup.addClickHandler(new addCinemaGroupClickHandler());
 		newCinema.addClickHandler(new addCinemaClickHandler() );
 		editCinema.addClickHandler(new editCinemaClickHandler());
 		deleteCinema.addClickHandler(new deleteCinemaClickHandler());
-		deleteCinemaGroup.addClickHandler(new deleteCinemaGroupClickHandler());
-		
-		cinemaGroupPanel2.add(deleteCinemaGroup);
-		
-		this.add(cinemaGroupPanel1);
-		this.add(cinemaGroupPanel2);
+//		deleteCinemaGroup.addClickHandler(new deleteCinemaGroupClickHandler());
+//		
+//		cinemaGroupPanel2.add(deleteCinemaGroup);
+//		
+//		this.add(cinemaGroupPanel1);
+//		this.add(cinemaGroupPanel2);
 		
 		this.add(cinema);
 		
@@ -128,15 +128,16 @@ public class CinemaForm extends VerticalPanel {
 	/**
 	 * ClickHandler für Erstellung einer CinemaGroup
 	 */
-	public class addCinemaGroupClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			CinemaGroupAddDialogBox cinemagroup = new CinemaGroupAddDialogBox();
-			cinemagroup.openCinemaGroup();
-			
-		}
-			
-	}
+//	public class addCinemaGroupClickHandler implements ClickHandler{
+//		
+//		public void onClick(ClickEvent event) {
+//			CinemaGroupAddDialogBox cinemagroup = new CinemaGroupAddDialogBox();
+//			cinemagroup.openCinemaGroup();
+//			
+//		}
+//			
+	
+
 	
     public class addCinemaClickHandler implements ClickHandler{
 		
@@ -171,16 +172,16 @@ public class CinemaForm extends VerticalPanel {
 		}
 	}
 	
-	/**
-	 * ClickHandler zum löschen einer CinemaGroup
-	 */
-	public class deleteCinemaGroupClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			DeleteCinemaGroupDialogBox deleteCinemaGroup = new DeleteCinemaGroupDialogBox();
-			deleteCinemaGroup.openCimemaGroupDelete();
-		}
-	}
+//	/**
+//	 * ClickHandler zum löschen einer CinemaGroup
+//	 */
+//	public class deleteCinemaGroupClickHandler implements ClickHandler{
+//		
+//		public void onClick(ClickEvent event) {
+//			DeleteCinemaGroupDialogBox deleteCinemaGroup = new DeleteCinemaGroupDialogBox();
+//			deleteCinemaGroup.openCimemaGroupDelete();
+//		}
+//	}
 	
 	
 	
@@ -216,40 +217,40 @@ public class CinemaForm extends VerticalPanel {
 	
 	
 	
-	private class editCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onSuccess(CinemaGroup result) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
+//	private class editCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
+//
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void onSuccess(CinemaGroup result) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		
+//	}
 	
 	
 	
 	
-	private class deleteCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onSuccess(CinemaGroup result) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
+//	private class deleteCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
+//
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void onSuccess(CinemaGroup result) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		
+//	}
 	
 	/**
 	 * ClickHandler für Erstellung eines Cinema
