@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.User;
 
 public class CinemaMapper {
 	
@@ -250,7 +251,7 @@ public class CinemaMapper {
 	
 	
 	
-	public Vector<Cinema> findallCinemabyUserID(int cine){
+	public Vector<Cinema> findallCinemabyUserID(User u){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -262,7 +263,7 @@ public class CinemaMapper {
 			PreparedStatement findallCinemabyUserID  =
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
 			
-			findallCinemabyUserID.setInt(1, cine);
+			findallCinemabyUserID.setInt(1, u.getId());
 			
 			ResultSet rs = findallCinemabyUserID.executeQuery();
 			
