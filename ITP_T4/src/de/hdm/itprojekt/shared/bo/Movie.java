@@ -22,10 +22,7 @@ private static final long serialversionUID = 1l;
 	}
 	
 	public Movie() {
-<<<<<<< HEAD
 		
-=======
->>>>>>> branch 'master' of https://github.com/MarcelRampitsch/SoftwarePraktikum_WS1920_Team04.git
 	}
 	
 	// Getter und Setter
