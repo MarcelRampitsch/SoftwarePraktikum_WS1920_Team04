@@ -11,14 +11,12 @@ private static final long serialversionUID = 1l;
 	
 	//Fremdschl�sselattribute
 	private int userID;
-	private int cinemaID;
 	
 	//Konstruktor
-	public Movie(int id, Timestamp creationDate, String name, int userID, int cinemaID) {
+	public Movie(int id, Timestamp creationDate, String name, int userID) {
 		super(id, creationDate);
 		this.name = name;
 		this.userID = userID;
-		this.cinemaID = cinemaID;
 	}
 	
 	public Movie() {
@@ -38,11 +36,5 @@ private static final long serialversionUID = 1l;
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
-	}
-	public int getCinemaID() {
-		return cinemaID;
-	}
-	public void setCinemaID(int cinemaID){
-		this.cinemaID = cinemaID;
 	}
 }

@@ -26,11 +26,10 @@ public class Cinema extends BusinessObject{
 			this.userID=userID;
 		}
 		
-		public Cinema(String location, String name, int cinemaGroupID, int userID) {
+		public Cinema(String location, String name, int userID) {
 			
 			this.location=location;
 			this.name=name;
-			this.cinemaGroupID=cinemaGroupID;
 			this.userID=userID;
 		}
 		

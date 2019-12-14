@@ -1,7 +1,10 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -11,6 +14,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
@@ -27,7 +31,7 @@ public class MovieForm  extends VerticalPanel{
 	
 	ListBox moviebox = new ListBox();
     Label movieLabel = new Label("Movie");
-//	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
     
     Button movieEdit = new Button("Edit");
@@ -49,19 +53,29 @@ public class MovieForm  extends VerticalPanel{
     	
     	super.onLoad();
     	
-    	this.add(movieLabel);
-    	
+    	this.add(movieLabel);    	
     	movieaddbox.add(moviebox);
+    	
+    	adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
+
+			@Override 
+			public void onSuccess(Vector<Movie> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					moviebox.addItem(result.elementAt(i).getName());
+				}
+			}
+		});
     	
     	movieEdit.addClickHandler(new editMovieClickHandler());
     	movieNew.addClickHandler(new addMovieClickHandler());
     	movieDelete.addClickHandler(new deleteMovieClickHandler());
-    	
-    	moviebox.addItem("spidermann");
-    	moviebox.addItem("Der böse Film");
-    	moviebox.addItem("Spiderman 3");
-
-    	
+    	    	
     	
     	buttonbox.add(movieEdit);
     	buttonbox.add(movieNew);

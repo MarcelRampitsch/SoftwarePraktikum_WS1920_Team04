@@ -71,7 +71,7 @@ public class MovieMapper {
 		ResultSet rs = findByMovieID.executeQuery();
 		
 		// Hinzuf�gen der Attribute zum Movieobjekt
-		mo = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
+		mo = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 		
 		// Fehlerbehandlung (Fangen der SQLException und Ausgabe des Fehlers)
 		} catch (SQLException e) {
@@ -95,7 +95,7 @@ public class MovieMapper {
 			
 			ResultSet rs = findByName.executeQuery();
 			
-			mo = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
+			mo = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,13 +113,13 @@ public class MovieMapper {
 		Vector<Movie> result = new Vector<Movie>();
 		
 		try {
-			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie" + "WHERE userID=?");
+			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie " + "WHERE UserID=? ");
 			findAllByUserID.setInt(1, u.getId());
 			
 			ResultSet rs = findAllByUserID.executeQuery();
 			
 			while (rs.next()) {
-				m = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
+				m = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 				result.addElement(m);
 			}
 			
@@ -138,11 +138,10 @@ public class MovieMapper {
 		
 		try {
 			// Erstellung des Prepared Statement insert
-			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(name, userID, cinemaID) VALUES(?,?,?);");
+			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.movie(name, userID) VALUES(?,?);");
 
 			insert.setString(1, m.getName());
 			insert.setInt(2, m.getUserID());
-			insert.setInt(3, m.getCinemaID());
 
 			insert.executeUpdate();
 			
@@ -152,7 +151,7 @@ public class MovieMapper {
 			ResultSet rs = getnewMovie.executeQuery();
 			
 			if (rs.next()) {
-				return new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("cinemaID"));
+				return new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
 			}
 			
 		} catch (SQLException e) {

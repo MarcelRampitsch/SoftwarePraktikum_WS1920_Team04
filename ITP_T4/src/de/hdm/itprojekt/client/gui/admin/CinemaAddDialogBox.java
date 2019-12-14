@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -15,6 +17,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
 * 
@@ -26,9 +29,10 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 
 public class CinemaAddDialogBox extends DialogBox {
 	
-	private static AdminAdministrationAsync greetingService = ClientSideSettings.getAdminAdministration() ;
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration() ;
 
-	
+	String name = null;
+	User user = null;
 	VerticalPanel content = new VerticalPanel();
 	
 	
@@ -46,8 +50,8 @@ public class CinemaAddDialogBox extends DialogBox {
 	Button safe = new Button("save");
 	
 	
-	public CinemaAddDialogBox() {
-		
+	public CinemaAddDialogBox(User user) {
+		this.user = user;
 	}
 	
 	/*
@@ -105,36 +109,23 @@ public class CinemaAddDialogBox extends DialogBox {
 
 	
 	private class safeCinemaForm implements ClickHandler{
-		
+		Cinema c = null;
 		@Override
 		public void onClick(ClickEvent event) {
-
+			c = new Cinema(locationBox.getText(), box.getText(), user.getId());
 			
-		/*	greetingService.greetServer(box.getText(), new AsyncCallback<Cinema>() {
-
+			adminAdministration.addCinema(c, new AsyncCallback<Cinema>() {
+				
 				@Override
 				public void onFailure(Throwable caught) {
-					
-					cinema.setText(caught.getMessage());
-					
+					Window.alert("was ist falsch geloffen");
 				}
-
-			
 
 				@Override
 				public void onSuccess(Cinema result) {
-					// TODO Auto-generated method stub
-					
-				}				
-	});*/
-			
-			
+				closeCinemaForm();
+				}});
+				
 		}
-			
-			
-		
-		
-		
 	}
-
 }

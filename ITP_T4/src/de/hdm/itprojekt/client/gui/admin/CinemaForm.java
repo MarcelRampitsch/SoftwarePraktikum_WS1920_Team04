@@ -54,6 +54,9 @@ public class CinemaForm extends VerticalPanel {
 	HorizontalPanel cinemaPanel1 = new HorizontalPanel();
 	HorizontalPanel cinemaPanel2 = new HorizontalPanel();
 	private User user = null;
+	private Cinema selectedCinema = null;
+	private Vector<Cinema> cine = null;
+	private Cinema delete = null;
 	
 	
 	public CinemaForm(User user) {
@@ -105,6 +108,7 @@ public class CinemaForm extends VerticalPanel {
 				
 				for (int i = 0; i < result.size(); i++ ) {
 					cinemaBox.addItem(result.elementAt(i).getName());
+					cine = result;
 				}
 			}
 		});
@@ -142,7 +146,7 @@ public class CinemaForm extends VerticalPanel {
     public class addCinemaClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			CinemaAddDialogBox cinema = new CinemaAddDialogBox();
+			CinemaAddDialogBox cinema = new CinemaAddDialogBox(user);
 			
 			cinema.openCinema();
 			
@@ -153,8 +157,8 @@ public class CinemaForm extends VerticalPanel {
    public class editCinemaClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			
-			EditCinemaDialogBox edit = new EditCinemaDialogBox();
+			selectedCinema = cine.elementAt(cinemaBox.getSelectedIndex());
+			EditCinemaDialogBox edit = new EditCinemaDialogBox(selectedCinema);
 			edit.openCinemaEdit();
 			
 		}
@@ -166,8 +170,9 @@ public class CinemaForm extends VerticalPanel {
 	public class deleteCinemaClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			DeleteCinemaDialogBox deleteCinema = new DeleteCinemaDialogBox();
-			deleteCinema.openCimemaDelete();
+			delete = cine.elementAt(cinemaBox.getSelectedIndex());
+			DeleteCinemaDialogBox edit = new DeleteCinemaDialogBox(delete);
+			edit.openCinemaDelete();
 											
 		}
 	}

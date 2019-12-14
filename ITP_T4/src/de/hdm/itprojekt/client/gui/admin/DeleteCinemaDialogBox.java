@@ -29,8 +29,8 @@ public class DeleteCinemaDialogBox extends DialogBox {
 	Button yes = new Button ("yes");
 	Button no = new Button ("no");
 	
-	public DeleteCinemaDialogBox() {
-		
+	public DeleteCinemaDialogBox(Cinema cinema) {
+		this.cinema = cinema;
 	}
 	
 	public void onLoad() {
@@ -54,7 +54,7 @@ public class DeleteCinemaDialogBox extends DialogBox {
 	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
 	 */
 	
-	public void openCimemaDelete() {
+	public void openCinemaDelete() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
 		this.center();
@@ -102,7 +102,6 @@ public class DeleteCinemaDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			
-			Window.alert("Wir sind im ClickHandler");
 
 			adminAdministration.deleteCinema(cinema, new AsyncCallback<Void>() {
 

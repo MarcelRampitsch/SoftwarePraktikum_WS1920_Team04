@@ -1,7 +1,10 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -9,14 +12,18 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
+import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.admin.CinemaForm.editCinemaGroupClickHandler;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class CinemaGroupForm extends VerticalPanel{
 	
 	private Label cinemaGroup = new Label("CinemaGroup");
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
 	ListBox cinemaGroupBox = new ListBox();
 	
@@ -40,9 +47,22 @@ public class CinemaGroupForm extends VerticalPanel{
 		super.onLoad();
 		
 		cinemaGroupPanel1.add(cinemaGroupBox);
-		cinemaGroupBox.addItem("kette1");
-		cinemaGroupBox.addItem("kette2");
-		cinemaGroupBox.addItem("kette3");
+		adminAdministration.getAllCinemaGroupByUserID(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
+
+			@Override 
+			public void onSuccess(Vector<CinemaGroup> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					cinemaGroupBox.addItem(result.elementAt(i).getName());
+				}
+			}
+		});
+		
 		
 		cinemaGroupPanel2.add(editCinemaGroup);
 		editCinemaGroup.addClickHandler(new editCinemaGroupClickHandler());
