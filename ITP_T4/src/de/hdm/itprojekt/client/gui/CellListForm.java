@@ -31,16 +31,14 @@ public class CellListForm extends VerticalPanel {
 	
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
-	private static final List<String> Gruppen = Arrays.asList();
    
 	public CellListForm(User user) {
 		this.user = user;
 }
-
+	Vector <Group> Gruppen = null;
 	public void onLoad() {
 	   super.onLoad();
-	   
-	 editorAdministration.getAllGroupnameByUserID(user, new AsyncCallback<Vector<Group>>() {
+	   editorAdministration.getAllGroupnameByUserID(user, new AsyncCallback<Vector<Group>>() {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -50,16 +48,15 @@ public class CellListForm extends VerticalPanel {
 
 		@Override
 		public void onSuccess(Vector<Group> result) {
-			
 			for (int i = 0; i < result.size(); i++ ) {
-				String s = null;
 				Group g = result.elementAt(i);
-				s = g.getName();
-				Gruppen.add(s);
-				Window.alert(s);
+				Window.alert(""+g.getName()+"");
+				Vector<Group> a = null;
+				a.addElement(g);
+				Gruppen = a; 
 		}
 		}});
-	   
+	 
 	   //INSTANZ DER KLASSE TEXTCELL
 	   TextCell textCell = new TextCell();
 	   
@@ -79,10 +76,16 @@ public class CellListForm extends VerticalPanel {
 	        }
 	      }
 	    });
+
 	   
-	    
 	    cellList.setRowCount(Gruppen.size(), true);
-	    cellList.setRowData(0, Gruppen);
+	    for (int i = 0; i < Gruppen.size(); i++ ) {
+	    	Group g = Gruppen.elementAt(i);
+	    	String s = g.getName();
+	    //	Neu.add(s);
+	    	
+		 //   cellList.setRowData(0, Neu);;
+	    }
 	   
 	    this.add(cellList);
 	 

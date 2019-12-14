@@ -50,7 +50,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	
 	public Vector<Group> getAllGroupnameByUserID (User u) throws IllegalArgumentException{
-		Vector<Group> gr;
+		Vector<Group> gr = null;
 		gr = gMapper.findAllGroupnameByUserID(u);
 		return gr;
 	}
