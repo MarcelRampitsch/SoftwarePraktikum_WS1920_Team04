@@ -18,6 +18,8 @@ public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
 	
+	// User Methoden
+	
 	// Einen User anlegen.
 	public User createUser(String nickname, String email)
 			throws IllegalArgumentException;
@@ -25,20 +27,18 @@ public interface EditorAdministration extends RemoteService {
 	// Suchen von User Objekten deren Nickname bekannt ist.
 	public User getUserByNickname() throws IllegalArgumentException;
 	
-	public Vector<Group> getAllGroupnameByUserID(User u) throws IllegalArgumentException;
-	
-	/*
-	// User Methoden
-	
 	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
 	public User getUserByEmail() throws IllegalArgumentException;
 	
+	public Vector<Group> getAllGroupnameByUserID(User u) throws IllegalArgumentException;
+	
 	// Aktualisieren eines User Objekts.
-	public void updateUser(User upUser) throws IllegalArgumentException;
+	public User updateUser(User upUser) throws IllegalArgumentException;
 	
 	// L�schen des �bergebenen Users.
-	public void delete(User u) throws IllegalArgumentException;
-	
+	public void deleteUser(User u) throws IllegalArgumentException;
+
+	/*
 	
 	// Group Methoden
 
