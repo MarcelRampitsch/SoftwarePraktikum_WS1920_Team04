@@ -18,7 +18,7 @@ public interface EditorAdministrationAsync {
 
 	// User
 	
-	void createUser(String nickname, String email, AsyncCallback<User> callback);
+	void createUser(User u, AsyncCallback<User> callback);
 	
 	void getUserByNickname(AsyncCallback<User> callback);
 	

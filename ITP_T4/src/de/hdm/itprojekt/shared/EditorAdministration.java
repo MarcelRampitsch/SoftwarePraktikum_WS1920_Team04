@@ -21,7 +21,7 @@ public interface EditorAdministration extends RemoteService {
 	// User Methoden
 	
 	// Einen User anlegen.
-	public User createUser(String nickname, String email)
+	public User createUser(User u)
 			throws IllegalArgumentException;
 	
 	// Suchen von User Objekten deren Nickname bekannt ist.
