@@ -17,17 +17,18 @@ import de.hdm.itprojekt.shared.bo.Vote;
 public interface EditorAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
+	
+	// Einen User anlegen.
+	public User createUser(String nickname, String email)
+			throws IllegalArgumentException;
+	
+	// Suchen von User Objekten deren Nickname bekannt ist.
+	public User getUserByNickname() throws IllegalArgumentException;
+	
 	public Vector<Group> getAllGroupnameByUserID(User u) throws IllegalArgumentException;
 	
 	/*
 	// User Methoden
-	
-	// Einen User anlegen.
-	public User createUser(String nickname, String email)
-		throws IllegalArgumentException;
-	
-	// Suchen von User Objekten deren Nickname bekannt ist.
-	public User getUserByNickname() throws IllegalArgumentException;
 	
 	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
 	public User getUserByEmail() throws IllegalArgumentException;

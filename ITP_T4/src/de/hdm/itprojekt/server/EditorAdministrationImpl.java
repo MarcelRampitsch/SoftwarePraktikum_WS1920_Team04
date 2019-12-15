@@ -48,6 +48,18 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		this.uMapper = UserMapper.UserMapper();
 		this.vMapper = VoteMapper.VoteMapper();
 	}
+	public User createUser(User u) {
+		if (u!= null) {
+			User tempUser = new User();
+			tempUser = uMapper.insert(u);
+			return tempUser;
+		}
+		return null;
+	}
+	public User getUserByNickname(User u) throws IllegalArgumentException{
+		User user = uMapper.findByNickname(u);
+		return user;
+	}
 	
 	public Vector<Group> getAllGroupnameByUserID (User u) throws IllegalArgumentException{
 		Vector<Group> gr = null;
