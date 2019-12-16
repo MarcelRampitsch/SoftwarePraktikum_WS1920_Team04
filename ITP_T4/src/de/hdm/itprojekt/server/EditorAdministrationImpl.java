@@ -23,6 +23,9 @@ import de.hdm.itprojekt.server.db.SurveyEntryMapper;
 import de.hdm.itprojekt.server.db.SurveyMapper;
 import de.hdm.itprojekt.server.db.UserMapper;
 import de.hdm.itprojekt.server.db.VoteMapper;
+import de.hdm.itprojekt.server.db.CinemaGroupMapper;
+import de.hdm.itprojekt.server.db.CinemaMapper;
+import de.hdm.itprojekt.server.db.MovieMapper;
 
 public class EditorAdministrationImpl extends RemoteServiceServlet implements EditorAdministration {
 	
@@ -33,6 +36,9 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	private SurveyMapper sMapper = null;
 	private UserMapper uMapper = null;
 	private VoteMapper vMapper = null;
+	private CinemaGroupMapper cgMapper = null;
+	private CinemaMapper cMapper = null;
+	private MovieMapper mMapper = null;
 	
 	
 	public EditorAdministrationImpl() throws IllegalArgumentException {
@@ -47,12 +53,54 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		this.sMapper = SurveyMapper.SurveyMapper();
 		this.uMapper = UserMapper.UserMapper();
 		this.vMapper = VoteMapper.VoteMapper();
+		this.cgMapper = CinemaGroupMapper.CinemaGroupMapper();
+		this.cMapper = CinemaMapper.CinemaMapper();
+		this.mMapper = MovieMapper.MovieMapper();
+	}
+	
+	
+	public User createUser(User u) {
+		if (u!= null) {
+			User tempUser = new User();
+			tempUser = uMapper.insert(u);
+			return tempUser;
+		}
+		return null;
+	}
+	public User getUserByNickname(User u) throws IllegalArgumentException{
+		User user = uMapper.findByNickname(u);
+		return user;
+	}
+	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
+	public User getUserByEmail(User u) throws IllegalArgumentException{
+		User user = uMapper.findByEmail(u);
+		return user;
 	}
 	
 	public Vector<Group> getAllGroupnameByUserID (User u) throws IllegalArgumentException{
 		Vector<Group> gr = null;
 		gr = gMapper.findAllGroupnameByUserID(u);
 		return gr;
+	}
+	
+	public User updateUser(User upUser) throws IllegalArgumentException{
+		if (upUser != null) {
+			User tempUser = uMapper.updateUser(upUser);
+			return tempUser;
+		}
+		return null;
+		}
+	public void deleteUser(User u) throws IllegalArgumentException{
+		uMapper.deleteUserByUserID(u.getId());
+		//gMapper.deleteAllByUserID(u.getId());
+		gmMapper.deleteAllByUserID(u.getId());
+		pMapper.deleteAllByUserID(u.getId());
+		sMapper.DeleteAllByGroupID(u.getId());
+		//seMapper.
+		vMapper.deleteAllVoteByUserID(u.getId());
+		//cgMapper.deleteAllCinemaGroupByUserID(u.getId());
+		//cMapper.deleteAllCinemaByUserID(u.getId());
+		//mMapper.deleteAllByUserID(u.getId());
 	}
 /*
 	@Override

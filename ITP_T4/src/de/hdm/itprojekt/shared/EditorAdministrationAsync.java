@@ -16,20 +16,22 @@ public interface EditorAdministrationAsync {
 	
 	void init(AsyncCallback<Void> callback);
 
-	void getAllGroupnameByUserID(User u, AsyncCallback<Vector<Group>> callback);
-	
-	/*
 	// User
-	void createUser(String nickname, String email, AsyncCallback<User> callback);
+	
+	void createUser(User u, AsyncCallback<User> callback);
 	
 	void getUserByNickname(AsyncCallback<User> callback);
-
+	
 	void getUserByEmail(AsyncCallback<User> callback);
 	
-	void updateUser(User upUser, AsyncCallback<Void> callback);
+	void getAllGroupnameByUserID(User u, AsyncCallback<Vector<Group>> callback);
 	
-	void delete(User u, AsyncCallback<Void> callback);
+	void updateUser(User upUser, AsyncCallback<User> callback);
 	
+	void deleteUser(User u, AsyncCallback<Void> callback);
+	
+	/*
+
 	// Group
 	void createGroup(String name, AsyncCallback<Group> callback);
 
