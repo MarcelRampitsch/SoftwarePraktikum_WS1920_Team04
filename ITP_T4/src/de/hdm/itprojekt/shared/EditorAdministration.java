@@ -25,10 +25,10 @@ public interface EditorAdministration extends RemoteService {
 			throws IllegalArgumentException;
 	
 	// Suchen von User Objekten deren Nickname bekannt ist.
-	public User getUserByNickname() throws IllegalArgumentException;
+	public User getUserByNickname(User u) throws IllegalArgumentException;
 	
 	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
-	public User getUserByEmail() throws IllegalArgumentException;
+	public User getUserByEmail(User u) throws IllegalArgumentException;
 	
 	public Vector<Group> getAllGroupnameByUserID(User u) throws IllegalArgumentException;
 	
@@ -38,19 +38,18 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen des �bergebenen Users.
 	public void deleteUser(User u) throws IllegalArgumentException;
 
-	/*
 	
 	// Group Methoden
 
 	// Eine Gruppe anlegen.
-	public Group createGroup(String name)
+	public Group createGroup(Group g)
 		throws IllegalArgumentException;
 	
 	// Suchen von Gruppen Objekten nach GroupID.
-	public Group getGroupByGroupID() throws IllegalArgumentException;
+	public Group getGroupByGroupID(Group g) throws IllegalArgumentException;
 	
 	// Suchen aller Gruppen Objekte nach UserID.
-	public void getAllGroupByUserID(Group g) throws IllegalArgumentException;
+	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException;
 	
 	// Aktualisieren eines Gruppen Objekts.
 	public void updateGroup(Group upGroup) throws IllegalArgumentException;
@@ -61,7 +60,7 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Gruppen die einer bestimmten UserID zugeordnet sind.
 	public void deleteAllByUserID(Group g) throws IllegalArgumentException;
 	
-	
+	/*
 	// GroupMember Methoden
 	
 	// Einen Groupmember anlegen.

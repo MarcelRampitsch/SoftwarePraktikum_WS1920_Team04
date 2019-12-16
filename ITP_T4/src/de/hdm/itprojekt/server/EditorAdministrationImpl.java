@@ -57,8 +57,8 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		this.cMapper = CinemaMapper.CinemaMapper();
 		this.mMapper = MovieMapper.MovieMapper();
 	}
-	
-	
+	// User
+	// Methode zur Erstellung eines User Objektes.
 	public User createUser(User u) {
 		if (u!= null) {
 			User tempUser = new User();
@@ -67,6 +67,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 	}
+	// Methode um einen User anhand des Nicknamen zu finden.
 	public User getUserByNickname(User u) throws IllegalArgumentException{
 		User user = uMapper.findByNickname(u);
 		return user;
@@ -76,13 +77,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		User user = uMapper.findByEmail(u);
 		return user;
 	}
-	
+	// Methode um alle Gruppen eines User zu finden.
 	public Vector<Group> getAllGroupnameByUserID (User u) throws IllegalArgumentException{
 		Vector<Group> gr = null;
 		gr = gMapper.findAllGroupnameByUserID(u);
 		return gr;
 	}
-	
+	// Methode zur Aktualisierung eines User Objektes.
 	public User updateUser(User upUser) throws IllegalArgumentException{
 		if (upUser != null) {
 			User tempUser = uMapper.updateUser(upUser);
@@ -90,6 +91,8 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 		}
+	// Methode zum Löschen eines bestimmten Users
+	// TODO: Besprechen der deleteAllBy-Methoden.
 	public void deleteUser(User u) throws IllegalArgumentException{
 		uMapper.deleteUserByUserID(u.getId());
 		//gMapper.deleteAllByUserID(u.getId());
@@ -114,4 +117,45 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 	*/
+
+	@Override
+	public Group createGroup(Group g) throws IllegalArgumentException {
+		if (g !=null) {
+			Group tempGroup = new Group();
+			tempGroup = gMapper.insertGroup(g);
+			return tempGroup;
+		}
+		return null;
+	}
+
+	@Override
+	public Group getGroupByGroupID(Group g) throws IllegalArgumentException {
+		Group group = gMapper.findByGroupID(g);
+		return group;
+	}
+
+	@Override
+	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException {
+		Vector<Group> rs = gMapper.findAllByUserID(u);
+		return rs;
+		
+	}
+
+	@Override
+	public void updateGroup(Group upGroup) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteByGroupID(Group g) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllByUserID(Group g) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
 }

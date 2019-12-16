@@ -20,24 +20,24 @@ public interface EditorAdministrationAsync {
 	
 	void createUser(User u, AsyncCallback<User> callback);
 	
-	void getUserByNickname(AsyncCallback<User> callback);
+	void getUserByNickname(User u, AsyncCallback<User> callback);
 	
-	void getUserByEmail(AsyncCallback<User> callback);
+	void getUserByEmail(User u, AsyncCallback<User> callback);
 	
 	void getAllGroupnameByUserID(User u, AsyncCallback<Vector<Group>> callback);
 	
 	void updateUser(User upUser, AsyncCallback<User> callback);
 	
 	void deleteUser(User u, AsyncCallback<Void> callback);
-	
-	/*
 
+	
 	// Group
-	void createGroup(String name, AsyncCallback<Group> callback);
-
-	void getGroupByGroupID(AsyncCallback<Group> callback);
 	
-	void getAllGroupByUserID(Group g, AsyncCallback<Void> callback);
+	void createGroup(Group g, AsyncCallback<Group> callback);
+
+	void getGroupByGroupID(Group g, AsyncCallback<Group> callback);
+	
+	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
 	
 	void updateGroup(Group upGroup, AsyncCallback<Void> callback);
 
@@ -45,6 +45,9 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Group g, AsyncCallback<Void> callback);
 	
+	
+	/*
+
 	// GroupMember
 	void createGroupMember(AsyncCallback<Groupmember> callback);
 
