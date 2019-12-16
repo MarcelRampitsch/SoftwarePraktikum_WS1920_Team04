@@ -1,7 +1,10 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -12,7 +15,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -23,6 +29,9 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 
 public class PresentationForm extends VerticalPanel{
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+
 	
 	
 	 	Label pcinemaLabel = new Label("Cinema");
@@ -50,7 +59,10 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    Button presentationAdd = new Button("add");
 	    
-	    
+		private Vector<Cinema> cine = null;
+		
+		private Vector<Movie> movie =null;
+
 	    
 	    HorizontalPanel presentationadder = new HorizontalPanel();
 	    VerticalPanel buttonbox  = new VerticalPanel();
@@ -73,16 +85,56 @@ public class PresentationForm extends VerticalPanel{
 	    	
 	    	this.add(pcinemaLabel);
 	    	this.add(cinemaDrop);
-	    	 cinemaDrop.addItem("UFA- Palast");
+	    	
+	    	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
+	    		
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+				}
+
+				@Override 
+				public void onSuccess(Vector<Cinema> result) {
+					
+					for (int i = 0; i < result.size(); i++ ) {
+						cinemaDrop.addItem(result.elementAt(i).getName());
+						cine = result;
+					}
+				}
+			});
+	/*    	 cinemaDrop.addItem("UFA- Palast");
 			 cinemaDrop.addItem("Traumpalast");
-			 cinemaDrop.addItem("Central und union");
+			 cinemaDrop.addItem("Central und union");   */
 	    	
 	    	
 	    	this.add(pmovieLabel);
 	    	this.add(movieDrop);
-	    	 movieDrop.addItem("Spiderman");
+	    	
+            adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
+	    		
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+				}
+
+				@Override 
+				public void onSuccess(Vector<Movie> result) {
+					
+					for (int i = 0; i < result.size(); i++ ) {
+						movieDrop.addItem(result.elementAt(i).getName());
+						movie = result;
+					}
+				}
+			});
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	/*    	 movieDrop.addItem("Spiderman");
 			 movieDrop.addItem("Der böse Film");
-			 movieDrop.addItem("Spiderman 3");
+			 movieDrop.addItem("Spiderman 3");       */
 			    
 	    	
 	    	this.add(ptimeslotLabel);
