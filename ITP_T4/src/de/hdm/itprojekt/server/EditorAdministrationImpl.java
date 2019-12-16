@@ -140,13 +140,17 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return rs;
 		
 	}
-
+/*
 	@Override
-	public void updateGroup(Group upGroup) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
+	public Group updateGroup(Group g) throws IllegalArgumentException {
+		if(g != null) {
+			Group tempGroup = null;
+			tempGroup = gMapper.updateGroup(tempGroup);
+			return tempGroup;
+		}
+		return null;
 	}
-
+*/
 	@Override
 	public void deleteByGroupID(Group g) throws IllegalArgumentException {
 		// TODO Auto-generated method stub

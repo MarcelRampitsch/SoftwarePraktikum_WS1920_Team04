@@ -52,7 +52,7 @@ public interface EditorAdministration extends RemoteService {
 	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException;
 	
 	// Aktualisieren eines Gruppen Objekts.
-	public void updateGroup(Group upGroup) throws IllegalArgumentException;
+	//public Group updateGroup(Group g) throws IllegalArgumentException;
 	
 	// L�schen der Gruppe anhand der ID.
 	public void deleteByGroupID(Group g) throws  IllegalArgumentException;

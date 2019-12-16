@@ -39,7 +39,7 @@ public interface EditorAdministrationAsync {
 	
 	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
 	
-	void updateGroup(Group upGroup, AsyncCallback<Void> callback);
+	//void updateGroup(Group g, AsyncCallback<Group> callback);
 
 	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
 	
