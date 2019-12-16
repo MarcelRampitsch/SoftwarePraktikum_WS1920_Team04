@@ -7,17 +7,20 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 public class EditCinemaDialogBox extends DialogBox {
 	
 	Cinema cine = null; 
+	User user = null;
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	Cinema c = null;
 	VerticalPanel content = new VerticalPanel();
@@ -29,7 +32,7 @@ public class EditCinemaDialogBox extends DialogBox {
 	Button safe = new Button("save");
 	
 	
-	public EditCinemaDialogBox(Cinema cine) {
+	public EditCinemaDialogBox(Cinema cine, User user) {
 		this.cine = cine;
 	}
 	
@@ -94,6 +97,9 @@ public class EditCinemaDialogBox extends DialogBox {
 				@Override
 				public void onSuccess(Cinema result) {
 				closeCinemaEditForm();
+				RootPanel.get().clear();
+				AdminForm adminform = new AdminForm(user);
+				RootPanel.get().add(adminform);
 				}});
 		}
 	}

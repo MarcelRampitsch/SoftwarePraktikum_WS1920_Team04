@@ -158,7 +158,7 @@ public class CinemaForm extends VerticalPanel {
 		
 		public void onClick(ClickEvent event) {
 			selectedCinema = cine.elementAt(cinemaBox.getSelectedIndex());
-			EditCinemaDialogBox edit = new EditCinemaDialogBox(selectedCinema);
+			EditCinemaDialogBox edit = new EditCinemaDialogBox(selectedCinema, user);
 			edit.openCinemaEdit();
 			
 		}
