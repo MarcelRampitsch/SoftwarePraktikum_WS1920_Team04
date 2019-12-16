@@ -12,6 +12,8 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class Admin implements EntryPoint {
 	
+	
+	
 	protected User currentUser = new User("a");
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();

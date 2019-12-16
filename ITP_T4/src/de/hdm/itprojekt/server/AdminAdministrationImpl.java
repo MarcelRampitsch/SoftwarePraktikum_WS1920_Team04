@@ -105,15 +105,14 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	
 	public CinemaGroup updateCinemaGroup (CinemaGroup cg) throws IllegalArgumentException{
 		if(cg != null) {
-			CinemaGroup cineg = null;
-			cineg = cgMapper.updateCinemaGroup(cineg);
+			CinemaGroup cineg = cgMapper.updateCinemaGroup(cg);
 			return cineg;
 		}
 		return null;
 	}
 	
 	public void deleteCinemaGroup (CinemaGroup cg) throws IllegalArgumentException{
-		cgMapper.deleteCinemaGroupByID(cg);
+		cgMapper.deleteCinemaGroupByID(cg.getId());
 	}
 	
 	public Vector<CinemaGroup> getAllCinemaGroupByUserID(User u) throws IllegalArgumentException{

@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
-import de.hdm.itprojekt.client.gui.admin.CinemaForm.editCinemaGroupClickHandler;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
@@ -35,6 +34,11 @@ public class CinemaGroupForm extends VerticalPanel{
 	HorizontalPanel cinemaGroupPanel2 = new HorizontalPanel();
 
 	private User user = null;
+	private CinemaGroup delete =null;
+	private Vector<CinemaGroup> cine = null;
+	private CinemaGroup selectedCinemaGroup = null;
+
+
 	
 	public CinemaGroupForm(User user) {
 		this.user=user;
@@ -46,12 +50,14 @@ public class CinemaGroupForm extends VerticalPanel{
 	public void onLoad() {
 		super.onLoad();
 		
+		
+		// Laden der CinemaGroups aus der Datenbank
 		cinemaGroupPanel1.add(cinemaGroupBox);
 		adminAdministration.getAllCinemaGroupByUserID(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("was ist falsch geloffen");
+				Window.alert("Fehler beim Laden der CinemaGroup!");
 			}
 
 			@Override 
@@ -59,6 +65,7 @@ public class CinemaGroupForm extends VerticalPanel{
 				
 				for (int i = 0; i < result.size(); i++ ) {
 					cinemaGroupBox.addItem(result.elementAt(i).getName());
+					cine = result;
 				}
 			}
 		});
@@ -88,32 +95,12 @@ public class CinemaGroupForm extends VerticalPanel{
 	public class addCinemaGroupClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			CinemaGroupAddDialogBox cinemagroup = new CinemaGroupAddDialogBox();
+			CinemaGroupAddDialogBox cinemagroup = new CinemaGroupAddDialogBox(user);
 			cinemagroup.openCinemaGroup();
 			
 	
-	
-	
-	
-}
-		private class addCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(CinemaGroup result) {
-				// TODO Auto-generated method stub
-				
-			}
+       }
 			
-		}
-		
-		
-		
 	}
 	
 	/**
@@ -122,26 +109,10 @@ public class CinemaGroupForm extends VerticalPanel{
 	public class deleteCinemaGroupClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			DeleteCinemaGroupDialogBox deleteCinemaGroup = new DeleteCinemaGroupDialogBox();
+			delete = cine.elementAt(cinemaGroupBox.getSelectedIndex());
+			DeleteCinemaGroupDialogBox deleteCinemaGroup = new DeleteCinemaGroupDialogBox(delete,user);
 			deleteCinemaGroup.openCimemaGroupDelete();
 		}
-	}
-	
-	
-	private class deleteCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onSuccess(CinemaGroup result) {
-			// TODO Auto-generated method stub
-			
-		}
-		
 	}
 	
 	
@@ -152,28 +123,15 @@ public class CinemaGroupForm extends VerticalPanel{
 	public class editCinemaGroupClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			EditCinemaGroupDialogBox editcinemagroup = new EditCinemaGroupDialogBox();
+			selectedCinemaGroup = cine.elementAt(cinemaGroupBox.getSelectedIndex());
+			EditCinemaGroupDialogBox editcinemagroup = new EditCinemaGroupDialogBox(selectedCinemaGroup, user);
 			editcinemagroup.openCinemaGroupEdit();
 			
 		}
 	}
 	
 	
-	private class editCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onSuccess(CinemaGroup result) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
+	
 	
 }
 		

@@ -8,10 +8,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 public class DeleteCinemaGroupDialogBox extends DialogBox {
@@ -22,13 +26,19 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
+	User user = null; 
+	CinemaGroup cinemaGroup = null;
+
+
 	
 	Label cinemaLabel = new Label("CinemaGroup wirklich löschen?");
 	
 	Button yes = new Button ("yes");
 	Button no = new Button ("no");
 	
-	public DeleteCinemaGroupDialogBox() {
+	public DeleteCinemaGroupDialogBox(CinemaGroup cinemaGroup, User user) {
+		this.cinemaGroup=cinemaGroup;
+		this.user=user;
 		
 	}
 	
@@ -97,7 +107,25 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-	//		adminAdministration.deleteCinemaGroup(1, new DeleteCallBack());     //deleteCinemaGroup Ergänzen! 
+			
+			adminAdministration.deleteCinemaGroup(cinemaGroup, new AsyncCallback<Void>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(Void result) {
+					// TODO Auto-generated method stub
+					closeCinemaGroupForm();
+					RootPanel.get().clear();
+					AdminForm adminform = new AdminForm(user);
+					RootPanel.get().add(adminform);
+					
+				}
+			});
 
 			
 		}
@@ -109,7 +137,7 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
    	 * Bei erfolgreichem Rückruf (onSucess) wird das CinemaGroup Objekt gelöscht. Danach wird die dazugehörige <code> DeleteCinemaGroupDialogBox </code> geschlossen. 
    	 * 
    	 */
-   	class DeleteCallBack implements AsyncCallback<Void>{
+  /* 	class DeleteCallBack implements AsyncCallback<Void>{
 
    		@Override
    		public void onFailure(Throwable caught) {
@@ -127,6 +155,6 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
        
 
        
-   	}
+   	} */
     
 }

@@ -100,7 +100,7 @@ public class CinemaGroupMapper {
 		try {
 			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement findCinemaGroupByID = 
-					con.prepareStatement("SELECT softwarepraktikum_ws1920.cinemaGroup WHERE cinemaGroupID=?;");
+					con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemaGroup WHERE cinemaGroupID=?;");
 			
 			
 			findCinemaGroupByID.setInt(1, cg.getId());
@@ -153,7 +153,7 @@ public class CinemaGroupMapper {
 	
 	
 	
-	public void deleteCinemaGroupByID(CinemaGroup cg) {
+	public void deleteCinemaGroupByID(int id) {
 		
 		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
@@ -162,8 +162,8 @@ public class CinemaGroupMapper {
 			
 			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement deleteCinemaGroupById =
-					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemaGroup WHERE 'cinemaGroupID' = ?;");
-			deleteCinemaGroupById.setInt(cg.getId(), 1);		
+					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemaGroup" + "WHERE cinemaGroupID=? ");
+			deleteCinemaGroupById.setInt(1, id);		
 			 // Löschen der CinemaGroups die einen bestimmten UserID enthalten
 			deleteCinemaGroupById.executeUpdate();
 			
@@ -189,7 +189,7 @@ public class CinemaGroupMapper {
 		try {
 			
 			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
-			PreparedStatement findCinemaGroupByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemaGroup " + "WHERE UserID=? ");
+			PreparedStatement findCinemaGroupByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemagroup " + "WHERE UserID=? ");
 			findCinemaGroupByUserID.setInt(1, u.getId());
 			
 			// Statement ausfüllen und als Query an die DB schicken

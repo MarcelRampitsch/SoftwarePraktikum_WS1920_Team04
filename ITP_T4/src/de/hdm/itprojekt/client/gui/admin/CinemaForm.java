@@ -192,7 +192,7 @@ public class CinemaForm extends VerticalPanel {
 	
 	
 	
-	private class addCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
+/*	private class addCinemaGroupCallback implements AsyncCallback <CinemaGroup>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -206,19 +206,11 @@ public class CinemaForm extends VerticalPanel {
 			
 		}
 		
-	}
+	}  */
 	
 	/**
 	 * ClickHandler zum editieren einer CinemaGroup
 	 */
-	public class editCinemaGroupClickHandler implements ClickHandler{
-		
-		public void onClick(ClickEvent event) {
-			EditCinemaGroupDialogBox editcinemagroup = new EditCinemaGroupDialogBox();
-			editcinemagroup.openCinemaGroupEdit();
-			
-		}
-	}
 	
 	
 	
@@ -262,7 +254,7 @@ public class CinemaForm extends VerticalPanel {
 	 */
     
 	
-	private class addCinemaCallback implements AsyncCallback <Cinema>{
+/*	private class addCinemaCallback implements AsyncCallback <Cinema>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -278,9 +270,7 @@ public class CinemaForm extends VerticalPanel {
 		
 	}
 	
-	/**
-	 * ClickHandler zum editieren eines Cinema
-	 */
+	
 	
 	
 	private class editCinemaCallback implements AsyncCallback <Cinema>{
@@ -313,10 +303,9 @@ public class CinemaForm extends VerticalPanel {
 		public void onSuccess(Cinema result) {
 			// TODO Auto-generated method stub
 			
-		}
+		}  */
 		
 		
 		
 	
-}
 }
