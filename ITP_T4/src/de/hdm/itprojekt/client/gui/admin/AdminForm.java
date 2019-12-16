@@ -40,7 +40,8 @@ public class AdminForm extends VerticalPanel{
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
-	private User currentUser;
+	public User currentUser;
+	public User u;
 	
 	/*
 	VerticalPanel main = new VerticalPanel();
@@ -75,56 +76,42 @@ public class AdminForm extends VerticalPanel{
 		 */
 
 		this.setStylePrimaryName("AdminForm");
-		Window.alert(currentUser.getEmail());
 		adminAdministration.getUserbyEmail(currentUser, new AsyncCallback<User>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert(currentUser.getEmail());
 			}
 
 			@Override
 			public void onSuccess(User result) {
 			currentUser = result;
-				
+			VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser);
+			main.add(verwaltungsForm);
 			}
 		});
-		
-	//	main.addStyleName("AdminMain");
-		VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser);
-		
 		Image logo = new Image("Offical_Logo.png");
-	
-	//	main.add(cinemaButton);
-	//	main.add(movieButton);
-	//	main.add(timeslotButton);
-	//	main.add(presentationButton);
+		//	main.addStyleName("AdminMain");
+		//	main.add(cinemaButton);
+		//	main.add(movieButton);
+		//	main.add(timeslotButton);
+		//	main.add(presentationButton);
 
-	//	this.add(main);
-	
-	//	RootPanel.get("container").add(main);
+		//	this.add(main);
 		
+		//	RootPanel.get("container").add(main);
+			
 
-		//Button, dessen ClickEvent zum Admin Mode führt.		
-		Button toBesucher = new Button("EditorModus", new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						// TODO Auto-generated method stub
-						Window.Location.replace("/ITP_T4.html");
-					}
-				});
-		
-		main.add(toBesucher);
-		main.add(verwaltungsForm);
-
-
+			//Button, dessen ClickEvent zum Admin Mode führt.		
+			Button toBesucher = new Button("EditorModus", new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							// TODO Auto-generated method stub
+							Window.Location.replace("/ITP_T4.html");
+						}
+					});
+			
+			main.add(toBesucher);
 		this.add(main);
-
-		
-				
-		
-
-
 	}
 
 	private class CinemaHandler implements ClickHandler {

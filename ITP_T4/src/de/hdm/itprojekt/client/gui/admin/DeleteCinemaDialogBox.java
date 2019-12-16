@@ -8,11 +8,13 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.User;
 
 public class DeleteCinemaDialogBox extends DialogBox {
 	
@@ -23,14 +25,15 @@ public class DeleteCinemaDialogBox extends DialogBox {
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
 	Cinema cinema = null;
-	
+	User currentUser = null; 
 	Label cinemaLabel = new Label("Cinema wirklich löschen?");
-	
+	CinemaForm cinemaform;
 	Button yes = new Button ("yes");
 	Button no = new Button ("no");
 	
-	public DeleteCinemaDialogBox(Cinema cinema) {
+	public DeleteCinemaDialogBox(Cinema cinema, User currentUser) {
 		this.cinema = cinema;
+		this.currentUser = currentUser;
 	}
 	
 	public void onLoad() {
@@ -115,6 +118,10 @@ public class DeleteCinemaDialogBox extends DialogBox {
 				public void onSuccess(Void result) {
 					// TODO Auto-generated method stub
 					closeCinemaForm();
+					RootPanel.get().clear();
+					AdminForm adminform = new AdminForm(currentUser);
+					RootPanel.get().add(adminform);
+					
 				}
 			});
 

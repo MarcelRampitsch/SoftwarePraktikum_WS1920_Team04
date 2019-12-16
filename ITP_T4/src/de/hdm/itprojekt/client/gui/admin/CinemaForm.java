@@ -171,7 +171,7 @@ public class CinemaForm extends VerticalPanel {
 		
 		public void onClick(ClickEvent event) {
 			delete = cine.elementAt(cinemaBox.getSelectedIndex());
-			DeleteCinemaDialogBox edit = new DeleteCinemaDialogBox(delete);
+			DeleteCinemaDialogBox edit = new DeleteCinemaDialogBox(delete, user);
 			edit.openCinemaDelete();
 											
 		}
