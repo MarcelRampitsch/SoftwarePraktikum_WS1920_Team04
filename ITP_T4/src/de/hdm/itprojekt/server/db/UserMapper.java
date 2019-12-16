@@ -83,17 +83,18 @@ public class UserMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  PreparedStatement findByEmail = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user"+ "WHERE email=?;");
+			  PreparedStatement findByEmail = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user " + "WHERE email=?");
 			  findByEmail.setString(1, u.getEmail());
 			  
 			  ResultSet rs = findByEmail.executeQuery();
-
+			  if(rs.next()){
 			  user = new User(rs.getInt("userID"), rs.getString("nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
-			  return user;
-		  } catch (SQLException e2) {
+			  }
+			  } catch (SQLException e2) {
 			  e2.printStackTrace();
 			  return null;
 		  }
+		  return user;
 	  }
 	  
 	  public User insert(User u) {
