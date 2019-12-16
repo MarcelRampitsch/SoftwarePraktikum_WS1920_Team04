@@ -162,7 +162,7 @@ public class CinemaGroupMapper {
 			
 			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
 			PreparedStatement deleteCinemaGroupById =
-					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemaGroup" + "WHERE cinemaGroupID=? ");
+					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemaGroup WHERE `cinemaGroupID`=?; ");
 			deleteCinemaGroupById.setInt(1, id);		
 			 // Löschen der CinemaGroups die einen bestimmten UserID enthalten
 			deleteCinemaGroupById.executeUpdate();
