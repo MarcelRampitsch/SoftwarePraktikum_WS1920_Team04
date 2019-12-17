@@ -103,7 +103,7 @@ public class MovieAddDialogbox extends DialogBox {
 		Movie m = null;
 		@Override
 		public void onClick(ClickEvent event) {
-			m = new Movie(user.getId(),moviebox.getText());
+			m = new Movie(moviebox.getText(),user.getId());
 			
 			adminAdministration.addMovie(m, new AsyncCallback<Movie>() {
 				
