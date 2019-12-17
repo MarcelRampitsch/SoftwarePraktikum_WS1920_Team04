@@ -9,11 +9,21 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.User;
+
 
 public class EditMovieDialogBox extends DialogBox {
 	
 VerticalPanel content = new VerticalPanel();
 	
+	Movie movie = null; 
+	User user = null;
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
 	Button close = new Button ("X");
 	
@@ -27,8 +37,9 @@ VerticalPanel content = new VerticalPanel();
 	Button safe = new Button("save");
 	
 	
-	public EditMovieDialogBox() {
-		
+	public EditMovieDialogBox(Movie movie, User user) {
+		this.movie = movie;
+		this.user = user;		
 	}
 	
 	public void onLoad() {
