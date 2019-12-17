@@ -34,7 +34,7 @@ public interface AdminAdministration extends RemoteService {
 	
 	// Movie
 	Movie addMovie(Movie m) throws IllegalArgumentException;
-	void updateMovie(Movie m) throws IllegalArgumentException;
+	Movie updateMovie(Movie m) throws IllegalArgumentException;
 	void deleteMovie(Movie m) throws IllegalArgumentException;
 	Vector<Movie> getAllMovieByUserID(User u) throws IllegalArgumentException;
 	

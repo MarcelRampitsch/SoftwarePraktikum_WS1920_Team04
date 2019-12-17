@@ -19,8 +19,12 @@ private static final long serialversionUID = 1l;
 		this.userID = userID;
 	}
 	
+	public Movie(String name, int userID) {
+	this.name = name;
+	this.userID = userID;
+	}
+	
 	public Movie() {
-		
 	}
 	
 	// Getter und Setter

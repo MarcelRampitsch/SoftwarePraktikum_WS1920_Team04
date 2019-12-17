@@ -32,7 +32,7 @@ public interface AdminAdministrationAsync {
 
 	// Movie
 	void addMovie(Movie m, AsyncCallback<Movie> callback);
-	void updateMovie(Movie m, AsyncCallback<Void> callback);
+	void updateMovie(Movie m, AsyncCallback<Movie> callback);
 	void deleteMovie(Movie m, AsyncCallback<Void> callback);
 	void getAllMovieByUserID(User u, AsyncCallback<Vector<Movie>> callback);
 	

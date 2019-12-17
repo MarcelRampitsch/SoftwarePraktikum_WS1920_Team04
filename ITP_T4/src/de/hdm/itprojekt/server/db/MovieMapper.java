@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Vector;
 
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -161,7 +162,7 @@ public class MovieMapper {
 		return null;
 	}
 	
-	public void updateMovie (Movie m) {
+	public Movie updateMovie (Movie m) {
 		Connection con = DBConnection.getConnection();
 		
 		try {
@@ -169,9 +170,21 @@ public class MovieMapper {
 			updateMovie.setString(1, m.getName());
 			updateMovie.setInt(2, m.getId());
 			updateMovie.executeUpdate();
+			PreparedStatement stm  = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie WHERE movieID=?;");
+			
+			updateMovie.setInt(1, m.getId());
+			
+			ResultSet rs  = stm.executeQuery();
+			
+			if(rs.next()) {
+				// Ergebnis-Tupel in Objekt umwandeln
+				return new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));          
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
+		return null;
 	}
 	
 	// Methode zum l�schen von Filmen aus der Datenbank anhand der MovieID
@@ -181,7 +194,7 @@ public class MovieMapper {
 		
 		try {
 			// Erstellung des PreparedStatement deleteByMovieID
-			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE movieID=?;");
+			PreparedStatement deleteByMovieID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE movieID=?");
 		deleteByMovieID.setInt(1, m.getId());
 		deleteByMovieID.executeUpdate();
 		
