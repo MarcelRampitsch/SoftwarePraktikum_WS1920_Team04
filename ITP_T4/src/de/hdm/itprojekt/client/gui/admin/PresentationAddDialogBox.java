@@ -1,43 +1,114 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.DatePicker;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Timeslot;
+import de.hdm.itprojekt.shared.bo.User;
 
 public class PresentationAddDialogBox extends DialogBox {
 	
-    VerticalPanel content = new VerticalPanel();
-
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+    
+	VerticalPanel content = new VerticalPanel();
     HorizontalPanel buttoncontent  = new HorizontalPanel();
-    Label inhalt  =  new Label("Die ausgewählten Inhalte als eine Präsentation einspeichern?");
-	
-    Button yes = new Button("yes");
-    Button no = new Button("no");
     
+    User user = null;
+    Vector <Cinema> cine = null;
+    Vector <Movie> movie = null;
+    Vector <Timeslot> timeslot = null;
     
-    public PresentationAddDialogBox () {
-    	
+    Button yes = new Button("save");
+    Button no = new Button("X");
+    
+    ListBox cinemaBox = new ListBox();
+    ListBox movieBox = new ListBox();
+    ListBox timeslotBox = new ListBox();
+    DatePicker datePicker = new DatePicker();
+    
+    Label pcinemaLabel = new Label("Cinema");
+    Label pmovieLabel = new Label("Movie");
+    Label ptimeslotLabel = new Label("Timeslot");
+    Label dateLabel = new Label("Date");
+    
+    public PresentationAddDialogBox (User user) {
+    	this.user = user;
     }
     
     public void onLoad() {
     	super.onLoad();
-    	
-    	content.add(inhalt);
-    	
-    	buttoncontent.add(yes);
-    	yes.addClickHandler(new save());
     	buttoncontent.add(no);
     	no.addClickHandler(new close());
-    	
+    	content.add(pcinemaLabel);
+    	content.add(cinemaBox);
+    	content.add(pmovieLabel);
+    	content.add(movieBox);
+    	content.add(dateLabel);
+    	content.add(datePicker);
+    	content.add(ptimeslotLabel);
+    	content.add(timeslotBox);
+    	buttoncontent.add(yes);
+    	yes.addClickHandler(new save());
     	content.add(buttoncontent);
-    	
-    	
     	this.add(content);
+    	
+    	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
+    		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
+
+			@Override 
+			public void onSuccess(Vector<Cinema> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					cinemaBox.addItem(result.elementAt(i).getName());
+					cine = result;
+				}
+			}
+		});
+    	
+    	adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
+
+			@Override 
+			public void onSuccess(Vector<Movie> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					movieBox.addItem(result.elementAt(i).getName());
+					movie = result;
+				}
+			}
+		});
+    	
+    	
+    	
     	
     }
 
@@ -71,17 +142,21 @@ public class PresentationAddDialogBox extends DialogBox {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			closePresentation();			
+			closePresentation();
 		}
-    	
-    	
     }
     
     private class save implements ClickHandler{
 
 		@Override
 		public void onClick(ClickEvent event) {
-				Window.alert("EINGABE WURDE GESICHERT");
+		closePresentation();
+		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex());
+		Movie m = movie.elementAt(movieBox.getSelectedIndex());
+		Window.alert(c.getName()+m.getName());
+		
+		
+		
 		}
 }
 }
