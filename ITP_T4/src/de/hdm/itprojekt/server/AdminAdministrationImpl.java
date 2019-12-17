@@ -147,6 +147,65 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		Vector<Movie> re = mMapper.findAllByUserID(u);
 		return re;
 	}
+
+	
+	public Timeslot findByTimeslotID(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public Timeslot findByTime(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public Timeslot insert(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public Timeslot update(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public void deleteByTimeslotID(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void deleteAllTimeslotByUserID(User u) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public Vector<Timeslot> findAllTimeslotByUserID(User u) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteAllTimeslotByMovieID(Movie m) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Timeslot addTimeslot(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Timeslot updateTimeslot(Timeslot t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	/*@Override
