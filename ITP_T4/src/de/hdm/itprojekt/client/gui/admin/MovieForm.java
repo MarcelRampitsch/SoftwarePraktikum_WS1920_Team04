@@ -14,34 +14,42 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.admin.CinemaForm.addCinemaClickHandler;
+import de.hdm.itprojekt.client.gui.admin.CinemaForm.deleteCinemaClickHandler;
+import de.hdm.itprojekt.client.gui.admin.CinemaForm.editCinemaClickHandler;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * 
- * @author Dominik Thumm, SerhatUlus
+ * @author DominikThumm, SerhatUlus, VanDuyHo
  *
  */
 
 public class MovieForm  extends VerticalPanel{
 	
+    private Label movieLabel = new Label("Movie");
 	
-	ListBox moviebox = new ListBox();
-    Label movieLabel = new Label("Movie");
-	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+    AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
+    private ListBox movieBox = new ListBox();
     
-    Button movieEdit = new Button("Edit");
-    Button movieNew = new Button("New");
-    Button movieDelete = new Button("Delete");
+    Button editMovie = new Button("Edit");
+    Button newMovie = new Button("New");
+    Button deleteMovie = new Button("Delete");
     
+	HorizontalPanel moviePanel1 = new HorizontalPanel();
+	HorizontalPanel moviePanel2 = new HorizontalPanel();
+	
+    private User user = null;
     
-    HorizontalPanel movieaddbox = new HorizontalPanel();
-    HorizontalPanel buttonbox = new HorizontalPanel();
-	private User user = null;
+	private Movie selectedMovie = null;
+	private Vector<Movie> movie = null;
+	private Movie delete = null;
 
     
     public MovieForm(User user) {
@@ -53,8 +61,12 @@ public class MovieForm  extends VerticalPanel{
     	
     	super.onLoad();
     	
+    	newMovie.addClickHandler(new addMovieClickHandler());
+		editMovie.addClickHandler(new editMovieClickHandler());
+		deleteMovie.addClickHandler(new deleteMovieClickHandler());
+    	
     	this.add(movieLabel);    	
-    	movieaddbox.add(moviebox);
+    	moviePanel1.add(movieBox);
     	
     	adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
 			
@@ -67,22 +79,19 @@ public class MovieForm  extends VerticalPanel{
 			public void onSuccess(Vector<Movie> result) {
 				
 				for (int i = 0; i < result.size(); i++ ) {
-					moviebox.addItem(result.elementAt(i).getName());
+					movieBox.addItem(result.elementAt(i).getName());
+					movie = result;
 				}
 			}
 		});
     	
-    	movieEdit.addClickHandler(new editMovieClickHandler());
-    	movieNew.addClickHandler(new addMovieClickHandler());
-    	movieDelete.addClickHandler(new deleteMovieClickHandler());
-    	    	
-    	
-    	buttonbox.add(movieEdit);
-    	buttonbox.add(movieNew);
-    	buttonbox.add(movieDelete);
-    	
-    	this.add(movieaddbox);
-    	this.add(buttonbox);
+    	moviePanel2.add(editMovie);
+		moviePanel2.add(newMovie);
+		moviePanel2.add(deleteMovie);
+		
+
+		this.add(moviePanel1);
+		this.add(moviePanel2);
      	
     }
     
@@ -97,9 +106,9 @@ public class MovieForm  extends VerticalPanel{
     public class addMovieClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			MovieAddDialogbox cinemagroup = new MovieAddDialogbox();
-			cinemagroup.openMovieAdd();
 			
+			MovieAddDialogbox movie = new MovieAddDialogbox(user);
+			movie.openMovieAdd();
 			
 		}
 		
@@ -111,9 +120,10 @@ public class MovieForm  extends VerticalPanel{
 	public class editMovieClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-
-			EditMovieDialogBox editMovie = new EditMovieDialogBox();
-			editMovie.openMovieEdit();
+	
+			selectedMovie = movie.elementAt(movieBox.getSelectedIndex());
+			EditMovieDialogBox edit = new EditMovieDialogBox(selectedMovie, user);
+			edit.openMovieEdit();
 			
 		}
 	}
@@ -124,12 +134,14 @@ public class MovieForm  extends VerticalPanel{
 	public class deleteMovieClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			DeleteMovieDialogBox deleteMovie = new DeleteMovieDialogBox();
-			deleteMovie.openMovieDelete();
 					
+			delete = movie.elementAt(movieBox.getSelectedIndex());
+			DeleteMovieDialogBox edit = new DeleteMovieDialogBox(delete, user);
+			edit.openMovieDelete();
 			
 		}
 	}
+	
 	
 	private class addCinemaGroupCallback implements AsyncCallback <Movie>{
 
@@ -148,7 +160,6 @@ public class MovieForm  extends VerticalPanel{
 	}
 	
 	
-	
 	private class editMovieCallback implements AsyncCallback <Movie>{
 
 		@Override
@@ -164,7 +175,6 @@ public class MovieForm  extends VerticalPanel{
 		}
 		
 	}
-	
 	
 	
 	private class deleteMovieCallback implements AsyncCallback <Movie>{
