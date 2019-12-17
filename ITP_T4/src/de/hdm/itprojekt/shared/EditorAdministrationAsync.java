@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Survey;
@@ -44,6 +45,13 @@ public interface EditorAdministrationAsync {
 	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
 	
 	void deleteAllByUserID(Group g, AsyncCallback<Void> callback);
+	
+	// Cinema
+	
+	void findAllCinemaByUser1(User u, AsyncCallback<Vector<Cinema>> callback);
+
+	
+	
 	
 	
 	/*

@@ -1,10 +1,12 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
@@ -12,6 +14,11 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 /**
@@ -24,6 +31,12 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class UmfragenOpenForm extends DialogBox {
 	
+	EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdministration();
+	
+	private User user = null;
+	private Cinema selectedCinema = null;
+	private Vector<Cinema> cine = null;
+	private Cinema delete = null;
 	
 	
 	 Label umfrageErstellung = new Label("Umfrageerstellung:");
@@ -34,7 +47,7 @@ public class UmfragenOpenForm extends DialogBox {
 	 Label film = new Label ("Film wählen:");
 	 final ListBox dropBoxFilm = new ListBox();
 	 Label kino = new Label("Kino wählen:");
-	 final ListBox dropBoxKino = new ListBox();
+	 ListBox dropBoxKino = new ListBox();
 	 Label spielzeit = new Label("Spielzeit wählen");
 	 final ListBox dropBoxSpielzeit = new ListBox();
 	 Button safeUmfrage = new Button("Umfrage speichern");
@@ -53,6 +66,11 @@ public class UmfragenOpenForm extends DialogBox {
 	
      VerticalPanel content = new VerticalPanel();
 	
+     public UmfragenOpenForm(User user) {
+    	 this.user = user;
+     }
+     
+     
 	
 	/*
 	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
@@ -82,10 +100,30 @@ public class UmfragenOpenForm extends DialogBox {
 		dropBoxFilm.addItem("Beispiel 3");
 		content.add(dropBoxFilm);
 		content.add(kino);
-		dropBoxKino.addItem("Central und Union");
-		dropBoxKino.addItem("UFA Palast");
-		dropBoxKino.addItem("Massetheater");
+		
 		content.add(dropBoxKino);
+
+		
+		editorAdministraion.findAllCinemaByUser1(this.user, new AsyncCallback<Vector<Cinema>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fehler beim Umfragen erstellen!");
+			}
+
+			@Override 
+			public void onSuccess(Vector<Cinema> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					dropBoxKino.addItem(result.elementAt(i).getName());
+					cine = result;
+				}
+			}
+		});
+		
+		
+		
+		
 		content.add(spielzeit);
 		dropBoxSpielzeit.addItem("19:00");
 		dropBoxSpielzeit.addItem("19:30");

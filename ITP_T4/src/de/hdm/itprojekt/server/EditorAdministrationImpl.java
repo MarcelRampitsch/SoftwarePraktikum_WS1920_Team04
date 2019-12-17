@@ -4,6 +4,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.gwt.user.client.Window;
 
 import de.hdm.itprojekt.shared.EditorAdministration;
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Presentation;
@@ -105,6 +106,20 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		//cMapper.deleteAllCinemaByUserID(u.getId());
 		//mMapper.deleteAllByUserID(u.getId());
 	}
+	
+	// Methode um alle Cinema eines User zu finden
+		public Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException{
+			
+			Vector<Cinema> rs = new Vector<Cinema>();
+			rs = cMapper.findallCinemabyUserID(u);
+			return rs;
+		}
+	
+	
+	
+	
+	
+	
 /*
 	@Override
 	public Survey createSurvey(String name) throws IllegalArgumentException {
