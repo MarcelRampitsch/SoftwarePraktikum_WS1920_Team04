@@ -123,16 +123,20 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	// Movie
 	public Movie addMovie(Movie m) throws IllegalArgumentException{
 		if(m != null) {
-			Movie mo = mMapper.insert(m);
+			Movie mo = null;
+			mo = mMapper.insert(m);
 			return mo;
 		}
 		return null;
 	}
 	
-	public void updateMovie(Movie m) throws IllegalArgumentException{
-		if (m != null) {
-		mMapper.updateMovie(m);
-		}	
+	public Movie updateMovie (Movie updateM) throws IllegalArgumentException{
+		if(updateM != null) {
+			Movie m = null;
+			m = mMapper.updateMovie(updateM);
+			return m;
+		}
+		return null;
 	}		
 	
 	public void deleteMovie(Movie m) throws IllegalArgumentException{

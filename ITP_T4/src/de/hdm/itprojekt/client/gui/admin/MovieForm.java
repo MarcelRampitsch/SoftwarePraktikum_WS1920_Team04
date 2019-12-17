@@ -46,7 +46,6 @@ public class MovieForm  extends VerticalPanel{
 	HorizontalPanel moviePanel2 = new HorizontalPanel();
 	
     private User user = null;
-    
 	private Movie selectedMovie = null;
 	private Vector<Movie> movie = null;
 	private Movie delete = null;
