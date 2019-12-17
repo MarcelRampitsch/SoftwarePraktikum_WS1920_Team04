@@ -40,16 +40,16 @@ public interface AdminAdministration extends RemoteService {
 	Vector<Movie> getAllMovieByUserID(User u) throws IllegalArgumentException;
 	
 	
-	Timeslot findByTimeslotID (Timeslot t)throws IllegalArgumentException;
-	Timeslot findByTime(Timeslot t) throws IllegalArgumentException;
-	void deleteByTimeslotID(Timeslot t) throws IllegalArgumentException;
-	void deleteAllTimeslotByUserID(User u)  throws IllegalArgumentException;
-	Vector<Timeslot> findAllTimeslotByUserID(User u) throws IllegalArgumentException;
-	void deleteAllTimeslotByMovieID(Movie m) throws IllegalArgumentException;
-
-	Timeslot addTimeslot(Timeslot t);
-
-	Timeslot updateTimeslot(Timeslot t);
+//	Timeslot findByTimeslotID (Timeslot t)throws IllegalArgumentException;
+//	Timeslot findByTime(Timeslot t) throws IllegalArgumentException;
+//	void deleteByTimeslotID(Timeslot t) throws IllegalArgumentException;
+//	void deleteAllTimeslotByUserID(User u)  throws IllegalArgumentException;
+//	Vector<Timeslot> findAllTimeslotByUserID(User u) throws IllegalArgumentException;
+//	void deleteAllTimeslotByMovieID(Movie m) throws IllegalArgumentException;
+//
+//	Timeslot addTimeslot(Timeslot t);
+//
+//	Timeslot updateTimeslot(Timeslot t);
 	
 	
 //	Cinema greetServer(String input) throws IllegalArgumentException;
