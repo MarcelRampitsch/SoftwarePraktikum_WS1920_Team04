@@ -8,6 +8,12 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.User;
+
 
 public class DeleteMovieDialogBox extends DialogBox {
 	
@@ -15,16 +21,19 @@ public class DeleteMovieDialogBox extends DialogBox {
 	
 	HorizontalPanel horzcontent = new HorizontalPanel();
 
-	
-	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+
+	Movie movie = null;
+	User currentUser = null; 
 	
 	Label movieLabel = new Label("Movie wirklich löschen?");
 	
 	Button yes = new Button ("yes");
 	Button no = new Button ("no");
 	
-	public DeleteMovieDialogBox() {
-		
+	public DeleteMovieDialogBox(Movie movie, User currentUser) {
+		this.movie = movie;
+		this.currentUser = currentUser;
 	}
 	
 	public void onLoad() {
