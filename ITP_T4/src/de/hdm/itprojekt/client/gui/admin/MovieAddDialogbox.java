@@ -116,7 +116,7 @@ public class MovieAddDialogbox extends DialogBox {
 				public void onSuccess(Movie result) {
 					CloseMovieGroup();
 				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user);
+				AdminForm adminform = new AdminForm(user,2);
 				RootPanel.get().add(adminform);
 				}});
 		

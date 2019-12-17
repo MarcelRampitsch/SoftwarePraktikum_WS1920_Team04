@@ -100,7 +100,7 @@ VerticalPanel content = new VerticalPanel();
 				public void onSuccess(Movie result) {
 				closeMovieEditForm();
 				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user);
+				AdminForm adminform = new AdminForm(user,2);
 				RootPanel.get().add(adminform);
 				}
 				

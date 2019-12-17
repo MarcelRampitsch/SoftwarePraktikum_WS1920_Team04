@@ -119,8 +119,9 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 				public void onSuccess(CinemaGroup result) {
 				CloseCinemaGroup();
 				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user);
-				RootPanel.get().add(adminform);
+				AdminForm adminform = new AdminForm(user,1);
+				RootPanel.get().add(adminform);	
+				
 				}});
 				
 		}

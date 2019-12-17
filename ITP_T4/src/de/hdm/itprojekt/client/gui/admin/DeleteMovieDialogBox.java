@@ -102,7 +102,7 @@ public class DeleteMovieDialogBox extends DialogBox {
 						// TODO Auto-generated method stub
 						closeMovieForm();
 						RootPanel.get().clear();
-						AdminForm adminform = new AdminForm(user);
+						AdminForm adminform = new AdminForm(user,2);
 						RootPanel.get().add(adminform);
 						
 					}

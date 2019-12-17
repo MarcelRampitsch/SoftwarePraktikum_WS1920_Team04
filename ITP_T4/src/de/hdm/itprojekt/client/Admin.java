@@ -21,6 +21,6 @@ public class Admin implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		
-		RootPanel.get().add(new AdminForm(currentUser));
+		RootPanel.get().add(new AdminForm(currentUser,0));
 	} 
 }

@@ -31,6 +31,7 @@ public class VerwaltungsForm extends VerticalPanel {
 	// Cinema/ CinemaGroup, Movie, Timeslot und Präsentation werden einem StackPanel hinzugefügt
     StackPanel panel = new StackPanel();
 	private User user = null;
+	int a;
  
 //    //Cinema/ CinemaGroup
 //    TextBox cinemaGroupBox = new TextBox();
@@ -98,8 +99,9 @@ public class VerwaltungsForm extends VerticalPanel {
 
 
 	
-	public VerwaltungsForm(User u){
+	public VerwaltungsForm(User u, int a){
 		this.user  = u;
+		this.a = a;
 	}
 	
 	//VerwaltungForm(Administrator a){
@@ -293,7 +295,7 @@ public class VerwaltungsForm extends VerticalPanel {
 
 		    
 		    panel.add(presentationpanel, "Presentation");
-		    
+		    panel.showStack(a);
 		    this.add(panel);
 
 
