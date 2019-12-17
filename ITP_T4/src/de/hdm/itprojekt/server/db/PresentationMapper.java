@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Vector;
+import java.util.Date;
 
 import de.hdm.itprojekt.shared.bo.Presentation;
 
@@ -77,7 +78,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					// Objekt in einen Ergebinsvektor übergeben
 					result.addElement(p);
@@ -111,7 +112,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				}// Fehlerbehandlung hinzufügen
@@ -143,7 +144,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
@@ -175,7 +176,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
@@ -203,7 +204,7 @@ public class PresentationMapper {
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByPresentationID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+				p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e) {
 			      e.printStackTrace();
@@ -233,7 +234,7 @@ public class PresentationMapper {
 
 					while (rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
                      // Objekt an ein Präsentationsvektor übergeben
 						result.addElement(p);
 					} 				 // Fehlerbehandlung hinzufügen
@@ -256,7 +257,8 @@ public class PresentationMapper {
 					PreparedStatement insert = con
 							.prepareStatement("INSERT INTO softwarepraktikum_ws1920.presentation(date, userID, cinemaID, timeslotID, movieID) VALUES (?,?,?,?,?);");
 					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-					insert.setInt(1, p.getDate());
+					
+					insert.setDate(1, p.getDate());
 					insert.setInt(2, p.getUserID());
 					insert.setInt(3, p.getCinemaID());
 					insert.setInt(4, p.getTimeslotID());
@@ -272,7 +274,7 @@ public class PresentationMapper {
 					ResultSet rs = getnewPresentation.executeQuery();
 					if (rs.next()) {
 						
-						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -296,7 +298,7 @@ public class PresentationMapper {
 					update.setInt(1, p.getCinemaID());
 					update.setInt(2, p.getMovieID());
 					update.setInt(3, p.getTimeslotID());
-					update.setInt(4, p.getDate());
+					update.setDate(4, p.getDate());
 					update.setInt(5, p.getId());
 
 					// PreparedStatement aufrufen und als Query an die DB schicken.
@@ -306,7 +308,7 @@ public class PresentationMapper {
 					ResultSet rs = stm.executeQuery();
 					if (rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getInt("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
