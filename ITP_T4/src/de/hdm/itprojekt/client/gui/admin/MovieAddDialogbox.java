@@ -9,15 +9,23 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.User;
+
 /**
 * 
-* @author DominikThumm
+* @author DominikThumm, VanDuyHo
 * Diese Klasse ermöglicht das Anzeigen einer DialogBox, wenn der Nutzer auf den "new" Button klickt in der <code>MovieForm</code>
 *
 */
 
 
 public class MovieAddDialogbox extends DialogBox {
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration() ;
+	
+	User user = null;
 	
     VerticalPanel content = new VerticalPanel();
 	
@@ -29,9 +37,9 @@ public class MovieAddDialogbox extends DialogBox {
 	Button safe = new Button("save");
 	
 	
-	public MovieAddDialogbox() {
+	public MovieAddDialogbox(User user) {
 		
-		
+		this.user = user;
 	
 	}
 	
