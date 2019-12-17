@@ -91,7 +91,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 		}
-	// Methode zum Löschen eines bestimmten Users
+	// Methode zum Lï¿½schen eines bestimmten Users
 	// TODO: Besprechen der deleteAllBy-Methoden.
 	public void deleteUser(User u) throws IllegalArgumentException{
 		uMapper.deleteUserByUserID(u.getId());
@@ -118,7 +118,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	*/
 
-	@Override
+/*	@Override
 	public Group createGroup(Group g) throws IllegalArgumentException {
 		if (g !=null) {
 			Group tempGroup = new Group();
@@ -126,7 +126,15 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			return tempGroup;
 		}
 		return null;
+	}  */
+	@Override
+	public Group createGroup (Group group) {
+		Group g = new Group();
+		g= gMapper.insertGroup(group);
+		
+		return g;
 	}
+	
 
 	@Override
 	public Group getGroupByGroupID(Group g) throws IllegalArgumentException {
