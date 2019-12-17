@@ -80,7 +80,7 @@ public class EditorForm extends VerticalPanel {
 	//	VoteForm voteForm = new VoteForm(currentUser);
 		UmfragenForm umfrageForm = new UmfragenForm();
 		CellListForm celllistform = new CellListForm(user);
-	
+	    UmfrageEintragTable umfragen = new UmfrageEintragTable();
 		
 
 		/**
@@ -91,6 +91,7 @@ public class EditorForm extends VerticalPanel {
 		east.add(umfrageForm);
 		west.add(gruppenForm);
 		west.add(celllistform);
+		east.add(umfragen);
 		
 		
 		main.add(center);
