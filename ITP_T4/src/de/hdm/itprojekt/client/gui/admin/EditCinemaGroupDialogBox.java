@@ -50,7 +50,7 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 	
 	public EditCinemaGroupDialogBox(CinemaGroup cine, User user) {
 		this.cine=cine;
-		
+		this.user=user;
 	}
 	
 	

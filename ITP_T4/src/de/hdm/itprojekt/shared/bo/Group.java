@@ -22,9 +22,20 @@ public class Group extends BusinessObject{
 		}
 		
 		// Konstruktur, der zum tragen kommt, wenn eine neue Group erstellt wird
-		public Group(String name, int userID) {
-			this.name=name;
+//		public Group(String name, int userID) {
+//			this.name=name;
+//			this.userID=userID;
+//		}
+		
+		// Konstruktur, der zum tragen kommt, wenn eine neue Group erstellt wird
+		public Group(int userID, String name ) {
 			this.userID=userID;
+			this.name=name;
+				}
+		
+		public Group(String name, int ID  ) {
+			super(ID);
+			this.name=name;
 		}
 		
 		public Group(String name) {

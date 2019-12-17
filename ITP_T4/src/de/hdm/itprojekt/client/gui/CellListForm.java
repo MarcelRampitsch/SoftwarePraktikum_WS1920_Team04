@@ -18,6 +18,8 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSe
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
@@ -35,10 +37,19 @@ public class CellListForm extends VerticalPanel {
 	public CellListForm(User user) {
 		this.user = user;
 }
-	Vector <Group> Gruppen = null;
+	
+	public CellListForm() {
+		
+	}
+	
+	 //erstellen des Data Provider
+	 public static final ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
+
+	
+	//Vector <Group> Gruppen = null;
 	public void onLoad() {
 	   super.onLoad();
-	   editorAdministration.getAllGroupnameByUserID(user, new AsyncCallback<Vector<Group>>() {
+/*	   editorAdministration.getAllGroupnameByUserID(user, new AsyncCallback<Vector<Group>>() {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -55,37 +66,49 @@ public class CellListForm extends VerticalPanel {
 				a.addElement(g);
 				Gruppen = a; 
 		}
-		}});
+		}});             */
 	 
 	   //INSTANZ DER KLASSE TEXTCELL
-	   TextCell textCell = new TextCell();
+	   GroupCell textCell = new GroupCell();
+	   
+	   ProvidesKey<Group> keyProvider = new ProvidesKey<Group>() {
+	         public Object getKey(Group item) {
+	            // Always do a null check.
+	            return (item == null) ? null : item.getId();
+	         }
+	      };
 	   
 	   //INSTANZ DER KKASSE CELLLIST PLUS DIE VORHER ERSTELLTE INSTANT VON TEXTCELL HIER ÜBERGEBEN 
-	   CellList<String> cellList = new CellList<String>(textCell);
+	   CellList<Group> cellList = new CellList<Group>(textCell, keyProvider);
 	   
-	   cellList.addStyleName("gruppenliste");
+	   // Add the cellList to the dataProvider.
+	    dataProvider.addDataDisplay(cellList);
+	    
+	    cellList.addStyleName("gruppenliste");
 	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-	    final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
+	    final SingleSelectionModel<Group> selectionModel = new SingleSelectionModel<Group>();
 	    cellList.setSelectionModel(selectionModel);
 	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 	      public void onSelectionChange(SelectionChangeEvent event) {
-	        String selected = selectionModel.getSelectedObject();
+	    	  Group selected = selectionModel.getSelectedObject();
 	        if (selected != null) {
-	          Window.alert("You selected : " + selected);
+	          Window.alert("You selected : " + selected.getName()+selected.getId());
 	          
 	        }
 	      }
 	    });
 
 	   
-	    cellList.setRowCount(Gruppen.size(), true);
+/*	    cellList.setRowCount(Gruppen.size(), true);
 	    for (int i = 0; i < Gruppen.size(); i++ ) {
 	    	Group g = Gruppen.elementAt(i);
 	    	String s = g.getName();
 	    //	Neu.add(s);
 	    	
 		 //   cellList.setRowData(0, Neu);;
-	    }
+	    }    */
+		 List <Group> Gruppen =  dataProvider.getList();
+
 	   
 	    this.add(cellList);
 	 
