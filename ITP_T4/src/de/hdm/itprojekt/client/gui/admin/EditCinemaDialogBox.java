@@ -34,6 +34,7 @@ public class EditCinemaDialogBox extends DialogBox {
 	
 	public EditCinemaDialogBox(Cinema cine, User user) {
 		this.cine = cine;
+		this.user = user;
 	}
 	
 	public void onLoad() {
