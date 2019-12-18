@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -7,6 +9,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -14,11 +17,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.User;
 
 
 public class EditCinemaDialogBox extends DialogBox {
 	
+	Label cinemaGroup = new Label("CinemaGroup");
+	ListBox cinemaGroupBox = new ListBox();
+	Vector<CinemaGroup> cinemag;
 	Cinema cine = null; 
 	User user = null;
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
@@ -39,8 +46,9 @@ public class EditCinemaDialogBox extends DialogBox {
 	
 	public void onLoad() {
 		super.onLoad();
-		
 		content.add(close);
+		content.add(cinemaGroup);
+		content.add(cinemaGroupBox);
 		content.add(cinema);
 		content.add(box);
 		content.add(location);
@@ -51,7 +59,22 @@ public class EditCinemaDialogBox extends DialogBox {
 		box.setText(cine.getName());
 		locationBox.setText(cine.getLocation());
 
-		
+		adminAdministration.getAllCinemaGroupByUserID(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fehler beim Laden der CinemaGroup!");
+			}
+
+			@Override 
+			public void onSuccess(Vector<CinemaGroup> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					cinemaGroupBox.addItem(result.elementAt(i).getName());
+					cinemag = result;
+				}
+			}
+		});
 		this.add(content);
 	}
 	
@@ -87,7 +110,8 @@ public class EditCinemaDialogBox extends DialogBox {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cine.getCinemaGroupID(), cine.getUserID());
+			int cinemaGroupID = cinemaGroupBox.getSelectedIndex();
+			c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cinemag.elementAt(cinemaGroupID).getId(), cine.getUserID());
 			adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
 				
 				@Override

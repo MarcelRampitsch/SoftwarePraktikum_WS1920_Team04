@@ -37,7 +37,7 @@ public class CinemaGroupForm extends VerticalPanel{
 	private CinemaGroup delete =null;
 	private Vector<CinemaGroup> cine = null;
 	private CinemaGroup selectedCinemaGroup = null;
-
+	private int cinemagroupindex;
 
 	
 	public CinemaGroupForm(User user) {
@@ -124,6 +124,7 @@ public class CinemaGroupForm extends VerticalPanel{
 		
 		public void onClick(ClickEvent event) {
 			selectedCinemaGroup = cine.elementAt(cinemaGroupBox.getSelectedIndex());
+			cinemagroupindex = cinemaGroupBox.getSelectedIndex();
 			EditCinemaGroupDialogBox editcinemagroup = new EditCinemaGroupDialogBox(selectedCinemaGroup, user);
 			editcinemagroup.openCinemaGroupEdit();
 			
