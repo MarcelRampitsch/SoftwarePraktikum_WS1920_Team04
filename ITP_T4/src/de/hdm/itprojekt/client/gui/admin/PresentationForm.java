@@ -1,18 +1,23 @@
 package de.hdm.itprojekt.client.gui.admin;
 
 import java.util.Date;
+
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
@@ -24,17 +29,17 @@ import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
+
 /**
  * 
- * @author Dominik Thumm, SerhatUlus
+ * @author Dominik Thumm, SerhatUlus, VanDuyHo
  *
  */
 
 public class PresentationForm extends VerticalPanel{
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-
-	
 	
 	 	Label pcinemaLabel = new Label("Cinema");
 	    Label pmovieLabel = new Label("Movie");
@@ -83,8 +88,50 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    
 	    public void onLoad() {
+	    	
 	    	super.onLoad();
 	    	
+	    	
+	    	
+	    	// Create a basic date picker
+	        DatePicker datePicker = new DatePicker();
+	        final Label text = new Label();
+
+	        // Set the value in the text box when the user selects a date
+	        datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+	           @Override
+	           public void onValueChange(ValueChangeEvent<Date> event) {
+	              Date date = event.getValue();
+	              String dateString = 
+	              DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
+	              text.setText(dateString);				
+	           }
+	        });
+	        
+	        // Set the default value
+	        datePicker.setValue(new Date(), true);
+
+	        // Create a DateBox
+	        DateTimeFormat dateFormat = DateTimeFormat.getFormat("MM/dd/yyyy");
+	        DateBox dateBox = new DateBox();
+	        dateBox.setFormat(new DateBox.DefaultFormat(dateFormat));
+
+	        Label selectLabel = new Label("Permanent DatePicker:");
+	        Label selectLabel2 = new Label("DateBox with popup DatePicker:");
+	        
+	        // Add widgets to the root panel.
+	        VerticalPanel vPanel = new VerticalPanel();
+	        vPanel.setSpacing(10);
+	        vPanel.add(selectLabel);
+	        vPanel.add(text);
+	        vPanel.add(datePicker);
+	        vPanel.add(selectLabel2);
+	        vPanel.add(dateBox);
+
+	        RootPanel.get("gwtContainer").add(vPanel);
+	    	
+	    	
+	        
 	    	this.add(pcinemaLabel);
 	    	this.add(cinemaDrop);
 	    	
@@ -104,6 +151,7 @@ public class PresentationForm extends VerticalPanel{
 					}
 				}
 			});
+	    	
 	/*    	 cinemaDrop.addItem("UFA- Palast");
 			 cinemaDrop.addItem("Traumpalast");
 			 cinemaDrop.addItem("Central und union");   */
@@ -129,11 +177,7 @@ public class PresentationForm extends VerticalPanel{
 				}
 			});
 	    	
-	    	
-	    	
-	    	
-	    	
-	    	
+	    
 	/*    	 movieDrop.addItem("Spiderman");
 			 movieDrop.addItem("Der böse Film");
 			 movieDrop.addItem("Spiderman 3");       */
@@ -173,8 +217,6 @@ public class PresentationForm extends VerticalPanel{
 		    this.add(search);
 		    search.addClickHandler(new searchClickHandler());
 		    
-		    
-		   
 		    
 		    buttonbox.add(presentationEdit);
 		    buttonbox.add(presentationNew);
