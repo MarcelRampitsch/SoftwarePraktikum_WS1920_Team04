@@ -59,26 +59,26 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteByGroupID(Group g) throws  IllegalArgumentException;
 	
 	// L�schen aller Gruppen die einer bestimmten UserID zugeordnet sind.
-	public void deleteAllByUserID(Group g) throws IllegalArgumentException;
+	public void deleteAllByUserID(User u) throws IllegalArgumentException;
 	
 	//Cinema
 	Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException;
 
-	/*
+
 	// GroupMember Methoden
 	
 	// Einen Groupmember anlegen.
-	public Groupmember createGroupMember()
+	/*public Groupmember createGroupMember(Groupmember gm)
 		throws IllegalArgumentException;
-
+*/
 	// Alle Gruppenmitglieder anhand der GruppenID suchen.
-	public Groupmember getAllByGroupID() throws IllegalArgumentException;
+	public Vector<Groupmember> getAllByGroupID(Group g) throws IllegalArgumentException;
 	
 	// Alle Gruppenmitglieder anhand der UserID suchen.
-	public Groupmember getAllByUserID() throws IllegalArgumentException;
+	public Vector<Groupmember> getAllByUserID(User u) throws IllegalArgumentException;
 	
 	// Aktualisieren des Gruppenmitglied Objekts.
-	public void updateGroupmember(Groupmember upGroupMember) throws IllegalArgumentException;
+	//public Groupmember updateGroupmember(Groupmember upGroupMember) throws IllegalArgumentException;
 
 	// L�schen des Gruppenmitglieds anhand der ID.
 	public void deleteByID(Groupmember gm) throws IllegalArgumentException;
@@ -89,7 +89,7 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Gruppenmitglieder anhand der UserID.
 	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException;
 	
-	
+	/*
 	// Survey Methoden
 	
 	// Eine Ummfage anlegen.

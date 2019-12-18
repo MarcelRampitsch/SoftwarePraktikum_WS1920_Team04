@@ -114,50 +114,19 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			rs = cMapper.findallCinemabyUserID(u);
 			return rs;
 		}
-	
-	
-	
-	
-	
-	
-/*
-	@Override
-	public Survey createSurvey(String name) throws IllegalArgumentException {
-		if (name != null) {
-			Survey s = new Survey();
-			s.setName();
-			s.setId(1);
-			return this.sMapper.insert(s);
-		}
-		return null;
-	}
-	*/
 
-/*	@Override
-	public Group createGroup(Group g) throws IllegalArgumentException {
-		if (g !=null) {
-			Group tempGroup = new Group();
-			tempGroup = gMapper.insertGroup(g);
-			return tempGroup;
-		}
-		return null;
-	}  */
-	@Override
 	public Group createGroup (Group group) {
 		Group g = new Group();
 		g= gMapper.insertGroup(group);
 		
 		return g;
 	}
-	
 
-	@Override
 	public Group getGroupByGroupID(Group g) throws IllegalArgumentException {
 		Group group = gMapper.findByGroupID(g);
 		return group;
 	}
 
-	@Override
 	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException {
 		Vector<Group> rs = gMapper.findAllByUserID(u);
 		return rs;
@@ -174,15 +143,54 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 */
-	@Override
 	public void deleteByGroupID(Group g) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		gMapper.deleteByGroupID(g);
 		
 	}
 
-	@Override
-	public void deleteAllByUserID(Group g) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+	public void deleteAllByUserID(User u) throws IllegalArgumentException {
+		gMapper.deleteAllByUserID(u);
+		
+	}
+	// TODO Wie hat die createGroupMember Methode auszusehen?
+	
+	/*public Groupmember createGroupMember(Groupmember gm) throws IllegalArgumentException {
+		if(gm != null) {
+		gm = gmMapper.insertGroupmember(gm);
+			return gm;
+		}
+		return null;
+	}
+*/
+	public Vector<Groupmember> getAllByGroupID(Group g) throws IllegalArgumentException {
+		Vector<Groupmember> gm = gmMapper.findAllByGroupID(g.getId());
+		return gm;
+	}
+
+	public Vector<Groupmember> getAllByUserID(User u) throws IllegalArgumentException {
+		Vector<Groupmember> gm = gmMapper.findAllByUserID(u.getId());
+		return gm;
+	}
+
+	/*public Groupmember updateGroupmember(Groupmember gm) throws IllegalArgumentException {
+		if (gm != null) {
+			Groupmember groupm = gmMapper.updateGroupmember(gm);
+			return groupm;
+		}
+		*/
+	// Methode um ein Gruppenmitglied anhand seiner ID zu löschen.
+	public void deleteByID(Groupmember gm) throws IllegalArgumentException {
+		gmMapper.deleteByID(gm.getId());
+		
+	}
+
+	public void deleteAllByGroupID(Groupmember gm) throws IllegalArgumentException {
+		gmMapper.deleteAllByGroupID(gm.getGroupID());
+		
+	}
+
+	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException {
+		gmMapper.deleteAllByUserID(gm.getUserID());
 		
 	}
 }

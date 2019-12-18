@@ -44,26 +44,21 @@ public interface EditorAdministrationAsync {
 
 	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
 	
-	void deleteAllByUserID(Group g, AsyncCallback<Void> callback);
+	void deleteAllByUserID(User u, AsyncCallback<Void> callback);
 	
 	// Cinema
 	
 	void findAllCinemaByUser1(User u, AsyncCallback<Vector<Cinema>> callback);
 
-	
-	
-	
-	
-	/*
 
 	// GroupMember
-	void createGroupMember(AsyncCallback<Groupmember> callback);
+	//void createGroupMember(Groupmember gm, AsyncCallback<Groupmember> callback);
 
-	void getAllByGroupID(AsyncCallback<Groupmember> callback);
+	void getAllByGroupID(Group g, AsyncCallback <Vector<Groupmember>> callback);
 	
-	void getAllByUserID(AsyncCallback<Groupmember> callback);
+	void getAllByUserID(User u, AsyncCallback <Vector<Groupmember>> callback);
 
-	void updateGroupmember(Groupmember upGroupmember, AsyncCallback<Void> callback);
+	//void updateGroupmember(Groupmember upGroupmember, AsyncCallback<Groupmember> callback);
 
 	void deleteByID(Groupmember gm, AsyncCallback<Void> callback);
 	
@@ -71,6 +66,10 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Groupmember gm, AsyncCallback<Void> callback);
 	
+	
+	
+	
+	/*
 	// Survey
 	void createSurvey(String name, AsyncCallback<Survey> callback);
 
