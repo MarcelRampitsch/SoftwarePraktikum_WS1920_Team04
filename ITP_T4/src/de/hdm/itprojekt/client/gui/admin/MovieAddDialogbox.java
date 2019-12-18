@@ -118,9 +118,24 @@ public class MovieAddDialogbox extends DialogBox {
 				RootPanel.get().clear();
 				AdminForm adminform = new AdminForm(user,2);
 				RootPanel.get().add(adminform);
-				}});
+				isValidSymbol();
+;				}});
 		
 	}
+		
+		private void isValidSymbol() {
+
+			
+			 final String symbol = moviebox.getText().toUpperCase().trim();
+			 moviebox.setFocus(true);
+
+		     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+		     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+		       Window.alert("'" + symbol + "' is not a valid symbol.");
+		       moviebox.selectAll();
+		       return;
+		     }
+			  }
 	
 
 }

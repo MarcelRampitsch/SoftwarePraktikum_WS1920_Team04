@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client.gui.admin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -121,18 +122,27 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 				RootPanel.get().clear();
 				AdminForm adminform = new AdminForm(user,0);
 				RootPanel.get().add(adminform);	
-				
+				isValidSymbol();
 				}});
 				
 		}
 			
 			
-			
-			
-			
-			
-			
 		}
+	
+	  private void isValidSymbol() {
+
+	
+	 final String symbol = cinemagroupbox.getText().toUpperCase().trim();
+	 cinemagroupbox.setFocus(true);
+
+     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+       Window.alert("'" + symbol + "' is not a valid symbol.");
+       cinemagroupbox.selectAll();
+       return;
+     }
+	  }
 		
 		
 	}

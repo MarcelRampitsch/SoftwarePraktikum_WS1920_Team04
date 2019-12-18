@@ -143,8 +143,39 @@ public class CinemaAddDialogBox extends DialogBox {
 				RootPanel.get().clear();
 				AdminForm adminform = new AdminForm(user, 1);
 				RootPanel.get().add(adminform);
+				isValidSymbol();
+				isValidSymbol2();
 				}});
 				
 		}
 	}
+	
+	
+	private void isValidSymbol() {
+
+		
+		 final String symbol = box.getText().toUpperCase().trim();
+		 box.setFocus(true);
+
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+	       Window.alert("'" + symbol + "' is not a valid symbol.");
+	       box.selectAll();
+	       return;
+	     }
+		  }
+	
+	private void isValidSymbol2() {
+
+		
+		 final String symbol = box.getText().toUpperCase().trim();
+		 box.setFocus(true);
+
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+	       Window.alert("'" + symbol + "' is not a valid symbol.");
+	       locationBox.selectAll();
+	       return;
+	     }
+		  }
 }
