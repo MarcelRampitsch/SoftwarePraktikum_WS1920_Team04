@@ -112,18 +112,17 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Surveys anhand der UserID.
 	public void deleteAllByUserID(Survey s) throws IllegalArgumentException;
 	
-	
-	/*
+
 	// SurveyEntry Methoden
 	
 	// Einen Umfrageeintrag erstellen.
-	public SurveyEntry createSurveyEntry()throws IllegalArgumentException;
+	public SurveyEntry createSurveyEntry(SurveyEntry se)throws IllegalArgumentException;
 	
 	// Einen Umfrageeintrag anhand der ID suchen.
-	public SurveyEntry getSurveyEntryBySurveyEntryID() throws IllegalArgumentException;
+	public SurveyEntry getSurveyEntryBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException;
 	
 	// Einen Umfrageeintrag anhand der SurveyID suchen.
-	public SurveyEntry getSurveyEntryBySurveyID() throws IllegalArgumentException;
+	public SurveyEntry getSurveyEntryBySurveyID(SurveyEntry se) throws IllegalArgumentException;
 	
 	// Aktualisieren des SurveyEntry Objekts.
 	public void updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException;
@@ -138,6 +137,7 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException;
 	
 	
+	/*
 	// Vote Methoden
 	
 	// Einen Vote erstellen.

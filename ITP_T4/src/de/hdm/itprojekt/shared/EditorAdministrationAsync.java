@@ -82,17 +82,15 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Survey s, AsyncCallback<Void> callback);
 	
-	
-	
-	/*
+
 	// SurveyEntry
-	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
+	void createSurveyEntry(SurveyEntry se, AsyncCallback<SurveyEntry> callback);
 
-	void getSurveyEntryBySurveyEntryID(AsyncCallback<SurveyEntry> callback);
+	void getSurveyEntryBySurveyEntryID(SurveyEntry se, AsyncCallback<SurveyEntry> callback);
 
-	void getSurveyEntryBySurveyID(AsyncCallback<SurveyEntry> callback);
+	void getSurveyEntryBySurveyID(SurveyEntry se, AsyncCallback<SurveyEntry> callback);
 
-	void updateSurveyEntry(SurveyEntry upSurvey, AsyncCallback<Void> callback);
+	void updateSurveyEntry(SurveyEntry upSurveyEntry, AsyncCallback<Void> callback);
 	
 	void deleteBySurveyEntryID(SurveyEntry se, AsyncCallback<Void> callback);
 	
@@ -100,6 +98,8 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByPresentationID(SurveyEntry se, AsyncCallback<Void> callback);
 	
+	
+	/*
 	// Vote
 	void createVote(AsyncCallback<Vote> callback);
 

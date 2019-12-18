@@ -239,4 +239,50 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		sMapper.deleteAllByUserID(s.getUserID());
 		
 	}
+
+	@Override
+	public SurveyEntry createSurveyEntry(SurveyEntry se) throws IllegalArgumentException {
+		if (se != null) {
+			SurveyEntry tempSurveyentry = new SurveyEntry();
+			tempSurveyentry = seMapper.insert(se);
+			return tempSurveyentry;
+		}
+		return null;
+	}
+
+	@Override
+	public SurveyEntry getSurveyEntryBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
+		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyEntryID(se.getId());
+		return surveyentry;
+	}
+
+	@Override
+	public SurveyEntry getSurveyEntryBySurveyID(SurveyEntry se) throws IllegalArgumentException {
+		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyID(se.getId());
+		return surveyentry;
+	}
+
+	@Override
+	public void updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
+		seMapper.deleteSurveyEntryBySurveyEntryID(se.getId());
+		
+	}
+
+	@Override
+	public void deleteAllBySurveyID(SurveyEntry se) throws IllegalArgumentException {
+		seMapper.deleteAllBySurveyID(se.getId());
+		
+	}
+
+	@Override
+	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException {
+		seMapper.deleteAllByPresentationID(se.getId());
+		
+	}
 }
