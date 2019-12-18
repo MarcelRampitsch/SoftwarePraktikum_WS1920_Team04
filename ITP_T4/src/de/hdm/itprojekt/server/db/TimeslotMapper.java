@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
+
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
@@ -63,7 +65,7 @@ public class TimeslotMapper {
 			try {
 				// Prepared Statement erstellen um einen Timeslot zu finden
 				PreparedStatement findByTimeslotID = con
-						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotid=?;");
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
 				findByTimeslotID.setInt(1, t.getId());
 
 				// Statement ausfüllen und als Query an die DB schicken
@@ -107,16 +109,14 @@ public class TimeslotMapper {
 
 			try {
 				// Prepared Statement erstellen um einen Timeslot in die Datenbank einzufügen
-				PreparedStatement insert = con
-						.prepareStatement("INSERT INTO softwarepraktikum_ws1920.timeslot(time, userID) VALUES (?,?);");
+				PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.timeslot(time, userID) VALUES (?,?);");
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				insert.setString(1, t.getTime());
 				insert.setInt(2, t.getUserID());
 				
 				insert.executeUpdate();
 
-				PreparedStatement getnewTimeslot = con
-						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot ORDER BY creationDate DESC LIMIT 1;");
+				PreparedStatement getnewTimeslot = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot ORDER BY creationDate DESC LIMIT 1;");
 				// Ergebnis-Tupel in Objekt umwandeln
 				ResultSet rs = getnewTimeslot.executeQuery();
 				if (rs.next()) {
@@ -135,12 +135,16 @@ public class TimeslotMapper {
 			Connection con = DBConnection.getConnection();
 
 			try {
-	              // Updaten eines bestimmten Timeslot  
-				PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.timeslot SET time=? WHERE timeslotID=?;");
-				update.setString(1, t.getTime());
+	              // Updaten eines bestimmten Timeslot 
 				
-				// PreparedStatement aufrufen und als Query an die DB schicken.
+				PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.timeslot SET time=? "+" WHERE timeslotID=?;");
+				update.setString(1, t.getTime());
+
+				update.setInt(2, t.getId());
+				
+
 				update.executeUpdate();
+				
 				PreparedStatement stm = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
 				stm.setInt(1, t.getId());
 				ResultSet rs = stm.executeQuery();
@@ -164,7 +168,7 @@ public class TimeslotMapper {
 			try {
 				// Prepared Statement zum Löschen eines bestimmten Timeslot in der Datenbank 
 				PreparedStatement deleteByTimeslotID = con
-				        .prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
+				        .prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE `timeslotID`=?;");
 				deleteByTimeslotID.setInt(1, t.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteByTimeslotID.executeUpdate();
@@ -212,8 +216,8 @@ public class TimeslotMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					t = new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
-
+					t = new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getTimestamp("creationDate"));
+									
 					result.addElement(t);
 				} // Fehlerbehandlung hinzufügen
 			} catch (SQLException e) {

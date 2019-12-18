@@ -1,7 +1,10 @@
 	package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -11,7 +14,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
@@ -30,14 +35,28 @@ public class TimeslotForm extends VerticalPanel {
 //	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
     
+    
     Button timeslotEdit = new Button("Edit");
     Button timeslotNew = new Button("New");
     Button timeslotDelete = new Button("Delete");
     
+    private Timeslot selectedtimeslot = null;
+    private Vector<Timeslot> tim = null;
+    
+    
+	private Vector<Timeslot> time = null;
+
     
     HorizontalPanel timeslotaddbox = new HorizontalPanel();
     HorizontalPanel buttonbox = new HorizontalPanel();
 	private User user = null;
+	
+	private Timeslot delete = null;
+
+	
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+
 
     
     public TimeslotForm(User user) {
@@ -51,33 +70,37 @@ public class TimeslotForm extends VerticalPanel {
     	
     	this.add(timeslotLabel);
     	
-    	timeslotaddbox.add(timeslotbox);
-    	timeslotbox.addItem("18:00uhr");
-    	timeslotbox.addItem("18:30uhr");
-    	timeslotbox.addItem("19:00uhr");
-    	timeslotbox.addItem("19:30uhr");
-    	timeslotbox.addItem("20:00uhr");
-    	timeslotbox.addItem("20:30uhr");
-    	timeslotbox.addItem("21:00uhr");
-    	timeslotbox.addItem("21:30uhr");
-    	timeslotbox.addItem("22:00uhr");
-    	timeslotbox.addItem("22:30uhr");
-    	timeslotbox.addItem("23:00uhr");
-    	timeslotbox.addItem("23:30uhr");
-    	timeslotbox.addItem("00:00uhr");
 
+    	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
+    		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
 
-
-
-
+			public void onSuccess(Vector<Timeslot> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					timeslotbox.addItem(result.elementAt(i).getTime());
+					time = result;
+				}
+			}
+		});
+		
     	
     	
+    	
+
+    	this.add(timeslotbox);
+  
     	buttonbox.add(timeslotEdit);
     	timeslotEdit.addClickHandler(new editTimeslotClickHandler());
     	buttonbox.add(timeslotNew);
     	timeslotNew.addClickHandler(new addTimeslotClickHandler());
     	buttonbox.add(timeslotDelete);
     	timeslotDelete.addClickHandler(new deleteTimeslotClickHandler());
+    	
+    	
     	
     	this.add(timeslotaddbox);
     	this.add(buttonbox);
@@ -95,7 +118,7 @@ public class TimeslotForm extends VerticalPanel {
     public class addTimeslotClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			TimeSlotAddDialogBox timeslotbox = new TimeSlotAddDialogBox();
+			TimeSlotAddDialogBox timeslotbox = new TimeSlotAddDialogBox(user);
 			timeslotbox.opentimeslot();
 			
 		}
@@ -124,7 +147,8 @@ public class TimeslotForm extends VerticalPanel {
 	public class editTimeslotClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			EditTimeSlot timeslotedit  = new EditTimeSlot();
+			selectedtimeslot = time.elementAt(timeslotbox.getSelectedIndex());
+			EditTimeSlot timeslotedit  = new EditTimeSlot(selectedtimeslot, user);
 			timeslotedit.openEditTimeSlot();
 			
 		}
@@ -152,8 +176,9 @@ public class TimeslotForm extends VerticalPanel {
 	public class deleteTimeslotClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
-			DeleteTimeSlotDialogBox deletetimeslot = new DeleteTimeSlotDialogBox();
-			deletetimeslot.closeTimeSlot();
+			delete  = time.elementAt(timeslotbox.getSelectedIndex());
+			DeleteTimeSlotDialogBox deletetimeslot = new DeleteTimeSlotDialogBox(delete, user);
+			deletetimeslot.openTimeSlot();
 			
 		}
 	}

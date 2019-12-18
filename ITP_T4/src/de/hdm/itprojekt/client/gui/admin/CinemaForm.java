@@ -57,6 +57,7 @@ public class CinemaForm extends VerticalPanel {
 	private Cinema selectedCinema = null;
 	private Vector<Cinema> cine = null;
 	private Cinema delete = null;
+	int cinemagroupindex;
 	
 	
 	public CinemaForm(User user) {

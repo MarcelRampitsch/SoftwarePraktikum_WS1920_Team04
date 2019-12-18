@@ -66,12 +66,13 @@ public class CinemaMapper {
 		try { 
 			// Prepared Statement erstellen um ein Cinema zu finden
 			PreparedStatement  insert = 
-					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,userID) VALUES (?,?,?);");
+					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,userID,cinemaGroupID) VALUES (?,?,?,?);");
 				
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				insert.setString(1, c.getLocation());
 				insert.setString(2, c.getName());
 				insert.setInt(3, c.getUserID());
+				insert.setInt(4, c.getCinemaGroupID());
 					
 				
 				insert.executeUpdate();
@@ -131,12 +132,13 @@ public class CinemaMapper {
             // Updaten einer bestimmten Cinema  
 			PreparedStatement update = 
 					
-					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET location=?, name=?" + "WHERE cinemaID=?;");
+					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET location=?, name=?, cinemaGroupID=? " + "WHERE cinemaID=?;");
 					
 		
 					update.setString(1, cinema.getLocation());
 					update.setString(2, cinema.getName());
-					update.setInt(3, cinema.getId());
+					update.setInt(3, cinema.getCinemaGroupID());
+					update.setInt(4, cinema.getId());
 
 					// PreparedStatement aufrufen und als Query an die DB schicken.
 					update.executeUpdate();

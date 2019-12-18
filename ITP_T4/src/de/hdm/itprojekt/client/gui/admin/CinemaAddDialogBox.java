@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -18,6 +19,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
@@ -34,20 +36,16 @@ public class CinemaAddDialogBox extends DialogBox {
 
 	String name = null;
 	User user = null;
+	Vector <CinemaGroup> cine = null;
 	VerticalPanel content = new VerticalPanel();
 	
-	
+	Label cinemaGroup = new Label("CinemaGroup");
+	ListBox cinemaGroupBox = new ListBox();
 	Button close = new Button ("X");
-	
 	Label cinema = new Label("Cinema");
-	
 	TextBox box = new TextBox();
-	
 	TextBox locationBox = new TextBox();
-	
 	Label location = new Label("Location");
-	
-	
 	Button safe = new Button("save");
 	
 	
@@ -64,6 +62,8 @@ public class CinemaAddDialogBox extends DialogBox {
 		super.onLoad();
 		
 		content.add(close);
+		content.add(cinemaGroup);
+		content.add(cinemaGroupBox);
 		content.add(cinema);
 		content.add(box);
 		content.add(location);
@@ -72,7 +72,22 @@ public class CinemaAddDialogBox extends DialogBox {
 		content.add(safe);
 		safe.addClickHandler(new safeCinemaForm());
 		
+		adminAdministration.getAllCinemaGroupByUserID(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fehler beim Laden der CinemaGroup!");
+			}
 
+			@Override 
+			public void onSuccess(Vector<CinemaGroup> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					cinemaGroupBox.addItem(result.elementAt(i).getName());
+					cine = result;
+				}
+			}
+		});
 		
 		this.add(content);
 	}
@@ -113,8 +128,8 @@ public class CinemaAddDialogBox extends DialogBox {
 		Cinema c = null;
 		@Override
 		public void onClick(ClickEvent event) {
-			c = new Cinema(locationBox.getText(), box.getText(), user.getId());
-			
+			int cinemaGroupID = cinemaGroupBox.getSelectedIndex();
+			c = new Cinema(locationBox.getText(), box.getText(), user.getId(), cine.elementAt(cinemaGroupID).getId());
 			adminAdministration.addCinema(c, new AsyncCallback<Cinema>() {
 				
 				@Override
