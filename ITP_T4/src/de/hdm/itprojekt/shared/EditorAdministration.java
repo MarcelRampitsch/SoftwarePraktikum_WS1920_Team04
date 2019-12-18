@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Presentation;
@@ -60,6 +61,9 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Gruppen die einer bestimmten UserID zugeordnet sind.
 	public void deleteAllByUserID(Group g) throws IllegalArgumentException;
 	
+	//Cinema
+	Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException;
+
 	/*
 	// GroupMember Methoden
 	

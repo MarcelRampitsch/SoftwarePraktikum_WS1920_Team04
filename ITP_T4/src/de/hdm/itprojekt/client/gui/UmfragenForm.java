@@ -7,10 +7,13 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.User;
+
 
 
 public class UmfragenForm extends VerticalPanel {
 	
+	public User user = null;
 	
 	
     public UmfragenForm() {
@@ -60,7 +63,7 @@ public class UmfragenForm extends VerticalPanel {
 		
 		 public void onClick(ClickEvent event) {
 			
-			UmfragenOpenForm uf = new UmfragenOpenForm();
+			UmfragenOpenForm uf = new UmfragenOpenForm(user);
 			uf.umfrageEditForm();
 		}
 	}

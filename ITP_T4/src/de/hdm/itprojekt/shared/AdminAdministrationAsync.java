@@ -38,15 +38,15 @@ public interface AdminAdministrationAsync {
 	void getAllMovieByUserID(User u, AsyncCallback<Vector<Movie>> callback);
 
 	//Timeslot
-	void deleteAllTimeslotByMovieID(Movie m, AsyncCallback<Void> callback);
-	void deleteAllTimeslotByUserID(User u, AsyncCallback<Void> callback);
-	void deleteByTimeslotID(Timeslot t, AsyncCallback<Void> callback);
-	void findAllTimeslotByUserID(User u, AsyncCallback<Vector<Timeslot>> callback);
-	void findByTime(Timeslot t, AsyncCallback<Timeslot> callback);
-	void findByTimeslotID(Timeslot t, AsyncCallback<Timeslot> callback);
-	void addTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
-	void updateTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
-	
+//	void deleteAllTimeslotByMovieID(Movie m, AsyncCallback<Void> callback);
+//	void deleteAllTimeslotByUserID(User u, AsyncCallback<Void> callback);
+//	void deleteByTimeslotID(Timeslot t, AsyncCallback<Void> callback);
+//	void findAllTimeslotByUserID(User u, AsyncCallback<Vector<Timeslot>> callback);
+//	void findByTime(Timeslot t, AsyncCallback<Timeslot> callback);
+//	void findByTimeslotID(Timeslot t, AsyncCallback<Timeslot> callback);
+//	void addTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
+//	void updateTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
+//	
 	// Movie
 	
 	// Timeslot
