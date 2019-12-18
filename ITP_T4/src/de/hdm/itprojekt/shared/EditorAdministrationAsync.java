@@ -40,7 +40,7 @@ public interface EditorAdministrationAsync {
 	
 	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
 	
-	//void updateGroup(Group g, AsyncCallback<Group> callback);
+	void updateGroup(Group updateg, AsyncCallback<Group> callback);
 
 	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
 	
@@ -58,7 +58,7 @@ public interface EditorAdministrationAsync {
 	
 	void getAllByUserID(User u, AsyncCallback <Vector<Groupmember>> callback);
 
-	//void updateGroupmember(Groupmember upGroupmember, AsyncCallback<Groupmember> callback);
+	void updateGroupmember(Groupmember updateGm, AsyncCallback<Groupmember> callback);
 
 	void deleteByID(Groupmember gm, AsyncCallback<Void> callback);
 	
@@ -74,7 +74,7 @@ public interface EditorAdministrationAsync {
 	
 	void getSurveyBySurveyName(Survey s, AsyncCallback<Survey> callback);
 
-	void updateSurvey(Survey upSurvey, AsyncCallback<Void> callback);
+	void updateSurvey(Survey updateS, AsyncCallback<Survey> callback);
 
 	void deleteBySurveyID(Survey s, AsyncCallback<Void> callback);
 	
