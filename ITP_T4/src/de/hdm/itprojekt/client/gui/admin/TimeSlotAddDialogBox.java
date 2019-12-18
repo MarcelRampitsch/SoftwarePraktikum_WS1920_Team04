@@ -3,12 +3,20 @@ package de.hdm.itprojekt.client.gui.admin;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Timeslot;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * 
@@ -22,17 +30,23 @@ public class TimeSlotAddDialogBox extends DialogBox {
 	
 	VerticalPanel content = new VerticalPanel();
 	
-	Label timeslot = new Label("Cinemagroup:");
+	Label timeslot = new Label("Timeslot:");
 	
 	TextBox timeslotbox = new TextBox();
 	
 	Button close = new Button("X");
+	
 	Button safe = new Button("save");
 	
+	User user = null;
 	
 	
-	public TimeSlotAddDialogBox () {
-		
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration() ;
+
+	
+	
+	public TimeSlotAddDialogBox (User user) {
+		this.user=user;
 		
 	}
 	
@@ -97,12 +111,41 @@ public class TimeSlotAddDialogBox extends DialogBox {
 	 */
 	private class safehandler implements ClickHandler{
 		
-		public void onClick(ClickEvent event) {
-			Window.alert("EINGABE GESICHERT");
-		}
+
+		Timeslot ts = null;
+			public void onClick(ClickEvent event) {
+				ts = new Timeslot(timeslotbox.getText(), user.getId());
+				//Window.alert(ts.getTime());
+				
+				adminAdministration.addTimeslot(ts, new AsyncCallback<Timeslot>() {
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("was ist falsch geloffen");
+					}
+
+					@Override
+					public void onSuccess(Timeslot result) {
+					closetimeslot();
+					Window.alert("");
+
+					RootPanel.get().clear();
+					AdminForm adminform = new AdminForm(user, 3);
+					RootPanel.get().add(adminform);
+					}});
+			
+			
+			
+			
+			
+			}
 	}
+}
+
+
 	
 	
 	
 
-}
+
+

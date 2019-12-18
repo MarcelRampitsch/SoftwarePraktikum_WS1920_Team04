@@ -1,13 +1,23 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.sql.Timestamp;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.Timeslot;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * 
@@ -17,6 +27,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  *
  */
 public class EditTimeSlot extends DialogBox	 {
+	
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+
+	User user = null;
+	
+	Timeslot time = null;
+	
+	Timeslot ts = null;
 	
 	VerticalPanel content = new VerticalPanel();
 
@@ -30,8 +48,9 @@ public class EditTimeSlot extends DialogBox	 {
 
 	
 	
-	public EditTimeSlot() {
-		
+	public EditTimeSlot(Timeslot time, User user) {
+		this.time=time;
+		this.user=user;
 	}
 	
 	
@@ -46,6 +65,7 @@ public class EditTimeSlot extends DialogBox	 {
 		content.add(timeslot);
 
 		content.add(timeslotbox);
+		timeslotbox.setText(time.getTime());
 		content.add(safe);
 		
 		safe.addClickHandler(new safehandler());
@@ -98,11 +118,26 @@ public class EditTimeSlot extends DialogBox	 {
 	 * Diser ClickHandler kommt zum Tragen, falls auf den saveButton geklickt wird
 	 */
 	private class safehandler implements ClickHandler{
-
-		@Override
 		public void onClick(ClickEvent event) {
+			ts = new Timeslot(timeslotbox.getText(), time.getUserID(),time.getId(), time.getCreationDate());
+
+			adminAdministration.updateTimeslot(ts, new AsyncCallback<Timeslot>() {
+				
 			
-			Window.alert("EINGABE GESICHERT");
+				
+
+				@Override
+				public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+				}
+
+				@Override
+				public void onSuccess(Timeslot result) {
+					closeEditTimeSlot();
+				RootPanel.get().clear();
+				AdminForm adminform = new AdminForm(user,3);
+				RootPanel.get().add(adminform);
+				}});
 		}
 		
 	}
