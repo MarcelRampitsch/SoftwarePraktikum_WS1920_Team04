@@ -66,14 +66,11 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Groupmember gm, AsyncCallback<Void> callback);
 	
-	
-	
-	
-	/*
-	// Survey
-	void createSurvey(String name, AsyncCallback<Survey> callback);
 
-	void getSurveyBySurveyID(AsyncCallback<Survey> callback);
+	// Survey
+	void createSurvey(Survey s, AsyncCallback<Survey> callback);
+
+	void getSurveyBySurveyID(Survey s, AsyncCallback<Survey> callback);
 	
 	void getSurveyBySurveyName(Survey s, AsyncCallback<Survey> callback);
 
@@ -85,6 +82,9 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByUserID(Survey s, AsyncCallback<Void> callback);
 	
+	
+	
+	/*
 	// SurveyEntry
 	void createSurveyEntry(AsyncCallback<SurveyEntry> callback);
 
