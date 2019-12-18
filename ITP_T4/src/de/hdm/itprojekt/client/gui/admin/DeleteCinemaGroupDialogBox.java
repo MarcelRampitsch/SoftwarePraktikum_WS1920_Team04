@@ -39,7 +39,6 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 	public DeleteCinemaGroupDialogBox(CinemaGroup cinemaGroup, User user) {
 		this.cinemaGroup=cinemaGroup;
 		this.user=user;
-		
 	}
 	
 	public void onLoad() {
@@ -52,11 +51,7 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		content.add(horzcontent);
 		no.addClickHandler(new closeCinemaGroupForm());
 		yes.addClickHandler(new deleteCinemaGroup());
-		
 		this.add(content);
-		
-		
-		
 	}
 	
 	public void openCimemaGroupDelete() {
@@ -92,10 +87,8 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			closeCinemaGroupForm();
-			
+			closeCinemaGroupForm();	
 		}
-
 	}
     
     /**
@@ -120,9 +113,9 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 				public void onSuccess(Void result) {
 					// TODO Auto-generated method stub
 					closeCinemaGroupForm();
-					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(user,0);
-					RootPanel.get().add(adminform);
+				//	RootPanel.get().clear();
+				//	AdminForm adminform = new AdminForm(user,0);
+				//	RootPanel.get().add(adminform);
 					
 				}
 			});

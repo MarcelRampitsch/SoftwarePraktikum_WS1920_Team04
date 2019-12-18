@@ -1,13 +1,18 @@
 package de.hdm.itprojekt.client.gui;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.admin.VerwaltungsForm;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -34,7 +39,7 @@ public class EditorForm extends VerticalPanel {
 	
 	 HorizontalPanel header = new HorizontalPanel();
 	 HorizontalPanel main = new HorizontalPanel();
-
+	 EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	 VerticalPanel center = new VerticalPanel();
 	 VerticalPanel west = new VerticalPanel();
 	 VerticalPanel east = new VerticalPanel();
@@ -59,7 +64,20 @@ public class EditorForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		
-		
+		editorAdministration.getUserByEmail(user, new AsyncCallback<User>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+			Window.alert("GetUser Fehler");
+			}
+
+			@Override
+			public void onSuccess(User result) {
+			user = result;
+			GruppenForm gruppenForm = new GruppenForm(user);
+			main.add(gruppenForm);
+			}
+		});
 		/*
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
@@ -76,7 +94,6 @@ public class EditorForm extends VerticalPanel {
 		 * Instanzierung aller nötigen Formen, die in der EditorForm angezeigt werden sollen. 
 		 */
 		
-		GruppenForm gruppenForm = new GruppenForm();
 	//	VoteForm voteForm = new VoteForm(currentUser);
 		UmfragenForm umfrageForm = new UmfragenForm();
 		CellListForm celllistform = new CellListForm(user);
@@ -89,7 +106,6 @@ public class EditorForm extends VerticalPanel {
 		
 	//	center.add(voteForm);
 		east.add(umfrageForm);
-		west.add(gruppenForm);
 		west.add(celllistform);
 		east.add(umfragen);
 		

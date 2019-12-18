@@ -18,6 +18,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.gui.EditorForm;
 import de.hdm.itprojekt.client.gui.admin.AdminForm;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -25,8 +27,10 @@ import de.hdm.itprojekt.shared.bo.User;
  * Entry-Point-Klasse des Projekts <b>ITP_T4</b>.
  */
 public class ITP_T4 implements EntryPoint {
+
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	protected User currentUser = new User("a");
 	
-	protected User currentUser = new User(1, "Basti", "a", null);
 	/**
 	   * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
 	   * zusichert, benötigen wir eine Methode

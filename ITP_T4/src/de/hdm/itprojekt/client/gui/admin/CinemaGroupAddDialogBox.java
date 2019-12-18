@@ -119,7 +119,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 				public void onSuccess(CinemaGroup result) {
 				CloseCinemaGroup();
 				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user,1);
+				AdminForm adminform = new AdminForm(user,0);
 				RootPanel.get().add(adminform);	
 				
 				}});

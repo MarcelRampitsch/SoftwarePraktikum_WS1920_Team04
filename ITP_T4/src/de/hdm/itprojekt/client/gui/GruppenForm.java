@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -44,8 +45,8 @@ public class GruppenForm extends VerticalPanel {
 	
 	
 	
-	public GruppenForm() {
-
+	public GruppenForm(User user) {
+	this.user = user;
 	}
 
 	 Button GruppenErstellung = new Button("Neue Gruppe erstellen");
@@ -65,23 +66,20 @@ public class GruppenForm extends VerticalPanel {
 
 			@Override
 			public void onSuccess(Vector<Group> result) {
-				
 				// Daten der CellList zurücksetzen
-				cellListDataProvider.getList().clear();
 				
+				cellListDataProvider.getList().clear();
+				List<Group> Gruppen = null;
 				for (int i = 0; i < result.size(); i++ ) {
-					cellListDataProvider.getList().add(result.get(i));
-
+					 
+					cellListDataProvider.getList().add(result.elementAt(i));
+					
 				//	c2.getCellParent(result.elementAt(i).getName());
 				//	groups = result;
 				}
+				
 				selectionModel.setSelected(cellListDataProvider.getList().get(0), true);
-
-				
-				
-				
 			}
-			
 		});
 
 		GruppenErstellung.addStyleName("GruppenButton");
