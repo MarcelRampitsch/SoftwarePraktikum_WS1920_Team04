@@ -42,6 +42,7 @@ public class AdminForm extends VerticalPanel{
 	
 	public User currentUser;
 	public User u;
+	int a = 0;
 	
 	/*
 	VerticalPanel main = new VerticalPanel();
@@ -59,8 +60,9 @@ public class AdminForm extends VerticalPanel{
 	 * Der aktuelle Nutzer (Admin) wird der AdminForm übergeben. So können alle anderen Formen diesen bei Bedarf verwenden.
 	 * 
 	 */
-	public AdminForm(User currentUser) {
+	public AdminForm(User currentUser, int a) {
 		this.currentUser = currentUser;
+		this.a = a;
 	}
 	
 	
@@ -85,7 +87,7 @@ public class AdminForm extends VerticalPanel{
 			@Override
 			public void onSuccess(User result) {
 			currentUser = result;
-			VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser);
+			VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser, a);
 			main.add(verwaltungsForm);
 			}
 		});

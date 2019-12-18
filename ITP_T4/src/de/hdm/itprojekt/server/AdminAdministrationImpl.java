@@ -123,16 +123,20 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	// Movie
 	public Movie addMovie(Movie m) throws IllegalArgumentException{
 		if(m != null) {
-			Movie mo = mMapper.insert(m);
+			Movie mo = null;
+			mo = mMapper.insert(m);
 			return mo;
 		}
 		return null;
 	}
 	
-	public void updateMovie(Movie m) throws IllegalArgumentException{
-		if (m != null) {
-		mMapper.updateMovie(m);
-		}	
+	public Movie updateMovie (Movie updateM) throws IllegalArgumentException{
+		if(updateM != null) {
+			Movie m = null;
+			m = mMapper.updateMovie(updateM);
+			return m;
+		}
+		return null;
 	}		
 	
 	public void deleteMovie(Movie m) throws IllegalArgumentException{
@@ -143,6 +147,36 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		Vector<Movie> re = mMapper.findAllByUserID(u);
 		return re;
 	}
+	
+	public Vector<Timeslot> getAllTimeslotByUserID(User u) throws IllegalArgumentException {
+		Vector<Timeslot> te = tMapper.findAllTimeslotByUserID(u);
+		return te;
+	}
+
+	public void deleteTimeslot(Timeslot t) throws IllegalArgumentException {
+		tMapper.deleteByTimeslotID(t);
+		
+	}
+
+	public Timeslot addTimeslot(Timeslot t) throws IllegalArgumentException {
+		if(t != null) {
+			Timeslot te = null;
+			te = tMapper.insert(t);
+			return te;
+		}
+		return null;
+	}
+
+	public Timeslot updateTimeslot(Timeslot t) throws IllegalArgumentException {
+		if(t != null) {
+			Timeslot te = null;
+			te = tMapper.update(t);
+			return te;
+		}
+		return null;
+	}
+	
+	
 	
 
 	/*@Override

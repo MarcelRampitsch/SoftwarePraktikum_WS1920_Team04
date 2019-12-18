@@ -1,24 +1,38 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.List;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ListDataProvider;
+
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.User;
+
 
 /**
  * 
- * @author serhatulus
+ * @author serhatulus, DominikThumm
  * DialogBox, die angezeigt wird, wenn der Nutzer eine Gruppe erstellen möchte.
  * Die Klasse enthält entsprechende ClickHandler & Methoden zum Bestätigen oder Abbrechen der Aktion.
  */
  	
 	public class GruppenOpenForm extends DialogBox{
 		
+		  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+		
+		
+		  ListDataProvider <Group> dataProvider;	
 
 		  VerticalPanel inhalt = new VerticalPanel();
 		
@@ -35,7 +49,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 		
 		  Button speichern = new Button("sichern");
 		
-		//TextArea ta = new TextArea();
+		  GruppenForm gruppenForm = null;
+
+		  User user;
+
 
 		
 		
@@ -52,6 +69,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 		
 		public void onLoad() {
 			super.onLoad();
+			
+			CellListForm cellList = new CellListForm(null);
+
+			dataProvider = cellList.dataProvider;
+
 			
 			inhalt.add(close);
 			close.addClickHandler(new closegruppenform());
@@ -106,17 +128,36 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 		}
 		
 		private class sichernhandler implements ClickHandler{
-	
+			
 			@Override
 			public void onClick(ClickEvent event) {
-				Window.alert("EINGABE GESICHERT");
+				Group group1 = new Group(1,gruppennamebox.getText());
+				editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Group result) {
+						
+						List <Group> liste = dataProvider.getList();
+						liste.add(group1);
+						Window.alert("EINGABE GESICHERT");
+						
+						
+					}
+					
+				});
+				
 			}
 			
 	}
-	}
 
 		
-
+	}
 
 
 

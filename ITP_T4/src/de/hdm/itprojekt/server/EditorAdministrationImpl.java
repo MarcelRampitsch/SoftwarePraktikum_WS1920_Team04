@@ -4,6 +4,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.gwt.user.client.Window;
 
 import de.hdm.itprojekt.shared.EditorAdministration;
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Presentation;
@@ -91,7 +92,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 		}
-	// Methode zum Löschen eines bestimmten Users
+	// Methode zum Lï¿½schen eines bestimmten Users
 	// TODO: Besprechen der deleteAllBy-Methoden.
 	public void deleteUser(User u) throws IllegalArgumentException{
 		uMapper.deleteUserByUserID(u.getId());
@@ -105,6 +106,20 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		//cMapper.deleteAllCinemaByUserID(u.getId());
 		//mMapper.deleteAllByUserID(u.getId());
 	}
+	
+	// Methode um alle Cinema eines User zu finden
+		public Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException{
+			
+			Vector<Cinema> rs = new Vector<Cinema>();
+			rs = cMapper.findallCinemabyUserID(u);
+			return rs;
+		}
+	
+	
+	
+	
+	
+	
 /*
 	@Override
 	public Survey createSurvey(String name) throws IllegalArgumentException {
@@ -118,7 +133,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	*/
 
-	@Override
+/*	@Override
 	public Group createGroup(Group g) throws IllegalArgumentException {
 		if (g !=null) {
 			Group tempGroup = new Group();
@@ -126,7 +141,15 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			return tempGroup;
 		}
 		return null;
+	}  */
+	@Override
+	public Group createGroup (Group group) {
+		Group g = new Group();
+		g= gMapper.insertGroup(group);
+		
+		return g;
 	}
+	
 
 	@Override
 	public Group getGroupByGroupID(Group g) throws IllegalArgumentException {

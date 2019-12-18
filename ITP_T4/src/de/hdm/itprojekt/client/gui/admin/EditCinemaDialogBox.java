@@ -34,6 +34,7 @@ public class EditCinemaDialogBox extends DialogBox {
 	
 	public EditCinemaDialogBox(Cinema cine, User user) {
 		this.cine = cine;
+		this.user = user;
 	}
 	
 	public void onLoad() {
@@ -98,7 +99,7 @@ public class EditCinemaDialogBox extends DialogBox {
 				public void onSuccess(Cinema result) {
 				closeCinemaEditForm();
 				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user);
+				AdminForm adminform = new AdminForm(user,1);
 				RootPanel.get().add(adminform);
 				}});
 		}

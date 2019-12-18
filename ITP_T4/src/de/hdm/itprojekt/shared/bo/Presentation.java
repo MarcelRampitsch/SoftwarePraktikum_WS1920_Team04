@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.sql.Timestamp;
+import java.sql.Date;
 
 
 public class Presentation extends BusinessObject {
@@ -12,10 +13,10 @@ private static final long serialversionUID = 1l;
 	private int movieID;
 	private int userID;
 	private int timeslotID;
-	private int date;
+	private Date date;
 	
 	// Konstruktor für die find methoden der Mapper
-	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, int date, int id, Timestamp creationDate) {
+	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, Date date, int id, Timestamp creationDate) {
 		super(id, creationDate);
 
 		this.cinemaID = cinemaID;
@@ -26,7 +27,7 @@ private static final long serialversionUID = 1l;
 	}
 
 	//Konstrucktor für die insert methoden der Mapper
-	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, int date) {
+	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, Date date) {
 		
 		this.cinemaID = cinemaID;
 		this.movieID = movieID;
@@ -63,10 +64,10 @@ private static final long serialversionUID = 1l;
 	public void setTimeslotID(int timeslotID) {
 		this.timeslotID = timeslotID;
 	}
-	public int getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(int date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

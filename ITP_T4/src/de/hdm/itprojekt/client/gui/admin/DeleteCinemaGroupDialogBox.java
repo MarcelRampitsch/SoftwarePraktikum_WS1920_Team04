@@ -121,7 +121,7 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 					// TODO Auto-generated method stub
 					closeCinemaGroupForm();
 					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(user);
+					AdminForm adminform = new AdminForm(user,0);
 					RootPanel.get().add(adminform);
 					
 				}

@@ -2,7 +2,6 @@ package de.hdm.itprojekt.client.gui.admin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -89,8 +88,6 @@ public class DeleteCinemaDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			closeCinemaForm();
-			
-
 		}
 
 	}
@@ -109,19 +106,17 @@ public class DeleteCinemaDialogBox extends DialogBox {
 			adminAdministration.deleteCinema(cinema, new AsyncCallback<Void>() {
 
 				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
 				public void onSuccess(Void result) {
 					// TODO Auto-generated method stub
 					closeCinemaForm();
 					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(currentUser);
+					AdminForm adminform = new AdminForm(currentUser,1);
 					RootPanel.get().add(adminform);
-					
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
 				}
 			});
 

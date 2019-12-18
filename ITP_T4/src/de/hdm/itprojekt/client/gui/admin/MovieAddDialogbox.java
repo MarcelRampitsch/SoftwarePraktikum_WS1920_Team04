@@ -3,14 +3,19 @@ package de.hdm.itprojekt.client.gui.admin;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
@@ -95,12 +100,30 @@ public class MovieAddDialogbox extends DialogBox {
 	
 	private class safeHandler implements ClickHandler{
 
+		Movie m = null;
 		@Override
 		public void onClick(ClickEvent event) {
+			m = new Movie(moviebox.getText(),user.getId());
 			
-		}
+			adminAdministration.addMovie(m, new AsyncCallback<Movie>() {
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+				}
+
+				@Override
+				public void onSuccess(Movie result) {
+					CloseMovieGroup();
+				RootPanel.get().clear();
+				AdminForm adminform = new AdminForm(user,2);
+				RootPanel.get().add(adminform);
+				}});
 		
 	}
 	
 
 }
+}
+
+

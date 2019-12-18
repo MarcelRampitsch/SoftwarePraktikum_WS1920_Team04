@@ -50,7 +50,7 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 	
 	public EditCinemaGroupDialogBox(CinemaGroup cine, User user) {
 		this.cine=cine;
-		
+		this.user=user;
 	}
 	
 	
@@ -112,7 +112,7 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 				public void onSuccess(CinemaGroup result) {
 				closeCinemaGroupEdit();
 				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user);
+				AdminForm adminform = new AdminForm(user,0);
 				RootPanel.get().add(adminform);
 				}});
 		}

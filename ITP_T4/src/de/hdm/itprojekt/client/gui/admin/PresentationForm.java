@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui.admin;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -20,6 +21,7 @@ import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
@@ -152,7 +154,7 @@ public class PresentationForm extends VerticalPanel{
 		    timeslotDrop.addItem("23:00");
 		    timeslotDrop.addItem("23:30");
 		    timeslotDrop.addItem("00:00");
-		    
+		    this.add(dateLabel);
 		    this.add(datePicker);
 		    
 		    this.add(presentationLabel);
@@ -169,6 +171,7 @@ public class PresentationForm extends VerticalPanel{
 		    this.add(presentationadder);
 		    
 		    this.add(search);
+		    search.addClickHandler(new searchClickHandler());
 		    
 		    
 		   
@@ -189,11 +192,25 @@ public class PresentationForm extends VerticalPanel{
 		 * 
 		 */
 	    
+	    public class searchClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+			Cinema c = cine.elementAt(cinemaDrop.getSelectedIndex());
+			Movie m = movie.elementAt(movieDrop.getSelectedIndex());
+			Timeslot t = null;
+			Date date = datePicker.getHighlightedDate();
+			Presentation p = new Presentation();
+			
+			}
+		   
+	   }
+	    
 	   public class addPresentationClickHandler implements ClickHandler{
 
 			@Override
 			public void onClick(ClickEvent event) {
-				PresentationAddDialogBox presentationadd = new PresentationAddDialogBox();
+				PresentationAddDialogBox presentationadd = new PresentationAddDialogBox(user);
 				presentationadd.openPresentation();
 			}
 		   

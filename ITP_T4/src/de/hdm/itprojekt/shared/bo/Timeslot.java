@@ -6,21 +6,25 @@ public class Timeslot  extends BusinessObject {
 	
 private static final long serialversionUID = 1l;
 	
-	private Timestamp time;
+	private String time;
 	private int userID;
+		
 	
-	
-	public Timeslot(Timestamp time, int userID, int id, Timestamp creationDate) {
+	public Timeslot(String time, int userID, int id, Timestamp creationDate) {
 		super(id, creationDate);
 
 		this.time = time;
 		this.userID = userID;
 	}
 	
-	public Timeslot() {
-		
+	public Timeslot(String time, int userID) {
+		this.time = time;
+		this.userID = userID;
 	}
-
+	
+	public Timeslot() {
+	}
+	
 	public int getUserID() {
 		return userID;
 	}
@@ -29,11 +33,11 @@ private static final long serialversionUID = 1l;
 		this.userID = userID;
 	}
 
-	public Timestamp getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Timestamp time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
