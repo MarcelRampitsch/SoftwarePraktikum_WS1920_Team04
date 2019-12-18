@@ -39,6 +39,10 @@ public interface AdminAdministration extends RemoteService {
 	void deleteMovie(Movie m) throws IllegalArgumentException;
 	Vector<Movie> getAllMovieByUserID(User u) throws IllegalArgumentException;
 	
+	Timeslot addTimeslot(Timeslot t) throws IllegalArgumentException;
+	Timeslot updateTimeslot(Timeslot t) throws IllegalArgumentException;
+	void deleteTimeslot (Timeslot t) throws IllegalArgumentException;
+	Vector<Timeslot> getAllTimeslotByUserID(User u) throws IllegalArgumentException;
 	
 //	Timeslot findByTimeslotID (Timeslot t)throws IllegalArgumentException;
 //	Timeslot findByTime(Timeslot t) throws IllegalArgumentException;

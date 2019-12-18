@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 
@@ -54,50 +55,50 @@ public class TimeslotMapper {
 		return timeslotMapper;
 	}
 	
-	 public Timeslot findByTimeslotID(int id) {
+	 public Timeslot findByTimeslotID(Timeslot t) {
 			// DB-Verbindung holen
-		  Timeslot t = null;
+		  Timeslot te = null;
 			Connection con = DBConnection.getConnection();
 			
 			try {
 				// Prepared Statement erstellen um einen Timeslot zu finden
 				PreparedStatement findByTimeslotID = con
 						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotid=?;");
-				findByTimeslotID.setInt(1, id);
+				findByTimeslotID.setInt(1, t.getId());
 
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByTimeslotID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				t = new Timeslot(rs.getTimestamp("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+				te = new Timeslot(rs.getString("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
 				// Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
 			      e2.printStackTrace();
 			      return null;
 
 			} // Presentation zurückgeben
-			return t;
+			return te;
 		}
 	 
-	 public Timeslot findByTime(int id) {
+	 public Timeslot findByTime(Timeslot t) {
 			// DB-Verbindung holen
-		  Timeslot t = null;
+		  Timeslot te = null;
 			Connection con = DBConnection.getConnection();
 			
 			try {
 				// Prepared Statement erstellen um einen Timeslot zu finden
 				PreparedStatement findByTime = con
 						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE time=?;");
-				findByTime.setInt(1, id);
+				findByTime.setString(1, t.getTime());
 
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByTime.executeQuery();
-				t = new Timeslot(rs.getTimestamp("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+				te = new Timeslot(rs.getString("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
 			} catch (SQLException e2) {
 			      e2.printStackTrace();
 			      return null;
 
 			}
-			return t;
+			return te;
 		}
 	 
 	 public Timeslot insert(Timeslot t)  {
@@ -109,7 +110,8 @@ public class TimeslotMapper {
 				PreparedStatement insert = con
 						.prepareStatement("INSERT INTO softwarepraktikum_ws1920.timeslot(time, userID) VALUES (?,?);");
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				insert.setTimestamp(1, t.getTime());
+				insert.setString(1, t.getTime());
+				insert.setInt(2, t.getUserID());
 				
 				insert.executeUpdate();
 
@@ -118,18 +120,13 @@ public class TimeslotMapper {
 				// Ergebnis-Tupel in Objekt umwandeln
 				ResultSet rs = getnewTimeslot.executeQuery();
 				if (rs.next()) {
-					return new Timeslot(rs.getTimestamp("time"),rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+					return new Timeslot(rs.getString("time"),rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
 				}
-			
 				 // Fehlerbehandlung hinzufügen
 		} catch (SQLException e2) {
 		      e2.printStackTrace();
-		      return null;
-
-				
-			}
-
-		
+		      return null;	
+			}		
 			return null;
 		}
 	 
@@ -140,7 +137,7 @@ public class TimeslotMapper {
 			try {
 	              // Updaten eines bestimmten Timeslot  
 				PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.timeslot SET time=? WHERE timeslotID=?;");
-				update.setTimestamp(1, t.getTime());
+				update.setString(1, t.getTime());
 				
 				// PreparedStatement aufrufen und als Query an die DB schicken.
 				update.executeUpdate();
@@ -149,7 +146,7 @@ public class TimeslotMapper {
 				ResultSet rs = stm.executeQuery();
 				if (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					return new Timeslot(rs.getTimestamp("time"),rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					return new Timeslot(rs.getString("time"),rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 				}
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
@@ -160,7 +157,7 @@ public class TimeslotMapper {
 			return null;
 		}
 	 
-	 public void deleteByTimeslotID(int id)  {
+	 public void deleteByTimeslotID(Timeslot t)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -168,7 +165,7 @@ public class TimeslotMapper {
 				// Prepared Statement zum Löschen eines bestimmten Timeslot in der Datenbank 
 				PreparedStatement deleteByTimeslotID = con
 				        .prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
-				deleteByTimeslotID.setInt(1, id);
+				deleteByTimeslotID.setInt(1, t.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteByTimeslotID.executeUpdate();
 				
@@ -178,17 +175,15 @@ public class TimeslotMapper {
 		}
 	  }
 	 
-	 public void deleteAllTimeslotByUserID(int id) {
+	 public void deleteAllTimeslotByUserID(Timeslot t) {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			
-			
-			try {
-				
+			try {	
 				// Prepared Statement zum Löschen aller Timeslots in der Datenbank 
 				PreparedStatement deleteAllCinemaGroupByUserID =
-						con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE userID=?;");
-				deleteAllCinemaGroupByUserID.setInt(1, id);
+				con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE userID=?;");
+				deleteAllCinemaGroupByUserID.setInt(1, t.getUserID());
 				
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteAllCinemaGroupByUserID.executeUpdate();
@@ -197,11 +192,9 @@ public class TimeslotMapper {
 			} catch (SQLException e) {
 			      e.printStackTrace();
 		}
-			
-						
 		}
 	 
-	 public Vector<Timeslot> findAllTimeslotByUserID(int id)  {
+	 public Vector<Timeslot> findAllTimeslotByUserID(User u)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			Timeslot t = null;
@@ -211,7 +204,7 @@ public class TimeslotMapper {
 				PreparedStatement findAllByUSerID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.timeslot "
 						+ "WHERE UserID=? ");
-				findAllByUSerID.setInt(1, id);
+				findAllByUSerID.setInt(1, u.getId());
 				
 				// Ergebnis-Tupel erstellen
 
@@ -219,7 +212,7 @@ public class TimeslotMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					t = new Timeslot(rs.getTimestamp("time"), rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					t = new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					result.addElement(t);
 				} // Fehlerbehandlung hinzufügen
@@ -231,34 +224,5 @@ public class TimeslotMapper {
 			return result;
 		
 		}
-	 //TODO DeleteAllByMovieID SINN?
-
-	 
-	 public void deleteAllTimeslotByMovieID(int id) {
-			// DB-Verbindung holen
-			Connection con = DBConnection.getConnection();
-			
-			
-			try {
-				
-				// Prepared Statement zum Löschen aller Timeslots in der Datenbank 
-				PreparedStatement deleteAllCinemaGroupByUserID =
-						con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE MovieID=?;");
-				deleteAllCinemaGroupByUserID.setInt(1, id);
-				
-				// Statement ausfüllen und als Query an die DB schicken
-				deleteAllCinemaGroupByUserID.executeUpdate();
-				
-				 // Fehlerbehandlung hinzufügen
-			} catch (SQLException e) {
-			      e.printStackTrace();
-		}
-			
-						
-		}
-	 
-	 
-	 
-	  
-	  
+	 //TODO DeleteAllByMovieID SINN?	  
 }
