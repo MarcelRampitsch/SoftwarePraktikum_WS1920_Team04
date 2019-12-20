@@ -25,8 +25,6 @@ public interface EditorAdministrationAsync {
 	
 	void getUserByEmail(User u, AsyncCallback<User> callback);
 	
-	void getAllGroupnameByUserID(User u, AsyncCallback<Vector<Group>> callback);
-	
 	void updateUser(User upUser, AsyncCallback<User> callback);
 	
 	void deleteUser(User u, AsyncCallback<Void> callback);
@@ -78,9 +76,9 @@ public interface EditorAdministrationAsync {
 
 	void deleteBySurveyID(Survey s, AsyncCallback<Void> callback);
 	
-	void deleteAllByGroupID(Survey s, AsyncCallback<Void> callback);
+	void deleteAllByGroupID(Group g, AsyncCallback<Void> callback);
 	
-	void deleteAllByUserID(Survey s, AsyncCallback<Void> callback);
+	void deleteAllByUserId(Survey s, AsyncCallback<Void> callback);
 	
 
 	// SurveyEntry

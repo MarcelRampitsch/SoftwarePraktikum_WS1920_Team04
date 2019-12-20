@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Vector;
 
+import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Survey;
+import de.hdm.itprojekt.shared.bo.User;
 
 public class SurveyMapper {
 	
@@ -170,14 +172,14 @@ public class SurveyMapper {
 	  }
 	  
 	  // Methode zum löschen aller Surveys die von einem User erstellt wurden
-	  public void deleteAllByUserID(int id) {
+	  public void deleteAllByUserID(User u) {
 
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  
 			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyID WHERE userID =?;");
-			  deleteAllByUserID.setInt(1,  id);
+			  deleteAllByUserID.setInt(1,  u.getId());
 			  
 			  deleteAllByUserID.executeUpdate();
 			  
@@ -187,14 +189,14 @@ public class SurveyMapper {
 	  }
 	  
 	  // Methode zum Löschen aller Surveys die einer Gruppe zugeordnet sind
-	  public void DeleteAllByGroupID (int id) {
+	  public void deleteAllByGroupID (Group g) {
 
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  
 			  PreparedStatement deleteAllByGroupID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyID WHERE groupID =?;");
-			  deleteAllByGroupID.setInt(1, id);
+			  deleteAllByGroupID.setInt(1, g.getId());
 			  
 			  deleteAllByGroupID.executeUpdate();
 			  

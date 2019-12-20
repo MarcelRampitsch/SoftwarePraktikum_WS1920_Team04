@@ -10,6 +10,7 @@ import java.util.Vector;
 import java.util.Date;
 
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 
@@ -405,7 +406,7 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public void deleteAllByUserID(int id)  {
+	  public void deleteAllByUserID(User u)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -413,7 +414,7 @@ public class PresentationMapper {
 	              // Löschen aller Presentations die einen bestimmtes Cinema enthalten 
 				PreparedStatement deleteAllByCinemaID = con
 						.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema WHERE userID =?;");
-				deleteAllByCinemaID.setInt(1, id);
+				deleteAllByCinemaID.setInt(1, u.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteAllByCinemaID.executeUpdate();
 

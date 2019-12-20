@@ -216,7 +216,7 @@ public class CinemaGroupMapper {
 	
 	
 	
-	public void deleteAllCinemaGroupByUserID(CinemaGroup cine) {
+	public void deleteAllCinemaGroupByUserID(User u) {
 		
 		
 		// DB-Verbindung holen
@@ -229,7 +229,7 @@ public class CinemaGroupMapper {
 					con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinemagroup" + " WHERE userID=?");
 			
 			// Löschen der CinemaGroups die einen bestimmten UserID enthalten
-			deleteAllCinemaGroupByUserID.setInt(1, cine.getUserID());
+			deleteAllCinemaGroupByUserID.setInt(1, u.getId());
 			
 			deleteAllCinemaGroupByUserID.executeUpdate();
 			

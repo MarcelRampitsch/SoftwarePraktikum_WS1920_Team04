@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Groupmember;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * Die Klasse GroupmemberMapper bildet <code>Group</code> Objekte auf eine
@@ -206,7 +207,7 @@ public class GroupmemberMapper {
 		}
 	  }
 	  
-	  public void deleteAllByUserID(int id)  {
+	  public void deleteAllByUserID(Groupmember gm)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -214,7 +215,7 @@ public class GroupmemberMapper {
 				// Prepared Statement zum Löschen aller Groupmember eines bestimmten User in der Datenbank 
 				PreparedStatement deleteByPresentationID = con
 						.prepareStatement("DELETE softwarepraktikum_ws1920.groupmember WHERE `userID`=?;");
-				deleteByPresentationID.setInt(1, id);
+				deleteByPresentationID.setInt(1, gm.getId());
 				deleteByPresentationID.executeUpdate();
 
 				 // Fehlerbehandlung hinzufügen

@@ -31,8 +31,6 @@ public interface EditorAdministration extends RemoteService {
 	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
 	public User getUserByEmail(User u) throws IllegalArgumentException;
 	
-	public Vector<Group> getAllGroupnameByUserID(User u) throws IllegalArgumentException;
-	
 	// Aktualisieren eines User Objekts.
 	public User updateUser(User upUser) throws IllegalArgumentException;
 	
@@ -100,6 +98,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	// Survey anhand des SurveyName suchen.
 	public Survey getSurveyBySurveyName(Survey s) throws IllegalArgumentException;
+	
 	// Aktualisieren des Survey Objekts.
 	public Survey updateSurvey(Survey updateS) throws IllegalArgumentException;
 	
@@ -107,10 +106,10 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteBySurveyID(Survey s) throws IllegalArgumentException;
 	
 	// L�schen aller Surveys anhand der GruppenID.
-	public void deleteAllByGroupID(Survey s) throws IllegalArgumentException;
+	public void deleteAllByGroupID(Group g) throws IllegalArgumentException;
 	
 	// L�schen aller Surveys anhand der UserID.
-	public void deleteAllByUserID(Survey s) throws IllegalArgumentException;
+	public void deleteAllByUserId(Survey s) throws IllegalArgumentException;
 	
 
 	// SurveyEntry Methoden

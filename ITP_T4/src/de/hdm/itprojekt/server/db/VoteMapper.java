@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
+import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Vote;
 
 /**
@@ -254,7 +255,7 @@ public class VoteMapper {
 	}
 	
 	
-	public void deleteAllVoteByUserID(int id)  {
+	public void deleteAllVoteByUserID(User u)  {
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -263,7 +264,7 @@ public class VoteMapper {
 			 PreparedStatement deleteAllVote = con
 					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE userID=?;");
 		
-			 deleteAllVote.setInt(1, id);
+			 deleteAllVote.setInt(1, u.getId());
 			 deleteAllVote.executeUpdate();
 		} catch (SQLException e) {
 		      e.printStackTrace();

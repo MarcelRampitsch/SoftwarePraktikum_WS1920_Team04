@@ -81,12 +81,6 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		User user = uMapper.findByEmail(u);
 		return user;
 	}
-	// Methode um alle Gruppen eines User zu finden.
-	public Vector<Group> getAllGroupnameByUserID (User u) throws IllegalArgumentException{
-		Vector<Group> gr = null;
-		gr = gMapper.findAllGroupnameByUserID(u);
-		return gr;
-	}
 	// Methode zur Aktualisierung eines User Objektes.
 	public User updateUser(User upUser) throws IllegalArgumentException{
 		if (upUser != null) {
@@ -95,19 +89,18 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 		}
-	// Methode zum L�schen eines bestimmten Users
-	// TODO: Besprechen der deleteAllBy-Methoden.
+	// Methode zum L�schen eines bestimmten Users und der damit verbundenen Objekte.
 	public void deleteUser(User u) throws IllegalArgumentException{
-		uMapper.deleteUserByUserID(u.getId());
-		//gMapper.deleteAllByUserID(u.getId());
-		gmMapper.deleteAllByUserID(u.getId());
-		pMapper.deleteAllByUserID(u.getId());
-		sMapper.DeleteAllByGroupID(u.getId());
-		//seMapper.
-		vMapper.deleteAllVoteByUserID(u.getId());
-		//cgMapper.deleteAllCinemaGroupByUserID(u.getId());
-		//cMapper.deleteAllCinemaByUserID(u.getId());
-		//mMapper.deleteAllByUserID(u.getId());
+		gMapper.deleteAllByUserID(u);
+		gmMapper.deleteAllByUserID(u);
+		pMapper.deleteAllByUserID(u);
+		sMapper.deleteAllByUserID(u);
+		seMapper.deleteAllByUserID(u);
+		vMapper.deleteAllVoteByUserID(u);
+		cgMapper.deleteAllCinemaGroupByUserID(u);
+		cMapper.deleteAllCinemaByUserID(u);
+		mMapper.deleteAllByUserID(u);
+		uMapper.deleteUserByUserID(u);
 	}
 	
 	// TODO : User 1?
@@ -150,22 +143,22 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 	}
 
-	public void deleteAllByUserID(User u) throws IllegalArgumentException {
-		gMapper.deleteAllByUserID(u);
+	// ist in delete userpublic void deleteAllByUserID(User u) throws IllegalArgumentException {
+		//gMapper.deleteAllByUserID(u);
 		
-	}
+	
 	
 	// Groupmember
 	// TODO Wie hat die createGroupMember Methode auszusehen?
 	
-	/*public Groupmember createGroupMember(Groupmember gm) throws IllegalArgumentException {
+	public Groupmember createGroupMember(Groupmember gm) throws IllegalArgumentException {
 		if(gm != null) {
 		gm = gmMapper.insertGroupmember(gm);
 			return gm;
 		}
 		return null;
 	}
-*/
+
 	public Vector<Groupmember> getAllByGroupID(Group g) throws IllegalArgumentException {
 		Vector<Groupmember> gm = gmMapper.findAllByGroupID(g.getId());
 		return gm;
@@ -194,7 +187,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 
 	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException {
-		gmMapper.deleteAllByUserID(gm.getUserID());
+		gmMapper.deleteAllByUserID(gm);
 		
 	}
 
@@ -232,15 +225,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 	}
 
-	@Override
-	public void deleteAllByGroupID(Survey s) throws IllegalArgumentException {
-		sMapper.DeleteAllByGroupID(s.getGroupID());
+	public void deleteAllByGroupID(Group g) throws IllegalArgumentException {
+		sMapper.deleteAllByGroupID(g);
 		
 	}
 
-	@Override
-	public void deleteAllByUserID(Survey s) throws IllegalArgumentException {
-		sMapper.deleteAllByUserID(s.getUserID());
+	public void deleteAllByUserId(User u) throws IllegalArgumentException {
+		sMapper.deleteAllByUserID(u);
 		
 	}
 

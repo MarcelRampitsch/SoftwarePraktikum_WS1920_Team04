@@ -162,7 +162,7 @@ public class CinemaMapper {
 	}
 	
 
-	public void deleteAllCinemaByUserID(Cinema cine) {
+	public void deleteAllCinemaByUserID(User u) {
 		
 		// DB-Verbindung holen
 		Connection con  = DBConnection.getConnection();
@@ -172,7 +172,7 @@ public class CinemaMapper {
 			PreparedStatement deleteAllCinemaByUserID = 
 							con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
 			
-			deleteAllCinemaByUserID.setInt(1, cine.getUserID());
+			deleteAllCinemaByUserID.setInt(1, u.getId());
 			
 			deleteAllCinemaByUserID.executeUpdate();
 			

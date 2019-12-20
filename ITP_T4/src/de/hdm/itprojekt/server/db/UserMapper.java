@@ -150,13 +150,13 @@ public class UserMapper {
 		  return null;
 	  }
 
-	public void deleteUserByUserID (int id) {
+	public void deleteUserByUserID (User u) {
 		  
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  PreparedStatement deleteByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.user WHERE userID=?;");
-			  deleteByUserID.setInt(1, id);
+			  deleteByUserID.setInt(1, u.getId());
 			  deleteByUserID.executeUpdate();
 			  
 		  } catch (SQLException e) {

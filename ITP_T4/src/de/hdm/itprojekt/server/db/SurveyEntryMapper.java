@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
+import de.hdm.itprojekt.shared.bo.User;
 
 /**
  * Die Klasse SurveyEntryMapper bildet <code>SurveyEntry</code> Objekte auf eine
@@ -222,6 +223,21 @@ public class SurveyEntryMapper {
 			  e.printStackTrace();
 		  }
 			 	 
+	  }
+	  
+	  public void deleteAllByUserID(User u) {
+		  
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE userID=?;");
+			  
+			  deleteAllByUserID.setInt(1, u.getId());
+			  deleteAllByUserID.executeUpdate();
+			  
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+		  }
 	  }
 	  
 	  
