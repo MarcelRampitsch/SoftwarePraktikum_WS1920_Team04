@@ -58,16 +58,9 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}
 	// Methode zur Aktualisierung eines Cinema Objektes
 	public Cinema updateCinema(Cinema upCinema) throws IllegalArgumentException {
-		if (upCinema.getCinemaGroupID() != 0) {
 		if (upCinema != null) {
 			Cinema tempCinema = cMapper.updateCinema(upCinema);
-			return tempCinema;}
-		}
-		else {
-		if (upCinema != null) {
-			Cinema tempCinema = cMapper.updateCinema1(upCinema);
 			return tempCinema;
-		}
 		}
 		return null;
 	}	

@@ -69,18 +69,16 @@ public class EditCinemaDialogBox extends DialogBox {
 			public void onSuccess(Vector<CinemaGroup> result) {
 				int d = 0;
 				cinemaGroupBox.addItem("Keine Kinogruppe");
+				cinemag = result;
 				for (int i = 0; i < result.size(); i++ ) {
-					
 					cinemaGroupBox.addItem(result.elementAt(i).getName());
 					if(cine.getCinemaGroupID() == result.elementAt(i).getId()){
 						d=i+1;					
 					}
 				}
-				result = cinemag;
 				cinemaGroupBox.setSelectedIndex(d);	
 			}
 		});
-		
 		this.add(content);
 	}
 	
@@ -105,7 +103,6 @@ public class EditCinemaDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			closeCinemaEditForm();
-			
 		}
 
 	
@@ -115,10 +112,11 @@ public class EditCinemaDialogBox extends DialogBox {
 	private class safeCinemaEditForm implements ClickHandler{
 		
 		@Override
-		public void onClick(ClickEvent event) {
-			int cinemaGroupID = cinemaGroupBox.getSelectedIndex();
-			if (cinemaGroupBox.getSelectedItemText() == "Keine Kinogruppe") {
-				c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), 0, cine.getUserID());
+		public void onClick(ClickEvent event) { 
+			if (cinemaGroupBox.getSelectedIndex() == 0) {
+				c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), 0, cine.getUserID());}
+			else {
+				c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cinemag.elementAt(cinemaGroupBox.getSelectedIndex()-1).getId(), cine.getUserID());}
 				adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
 					
 					@Override
@@ -132,23 +130,7 @@ public class EditCinemaDialogBox extends DialogBox {
 					RootPanel.get().clear();
 					AdminForm adminform = new AdminForm(user,1);
 					RootPanel.get().add(adminform);
-					}});
-			} else {
-			c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cinemag.elementAt(cinemaGroupID).getId(), cine.getUserID());}
-			adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
-				
-				@Override
-				public void onFailure(Throwable caught) {
-				Window.alert("was ist falsch geloffen");
-				}
-
-				@Override
-				public void onSuccess(Cinema result) {
-				closeCinemaEditForm();
-				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user,1);
-				RootPanel.get().add(adminform);
-				}});
-		}
+					}});			
+	}
 	}
 }
