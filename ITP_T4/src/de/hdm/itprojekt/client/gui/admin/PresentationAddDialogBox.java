@@ -58,7 +58,8 @@ public class PresentationAddDialogBox extends DialogBox {
     
     public void onLoad() {
     	super.onLoad();
-    	buttoncontent.add(no);
+    	
+    	content.add(no);
     	no.addClickHandler(new close());
     	content.add(pcinemaLabel);
     	content.add(cinemaBox);
@@ -107,14 +108,22 @@ public class PresentationAddDialogBox extends DialogBox {
 			}
 		});
     	
-    	
-    	
-    	
-    }
+    	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
+    		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
 
-    
-    
-    
+			public void onSuccess(Vector<Timeslot> result) {
+				
+				for (int i = 0; i < result.size(); i++ ) {
+					timeslotBox.addItem(result.elementAt(i).getTime());
+					timeslot = result;
+				}
+			}
+		});
+    }
 
 	/*
 	 * Methode die das Anzeigen der DialogBox realisiert
@@ -137,7 +146,6 @@ public class PresentationAddDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
     
-    
     private class close implements ClickHandler{
 
 		@Override
@@ -153,10 +161,8 @@ public class PresentationAddDialogBox extends DialogBox {
 		closePresentation();
 		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex());
 		Movie m = movie.elementAt(movieBox.getSelectedIndex());
-		Window.alert(c.getName()+m.getName());
-		
-		
-		
+		Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex());
+		Window.alert(c.getName()+m.getName()+t.getTime());
 		}
-}
+    }
 }
