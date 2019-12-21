@@ -65,17 +65,22 @@ public class CinemaMapper {
 
 		try { 
 			// Prepared Statement erstellen um ein Cinema zu finden
-			PreparedStatement  insert = 
-					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,userID,cinemaGroupID) VALUES (?,?,?,?);");
+			if(c.getCinemaGroupID() != 0) {
+			PreparedStatement  insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,userID,cinemaGroupID) VALUES (?,?,?,?);");
 				
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				insert.setString(1, c.getLocation());
 				insert.setString(2, c.getName());
 				insert.setInt(3, c.getUserID());
 				insert.setInt(4, c.getCinemaGroupID());
-					
-				
-				insert.executeUpdate();
+				insert.executeUpdate();}
+			else {PreparedStatement  insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinema(location,name,userID) VALUES (?,?,?);");
+			
+		// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+			insert.setString(1, c.getLocation());
+			insert.setString(2, c.getName());
+			insert.setInt(3, c.getUserID());
+			insert.executeUpdate();}
 				
 				PreparedStatement getnewCinema = 
 						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema ORDER BY creationDate DESC LIMIT 1;");
@@ -139,6 +144,44 @@ public class CinemaMapper {
 					update.setString(2, cinema.getName());
 					update.setInt(3, cinema.getCinemaGroupID());
 					update.setInt(4, cinema.getId());
+
+					// PreparedStatement aufrufen und als Query an die DB schicken.
+					update.executeUpdate();
+					
+					PreparedStatement stm  = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema WHERE cinemaID=?;");
+	
+					update.setInt(1, cinema.getId());
+					
+					ResultSet rs  = stm.executeQuery();
+					
+					if(rs.next()) {
+						// Ergebnis-Tupel in Objekt umwandeln
+						return new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"), rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));          
+					}
+					 // Fehlerbehandlung hinzufügen
+		} catch (SQLException e) {
+		      e.printStackTrace();
+		      return null;
+		} 
+		return null;
+	}
+	
+public Cinema updateCinema1(Cinema cinema) {
+		
+		// DB-Verbindung holen
+		Connection con = DBConnection.getConnection();
+		
+		
+		try {
+            // Updaten einer bestimmten Cinema  
+			PreparedStatement update = 
+					
+					con.prepareStatement("UPDATE softwarepraktikum_ws1920.cinema SET location=?, name=?, cinemaGroupID=NULL " + "WHERE cinemaID=?;");
+					
+		
+					update.setString(1, cinema.getLocation());
+					update.setString(2, cinema.getName());
+					update.setInt(3, cinema.getId());
 
 					// PreparedStatement aufrufen und als Query an die DB schicken.
 					update.executeUpdate();

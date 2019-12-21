@@ -81,7 +81,7 @@ public class CinemaAddDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<CinemaGroup> result) {
-				
+				cinemaGroupBox.addItem("Keine Kinogruppe");
 				for (int i = 0; i < result.size(); i++ ) {
 					cinemaGroupBox.addItem(result.elementAt(i).getName());
 					cine = result;
@@ -129,7 +129,11 @@ public class CinemaAddDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			int cinemaGroupID = cinemaGroupBox.getSelectedIndex();
-			c = new Cinema(locationBox.getText(), box.getText(), user.getId(), cine.elementAt(cinemaGroupID).getId());
+			if(cinemaGroupBox.getSelectedItemText() == "Keine Kinogruppe") {
+			c = new Cinema(locationBox.getText(), box.getText(), user.getId(), 0);
+			}else {
+				c = new Cinema(locationBox.getText(), box.getText(), user.getId(), cine.elementAt(cinemaGroupID).getId());
+			}
 			adminAdministration.addCinema(c, new AsyncCallback<Cinema>() {
 				
 				@Override
@@ -146,7 +150,6 @@ public class CinemaAddDialogBox extends DialogBox {
 				isValidSymbol();
 				isValidSymbol2();
 				}});
-				
 		}
 	}
 	

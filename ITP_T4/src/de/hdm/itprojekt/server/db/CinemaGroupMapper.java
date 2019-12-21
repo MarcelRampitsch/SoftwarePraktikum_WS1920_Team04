@@ -64,13 +64,12 @@ public class CinemaGroupMapper {
 		try {
 			
 			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
-			PreparedStatement insert  = 
-					con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinemaGroup(name, userID) VALUES (?,?);");
+			if (c.getId() == 0) {
+			PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.cinemaGroup(name, userID) VALUES (?,?);");
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 					insert.setString(1, c.getName());
 					insert.setInt(2, c.getUserID());
-					
-					insert.executeUpdate();
+					insert.executeUpdate();}
 					
 					
 				PreparedStatement getnewCinemaGroup= con
@@ -89,6 +88,8 @@ public class CinemaGroupMapper {
 					return null;
 					
 	}
+	
+	
 	
 	public CinemaGroup findCinemaGroupByID(CinemaGroup cg) {
 		CinemaGroup cineg = null;

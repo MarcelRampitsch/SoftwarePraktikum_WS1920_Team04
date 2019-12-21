@@ -43,6 +43,8 @@ public interface AdminAdministrationAsync {
 	void deleteTimeslot(Timeslot t, AsyncCallback<Void> callback);
 	void getAllTimeslotByUserID(User u, AsyncCallback<Vector<Timeslot>> callback);
 
+
+
 	//Timeslot
 //	void deleteAllTimeslotByMovieID(Movie m, AsyncCallback<Void> callback);
 //	void deleteAllTimeslotByUserID(User u, AsyncCallback<Void> callback);

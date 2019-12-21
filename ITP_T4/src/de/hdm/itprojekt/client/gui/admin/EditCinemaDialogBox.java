@@ -58,7 +58,6 @@ public class EditCinemaDialogBox extends DialogBox {
 		safe.addClickHandler(new safeCinemaEditForm());
 		box.setText(cine.getName());
 		locationBox.setText(cine.getLocation());
-
 		adminAdministration.getAllCinemaGroupByUserID(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
 			
 			@Override
@@ -68,13 +67,20 @@ public class EditCinemaDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<CinemaGroup> result) {
-				
+				int d = 0;
+				cinemaGroupBox.addItem("Keine Kinogruppe");
 				for (int i = 0; i < result.size(); i++ ) {
+					
 					cinemaGroupBox.addItem(result.elementAt(i).getName());
-					cinemag = result;
+					if(cine.getCinemaGroupID() == result.elementAt(i).getId()){
+						d=i+1;					
+					}
 				}
+				result = cinemag;
+				cinemaGroupBox.setSelectedIndex(d);	
 			}
 		});
+		
 		this.add(content);
 	}
 	
@@ -111,7 +117,24 @@ public class EditCinemaDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			int cinemaGroupID = cinemaGroupBox.getSelectedIndex();
-			c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cinemag.elementAt(cinemaGroupID).getId(), cine.getUserID());
+			if (cinemaGroupBox.getSelectedItemText() == "Keine Kinogruppe") {
+				c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), 0, cine.getUserID());
+				adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
+					
+					@Override
+					public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+					}
+
+					@Override
+					public void onSuccess(Cinema result) {
+					closeCinemaEditForm();
+					RootPanel.get().clear();
+					AdminForm adminform = new AdminForm(user,1);
+					RootPanel.get().add(adminform);
+					}});
+			} else {
+			c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cinemag.elementAt(cinemaGroupID).getId(), cine.getUserID());}
 			adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
 				
 				@Override
