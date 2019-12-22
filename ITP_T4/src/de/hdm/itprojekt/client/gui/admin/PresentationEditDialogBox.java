@@ -90,11 +90,15 @@ public class PresentationEditDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<Cinema> result) {
-				
+				int d = 0;
+				cine = result;
 				for (int i = 0; i < result.size(); i++ ) {
 					cinemaBox.addItem(result.elementAt(i).getName());
-					cine = result;
+					if(presentation.getCinemaID() == result.elementAt(i).getId()){
+						d=i;
+					}
 				}
+				cinemaBox.setSelectedIndex(d);
 			}
 		});
     	

@@ -2,9 +2,10 @@ package de.hdm.itprojekt.client.gui.admin;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.shared.DateTimeFormat;
@@ -15,6 +16,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -36,6 +38,7 @@ public class PresentationAddDialogBox extends DialogBox {
     HorizontalPanel buttoncontent  = new HorizontalPanel();
     
     User user = null;
+    Presentation pres = null; 
     Vector <Cinema> cine = null;
     Vector <Movie> movie = null;
     Vector <Timeslot> timeslot = null;
@@ -78,7 +81,9 @@ public class PresentationAddDialogBox extends DialogBox {
     	yes.addClickHandler(new save());
     	content.add(buttoncontent);
     	this.add(content);
-    	
+    	cinemaBox.addItem("Kein Kino ausgewählt");
+    	movieBox.addItem("Kein Film ausgewählt");
+    	timeslotBox.addItem("Keine Spielzeit ausgewählt");
     	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
     		
 			@Override
@@ -160,14 +165,33 @@ public class PresentationAddDialogBox extends DialogBox {
     }
     
     private class save implements ClickHandler{
-
+    
 		@Override
 		public void onClick(ClickEvent event) {
-		closePresentation();
-		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex());
-		Movie m = movie.elementAt(movieBox.getSelectedIndex());
-		Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex());
-		Window.alert(c.getName()+m.getName()+t.getTime());
+		if((cinemaBox.getSelectedItemText() != "Kein Kino ausgewählt") & (movieBox.getSelectedItemText() != "Kein Film ausgewählt") & (timeslotBox.getSelectedItemText() != "Keine Spielzeit ausgewählt")) {
+		java.util.Date utilDate = new java.util.Date();
+		utilDate = datePicker.getValue();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex()-1);
+		Movie m = movie.elementAt(movieBox.getSelectedIndex()-1);
+		Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex()-1);
+		pres = new Presentation(nameBox.getText(),c.getId(),m.getId(),user.getId(),t.getId(),sqlDate);
+		adminAdministration.addPresentation(pres, new AsyncCallback<Presentation>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
+
+			@Override 
+			public void onSuccess(Presentation result) {
+			closePresentation();
+			RootPanel.get().clear();
+			AdminForm adminform = new AdminForm(user,4);
+			RootPanel.get().add(adminform);	
+			}
+		});
+		}
 		}
     }
 }

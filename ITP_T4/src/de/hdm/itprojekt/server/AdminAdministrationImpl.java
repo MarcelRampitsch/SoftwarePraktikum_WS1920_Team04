@@ -184,6 +184,15 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		return pres;
 	}
 	
+	public Presentation addPresentation(Presentation p) throws IllegalArgumentException {
+		if(p != null) {
+			Presentation pr = null;
+			pr = pMapper.insert(p);
+			return pr;
+		}
+		return null;
+	}
+	
 
 	/*@Override
 	public Cinema greetServer(String input) throws IllegalArgumentException {

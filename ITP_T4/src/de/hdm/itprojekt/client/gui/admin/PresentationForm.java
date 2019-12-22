@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.client.gui.admin;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -218,13 +218,8 @@ public class PresentationForm extends VerticalPanel{
 			Cinema c = cine.elementAt(cinemaDrop.getSelectedIndex());
 			Movie m = movie.elementAt(movieDrop.getSelectedIndex());
 			Timeslot t = time.elementAt(timeslotDrop.getSelectedIndex());
+			Date d = datePicker.getValue();
 			Presentation p = new Presentation();
-			
-//			Calendar cal = datePicker.getValue();
-//			Window.alert(cal.toString());
-//			java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());
-//			
-//			Window.alert(sqlDate.toString());
 			}
 		   
 	   }
@@ -233,6 +228,7 @@ public class PresentationForm extends VerticalPanel{
 
 			@Override
 			public void onClick(ClickEvent event) {
+				presentation = pres.elementAt(presentationbox.getSelectedIndex());
 				PresentationEditDialogBox presentationadd = new PresentationEditDialogBox(presentation, user);
 				presentationadd.openPresentation();
 			}

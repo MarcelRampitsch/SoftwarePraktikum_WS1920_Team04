@@ -106,7 +106,7 @@ public class PresentationDeleteDialogBox extends DialogBox {
 					// TODO Auto-generated method stub
 					closePresentationForm();
 					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(currentUser,1);
+					AdminForm adminform = new AdminForm(currentUser,4);
 					RootPanel.get().add(adminform);
 				}
 				

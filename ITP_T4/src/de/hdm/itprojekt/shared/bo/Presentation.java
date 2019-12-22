@@ -41,7 +41,7 @@ private static final long serialversionUID = 1l;
 	public Presentation() {
 
 	}
-	
+
 	public int getCinemaID() {
 		return cinemaID;
 	}

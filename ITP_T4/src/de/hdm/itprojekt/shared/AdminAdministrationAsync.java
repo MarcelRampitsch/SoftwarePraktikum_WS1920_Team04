@@ -46,6 +46,7 @@ public interface AdminAdministrationAsync {
 	void deletePresentation(Presentation p, AsyncCallback<Void> asyncCallback);
 
 	void getAllPresentationsByUser(User u, AsyncCallback<Vector<Presentation>> callback);
+	void addPresentation(Presentation p, AsyncCallback<Presentation> callback);
 
 
 

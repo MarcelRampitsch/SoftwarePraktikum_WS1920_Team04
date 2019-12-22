@@ -82,7 +82,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 
 					// Objekt in einen Ergebinsvektor übergeben
 					result.addElement(p);
@@ -116,7 +116,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				}// Fehlerbehandlung hinzufügen
@@ -148,7 +148,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
@@ -208,7 +208,7 @@ public class PresentationMapper {
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByPresentationID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				pe = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+				pe = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e) {
 			      e.printStackTrace();
@@ -238,7 +238,7 @@ public class PresentationMapper {
 
 					while (rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						pe = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						pe = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
                      // Objekt an ein Präsentationsvektor übergeben
 						result.addElement(pe);
 					} 				 // Fehlerbehandlung hinzufügen
@@ -279,7 +279,7 @@ public class PresentationMapper {
 					ResultSet rs = getnewPresentation.executeQuery();
 					if (rs.next()) {
 						
-						return new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -314,7 +314,7 @@ public class PresentationMapper {
 					ResultSet rs = stm.executeQuery();
 					if (rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						return new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
