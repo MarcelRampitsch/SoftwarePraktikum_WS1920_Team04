@@ -1,6 +1,9 @@
 package de.hdm.itprojekt.client.gui.admin;
 
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import java.util.Vector;
 
@@ -55,12 +58,9 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    DatePicker datePicker = new DatePicker();
 	    
-	    Button presentationAdd = new Button("New");
-
+	    Button presentationAdd = new Button("Edit");
 	    ListBox presentationbox = new ListBox();
 	    Label presentationLabel = new Label("Presentation");
-	    
-	    Button presentationEdit = new Button("Edit");
 	    Button presentationNew = new Button("New");
 	    Button presentationDelete = new Button("Delete");
 	    
@@ -69,10 +69,12 @@ public class PresentationForm extends VerticalPanel{
 		private Vector<Cinema> cine = null;
 		private Vector<Movie> movie = null;
 		private Vector<Timeslot> time = null;
+		private Vector<Presentation> pres = null;
+		private Presentation presentation = null;
 
 	    
 	    HorizontalPanel presentationadder = new HorizontalPanel();
-	    VerticalPanel buttonbox  = new VerticalPanel();
+	    HorizontalPanel buttonbox  = new HorizontalPanel();
 		private User user = null;
 	    
 	    
@@ -163,28 +165,40 @@ public class PresentationForm extends VerticalPanel{
 	    	
 		    this.add(dateLabel);
 		    this.add(datePicker);
-		    
-		    this.add(presentationLabel);
-
-		    presentationadder.add(presentationbox);
-		    presentationbox.addItem("erste");
-		    presentationbox.addItem("zweite");
-		    presentationbox.addItem("dritte");
-
-		    
 		    presentationadder.add(search );
 		    search.addClickHandler(new searchClickHandler());
-		    
 		    this.add(presentationadder);
+		    this.add(presentationLabel);
+
+		    this.add(presentationbox);
+		    adminAdministration.getAllPresentationsByUser(this.user, new AsyncCallback<Vector<Presentation>>() {
+	    		
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+				}
+
+				public void onSuccess(Vector<Presentation> result) {
+					
+					for (int i = 0; i < result.size(); i++ ) {
+						presentationbox.addItem(result.elementAt(i).getName());
+						pres = result;
+					}
+				}
+			});
 		    
-		    this.add(presentationAdd);
-		    presentationAdd.addClickHandler(new addPresentationClickHandler());
 		    
+//		    presentationbox.addItem("erste");
+//		    presentationbox.addItem("zweite");
+//		    presentationbox.addItem("dritte");
 		    
-		    buttonbox.add(presentationEdit);
+		    buttonbox.add(presentationAdd);
+		    presentationAdd.addClickHandler(new editPresentationClickHandler());
 		    buttonbox.add(presentationNew);
+		    presentationNew.addClickHandler(new newPresentationClickHandler());
 		    buttonbox.add(presentationDelete);
-		    
+		    presentationDelete.addClickHandler(new deletePresentationClickHandler());
+		    this.add(buttonbox);
 	    
 	    }
 
@@ -204,25 +218,46 @@ public class PresentationForm extends VerticalPanel{
 			Cinema c = cine.elementAt(cinemaDrop.getSelectedIndex());
 			Movie m = movie.elementAt(movieDrop.getSelectedIndex());
 			Timeslot t = time.elementAt(timeslotDrop.getSelectedIndex());
-			Date date = datePicker.getHighlightedDate();
 			Presentation p = new Presentation();
-			Window.alert(datePicker.getValue().toString());
 			
+//			Calendar cal = datePicker.getValue();
+//			Window.alert(cal.toString());
+//			java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());
+//			
+//			Window.alert(sqlDate.toString());
 			}
 		   
 	   }
 	    
-	   public class addPresentationClickHandler implements ClickHandler{
+	   public class editPresentationClickHandler implements ClickHandler{
 
 			@Override
 			public void onClick(ClickEvent event) {
-				PresentationAddDialogBox presentationadd = new PresentationAddDialogBox(user);
+				PresentationEditDialogBox presentationadd = new PresentationEditDialogBox(presentation, user);
 				presentationadd.openPresentation();
 			}
-		   
 	   }
 	   
-	   private  class addPresentationCallback implements AsyncCallback<Presentation>{
+	   public class newPresentationClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+				PresentationAddDialogBox presentationnew = new PresentationAddDialogBox(user);
+				presentationnew.openPresentation();
+			}
+	   }
+	   
+	   public class deletePresentationClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+				presentation = pres.elementAt(presentationbox.getSelectedIndex());
+				PresentationDeleteDialogBox presentationdelete = new PresentationDeleteDialogBox(presentation, user);
+				presentationdelete.openPresentationDelete();
+			}
+	   }
+	   
+	   private  class PresentationCallback implements AsyncCallback<Presentation>{
 
 		@Override
 		public void onFailure(Throwable caught) {

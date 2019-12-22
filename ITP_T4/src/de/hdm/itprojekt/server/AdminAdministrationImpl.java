@@ -175,7 +175,14 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		return null;
 	}
 	
+	public void deletePresentation(Presentation p) throws IllegalArgumentException {
+		pMapper.deleteByPresentationID(p);	
+	}
 	
+	public Vector<Presentation> getAllPresentationsByUser(User u) throws IllegalArgumentException {
+		Vector<Presentation> pres = pMapper.findAllByUserID(u);
+		return pres;
+	}
 	
 
 	/*@Override

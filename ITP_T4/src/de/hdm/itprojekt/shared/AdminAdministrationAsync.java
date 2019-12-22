@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -42,6 +43,9 @@ public interface AdminAdministrationAsync {
 	void updateTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
 	void deleteTimeslot(Timeslot t, AsyncCallback<Void> callback);
 	void getAllTimeslotByUserID(User u, AsyncCallback<Vector<Timeslot>> callback);
+	void deletePresentation(Presentation p, AsyncCallback<Void> asyncCallback);
+
+	void getAllPresentationsByUser(User u, AsyncCallback<Vector<Presentation>> callback);
 
 
 

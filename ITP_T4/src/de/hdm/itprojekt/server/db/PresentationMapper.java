@@ -9,7 +9,10 @@ import java.sql.Timestamp;
 import java.util.Vector;
 import java.util.Date;
 
+import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -61,7 +64,7 @@ public class PresentationMapper {
 	  }
 	  
 	  
-	  public Vector<Presentation> findAllByMovieID(int id)  {
+	  public Vector<Presentation> findAllByMovieID(Movie m)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			Presentation p = null;
@@ -71,7 +74,7 @@ public class PresentationMapper {
 				PreparedStatement findAllByMovieID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.presentation "
 						+ "WHERE movieID=? ");
-				findAllByMovieID.setInt(1, id);
+				findAllByMovieID.setInt(1, m.getId());
 
                     // Ergebnis-Tupel erstellen
 
@@ -79,7 +82,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					// Objekt in einen Ergebinsvektor übergeben
 					result.addElement(p);
@@ -94,7 +97,7 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public Vector<Presentation> findAllByTimeslotID(int id)  {
+	  public Vector<Presentation> findAllByTimeslotID(Timeslot t)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			Presentation p = null;
@@ -104,7 +107,7 @@ public class PresentationMapper {
 				PreparedStatement findAllByTimeslotID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.presentation "
 						+ "WHERE TimeslotID=? ");
-				findAllByTimeslotID.setInt(1, id);
+				findAllByTimeslotID.setInt(1, t.getId());
 
 				// Ergebnis-Tupel erstellen
 
@@ -113,7 +116,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				}// Fehlerbehandlung hinzufügen
@@ -127,7 +130,7 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public Vector<Presentation> findAllByCinemaID(int id)  {
+	  public Vector<Presentation> findAllByCinemaID(Cinema c)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			Presentation p = null;
@@ -137,7 +140,7 @@ public class PresentationMapper {
 				PreparedStatement findAllByCinemaID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.presentation "
 						+ "WHERE CinemaID=? ");
-				findAllByCinemaID.setInt(1, id);
+				findAllByCinemaID.setInt(1, c.getId());
 				
 				// Ergebnis-Tupel erstellen
 
@@ -145,7 +148,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
@@ -159,7 +162,7 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public Vector<Presentation> findAllByUserID(int id)  {
+	  public Vector<Presentation> findAllByUserID(User u)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			Presentation p = null;
@@ -169,7 +172,7 @@ public class PresentationMapper {
 				PreparedStatement findAllByUSerID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.presentation "
 						+ "WHERE UserID=? ");
-				findAllByUSerID.setInt(1, id);
+				findAllByUSerID.setInt(1, u.getId());
 				
 				// Ergebnis-Tupel erstellen
 
@@ -177,7 +180,7 @@ public class PresentationMapper {
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 
 					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
@@ -191,8 +194,8 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public Presentation findByPresentationID(int id) {
-		  Presentation p = null;
+	  public Presentation findByPresentationID(Presentation p) {
+		  Presentation pe = null;
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			
@@ -200,26 +203,26 @@ public class PresentationMapper {
 				// Prepared Statement erstellen um eine Präsentation zu finden
 				PreparedStatement findByPresentationID = con
 						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.presentation WHERE presentationID=? ;");
-				findByPresentationID.setInt(1, id);
+				findByPresentationID.setInt(1, p.getId());
 
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByPresentationID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+				pe = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e) {
 			      e.printStackTrace();
 			      return null;
 
 			} // Presentation zurückgeben
-			return p;
+			return pe;
 		}
 	  
 		  
-		  public Vector<Presentation> findByDate(int date)  {
+		  public Vector<Presentation> findByDate(Presentation p)  {
 				// DB-Verbindung holen
 				Connection con = DBConnection.getConnection();
-				Presentation p = null;
+				Presentation pe = null;
 				// Ergebnisvektor vorbereiten
 				Vector<Presentation> result = new Vector<Presentation>();
 				try {
@@ -228,16 +231,16 @@ public class PresentationMapper {
 							"SELECT * From softwarepraktikum_ws1920.presentation "
 							+ "WHERE date=? "
 							+ "Order By TimeslotID ASC;");
-					findByDate.setInt(1, date);
+					findByDate.setDate(1, p.getDate());
 
 					// Statement ausfüllen und als Query an die DB schicken
 					ResultSet rs = findByDate.executeQuery();
 
 					while (rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						p = new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						pe = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
                      // Objekt an ein Präsentationsvektor übergeben
-						result.addElement(p);
+						result.addElement(pe);
 					} 				 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
 				      e.printStackTrace();
@@ -256,7 +259,7 @@ public class PresentationMapper {
 				try { 
 					// Prepared Statement erstellen um eine Präsentation in die Datenbank einzufügen
 					PreparedStatement insert = con
-							.prepareStatement("INSERT INTO softwarepraktikum_ws1920.presentation(date, userID, cinemaID, timeslotID, movieID) VALUES (?,?,?,?,?);");
+							.prepareStatement("INSERT INTO softwarepraktikum_ws1920.presentation(date, userID, cinemaID, timeslotID, movieID, name) VALUES (?,?,?,?,?,?);");
 					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 					
 					insert.setDate(1, p.getDate());
@@ -264,6 +267,7 @@ public class PresentationMapper {
 					insert.setInt(3, p.getCinemaID());
 					insert.setInt(4, p.getTimeslotID());
 					insert.setInt(5, p.getMovieID());
+					insert.setString(6, p.getName());
 
 					
 					
@@ -275,7 +279,7 @@ public class PresentationMapper {
 					ResultSet rs = getnewPresentation.executeQuery();
 					if (rs.next()) {
 						
-						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -295,12 +299,13 @@ public class PresentationMapper {
 
 				try {
 		              // Updaten einer bestimmten Presentation  
-					PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET cinemaID=?, movieID=?, timeslotID=?, date=?  WHERE presentationID=?;");
+					PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET cinemaID=?, movieID=?, timeslotID=?, date=?, name=?  WHERE presentationID=?;");
 					update.setInt(1, p.getCinemaID());
 					update.setInt(2, p.getMovieID());
 					update.setInt(3, p.getTimeslotID());
 					update.setDate(4, p.getDate());
-					update.setInt(5, p.getId());
+					update.setString(5, p.getName());
+					update.setInt(6, p.getId());
 
 					// PreparedStatement aufrufen und als Query an die DB schicken.
 					update.executeUpdate();
@@ -309,7 +314,7 @@ public class PresentationMapper {
 					ResultSet rs = stm.executeQuery();
 					if (rs.next()) {
 						// Ergebnis-Tupel in Objekt umwandeln
-						return new Presentation(rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -321,18 +326,16 @@ public class PresentationMapper {
 			}
 		  
 			
-		  public void deleteByPresentationID(int id)  {
+		  public void deleteByPresentationID(Presentation p)  {
 				// DB-Verbindung holen
 				Connection con = DBConnection.getConnection();
 
 				try {
 					// Prepared Statement zum Löschen einer bestimmten Präsentation in der Datenbank 
 					PreparedStatement deleteByPresentationID = con
-							.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET `DeleteDate`=NOW() WHERE `PresentationID`=?;");
-					//      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE `PresentationID`=?;");
-					deleteByPresentationID.setInt(1, id);
+							.prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE presentationID=?");
+					deleteByPresentationID.setInt(1, p.getId());
 					deleteByPresentationID.executeUpdate();
-			  //    deleteByPresentationID.executeDeletion();
 
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -341,7 +344,7 @@ public class PresentationMapper {
 		  }
 		 
 	  
-	  public void deleteAllByMovieID(int id)  {
+	  public void deleteAllByMovieID(Movie m)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -349,7 +352,7 @@ public class PresentationMapper {
               // Löschen aller Presentations die einen bestimmten Movie enthalten 
 				PreparedStatement deleteAllByMovieID = con
 						.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE movieID =?;");
-				deleteAllByMovieID.setInt(1, id);
+				deleteAllByMovieID.setInt(1, m.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteAllByMovieID.executeUpdate();
 
@@ -363,7 +366,7 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public void deleteAllByTimeslotID(int id)  {
+	  public void deleteAllByTimeslotID(Timeslot t)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -371,7 +374,7 @@ public class PresentationMapper {
 	              // Löschen aller Presentations die einen bestimmten Timeslot enthalten 
 				PreparedStatement deleteAllByTimeslotID = con
 						.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID =?;");
-				deleteAllByTimeslotID.setInt(1, id);
+				deleteAllByTimeslotID.setInt(1, t.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteAllByTimeslotID.executeUpdate();
 
@@ -384,7 +387,7 @@ public class PresentationMapper {
 		}
 	  
 	  
-	  public void deleteAllByCinemaID(int id)  {
+	  public void deleteAllByCinemaID(Cinema c)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -392,7 +395,7 @@ public class PresentationMapper {
 	              // Löschen aller Presentations die einen bestimmtes Cinema enthalten 
 				PreparedStatement deleteAllByCinemaID = con
 						.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema WHERE cinemaID =?;");
-				deleteAllByCinemaID.setInt(1, id);
+				deleteAllByCinemaID.setInt(1, c.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteAllByCinemaID.executeUpdate();
 

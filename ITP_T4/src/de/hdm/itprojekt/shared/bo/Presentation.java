@@ -8,7 +8,7 @@ public class Presentation extends BusinessObject {
 	
 private static final long serialversionUID = 1l;
 
-	
+	private String name;
 	private int cinemaID;
 	private int movieID;
 	private int userID;
@@ -16,9 +16,10 @@ private static final long serialversionUID = 1l;
 	private Date date;
 	
 	// Konstruktor für die find methoden der Mapper
-	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, Date date, int id, Timestamp creationDate) {
+	public Presentation(String name, int cinemaID, int movieID, int userID, int timeslotID, Date date, int id, Timestamp creationDate) {
 		super(id, creationDate);
-
+		
+		this.name = name;
 		this.cinemaID = cinemaID;
 		this.movieID = movieID;
 		this.userID = userID;
@@ -27,8 +28,9 @@ private static final long serialversionUID = 1l;
 	}
 
 	//Konstrucktor für die insert methoden der Mapper
-	public Presentation(int cinemaID, int movieID, int userID, int timeslotID, Date date) {
+	public Presentation(String name, int cinemaID, int movieID, int userID, int timeslotID, Date date) {
 		
+		this.name = name;
 		this.cinemaID = cinemaID;
 		this.movieID = movieID;
 		this.userID = userID;
@@ -69,6 +71,12 @@ private static final long serialversionUID = 1l;
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

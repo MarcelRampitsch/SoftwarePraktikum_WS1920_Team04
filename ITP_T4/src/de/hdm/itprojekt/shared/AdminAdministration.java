@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -43,7 +44,9 @@ public interface AdminAdministration extends RemoteService {
 	Timeslot updateTimeslot(Timeslot t) throws IllegalArgumentException;
 	void deleteTimeslot (Timeslot t) throws IllegalArgumentException;
 	Vector<Timeslot> getAllTimeslotByUserID(User u) throws IllegalArgumentException;
-	
+
+	void deletePresentation(Presentation p);
+	Vector<Presentation> getAllPresentationsByUser(User u) throws IllegalArgumentException;
 //	Timeslot findByTimeslotID (Timeslot t)throws IllegalArgumentException;
 //	Timeslot findByTime(Timeslot t) throws IllegalArgumentException;
 //	void deleteByTimeslotID(Timeslot t) throws IllegalArgumentException;

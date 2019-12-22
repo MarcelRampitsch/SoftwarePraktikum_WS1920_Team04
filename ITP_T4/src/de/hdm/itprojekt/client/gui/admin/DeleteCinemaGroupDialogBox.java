@@ -21,18 +21,11 @@ import de.hdm.itprojekt.shared.bo.User;
 public class DeleteCinemaGroupDialogBox extends DialogBox {
 
     VerticalPanel content = new VerticalPanel();
-	
 	HorizontalPanel horzcontent = new HorizontalPanel();
-
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-	
 	User user = null; 
 	CinemaGroup cinemaGroup = null;
-
-
-	
 	Label cinemaLabel = new Label("CinemaGroup wirklich löschen?");
-	
 	Button yes = new Button ("yes");
 	Button no = new Button ("no");
 	
@@ -113,9 +106,9 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 				public void onSuccess(Void result) {
 					// TODO Auto-generated method stub
 					closeCinemaGroupForm();
-				//	RootPanel.get().clear();
-				//	AdminForm adminform = new AdminForm(user,0);
-				//	RootPanel.get().add(adminform);
+					RootPanel.get().clear();
+					AdminForm adminform = new AdminForm(user,4);
+					RootPanel.get().add(adminform);
 					
 				}
 			});

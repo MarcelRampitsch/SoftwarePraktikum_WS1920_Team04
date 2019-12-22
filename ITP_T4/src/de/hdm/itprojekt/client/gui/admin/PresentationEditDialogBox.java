@@ -28,7 +28,7 @@ import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
-public class PresentationAddDialogBox extends DialogBox {
+public class PresentationEditDialogBox extends DialogBox {
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
     
@@ -36,6 +36,7 @@ public class PresentationAddDialogBox extends DialogBox {
     HorizontalPanel buttoncontent  = new HorizontalPanel();
     
     User user = null;
+    Presentation presentation = null;
     Vector <Cinema> cine = null;
     Vector <Movie> movie = null;
     Vector <Timeslot> timeslot = null;
@@ -55,8 +56,9 @@ public class PresentationAddDialogBox extends DialogBox {
     Label ptimeslotLabel = new Label("Timeslot");
     Label dateLabel = new Label("Date");
     
-    public PresentationAddDialogBox (User user) {
+    public PresentationEditDialogBox (Presentation presentation, User user) {
     	this.user = user;
+    	this.presentation = presentation;
     }
     
     public void onLoad() {
