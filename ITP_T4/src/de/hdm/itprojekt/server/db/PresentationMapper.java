@@ -171,7 +171,7 @@ public class PresentationMapper {
 			try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema zu finden
 				PreparedStatement findAllByUSerID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.presentation "
-						+ "WHERE UserID=? ");
+						+ "WHERE UserID=? ORDER BY name asc");
 				findAllByUSerID.setInt(1, u.getId());
 				
 				// Ergebnis-Tupel erstellen
@@ -299,7 +299,7 @@ public class PresentationMapper {
 
 				try {
 		              // Updaten einer bestimmten Presentation  
-					PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET cinemaID=?, movieID=?, timeslotID=?, date=?, name=?  WHERE presentationID=?;");
+					PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET cinemaID=?, movieID=?, timeslotID=?, date=?, name=?" + "WHERE presentationID=?;");
 					update.setInt(1, p.getCinemaID());
 					update.setInt(2, p.getMovieID());
 					update.setInt(3, p.getTimeslotID());

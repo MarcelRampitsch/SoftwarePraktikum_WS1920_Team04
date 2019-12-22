@@ -65,13 +65,13 @@ public class TimeslotMapper {
 			try {
 				// Prepared Statement erstellen um einen Timeslot zu finden
 				PreparedStatement findByTimeslotID = con
-						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot WHERE timeslotID=?;");
+						.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.timeslot ORDER BY time asc WHERE timeslotID=? ORDER BY time asc");
 				findByTimeslotID.setInt(1, t.getId());
 
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByTimeslotID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				te = new Timeslot(rs.getString("time"), rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+				te = new Timeslot(rs.getString("time"), rs.getInt("userID"),rs.getInt("timeslotID"), rs.getTimestamp("creationDate"));
 				// Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
 			      e2.printStackTrace();
@@ -120,7 +120,7 @@ public class TimeslotMapper {
 				// Ergebnis-Tupel in Objekt umwandeln
 				ResultSet rs = getnewTimeslot.executeQuery();
 				if (rs.next()) {
-					return new Timeslot(rs.getString("time"),rs.getInt("userID"),rs.getInt("id"), rs.getTimestamp("creationDate"));
+					return new Timeslot(rs.getString("time"),rs.getInt("userID"),rs.getInt("timeslotID"), rs.getTimestamp("creationDate"));
 				}
 				 // Fehlerbehandlung hinzufügen
 		} catch (SQLException e2) {
@@ -150,7 +150,7 @@ public class TimeslotMapper {
 				ResultSet rs = stm.executeQuery();
 				if (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					return new Timeslot(rs.getString("time"),rs.getInt("userID"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					return new Timeslot(rs.getString("time"),rs.getInt("userID"), rs.getInt("timeslotID"), rs.getTimestamp("creationDate"));
 				}
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
@@ -207,7 +207,7 @@ public class TimeslotMapper {
 			try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema zu finden
 				PreparedStatement findAllByUSerID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.timeslot "
-						+ "WHERE UserID=? ");
+						+ "WHERE UserID=? ORDER BY time asc ");
 				findAllByUSerID.setInt(1, u.getId());
 				
 				// Ergebnis-Tupel erstellen

@@ -190,7 +190,7 @@ public class CinemaGroupMapper {
 		try {
 			
 			// PreparedStatement erstellen um eine CinemaGroup in die Datenbank einzufügen
-			PreparedStatement findCinemaGroupByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemagroup " + "WHERE UserID=? ");
+			PreparedStatement findCinemaGroupByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemagroup " + "WHERE UserID=? ORDER BY name asc");
 			findCinemaGroupByUserID.setInt(1, u.getId());
 			
 			// Statement ausfüllen und als Query an die DB schicken

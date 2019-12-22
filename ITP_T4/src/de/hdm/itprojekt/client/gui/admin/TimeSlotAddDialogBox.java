@@ -127,8 +127,6 @@ public class TimeSlotAddDialogBox extends DialogBox {
 					@Override
 					public void onSuccess(Timeslot result) {
 					closetimeslot();
-					Window.alert("");
-
 					RootPanel.get().clear();
 					AdminForm adminform = new AdminForm(user, 3);
 					RootPanel.get().add(adminform);

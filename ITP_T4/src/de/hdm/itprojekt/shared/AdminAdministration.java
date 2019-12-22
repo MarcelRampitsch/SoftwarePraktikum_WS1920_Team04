@@ -48,6 +48,7 @@ public interface AdminAdministration extends RemoteService {
 	void deletePresentation(Presentation p) throws IllegalArgumentException;
 	Vector<Presentation> getAllPresentationsByUser(User u) throws IllegalArgumentException;
 	Presentation addPresentation(Presentation p) throws IllegalArgumentException;
+	Presentation updatePresentation(Presentation p) throws IllegalArgumentException;
 	
 //	Timeslot findByTimeslotID (Timeslot t)throws IllegalArgumentException;
 //	Timeslot findByTime(Timeslot t) throws IllegalArgumentException;

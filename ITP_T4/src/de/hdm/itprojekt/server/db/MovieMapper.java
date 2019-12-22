@@ -114,7 +114,7 @@ public class MovieMapper {
 		Vector<Movie> result = new Vector<Movie>();
 		
 		try {
-			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie " + "WHERE UserID=? ");
+			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie " + "WHERE UserID=? ORDER BY name asc");
 			findAllByUserID.setInt(1, u.getId());
 			
 			ResultSet rs = findAllByUserID.executeQuery();

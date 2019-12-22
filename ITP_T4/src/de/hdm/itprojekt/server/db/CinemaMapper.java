@@ -269,7 +269,7 @@ public class CinemaMapper {
 		
 		try {
 			PreparedStatement findallCinemabyUserID  =
-						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ");
+						con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema " + "WHERE userID=? ORDER BY name asc");
 			
 			findallCinemabyUserID.setInt(1, u.getId());
 			

@@ -15,12 +15,14 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
@@ -81,6 +83,11 @@ public class PresentationEditDialogBox extends DialogBox {
     	content.add(buttoncontent);
     	this.add(content);
     	
+		java.util.Date utilDate = new java.util.Date(presentation.getDate().getTime());
+    	
+		datePicker.setValue(utilDate);
+    	nameBox.setText(presentation.getName());
+    	
     	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
     		
 			@Override
@@ -90,15 +97,15 @@ public class PresentationEditDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<Cinema> result) {
-				int d = 0;
+				int indexc = 0;
 				cine = result;
 				for (int i = 0; i < result.size(); i++ ) {
 					cinemaBox.addItem(result.elementAt(i).getName());
 					if(presentation.getCinemaID() == result.elementAt(i).getId()){
-						d=i;
+						indexc=i;
 					}
 				}
-				cinemaBox.setSelectedIndex(d);
+				cinemaBox.setSelectedIndex(indexc);
 			}
 		});
     	
@@ -111,13 +118,17 @@ public class PresentationEditDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<Movie> result) {
-				
+				int indexm = 0;
+				movie = result;
 				for (int i = 0; i < result.size(); i++ ) {
 					movieBox.addItem(result.elementAt(i).getName());
 					movie = result;
+				if(presentation.getMovieID() == result.elementAt(i).getId()){
+					indexm = i;
 				}
+				movieBox.setSelectedIndex(indexm);
 			}
-		});
+		}});
     	
     	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
     		
@@ -127,11 +138,15 @@ public class PresentationEditDialogBox extends DialogBox {
 			}
 
 			public void onSuccess(Vector<Timeslot> result) {
-				
+				timeslot = result;
+				int indext = 0;
 				for (int i = 0; i < result.size(); i++ ) {
 					timeslotBox.addItem(result.elementAt(i).getTime());
-					timeslot = result;
+					if(presentation.getTimeslotID() == result.elementAt(i).getId()){
+						indext=i;
+					}
 				}
+				timeslotBox.setSelectedIndex(indext);
 			}
 		});
     }
@@ -173,7 +188,21 @@ public class PresentationEditDialogBox extends DialogBox {
 		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex());
 		Movie m = movie.elementAt(movieBox.getSelectedIndex());
 		Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex());
-		Window.alert(c.getName()+m.getName()+t.getTime());
+		java.sql.Date sqlDate = new java.sql.Date(datePicker.getValue().getTime());
+		presentation = new Presentation(nameBox.getText(), c.getId(), m.getId(), user.getId(), t.getId(), sqlDate, presentation.getId(), presentation.getCreationDate());
+		adminAdministration.updatePresentation(presentation, new AsyncCallback<Presentation>() {
+    		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
+
+			public void onSuccess(Presentation result) {
+			closePresentation();
+			RootPanel.get().clear();
+			AdminForm adminform = new AdminForm(user,4);
+			RootPanel.get().add(adminform);
+			}});
 		}
     }
 }
