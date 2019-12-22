@@ -42,7 +42,6 @@ public interface EditorAdministrationAsync {
 
 	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
 	
-	void deleteAllByUserID(User u, AsyncCallback<Void> callback);
 	
 	// Cinema
 	
@@ -62,7 +61,6 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByGroupID(Groupmember gm, AsyncCallback<Void> callback);
 	
-	void deleteAllByUserID(Groupmember gm, AsyncCallback<Void> callback);
 	
 
 	// Survey
@@ -78,7 +76,6 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByGroupID(Group g, AsyncCallback<Void> callback);
 	
-	void deleteAllByUserId(Survey s, AsyncCallback<Void> callback);
 	
 
 	// SurveyEntry

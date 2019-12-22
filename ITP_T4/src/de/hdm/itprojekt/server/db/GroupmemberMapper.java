@@ -207,7 +207,7 @@ public class GroupmemberMapper {
 		}
 	  }
 	  
-	  public void deleteAllByUserID(Groupmember gm)  {
+	  public void deleteAllGroupmemberByUserID(User u)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -215,7 +215,7 @@ public class GroupmemberMapper {
 				// Prepared Statement zum Löschen aller Groupmember eines bestimmten User in der Datenbank 
 				PreparedStatement deleteByPresentationID = con
 						.prepareStatement("DELETE softwarepraktikum_ws1920.groupmember WHERE `userID`=?;");
-				deleteByPresentationID.setInt(1, gm.getId());
+				deleteByPresentationID.setInt(1, u.getId());
 				deleteByPresentationID.executeUpdate();
 
 				 // Fehlerbehandlung hinzufügen

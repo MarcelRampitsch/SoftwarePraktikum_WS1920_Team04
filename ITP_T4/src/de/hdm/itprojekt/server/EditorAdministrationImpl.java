@@ -92,7 +92,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	// Methode zum L�schen eines bestimmten Users und der damit verbundenen Objekte.
 	public void deleteUser(User u) throws IllegalArgumentException{
 		gMapper.deleteAllByUserID(u);
-		gmMapper.deleteAllByUserID(u);
+		gmMapper.deleteAllGroupmemberByUserID(u);
 		pMapper.deleteAllByUserID(u);
 		sMapper.deleteAllByUserID(u);
 		seMapper.deleteAllByUserID(u);
@@ -183,11 +183,6 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 
 	public void deleteAllByGroupID(Groupmember gm) throws IllegalArgumentException {
 		gmMapper.deleteAllByGroupID(gm.getGroupID());
-		
-	}
-
-	public void deleteAllByUserID(Groupmember gm) throws IllegalArgumentException {
-		gmMapper.deleteAllByUserID(gm);
 		
 	}
 
