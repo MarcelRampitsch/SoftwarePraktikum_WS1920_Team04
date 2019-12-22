@@ -129,25 +129,24 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Umfrageeintr�ge anhand der PresentationID.
 	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException;
 	
-	
-	/*
+
 	// Vote Methoden
 	
 	// Einen Vote erstellen.
-	public Vote createVote()
+	public Vote createVote(Vote v)
 		throws IllegalArgumentException;
 	
 	// Einen Vote anhand der VoteID suchen.
-	public Vote getVoteByVoteID() throws IllegalArgumentException;
+	public Vote getVoteByVoteID(Vote v) throws IllegalArgumentException;
 	
 	// Einen Vote anhand der UserID suchen.
-	public Vote getAllVoteByUserID(Vote v) throws IllegalArgumentException;
+	public Vector<Vote> getAllVoteByUserID(User u) throws IllegalArgumentException;
 	
 	// Alle Votes anhand einer UmfrageeintragID suchen.
-	public Vote getAllVoteBySurveyEntryID(Vote v) throws IllegalArgumentException;
+	public Vector<Vote> getAllVoteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException;
 	
 	// Aktualisieren des Vote Objekts.
-	public void updateVote(Vote upVote) throws IllegalArgumentException;
+	public Vote updateVote(Vote upVote) throws IllegalArgumentException;
 	
 	// L�schen des Vote anhand der VoteID.
 	public void deleteByVoteID(Vote v) throws IllegalArgumentException;
@@ -155,10 +154,8 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Votes anhand der UmfrageeintragID.
 	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException;
 	
-	// L�schen aller Votes anhand der UserID.
-	public void deleteAllByUserID(Vote v) throws IllegalArgumentException;
 	
-
+	/*
 	
 	public Presentation getPresentation() throws IllegalArgumentException;
 	

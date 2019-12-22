@@ -93,27 +93,25 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllByPresentationID(SurveyEntry se, AsyncCallback<Void> callback);
 	
-	
-	/*
+
 	// Vote
-	void createVote(AsyncCallback<Vote> callback);
+	void createVote(Vote v, AsyncCallback<Vote> callback);
 
-	void getVoteByVoteID(AsyncCallback<Vote> callback);
+	void getVoteByVoteID(Vote v, AsyncCallback<Vote> callback);
 	
-	void getAllVoteByUserID(Vote v, AsyncCallback<Vote> callback);
+	void getAllVoteByUserID(User u, AsyncCallback<Vector<Vote>> callback);
 	
-	void getAllVoteBySurveyEntryID(Vote v, AsyncCallback<Vote> callback);
+	void getAllVoteBySurveyEntryID(SurveyEntry se, AsyncCallback<Vector<Vote>> callback);
 
-	void updateVote(Vote upVote, AsyncCallback<Void> callback);
+	void updateVote(Vote upVote, AsyncCallback<Vote> callback);
 	
 	void deleteByVoteID(Vote v, AsyncCallback<Void> callback);
 	
 	void deleteAllBySurveyEntryID(Vote v, AsyncCallback<Void> callback);
 	
-	void deleteAllByUserID(Vote v, AsyncCallback<Void> callback);
 	
 	
-	
+	/*
 	
 	void getPresentation(AsyncCallback<Presentation> callback);
 

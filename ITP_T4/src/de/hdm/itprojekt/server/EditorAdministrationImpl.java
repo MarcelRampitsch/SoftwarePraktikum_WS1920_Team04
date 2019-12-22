@@ -275,4 +275,56 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		seMapper.deleteAllByPresentationID(se.getId());
 		
 	}
+
+	// Vote
+	
+	@Override
+	public Vote createVote(Vote v) throws IllegalArgumentException {
+		if (v != null) {
+			Vote tempvote = new Vote();
+			tempvote = vMapper.insert(v);
+			return tempvote;
+		}
+		return null;
+	}
+
+	@Override
+	public Vote getVoteByVoteID(Vote v) throws IllegalArgumentException {
+		Vote vote = vMapper.findVoteByVoteID(v.getId());
+		return vote;
+	}
+
+	@Override
+	public Vector<Vote> getAllVoteByUserID(User u) throws IllegalArgumentException {
+		Vector<Vote> rs = vMapper.findVoteByUserID(u.getId());
+		return rs;
+	}
+
+	@Override
+	public Vector<Vote> getAllVoteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
+		Vector<Vote> rs = vMapper.findAllVoteBySurveyEntryID(se.getId());
+		return rs;
+	}
+
+	@Override
+	public Vote updateVote(Vote upVote) throws IllegalArgumentException {
+		if (upVote != null) {
+			Vote tempVote = vMapper.update(upVote);
+			return tempVote;
+		}
+		return null;
+		
+	}
+
+	@Override
+	public void deleteByVoteID(Vote v) throws IllegalArgumentException {
+		vMapper.deleteVoteByVoteID(v.getId());
+		
+	}
+
+	@Override
+	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException {
+		vMapper.deleteAllVoteBySurveyEntryID(v.getId());
+		
+	}
 }
