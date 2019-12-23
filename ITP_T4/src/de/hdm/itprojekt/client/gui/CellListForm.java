@@ -14,7 +14,9 @@ import java.util.Vector;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.cell.client.TextInputCell;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
@@ -83,7 +85,7 @@ public class CellListForm extends VerticalPanel {
 	      };   */
 	      
 	      
-	      TextCell gruppenNameTextCell = new TextCell();
+	/*      TextCell gruppenNameTextCell = new TextCell();
 
 			Column<Group, String> namenColumn = new Column<Group, String>(gruppenNameTextCell) {
 
@@ -95,7 +97,19 @@ public class CellListForm extends VerticalPanel {
 
 				}
 
-			};
+			};  */
+			
+			  TextInputCell input = new TextInputCell();
+			   
+			   Column<Group, String> changeName = new Column<Group,String>(input){
+
+				@Override
+				public String getValue(Group object) {
+					// TODO Auto-generated method stub
+					return object.getName();
+				}
+				   
+			   };
 			
 			Cell<String> gruppenDeleteCell = new ButtonCell();
 
@@ -120,6 +134,36 @@ public class CellListForm extends VerticalPanel {
 				}
 
 			};
+			
+			
+			deleteColumn.setFieldUpdater(new FieldUpdater<Group, String>() {
+
+				@Override
+				public void update(int index, Group dd, String value) {
+					// TODO Auto-generated method stub
+					dataProvider.getList().remove(dd);
+
+					AsyncCallback<Group> loeschenCallback = new AsyncCallback<Group>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("Fail");
+
+						}
+
+						@Override
+						public void onSuccess(Group result) {
+
+							Window.alert("Schmeckt");
+
+						}
+
+					};
+
+			//		editorAdministration.deleteByGroupID(dd, loeschenCallback );         // Implementierung des Callbacks fehlt Button wird immer neu
+				} // erzeugt wie implementiert man hier den ClickHandler?
+
+			});
 	   
 	   //INSTANZ DER KLASSE CELLLIST PLUS DIE VORHER ERSTELLTE INSTANT VON TEXTCELL HIER ÜBERGEBEN 
 	//   CellList<Group> cellList = new CellList<Group>(textCell, keyProvider);
@@ -182,7 +226,8 @@ public class CellListForm extends VerticalPanel {
 		 List <Group> Gruppen =  dataProvider.getList();
 
 		 
-		 gruppenCellTable.addColumn(namenColumn,"Gruppenname");
+	//	 gruppenCellTable.addColumn(namenColumn,"Gruppenname");
+		 gruppenCellTable.addColumn(changeName,"Gruppenname");
 		 gruppenCellTable.addColumn(deleteColumn,"Gruppe entfernen");
 		 gruppenCellTable.addColumn(editColumn, "Gruppe editieren");
 	   
