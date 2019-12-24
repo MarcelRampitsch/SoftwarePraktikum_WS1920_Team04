@@ -3,13 +3,11 @@ package de.hdm.itprojekt.server;
 import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.bo.*;
 
-import java.sql.SQLException;
 import java.util.Vector;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import de.hdm.itprojekt.server.db.DBConnection;
+import de.hdm.itprojekt.server.db.GroupMapper;
 import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
 import de.hdm.itprojekt.server.db.MovieMapper;
@@ -30,7 +28,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	private PresentationMapper pMapper = null;
 	private TimeslotMapper tMapper = null;
 	private UserMapper uMapper = null; 
-	
+	private GroupMapper gMapper = null;
 
 
 	public AdminAdministrationImpl() throws IllegalArgumentException{
@@ -44,6 +42,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.pMapper = PresentationMapper.PresentationMapper();
 		this.tMapper = TimeslotMapper.TimeslotMapper();
 		this.uMapper = UserMapper.UserMapper();
+		this.gMapper = GroupMapper.GroupMapper();
 	}
 	
 	// Cinema
@@ -174,7 +173,17 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		}
 		return null;
 	}
+
+	@Override
+	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException {
+		Vector<Group> rs = gMapper.findAllByUserID(u);
+		return rs;	
+	}
 	
+//	public Vector<CinemaGroup> getAllCinemaGroupByUserID(User u) throws IllegalArgumentException{
+//		Vector<CinemaGroup> rs = cgMapper.findcinemagroupbyuserID(u);
+//		return rs;
+//	}
 	
 	
 
