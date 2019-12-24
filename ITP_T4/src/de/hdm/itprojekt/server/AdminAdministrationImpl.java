@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+
 import de.hdm.itprojekt.server.db.GroupMapper;
 import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
@@ -43,6 +44,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.tMapper = TimeslotMapper.TimeslotMapper();
 		this.uMapper = UserMapper.UserMapper();
 		this.gMapper = GroupMapper.GroupMapper();
+
 	}
 	
 	// Cinema
@@ -174,18 +176,42 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		return null;
 	}
 
-	@Override
+	
+
+
+	public void deletePresentation(Presentation p) throws IllegalArgumentException {
+		pMapper.deleteByPresentationID(p);	
+	}
+
+	
+	public Vector<Presentation> getAllPresentationsByUser(User u) throws IllegalArgumentException {
+		Vector<Presentation> pres = pMapper.findAllByUserID(u);
+		return pres;
+	}
+	
+	public Presentation addPresentation(Presentation p) throws IllegalArgumentException {
+		if(p != null) {
+			Presentation pr = null;
+			pr = pMapper.insert(p);
+			return pr;
+		}
+		return null;
+	}
+	
+	public Presentation updatePresentation(Presentation p) throws IllegalArgumentException{
+		if(p != null) {
+			Presentation pr = null;
+			pr = pMapper.update(p);
+			return pr;
+		}
+		return null;
+	}
+	
 	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException {
 		Vector<Group> rs = gMapper.findAllByUserID(u);
 		return rs;	
 	}
-	
-//	public Vector<CinemaGroup> getAllCinemaGroupByUserID(User u) throws IllegalArgumentException{
-//		Vector<CinemaGroup> rs = cgMapper.findcinemagroupbyuserID(u);
-//		return rs;
-//	}
-	
-	
+
 
 	/*@Override
 	public Cinema greetServer(String input) throws IllegalArgumentException {

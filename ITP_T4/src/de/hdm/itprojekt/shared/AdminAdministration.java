@@ -9,6 +9,7 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -45,7 +46,12 @@ public interface AdminAdministration extends RemoteService {
 	void deleteTimeslot (Timeslot t) throws IllegalArgumentException;
 	Vector<Timeslot> getAllTimeslotByUserID(User u) throws IllegalArgumentException;
 
-	Vector<Group> getAllGroupByUserID(User user);
+
+	void deletePresentation(Presentation p) throws IllegalArgumentException;
+	Vector<Presentation> getAllPresentationsByUser(User u) throws IllegalArgumentException;
+	Presentation addPresentation(Presentation p) throws IllegalArgumentException;
+	Presentation updatePresentation(Presentation p) throws IllegalArgumentException;
+	
 	
 //	Timeslot findByTimeslotID (Timeslot t)throws IllegalArgumentException;
 //	Timeslot findByTime(Timeslot t) throws IllegalArgumentException;

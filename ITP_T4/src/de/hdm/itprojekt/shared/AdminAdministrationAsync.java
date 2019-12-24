@@ -8,6 +8,7 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -43,13 +44,22 @@ public interface AdminAdministrationAsync {
 	void updateTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
 	void deleteTimeslot(Timeslot t, AsyncCallback<Void> callback);
 	void getAllTimeslotByUserID(User u, AsyncCallback<Vector<Timeslot>> callback);
+	void deletePresentation(Presentation p, AsyncCallback<Void> asyncCallback);
+
+	
+	void getAllPresentationsByUser(User u, AsyncCallback<Vector<Presentation>> callback);
+	void addPresentation(Presentation p, AsyncCallback<Presentation> callback);
+	void updatePresentation(Presentation p, AsyncCallback<Presentation> callback);
+
+	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
+
+	//void getAllGroupByUserID1(User u, AsyncCallback<Vector<Group>> callback);
 
 	//Group
-	void getAllGroupByUserID(User user, AsyncCallback<Vector<Group>> asyncCallback);
+	
 
 
-
-	//Timeslot
+//Timeslot
 //	void deleteAllTimeslotByMovieID(Movie m, AsyncCallback<Void> callback);
 //	void deleteAllTimeslotByUserID(User u, AsyncCallback<Void> callback);
 //	void deleteByTimeslotID(Timeslot t, AsyncCallback<Void> callback);
@@ -59,13 +69,13 @@ public interface AdminAdministrationAsync {
 //	void addTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
 //	void updateTimeslot(Timeslot t, AsyncCallback<Timeslot> callback);
 //	
-	// Movie
+// Movie
 	
-	// Timeslot
+// Timeslot
 	
 	
-	// Presentation
-	//void greetServer(String string, AsyncCallback<Cinema> callback);
+// Presentation
+//void greetServer(String string, AsyncCallback<Cinema> callback);
 
 
 }
