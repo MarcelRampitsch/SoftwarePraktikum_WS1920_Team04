@@ -30,6 +30,7 @@ import de.hdm.itprojekt.server.db.MovieMapper;
 
 public class EditorAdministrationImpl extends RemoteServiceServlet implements EditorAdministration {
 	
+
 	private GroupMapper gMapper = null;
 	private GroupmemberMapper gmMapper = null;
 	private PresentationMapper pMapper = null;
@@ -138,9 +139,9 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 	
-	public void deleteByGroupID(Group g) throws IllegalArgumentException {
+	public Group deleteByGroupID(Group g) throws IllegalArgumentException {
 		gMapper.deleteByGroupID(g);
-		
+		return null;
 	}
 
 	// ist in delete userpublic void deleteAllByUserID(User u) throws IllegalArgumentException {
@@ -175,7 +176,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 	}
-	// Methode um ein Gruppenmitglied anhand seiner ID zu löschen.
+	// Methode um ein Gruppenmitglied anhand seiner ID zu lï¿½schen.
 	public void deleteByID(Groupmember gm) throws IllegalArgumentException {
 		gmMapper.deleteByID(gm.getId());
 		

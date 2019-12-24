@@ -7,6 +7,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
@@ -14,6 +15,10 @@ import de.hdm.itprojekt.client.gui.admin.VerwaltungsForm;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.bo.Group;
+
+import java.util.List;
+import java.util.Vector;
 
 
 /**
@@ -29,6 +34,7 @@ public class EditorForm extends VerticalPanel {
 	 * currentUser speichert den aktuellen Nutzer
 	 */
 	User user = null;
+	List <Group> Gruppen;
 	/**
 	 * <code>header</code>: Oberer Teil des Fensters. Erstreckt sich über die ganze Länge der Anwendung
 	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels, außer <code>header</code>
@@ -43,6 +49,7 @@ public class EditorForm extends VerticalPanel {
 	 VerticalPanel center = new VerticalPanel();
 	 VerticalPanel west = new VerticalPanel();
 	 VerticalPanel east = new VerticalPanel();
+	 ListBox group = new ListBox();
 	
 	/**
 	 * 
@@ -51,8 +58,9 @@ public class EditorForm extends VerticalPanel {
 	 * 
 	 */
 	
-	public EditorForm(User user){
+	public EditorForm(User user, List <Group> Gruppen){
 		this.user = user;
+		this.Gruppen = Gruppen;
 	}
 	
 	
@@ -64,20 +72,6 @@ public class EditorForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		
-		editorAdministration.getUserByEmail(user, new AsyncCallback<User>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-			Window.alert("GetUser Fehler");
-			}
-
-			@Override
-			public void onSuccess(User result) {
-			user = result;
-			GruppenForm gruppenForm = new GruppenForm(user);
-			main.add(gruppenForm);
-			}
-		});
 		/*
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
@@ -96,7 +90,7 @@ public class EditorForm extends VerticalPanel {
 		
 	//	VoteForm voteForm = new VoteForm(currentUser);
 		UmfragenForm umfrageForm = new UmfragenForm();
-		CellListForm celllistform = new CellListForm(user);
+		CellListForm celllistform = new CellListForm(user , Gruppen);
 	    UmfrageEintragTable umfragen = new UmfrageEintragTable();
 		
 
@@ -124,9 +118,9 @@ public class EditorForm extends VerticalPanel {
 		});
 		
 		main.add(toAdmin);
-		
+		GruppenForm gruppenForm = new GruppenForm(user);
+		main.add(gruppenForm);
 		this.add(main);
-
 		
 		
 	}

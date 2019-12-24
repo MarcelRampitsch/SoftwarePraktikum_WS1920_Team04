@@ -10,6 +10,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.DBConnection;
+import de.hdm.itprojekt.server.db.GroupMapper;
 import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
 import de.hdm.itprojekt.server.db.MovieMapper;
@@ -30,6 +31,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	private PresentationMapper pMapper = null;
 	private TimeslotMapper tMapper = null;
 	private UserMapper uMapper = null; 
+	private GroupMapper gMapper = null;
 	
 
 
@@ -44,6 +46,8 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.pMapper = PresentationMapper.PresentationMapper();
 		this.tMapper = TimeslotMapper.TimeslotMapper();
 		this.uMapper = UserMapper.UserMapper();
+		this.gMapper = GroupMapper.GroupMapper();
+		
 	}
 	
 	// Cinema
@@ -202,6 +206,11 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		return null;
 	}
 	
+	public Vector<Group> getAllGroupByUserID(User u) throws IllegalArgumentException {
+		Vector<Group> rs = gMapper.findAllByUserID(u);
+		return rs;	
+	}
+
 
 	/*@Override
 	public Cinema greetServer(String input) throws IllegalArgumentException {

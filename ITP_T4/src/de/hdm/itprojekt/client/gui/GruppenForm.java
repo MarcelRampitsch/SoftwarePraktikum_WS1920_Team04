@@ -49,7 +49,7 @@ public class GruppenForm extends VerticalPanel {
 	this.user = user;
 	}
 
-	 Button GruppenErstellung = new Button("Neue Gruppe erstellen");
+	Button GruppenErstellung = new Button("Neue Gruppe erstellen");
 
 	public void onLoad() {
 		super.onLoad();
@@ -57,6 +57,8 @@ public class GruppenForm extends VerticalPanel {
 		// Versuch Laden der Vorhandenn Gruppen in die CellList
 		
 		editorAdministraion.getAllGroupByUserID(this.user, new AsyncCallback<Vector<Group>>(){
+
+			private List<Group> gruppen;
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -67,18 +69,19 @@ public class GruppenForm extends VerticalPanel {
 			@Override
 			public void onSuccess(Vector<Group> result) {
 				// Daten der CellList zurücksetzen
-				
 				cellListDataProvider.getList().clear();
-				List<Group> Gruppen = null;
+				gruppen = null;
 				for (int i = 0; i < result.size(); i++ ) {
-					 
-					cellListDataProvider.getList().add(result.elementAt(i));
-					
+					Group group = null;
+					group = result.elementAt(i);
+					gruppen.add(group); 
+				//	cellListDataProvider.getList().add(result.elementAt(i));
+					cellListDataProvider.setList(gruppen);
+					selectionModel.setSelected(cellListDataProvider.getList().get(i), true);
 				//	c2.getCellParent(result.elementAt(i).getName());
 				//	groups = result;
 				}
 				
-				selectionModel.setSelected(cellListDataProvider.getList().get(0), true);
 			}
 		});
 

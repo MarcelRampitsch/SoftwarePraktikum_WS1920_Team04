@@ -40,7 +40,7 @@ public interface EditorAdministrationAsync {
 	
 	void updateGroup(Group updateg, AsyncCallback<Group> callback);
 
-	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
+	void deleteByGroupID(Group g, AsyncCallback<Group> callback);
 	
 	
 	// Cinema

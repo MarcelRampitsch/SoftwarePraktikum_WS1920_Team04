@@ -18,8 +18,10 @@ import com.sun.java.swing.plaf.windows.resources.windows;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
@@ -34,13 +36,10 @@ public class CinemaForm extends VerticalPanel {
 	private Label cinema = new Label("Cinema");
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-	
-
-
-	
 	//ListBox cinemaGroupBox = new ListBox();
 	ListBox cinemaBox = new ListBox();
-	
+	ListBox groupBox = new ListBox();
+ 	
 //	Button editCinemaGroup = new Button("Edit");
 //	Button newCinemaGroup = new Button("New");
 //	Button deleteCinemaGroup = new Button("Delete");
@@ -94,9 +93,7 @@ public class CinemaForm extends VerticalPanel {
 		
 		this.add(cinema);
 		
-		cinemaPanel1.add(cinemaBox);
-		
-		
+		cinemaPanel1.add(cinemaBox);		
 		adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
 		
 			@Override
@@ -113,6 +110,24 @@ public class CinemaForm extends VerticalPanel {
 				}
 			}
 		});
+		
+		cinemaPanel1.add(groupBox);
+		adminAdministration.getAllGroupByUserID(this.user, new AsyncCallback<Vector<Group>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Vector<Group> result) {
+				for(int i=0; i<result.size(); i++) {
+					groupBox.addItem(result.elementAt(i).getName());
+					
+				}
+			}
+		});	
 		
 		
 		cinemaPanel2.add(editCinema);

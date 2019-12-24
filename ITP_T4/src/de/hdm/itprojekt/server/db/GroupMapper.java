@@ -61,14 +61,10 @@ public class GroupMapper {
 		// Ergebnisvektor vorbereiten
 		Vector<Group> result = new Vector<Group>();
 		try { // Prepared Statement erstellen um alle Group eines bestimmten User zu finden
-			PreparedStatement findAllByUserID = con.prepareStatement(
-					"SELECT * From softwarepraktikum_ws1920.group "
-					+ "WHERE userID=? ");
+			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * From softwarepraktikum_ws1920.group WHERE userID=?");
 			findAllByUserID.setInt(1, u.getId());
 
 			// Ergebnis-Tupel erstellen
-
-
 			ResultSet rs = findAllByUserID.executeQuery();
 
 			while (rs.next()) {
@@ -208,11 +204,10 @@ public class GroupMapper {
 
 			try {
 				// Prepared Statement zum Löschen einer bestimmten Group in der Datenbank 
-				PreparedStatement deleteByPresentationID = con
-				      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.group WHERE `groupID`=?;");
-				deleteByPresentationID.setInt(1, g.getId());
-				deleteByPresentationID.executeUpdate();
-		  //    deleteByPresentationID.executeDeletion();
+				PreparedStatement deleteByGroupID = con
+				      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.group WHERE groupID=?;");
+				deleteByGroupID.setInt(1, g.getId());
+				deleteByGroupID.executeUpdate();
 
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {

@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.itprojekt.client.gui.admin.AdminForm;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
 
 

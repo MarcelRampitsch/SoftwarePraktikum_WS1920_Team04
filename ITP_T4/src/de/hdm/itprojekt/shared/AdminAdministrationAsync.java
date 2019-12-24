@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
+import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Timeslot;
@@ -48,6 +49,8 @@ public interface AdminAdministrationAsync {
 	void getAllPresentationsByUser(User u, AsyncCallback<Vector<Presentation>> callback);
 	void addPresentation(Presentation p, AsyncCallback<Presentation> callback);
 	void updatePresentation(Presentation p, AsyncCallback<Presentation> callback);
+
+	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
 
 
 

@@ -70,9 +70,9 @@ import de.hdm.itprojekt.shared.bo.User;
 		public void onLoad() {
 			super.onLoad();
 			
-			CellListForm cellList = new CellListForm(null);
+//			CellListForm cellList = new CellListForm(null);
 
-			dataProvider = cellList.dataProvider;
+//			dataProvider = cellList.dataProvider;
 
 			
 			inhalt.add(close);
