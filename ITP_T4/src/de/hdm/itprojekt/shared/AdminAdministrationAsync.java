@@ -54,7 +54,7 @@ public interface AdminAdministrationAsync {
 	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
 
 	//void getAllGroupByUserID1(User u, AsyncCallback<Vector<Group>> callback);
-
+	
 	//Group
 	
 
