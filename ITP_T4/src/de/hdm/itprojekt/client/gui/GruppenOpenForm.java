@@ -39,13 +39,13 @@ import de.hdm.itprojekt.shared.bo.User;
 		
 		  Label gruppenerstellung = new Label("Gruppenerstellung:");
 		  Label gruppenname = new Label("Gruppenname");
-		  Label nickname = new Label("Nickname");
+//		  Label nickname = new Label("Nickname");
 		
 		  Button edit = new Button("editieren");
 		  Button close  = new Button("X");
 		
 		  TextBox gruppennamebox =new TextBox();
-		  TextBox nicknamebox = new TextBox();
+		  //TextBox nicknamebox = new TextBox();
 		
 		  Button speichern = new Button("sichern");
 		
@@ -70,9 +70,9 @@ import de.hdm.itprojekt.shared.bo.User;
 		public void onLoad() {
 			super.onLoad();
 			
-			CellListForm cellList = new CellListForm(null);
+//			CellListForm cellList = new CellListForm(null);
 
-			dataProvider = cellList.dataProvider;
+//			dataProvider = cellList.dataProvider;
 
 			
 			inhalt.add(close);
@@ -82,8 +82,12 @@ import de.hdm.itprojekt.shared.bo.User;
 			inhalt.add(gruppenname);
 			inhalt.add(gruppennamebox);
 			
-			inhalt.add(nickname);
-			inhalt.add(nicknamebox);
+			NicknameForm nicknameform = new NicknameForm();
+			
+			inhalt.add(nicknameform);
+			
+//			inhalt.add(nickname);
+//			inhalt.add(nicknamebox);
 			
 			inhalt.add(speichern);
 			inhalt.add(edit);
