@@ -105,9 +105,9 @@ public interface EditorAdministrationAsync {
 
 	void updateVote(Vote upVote, AsyncCallback<Vote> callback);
 	
-	void deleteByVoteID(Vote v, AsyncCallback<Void> callback);
+	void deleteVoteByVoteID(Vote v, AsyncCallback<Void> callback);
 	
-	void deleteAllBySurveyEntryID(Vote v, AsyncCallback<Void> callback);
+	void deleteAllVoteBySurveyEntryID(SurveyEntry se, AsyncCallback<Void> callback);
 	
 	
 	

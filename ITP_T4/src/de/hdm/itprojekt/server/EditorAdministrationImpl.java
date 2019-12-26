@@ -290,19 +290,19 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 
 	@Override
 	public Vote getVoteByVoteID(Vote v) throws IllegalArgumentException {
-		Vote vote = vMapper.findVoteByVoteID(v.getId());
+		Vote vote = vMapper.findVoteByVoteID(v);
 		return vote;
 	}
 
 	@Override
 	public Vector<Vote> getAllVoteByUserID(User u) throws IllegalArgumentException {
-		Vector<Vote> rs = vMapper.findVoteByUserID(u.getId());
+		Vector<Vote> rs = vMapper.findVoteByUserID(u);
 		return rs;
 	}
 
 	@Override
 	public Vector<Vote> getAllVoteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
-		Vector<Vote> rs = vMapper.findAllVoteBySurveyEntryID(se.getId());
+		Vector<Vote> rs = vMapper.findAllVoteBySurveyEntryID(se);
 		return rs;
 	}
 
@@ -317,14 +317,14 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 
 	@Override
-	public void deleteByVoteID(Vote v) throws IllegalArgumentException {
-		vMapper.deleteVoteByVoteID(v.getId());
+	public void deleteVoteByVoteID(Vote v) throws IllegalArgumentException {
+		vMapper.deleteVoteByVoteID(v);
 		
 	}
 
 	@Override
-	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException {
-		vMapper.deleteAllVoteBySurveyEntryID(v.getId());
+	public void deleteAllVoteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
+		vMapper.deleteAllVoteBySurveyEntryID(se);
 		
 	}
 }

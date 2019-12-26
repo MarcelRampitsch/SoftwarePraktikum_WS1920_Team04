@@ -61,17 +61,15 @@ public class VoteMapper {
 		return voteMapper;
 	}
 	
-	public Vote findVoteByVoteID(int id) {
+	public Vote findVoteByVoteID(Vote v) {
 		
 		Connection con = DBConnection.getConnection();
-
-		Vote v = null;
 		
 		try {
 			
 			PreparedStatement findVoteByUserID = con.prepareStatement( 
 					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE voteID=?");
-			findVoteByUserID.setInt(1, id);
+			findVoteByUserID.setInt(1, v.getId());
 				
 			ResultSet rs = findVoteByUserID.executeQuery();
 
@@ -93,7 +91,7 @@ public class VoteMapper {
 	}
 	
 	//TODO Ist diese Methode relevant?
-	public Vector<Vote> findVoteByUserID(int userID) {
+	public Vector<Vote> findVoteByUserID(User u) {
 
 		Connection con = DBConnection.getConnection();
 
@@ -106,7 +104,7 @@ public class VoteMapper {
 				
 			PreparedStatement findVoteByUserID = con.prepareStatement( 
 					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE userID=?");
-			findVoteByUserID.setInt(1, userID);
+			findVoteByUserID.setInt(1, u.getId());
 				
 			ResultSet rs = findVoteByUserID.executeQuery();
 
@@ -130,7 +128,7 @@ public class VoteMapper {
 	}
 	  
 	  
-	public Vector<Vote> findAllVoteBySurveyEntryID(int id) {
+	public Vector<Vote> findAllVoteBySurveyEntryID(SurveyEntry se) {
 
 		Connection con = DBConnection.getConnection();
 
@@ -142,7 +140,7 @@ public class VoteMapper {
 			
 			PreparedStatement findAllVoteBySurveyEntryID = con.prepareStatement( 
 					"SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE surveyentryID=?");
-			findAllVoteBySurveyEntryID.setInt(1, id);
+			findAllVoteBySurveyEntryID.setInt(1, se.getId());
 
 			ResultSet rs = findAllVoteBySurveyEntryID.executeQuery();
 			
@@ -237,7 +235,7 @@ public class VoteMapper {
 	}
 	
 	
-	public void deleteVoteByVoteID(int id)  {
+	public void deleteVoteByVoteID(Vote v)  {
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -246,7 +244,7 @@ public class VoteMapper {
 			 PreparedStatement deleteVoteByVoteID = con
 					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE voteID=?;");
 		
-			 deleteVoteByVoteID.setInt(1, id);
+			 deleteVoteByVoteID.setInt(1, v.getId());
 			 deleteVoteByVoteID.executeUpdate();
 		} catch (SQLException e) {
 		      e.printStackTrace();
@@ -273,7 +271,7 @@ public class VoteMapper {
 	}
 	
 	
-	public void deleteAllVoteBySurveyEntryID(int id)  {
+	public void deleteAllVoteBySurveyEntryID(SurveyEntry se)  {
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -282,7 +280,7 @@ public class VoteMapper {
 			 PreparedStatement eleteAllVoteBySurveyEntryID = con
 					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE surveyentryID=?;");
 		
-			 eleteAllVoteBySurveyEntryID.setInt(1, id);
+			 eleteAllVoteBySurveyEntryID.setInt(1, se.getId());
 			 eleteAllVoteBySurveyEntryID.executeUpdate();
 		} catch (SQLException e) {
 		      e.printStackTrace();
