@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -54,7 +55,7 @@ public class GroupmemberMapper {
 		return groupmemberMapper;
 	}
 	
-	public Vector<Groupmember> findAllByUserID(int id)  {
+	public Vector<Groupmember> findAllByUserID(User u)  {
 		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		Groupmember gm = null;
@@ -64,7 +65,7 @@ public class GroupmemberMapper {
 			PreparedStatement findAllByUserID = con.prepareStatement(
 					"SELECT * From softwarepraktikum_ws1920.groupmember "
 					+ "WHERE userID=? ");
-			findAllByUserID.setInt(1, id);
+			findAllByUserID.setInt(1, u.getId());
 
 			// Ergebnis-Tupel erstellen
 
@@ -84,7 +85,7 @@ public class GroupmemberMapper {
 		return result;
 	}
 	
-	public Vector<Groupmember> findAllByGroupID(int id)  {
+	public Vector<Groupmember> findAllByGroupID(Group g)  {
 		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 		Groupmember gm = null;
@@ -94,7 +95,7 @@ public class GroupmemberMapper {
 			PreparedStatement findAllByGroupID = con.prepareStatement(
 					"SELECT * From softwarepraktikum_ws1920.groupmember "
 					+ "WHERE groupID=? ");
-			findAllByGroupID.setInt(1, id);
+			findAllByGroupID.setInt(1, g.getId());
 
 			// Ergebnis-Tupel erstellen
 
@@ -173,14 +174,14 @@ public class GroupmemberMapper {
 			return null;
 		}
 		
-	  public void deleteByID(int id) {
+	  public void deleteByID(Groupmember gm) {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 				// Prepared Statement zum Löschen aller Groupmember eines bestimmten User in der Datenbank 
 				PreparedStatement deleteByID = con
 						.prepareStatement("DELETE softwarepraktikum_ws1920.groupmember WHERE `groupmemberID`=?;");
-				deleteByID.setInt(1, id);
+				deleteByID.setInt(1, gm.getId());
 				deleteByID.executeUpdate();
 	
 				 // Fehlerbehandlung hinzufügen
@@ -189,7 +190,7 @@ public class GroupmemberMapper {
 		}
 	  }
 
-	public void deleteAllByGroupID(int id)  {
+	public void deleteAllByGroupID(Group g)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -197,7 +198,7 @@ public class GroupmemberMapper {
 				// Prepared Statement zum Löschen eines bestimmten Groupmember in der Datenbank 
 				PreparedStatement deleteByPresentationID = con
 				      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.groupmember WHERE `groupID`=?;");
-				deleteByPresentationID.setInt(1, id);
+				deleteByPresentationID.setInt(1, g.getId());
 				deleteByPresentationID.executeUpdate();
 		  //    deleteByPresentationID.executeDeletion();
 
