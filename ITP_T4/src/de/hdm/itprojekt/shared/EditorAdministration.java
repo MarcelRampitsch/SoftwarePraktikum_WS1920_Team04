@@ -68,19 +68,19 @@ public interface EditorAdministration extends RemoteService {
 		throws IllegalArgumentException;
 */
 	// Alle Gruppenmitglieder anhand der GruppenID suchen.
-	public Vector<Groupmember> getAllByGroupID(Group g) throws IllegalArgumentException;
+	public Vector<Groupmember> getAllGroupmemberByGroupID(Group g) throws IllegalArgumentException;
 	
 	// Alle Gruppenmitglieder anhand der UserID suchen.
-	public Vector<Groupmember> getAllByUserID(User u) throws IllegalArgumentException;
+	public Vector<Groupmember> getAllGroupmemberByUserID(User u) throws IllegalArgumentException;
 	
 	// Aktualisieren des Gruppenmitglied Objekts.
 	public Groupmember updateGroupmember(Groupmember updateGm) throws IllegalArgumentException;
 
 	// L�schen des Gruppenmitglieds anhand der ID.
-	public void deleteByID(Groupmember gm) throws IllegalArgumentException;
+	public void deleteGroupmemberByGroupmemberID(Groupmember gm) throws IllegalArgumentException;
 	
 	// L�schen aller Gruppenmitglieder anhand der GruppenID.
-	public void deleteAllByGroupID(Groupmember gm) throws IllegalArgumentException;
+	public void deleteAllGroupmemberByGroupID(Group g) throws IllegalArgumentException;
 	
 
 	// Survey Methoden
