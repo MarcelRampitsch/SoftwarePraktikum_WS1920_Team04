@@ -51,7 +51,6 @@ public interface AdminAdministrationAsync {
 	void addPresentation(Presentation p, AsyncCallback<Presentation> callback);
 	void updatePresentation(Presentation p, AsyncCallback<Presentation> callback);
 
-	void getAllGroupByUserID(User u, AsyncCallback<Vector<Group>> callback);
 
 	//void getAllGroupByUserID1(User u, AsyncCallback<Vector<Group>> callback);
 
