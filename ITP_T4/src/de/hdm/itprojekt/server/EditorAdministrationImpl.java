@@ -138,8 +138,8 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 	
-	public void deleteByGroupID(Group g) throws IllegalArgumentException {
-		gMapper.deleteByGroupID(g);
+	public void deleteGroupByGroupID(Group g) throws IllegalArgumentException {
+		gMapper.deleteGroupByGroupID(g);
 		
 	}
 

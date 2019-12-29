@@ -54,7 +54,7 @@ public interface EditorAdministration extends RemoteService {
 	public Group updateGroup(Group updateg) throws IllegalArgumentException;
 	
 	// L�schen der Gruppe anhand der ID.
-	public void deleteByGroupID(Group g) throws  IllegalArgumentException;
+	public void deleteGroupByGroupID(Group g) throws  IllegalArgumentException;
 	
 	
 	//Cinema
