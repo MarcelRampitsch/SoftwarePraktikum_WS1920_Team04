@@ -54,7 +54,7 @@ public interface EditorAdministration extends RemoteService {
 	public Group updateGroup(Group updateg) throws IllegalArgumentException;
 	
 	// L�schen der Gruppe anhand der ID.
-	public void deleteGroupByGroupID(Group g) throws  IllegalArgumentException;
+	public void deleteByGroupID(Group g) throws  IllegalArgumentException;
 	
 	
 	//Cinema
@@ -68,19 +68,19 @@ public interface EditorAdministration extends RemoteService {
 		throws IllegalArgumentException;
 */
 	// Alle Gruppenmitglieder anhand der GruppenID suchen.
-	public Vector<Groupmember> getAllGroupmemberByGroupID(Group g) throws IllegalArgumentException;
+	public Vector<Groupmember> getAllByGroupID(Group g) throws IllegalArgumentException;
 	
 	// Alle Gruppenmitglieder anhand der UserID suchen.
-	public Vector<Groupmember> getAllGroupmemberByUserID(User u) throws IllegalArgumentException;
+	public Vector<Groupmember> getAllByUserID(User u) throws IllegalArgumentException;
 	
 	// Aktualisieren des Gruppenmitglied Objekts.
 	public Groupmember updateGroupmember(Groupmember updateGm) throws IllegalArgumentException;
 
 	// L�schen des Gruppenmitglieds anhand der ID.
-	public void deleteGroupmemberByID(Groupmember gm) throws IllegalArgumentException;
+	public void deleteByID(Groupmember gm) throws IllegalArgumentException;
 	
 	// L�schen aller Gruppenmitglieder anhand der GruppenID.
-	public void deleteAllGroupmemberByGroupID(Group g) throws IllegalArgumentException;
+	public void deleteAllByGroupID(Groupmember gm) throws IllegalArgumentException;
 	
 
 	// Survey Methoden

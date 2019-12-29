@@ -40,7 +40,7 @@ public interface EditorAdministrationAsync {
 	
 	void updateGroup(Group updateg, AsyncCallback<Group> callback);
 
-	void deleteGroupByGroupID(Group g, AsyncCallback<Void> callback);
+	void deleteByGroupID(Group g, AsyncCallback<Void> callback);
 	
 	
 	// Cinema
@@ -51,15 +51,15 @@ public interface EditorAdministrationAsync {
 	// GroupMember
 	//void createGroupMember(Groupmember gm, AsyncCallback<Groupmember> callback);
 
-	void getAllGroupmemberByGroupID(Group g, AsyncCallback <Vector<Groupmember>> callback);
+	void getAllByGroupID(Group g, AsyncCallback <Vector<Groupmember>> callback);
 	
-	void getAllGroupmemberByUserID(User u, AsyncCallback <Vector<Groupmember>> callback);
+	void getAllByUserID(User u, AsyncCallback <Vector<Groupmember>> callback);
 
 	void updateGroupmember(Groupmember updateGm, AsyncCallback<Groupmember> callback);
 
-	void deleteGroupmemberByID(Groupmember gm, AsyncCallback<Void> callback);
+	void deleteByID(Groupmember gm, AsyncCallback<Void> callback);
 	
-	void deleteAllGroupmemberByGroupID(Group g, AsyncCallback<Void> callback);
+	void deleteAllByGroupID(Groupmember gm, AsyncCallback<Void> callback);
 	
 	
 
