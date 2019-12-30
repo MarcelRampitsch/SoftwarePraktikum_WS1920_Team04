@@ -15,6 +15,8 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -34,7 +36,9 @@ public class PresentationAddDialogBox extends DialogBox {
 	VerticalPanel content = new VerticalPanel();
     HorizontalPanel buttoncontent  = new HorizontalPanel();
     
+    int index =0;
     User user = null;
+    Presentation p = null;
     Vector <Cinema> cine = null;
     Vector <Movie> movie = null;
     Vector <Timeslot> timeslot = null;
@@ -42,17 +46,20 @@ public class PresentationAddDialogBox extends DialogBox {
     Button yes = new Button("save");
     Button no = new Button("X");
     
+    TextBox name = new TextBox();
     ListBox cinemaBox = new ListBox();
     ListBox movieBox = new ListBox();
     ListBox timeslotBox = new ListBox();
     DatePicker datePicker = new DatePicker();
     
+    Label nameLabel = new Label("Name");
     Label pcinemaLabel = new Label("Cinema");
     Label pmovieLabel = new Label("Movie");
     Label ptimeslotLabel = new Label("Timeslot");
     Label dateLabel = new Label("Date");
     
-    public PresentationAddDialogBox (User user) {
+    public PresentationAddDialogBox (Presentation p, User user) {
+    	this.p = p;
     	this.user = user;
     }
     
@@ -60,6 +67,8 @@ public class PresentationAddDialogBox extends DialogBox {
     	super.onLoad();
     	buttoncontent.add(no);
     	no.addClickHandler(new close());
+    	content.add(nameLabel);
+    	content.add(name);
     	content.add(pcinemaLabel);
     	content.add(cinemaBox);
     	content.add(pmovieLabel);
@@ -72,7 +81,8 @@ public class PresentationAddDialogBox extends DialogBox {
     	yes.addClickHandler(new save());
     	content.add(buttoncontent);
     	this.add(content);
-    	
+    	datePicker.setValue(p.getDate());
+    	name.setText(p.getName());
     	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
     		
 			@Override
@@ -82,11 +92,14 @@ public class PresentationAddDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<Cinema> result) {
-				
+				cine = result;
 				for (int i = 0; i < result.size(); i++ ) {
 					cinemaBox.addItem(result.elementAt(i).getName());
-					cine = result;
+					if(p.getCinemaID() == result.elementAt(i).getId()) {
+						index = i;
+					}
 				}
+				cinemaBox.setSelectedIndex(index);
 			}
 		});
     	
@@ -99,20 +112,36 @@ public class PresentationAddDialogBox extends DialogBox {
 
 			@Override 
 			public void onSuccess(Vector<Movie> result) {
-				
+				movie = result;
 				for (int i = 0; i < result.size(); i++ ) {
 					movieBox.addItem(result.elementAt(i).getName());
-					movie = result;
+				if(p.getMovieID()==result.elementAt(i).getId()) {
+					index = i;
 				}
+				}
+				movieBox.setSelectedIndex(index);
 			}
 		});
     	
-    	
-    	
-    	
-    }
+    	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
+    		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("was ist falsch geloffen");
+			}
 
-    
+			public void onSuccess(Vector<Timeslot> result) {
+				timeslot = result;
+				for (int i = 0; i < result.size(); i++ ) {
+					timeslotBox.addItem(result.elementAt(i).getTime());
+					if(p.getTimeslotID() == result.elementAt(i).getId()) {
+						index = i;
+					}
+				}
+				timeslotBox.setSelectedIndex(index);
+			}
+		});
+    } 
     
     
 
@@ -150,12 +179,25 @@ public class PresentationAddDialogBox extends DialogBox {
 
 		@Override
 		public void onClick(ClickEvent event) {
-		closePresentation();
-		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex());
-		Movie m = movie.elementAt(movieBox.getSelectedIndex());
-		Window.alert(c.getName()+m.getName());
+		Date date = new java.sql.Date(datePicker.getValue().getTime());
+		Presentation pres = new Presentation(name.getText(), cine.elementAt(cinemaBox.getSelectedIndex()).getId(), movie.elementAt(movieBox.getSelectedIndex()).getId(), user.getId(), timeslot.elementAt(timeslotBox.getSelectedIndex()).getId(), date, p.getId(), p.getCreationDate());
 		
-		
+		adminAdministration.updatePresentation(pres, new AsyncCallback<Presentation>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Presentation result) {
+			RootPanel.get().clear();
+			AdminForm adminform = new AdminForm(user,4);
+			RootPanel.get().add(adminform);
+			closePresentation();		
+			}
+		});
 		
 		}
 }

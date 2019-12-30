@@ -256,14 +256,14 @@ public class PresentationMapper {
 				try { 
 					// Prepared Statement erstellen um eine Präsentation in die Datenbank einzufügen
 					PreparedStatement insert = con
-							.prepareStatement("INSERT INTO softwarepraktikum_ws1920.presentation(date, userID, cinemaID, timeslotID, movieID) VALUES (?,?,?,?,?);");
+							.prepareStatement("INSERT INTO softwarepraktikum_ws1920.presentation(name, date, userID, cinemaID, timeslotID, movieID) VALUES (?,?,?,?,?,?);");
 					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-					
-					insert.setDate(1, p.getDate());
-					insert.setInt(2, p.getUserID());
-					insert.setInt(3, p.getCinemaID());
-					insert.setInt(4, p.getTimeslotID());
-					insert.setInt(5, p.getMovieID());
+					insert.setString(1, p.getName());
+					insert.setDate(2, p.getDate());
+					insert.setInt(3, p.getUserID());
+					insert.setInt(4, p.getCinemaID());
+					insert.setInt(5, p.getTimeslotID());
+					insert.setInt(6, p.getMovieID());
 
 					
 					
@@ -275,7 +275,7 @@ public class PresentationMapper {
 					ResultSet rs = getnewPresentation.executeQuery();
 					if (rs.next()) {
 						
-						return new Presentation(rs.getString("name"),rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+						return new Presentation(rs.getString("name"),rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -295,12 +295,13 @@ public class PresentationMapper {
 
 				try {
 		              // Updaten einer bestimmten Presentation  
-					PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET cinemaID=?, movieID=?, timeslotID=?, date=?  WHERE presentationID=?;");
-					update.setInt(1, p.getCinemaID());
-					update.setInt(2, p.getMovieID());
-					update.setInt(3, p.getTimeslotID());
-					update.setDate(4, p.getDate());
-					update.setInt(5, p.getId());
+					PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET name=?, cinemaID=?, movieID=?, timeslotID=?, date=?  WHERE presentationID=?;");
+					update.setString(1, p.getName());
+					update.setInt(2, p.getCinemaID());
+					update.setInt(3, p.getMovieID());
+					update.setInt(4, p.getTimeslotID());
+					update.setDate(5, p.getDate());
+					update.setInt(6, p.getId());
 
 					// PreparedStatement aufrufen und als Query an die DB schicken.
 					update.executeUpdate();
@@ -327,12 +328,9 @@ public class PresentationMapper {
 
 				try {
 					// Prepared Statement zum Löschen einer bestimmten Präsentation in der Datenbank 
-					PreparedStatement deleteByPresentationID = con
-							.prepareStatement("UPDATE softwarepraktikum_ws1920.presentation SET `DeleteDate`=NOW() WHERE `PresentationID`=?;");
-					//      .prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE `PresentationID`=?;");
+					PreparedStatement deleteByPresentationID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE presentationID=?;");
 					deleteByPresentationID.setInt(1, p.getId());
 					deleteByPresentationID.executeUpdate();
-			  //    deleteByPresentationID.executeDeletion();
 
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {

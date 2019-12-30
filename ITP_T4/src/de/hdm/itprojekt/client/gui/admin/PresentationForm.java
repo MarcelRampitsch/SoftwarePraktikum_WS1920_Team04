@@ -1,6 +1,9 @@
 package de.hdm.itprojekt.client.gui.admin;
 
 import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import java.util.Vector;
 
@@ -55,24 +58,23 @@ public class PresentationForm extends VerticalPanel{
 	    
 	    DatePicker datePicker = new DatePicker();
 	    
-	    Button search = new Button("Search");
-
+	    Button presentationAdd = new Button("Edit");
 	    ListBox presentationbox = new ListBox();
 	    Label presentationLabel = new Label("Presentation");
-	    
-	    Button presentationEdit = new Button("Edit");
 	    Button presentationNew = new Button("New");
 	    Button presentationDelete = new Button("Delete");
 	    
-	    Button presentationAdd = new Button("add");
+	    Button search = new Button("Search");
 	    
 		private Vector<Cinema> cine = null;
-		
-		private Vector<Movie> movie =null;
+		private Vector<Movie> movie = null;
+		private Vector<Timeslot> time = null;
+		private Vector<Presentation> pres = null;
+		private Presentation presentation = null;
 
 	    
 	    HorizontalPanel presentationadder = new HorizontalPanel();
-	    VerticalPanel buttonbox  = new VerticalPanel();
+	    HorizontalPanel buttonbox  = new HorizontalPanel();
 		private User user = null;
 	    
 	    
@@ -90,48 +92,6 @@ public class PresentationForm extends VerticalPanel{
 	    public void onLoad() {
 	    	
 	    	super.onLoad();
-	    	
-	    	
-	    	
-	    	// Create a basic date picker
-	        DatePicker datePicker = new DatePicker();
-	        final Label text = new Label();
-
-	        // Set the value in the text box when the user selects a date
-	        datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
-	           @Override
-	           public void onValueChange(ValueChangeEvent<Date> event) {
-	              Date date = event.getValue();
-	              String dateString = 
-	              DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
-	              text.setText(dateString);				
-	           }
-	        });
-	        
-	        // Set the default value
-	        datePicker.setValue(new Date(), true);
-
-	        // Create a DateBox
-	        DateTimeFormat dateFormat = DateTimeFormat.getFormat("MM/dd/yyyy");
-	        DateBox dateBox = new DateBox();
-	        dateBox.setFormat(new DateBox.DefaultFormat(dateFormat));
-
-	        Label selectLabel = new Label("Permanent DatePicker:");
-	        Label selectLabel2 = new Label("DateBox with popup DatePicker:");
-	        
-	        // Add widgets to the root panel.
-	        VerticalPanel vPanel = new VerticalPanel();
-	        vPanel.setSpacing(10);
-	        vPanel.add(selectLabel);
-	        vPanel.add(text);
-	        vPanel.add(datePicker);
-	        vPanel.add(selectLabel2);
-	        vPanel.add(dateBox);
-
-	        RootPanel.get("gwtContainer").add(vPanel);
-	    	
-	    	
-	        
 	    	this.add(pcinemaLabel);
 	    	this.add(cinemaDrop);
 	    	
@@ -185,43 +145,60 @@ public class PresentationForm extends VerticalPanel{
 	    	
 	    	this.add(ptimeslotLabel);
 	    	this.add(timeslotDrop);
-	    	timeslotDrop.addItem("18:00");
-		    timeslotDrop.addItem("18:30");
-		    timeslotDrop.addItem("19:00");
-		    timeslotDrop.addItem("19:30");
-		    timeslotDrop.addItem("20:00");
-		    timeslotDrop.addItem("20:30");
-		    timeslotDrop.addItem("21:00");
-		    timeslotDrop.addItem("21:30");
-		    timeslotDrop.addItem("22:00");
-		    timeslotDrop.addItem("22:30");
-		    timeslotDrop.addItem("23:00");
-		    timeslotDrop.addItem("23:30");
-		    timeslotDrop.addItem("00:00");
+	    	
+	    	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
+	    		
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+				}
+
+				public void onSuccess(Vector<Timeslot> result) {
+					
+					for (int i = 0; i < result.size(); i++ ) {
+						timeslotDrop.addItem(result.elementAt(i).getTime());
+						time = result;
+					}
+				}
+			});
+	    	
+	    	
 		    this.add(dateLabel);
 		    this.add(datePicker);
-		    
+		    presentationadder.add(search );
+		    search.addClickHandler(new searchClickHandler());
+		    this.add(presentationadder);
 		    this.add(presentationLabel);
 
-		    presentationadder.add(presentationbox);
-		    presentationbox.addItem("erste");
-		    presentationbox.addItem("zweite");
-		    presentationbox.addItem("dritte");
+		    this.add(presentationbox);
+		    adminAdministration.getAllPresentationsByUser(this.user, new AsyncCallback<Vector<Presentation>>() {
+	    		
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch geloffen");
+				}
 
+				public void onSuccess(Vector<Presentation> result) {
+					
+					for (int i = 0; i < result.size(); i++ ) {
+						presentationbox.addItem(result.elementAt(i).getName());
+						pres = result;
+					}
+				}
+			});
 		    
-		    presentationadder.add(presentationAdd);
-		    presentationAdd.addClickHandler(new addPresentationClickHandler());
 		    
-		    this.add(presentationadder);
+//		    presentationbox.addItem("erste");
+//		    presentationbox.addItem("zweite");
+//		    presentationbox.addItem("dritte");
 		    
-		    this.add(search);
-		    search.addClickHandler(new searchClickHandler());
-		    
-		    
-		    buttonbox.add(presentationEdit);
+		    buttonbox.add(presentationAdd);
+		    presentationAdd.addClickHandler(new editPresentationClickHandler());
 		    buttonbox.add(presentationNew);
+		    presentationNew.addClickHandler(new newPresentationClickHandler());
 		    buttonbox.add(presentationDelete);
-		    
+		    presentationDelete.addClickHandler(new deletePresentationClickHandler());
+		    this.add(buttonbox);
 	    
 	    }
 
@@ -240,25 +217,43 @@ public class PresentationForm extends VerticalPanel{
 			public void onClick(ClickEvent event) {
 			Cinema c = cine.elementAt(cinemaDrop.getSelectedIndex());
 			Movie m = movie.elementAt(movieDrop.getSelectedIndex());
-			Timeslot t = null;
-			Date date = datePicker.getHighlightedDate();
+			Timeslot t = time.elementAt(timeslotDrop.getSelectedIndex());
+			Date d = datePicker.getValue();
 			Presentation p = new Presentation();
-			
 			}
 		   
 	   }
 	    
-	   public class addPresentationClickHandler implements ClickHandler{
+	   public class editPresentationClickHandler implements ClickHandler{
 
 			@Override
 			public void onClick(ClickEvent event) {
-				PresentationAddDialogBox presentationadd = new PresentationAddDialogBox(user);
+				presentation = pres.elementAt(presentationbox.getSelectedIndex());
+				PresentationAddDialogBox presentationadd = new PresentationAddDialogBox(presentation, user);
 				presentationadd.openPresentation();
 			}
-		   
 	   }
 	   
-	   private  class addPresentationCallback implements AsyncCallback<Presentation>{
+	   public class newPresentationClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+				PresentationNewDialogBox presentationnew = new PresentationNewDialogBox(user);
+				presentationnew.openPresentation();
+			}
+	   }
+	   
+	   public class deletePresentationClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+				presentation = pres.elementAt(presentationbox.getSelectedIndex());
+				PresentationDeleteDialogBox presentationdelete = new PresentationDeleteDialogBox(presentation, user);
+				presentationdelete.openPresentation();
+			}
+	   }
+	   
+	   private  class PresentationCallback implements AsyncCallback<Presentation>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -269,6 +264,7 @@ public class PresentationForm extends VerticalPanel{
 		@Override
 		public void onSuccess(Presentation result) {
 			// TODO Auto-generated method stub
+			
 			
 		}
 	   
