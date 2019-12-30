@@ -53,8 +53,7 @@ public class SurveyMapper {
 		}
 		return surveyMapper;
 	}
-	  public Survey findBySurveyID(int id) {
-		  Survey s = null;
+	  public Survey findBySurveyID(Survey s) {
 		  
 		  // Aufbau der DB-Verbindung
 		  Connection con = DBConnection.getConnection();
@@ -63,7 +62,7 @@ public class SurveyMapper {
 			  
 			  // Erstellung des Prepared Statement um alle Surveys anhand der SurveyID zu finden
 			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=? ;");
-			  findBySurveyID.setInt(1, id);
+			  findBySurveyID.setInt(1, s.getId());
 			  
 			  // Ausführen des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
@@ -79,14 +78,13 @@ public class SurveyMapper {
 	  }
 	  
 	  // Methode zum Finden eines Surveys anhand des Namens
-	  public Survey findByName(String name) {
-		  Survey s = null;
+	  public Survey findByName(Survey s) {
 
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  PreparedStatement findByName = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE name=?;");
-			  findByName.setString(1, name);
+			  findByName.setString(1, s.getName());
 			  
 			  ResultSet rs = findByName.executeQuery();
 
@@ -127,13 +125,13 @@ public class SurveyMapper {
 	  }
 	  
 	  // Methode zum Löschen eines Surveys anhand der SurveyID
-	  public void deleteSurveyBySurveyID (int id) {
+	  public void deleteSurveyBySurveyID (Survey s) {
 		  
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  PreparedStatement deleteBySurveyID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.survey WHERE surveyID=?;");
-			  deleteBySurveyID.setInt(1, id);
+			  deleteBySurveyID.setInt(1, s.getId());
 			  deleteBySurveyID.executeUpdate();
 			  
 		  } catch (SQLException e) {
@@ -189,7 +187,7 @@ public class SurveyMapper {
 	  }
 	  
 	  // Methode zum Löschen aller Surveys die einer Gruppe zugeordnet sind
-	  public void deleteAllByGroupID (Group g) {
+	  public void deleteAllSurveyByGroupID (Group g) {
 
 		  Connection con = DBConnection.getConnection();
 		  

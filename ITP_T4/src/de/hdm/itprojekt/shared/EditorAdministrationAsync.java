@@ -72,9 +72,9 @@ public interface EditorAdministrationAsync {
 
 	void updateSurvey(Survey updateS, AsyncCallback<Survey> callback);
 
-	void deleteBySurveyID(Survey s, AsyncCallback<Void> callback);
+	void deleteSurveyBySurveyID(Survey s, AsyncCallback<Void> callback);
 	
-	void deleteAllByGroupID(Group g, AsyncCallback<Void> callback);
+	void deleteAllSurveyByGroupID(Group g, AsyncCallback<Void> callback);
 	
 	
 

@@ -99,10 +99,10 @@ public interface EditorAdministration extends RemoteService {
 	public Survey updateSurvey(Survey updateS) throws IllegalArgumentException;
 	
 	// L�schen des Survey anhand der SurveyID.
-	public void deleteBySurveyID(Survey s) throws IllegalArgumentException;
+	public void deleteSurveyBySurveyID(Survey s) throws IllegalArgumentException;
 	
 	// L�schen aller Surveys anhand der GruppenID.
-	public void deleteAllByGroupID(Group g) throws IllegalArgumentException;
+	public void deleteAllSurveyByGroupID(Group g) throws IllegalArgumentException;
 	
 	
 

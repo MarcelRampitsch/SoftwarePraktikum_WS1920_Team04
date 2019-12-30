@@ -196,12 +196,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 
 	public Survey getSurveyBySurveyID(Survey s) throws IllegalArgumentException {
-		Survey survey = sMapper.findBySurveyID(s.getId());
+		Survey survey = sMapper.findBySurveyID(s);
 		return survey;
 	}
 
 	public Survey getSurveyBySurveyName(Survey s) {
-		Survey survey = sMapper.findByName(s.getName());
+		Survey survey = sMapper.findByName(s);
 		return survey;
 	}
 
@@ -215,17 +215,17 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 
 	@Override
-	public void deleteBySurveyID(Survey s) throws IllegalArgumentException {
-		sMapper.deleteSurveyBySurveyID(s.getId());
+	public void deleteSurveyBySurveyID(Survey s) throws IllegalArgumentException {
+		sMapper.deleteSurveyBySurveyID(s);
 		
 	}
 
-	public void deleteAllByGroupID(Group g) throws IllegalArgumentException {
-		sMapper.deleteAllByGroupID(g);
+	public void deleteAllSurveyByGroupID(Group g) throws IllegalArgumentException {
+		sMapper.deleteAllSurveyByGroupID(g);
 		
 	}
 
-	public void deleteAllByUserId(User u) throws IllegalArgumentException {
+	public void deleteAllSurveyByUserId(User u) throws IllegalArgumentException {
 		sMapper.deleteAllByUserID(u);
 		
 	}
