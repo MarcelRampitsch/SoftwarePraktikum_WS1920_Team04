@@ -61,6 +61,10 @@ public class CellListForm extends VerticalPanel {
 	public void onLoad() {
 	   super.onLoad();
 	   final CellTable<Group> table = new CellTable<Group>();
+	
+	    // Create a list data provider.
+		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
+
 	   
 	   TextColumn<Group> nameColumn = new TextColumn<Group>() {
 
@@ -71,18 +75,70 @@ public class CellListForm extends VerticalPanel {
 		}
 	};
 		
-		TextColumn<Group> adressColumn = new TextColumn<Group>(){
+		
+		
+        Cell<String> loeschenCell = new ButtonCell();	
+		
+		Column<Group, String> loeschenColumn = new Column<Group, String>(loeschenCell) {
 
 			@Override
-			public String getValue(Group group) {
+			public String getValue(Group object) {
 				// TODO Auto-generated method stub
-				return group.getName();
+				return "X";
 			}
+
 		};
-		table.addColumn(nameColumn, "Name");
-		table.addColumn(adressColumn, "Name2");
 		
-		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
+		Cell<String> editCell = new ButtonCell();
+
+		Column<Group, String> editColumn = new Column<Group, String>(editCell) {
+
+			@Override
+			public String getValue(Group object) {
+				// TODO Auto-generated method stub
+				return "Edit";
+			}
+
+		};
+		
+		loeschenColumn.setFieldUpdater(new FieldUpdater<Group, String>() {
+
+			@Override
+			public void update(int index, Group anwender, String value) {
+				// TODO Auto-generated method stub
+				dataProvider.getList().remove(anwender);
+
+				AsyncCallback<Group> loeschenCallback = new AsyncCallback<Group>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Fail");
+
+					}
+
+					@Override
+					public void onSuccess(Group result) {
+
+						Window.alert("Schmeckt");
+
+					}
+
+				};
+
+		//		adminAdministration.delete(anwender, loeschenCallback );
+			}
+
+		});
+		
+		
+		
+		
+		
+		
+		table.addColumn(nameColumn, "Gruppenname");
+		table.addColumn(loeschenColumn, "Gruppe löschen");
+		table.addColumn(editColumn, "Gruppe editieren");
+		
 		dataProvider.addDataDisplay(table);
 		
 		final List <Group> list = dataProvider.getList();
