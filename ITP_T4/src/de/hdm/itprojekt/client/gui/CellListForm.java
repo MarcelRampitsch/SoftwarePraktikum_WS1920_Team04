@@ -60,7 +60,6 @@ public class CellListForm extends VerticalPanel {
 	//Vector <Group> Gruppen = null;
 	public void onLoad() {
 	   super.onLoad();
-	   Window.alert(Gruppen.get(0).getName());
 	   final CellTable<Group> table = new CellTable<Group>();
 	   
 	   TextColumn<Group> nameColumn = new TextColumn<Group>() {
