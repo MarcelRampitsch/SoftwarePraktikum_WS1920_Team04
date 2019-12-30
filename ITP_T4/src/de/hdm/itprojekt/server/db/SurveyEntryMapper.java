@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -54,17 +55,15 @@ public class SurveyEntryMapper {
 	  }
 	  
 
-	  public SurveyEntry findSurveyEntryBySurveyEntryID(int id) {
+	  public SurveyEntry findSurveyEntryBySurveyEntryID(SurveyEntry se) {
 		  
 			Connection con = DBConnection.getConnection();
-			
-			SurveyEntry se = null;
 			
 			try {
 				
 				PreparedStatement findSurveyEntryBySurveyEntryID = con.prepareStatement( 
 						"SELECT * FROM softwarepraktikum_ws1920.surveyentry" + "WHERE surveyEntryID=?");
-				findSurveyEntryBySurveyEntryID.setInt(1, id);
+				findSurveyEntryBySurveyEntryID.setInt(1, se.getId());
 				
 				ResultSet rs = findSurveyEntryBySurveyEntryID.executeQuery();
 
@@ -86,7 +85,7 @@ public class SurveyEntryMapper {
 	  }
 	  
 	  
-	  public SurveyEntry findSurveyEntryBySurveyID(int id) {
+	  public SurveyEntry findSurveyEntryBySurveyID(Survey s) {
 
 			Connection con = DBConnection.getConnection();
 
@@ -96,7 +95,7 @@ public class SurveyEntryMapper {
 				
 				PreparedStatement findSurveyEntryBySurveyID = con.prepareStatement( 
 						"SELECT * FROM softwarepraktikum_ws1920.surveyentry" + "WHERE surveyID=?");
-				findSurveyEntryBySurveyID.setInt(1, id);
+				findSurveyEntryBySurveyID.setInt(1, s.getId());
 
 				ResultSet rs = findSurveyEntryBySurveyID.executeQuery();
 
@@ -188,7 +187,7 @@ public class SurveyEntryMapper {
 	  }
 	  
 
-	  public void deleteSurveyEntryBySurveyEntryID(int id)  {
+	  public void deleteSurveyEntryBySurveyEntryID(SurveyEntry se)  {
 	  
 		 Connection con = DBConnection.getConnection();
 		  
@@ -197,7 +196,7 @@ public class SurveyEntryMapper {
 			 PreparedStatement deleteBySurveyEntryID = con
 					 .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE surveyEntryID=?;");
 			 
-			 deleteBySurveyEntryID.setInt(1, id);
+			 deleteBySurveyEntryID.setInt(1, se.getId());
 			 deleteBySurveyEntryID.executeUpdate();
 		 
 		 } catch (SQLException e) {
@@ -207,7 +206,7 @@ public class SurveyEntryMapper {
 	  }
 	  
 	  
-	  public void deleteAllBySurveyID(int id)  {
+	  public void deleteAllBySurveyID(Survey s)  {
 		  
 		  Connection con = DBConnection.getConnection();
 			  
@@ -216,7 +215,7 @@ public class SurveyEntryMapper {
 			  PreparedStatement deleteAllBySurveyID = con
 					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE surveyID=?;");
 				 
-			  deleteAllBySurveyID.setInt(1, id);
+			  deleteAllBySurveyID.setInt(1, s.getId());
 			  deleteAllBySurveyID.executeUpdate();
 			 
 		  } catch (SQLException e) {
@@ -241,7 +240,7 @@ public class SurveyEntryMapper {
 	  }
 	  
 	  
-	  public void deleteAllByPresentationID(int id)  {
+	  public void deleteAllByPresentationID(Presentation p)  {
 		  
 		  Connection con = DBConnection.getConnection();
 			  
@@ -250,7 +249,7 @@ public class SurveyEntryMapper {
 			  PreparedStatement deleteAllByPresentationID = con
 					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE presentationID=?;");
 				 
-			  deleteAllByPresentationID.setInt(1, id);
+			  deleteAllByPresentationID.setInt(1, p.getId());
 			  deleteAllByPresentationID.executeUpdate();
 			 
 		  } catch (SQLException e) {

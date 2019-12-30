@@ -83,15 +83,15 @@ public interface EditorAdministrationAsync {
 
 	void getSurveyEntryBySurveyEntryID(SurveyEntry se, AsyncCallback<SurveyEntry> callback);
 
-	void getSurveyEntryBySurveyID(SurveyEntry se, AsyncCallback<SurveyEntry> callback);
+	void getSurveyEntryBySurveyID(Survey s, AsyncCallback<SurveyEntry> callback);
 
-	void updateSurveyEntry(SurveyEntry upSurveyEntry, AsyncCallback<Void> callback);
+	void updateSurveyEntry(SurveyEntry upSurveyEntry, AsyncCallback<SurveyEntry> callback);
 	
-	void deleteBySurveyEntryID(SurveyEntry se, AsyncCallback<Void> callback);
+	void deleteSurveyEntryBySurveyEntryID(SurveyEntry se, AsyncCallback<Void> callback);
 	
-	void deleteAllBySurveyID(SurveyEntry se, AsyncCallback<Void> callback);
+	void deleteAllSurveyEntryBySurveyID(Survey s, AsyncCallback<Void> callback);
 	
-	void deleteAllByPresentationID(SurveyEntry se, AsyncCallback<Void> callback);
+	void deleteAllSurveyEntryByPresentationID(Presentation p, AsyncCallback<Void> callback);
 	
 
 	// Vote

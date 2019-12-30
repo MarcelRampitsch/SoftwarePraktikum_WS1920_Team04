@@ -28,6 +28,11 @@ import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
 import de.hdm.itprojekt.server.db.MovieMapper;
 
+
+/*
+ * @author MarcelRampitsch
+ * EditorAdministrationImpl bildet die Aplikationslogik aller anwenderseitigen Funktionen ab.
+ */
 public class EditorAdministrationImpl extends RemoteServiceServlet implements EditorAdministration {
 	
 	private GroupMapper gMapper = null;
@@ -88,7 +93,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			return tempUser;
 		}
 		return null;
-		}
+	}
 	// Methode zum Lï¿½schen eines bestimmten Users und der damit verbundenen Objekte.
 	public void deleteUser(User u) throws IllegalArgumentException{
 		gMapper.deleteAllByUserID(u);
@@ -111,6 +116,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return rs;
 	}
 
+	
 	// Group
 	
 	public Group createGroup (Group group) {
@@ -142,11 +148,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		gMapper.deleteGroupByGroupID(g);
 		
 	}
-
-	// ist in delete userpublic void deleteAllByUserID(User u) throws IllegalArgumentException {
-		//gMapper.deleteAllByUserID(u);
 		
-	
 	
 	// Groupmember
 	// TODO Wie hat die createGroupMember Methode auszusehen?
@@ -175,7 +177,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 	}
-	// Methode um ein Gruppenmitglied anhand seiner ID zu löschen.
+
 	public void deleteGroupmemberByGroupmemberID(Groupmember gm) throws IllegalArgumentException {
 		gmMapper.deleteGroupmemberByGroupmemberID(gm);
 		
@@ -186,6 +188,9 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 	}
 
+	
+	// Survey
+	
 	public Survey createSurvey(Survey s) throws IllegalArgumentException {
 		if (s != null) {
 			Survey tempSurvey = new Survey();
@@ -205,7 +210,6 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return survey;
 	}
 
-	@Override
 	public Survey updateSurvey(Survey updateS) throws IllegalArgumentException {
 		if (updateS != null) {
 			Survey tempSurvey = sMapper.updateSurvey(updateS);
@@ -214,7 +218,6 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 
-	@Override
 	public void deleteSurveyBySurveyID(Survey s) throws IllegalArgumentException {
 		sMapper.deleteSurveyBySurveyID(s);
 		
@@ -230,7 +233,9 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 	}
 
-	@Override
+
+	// SurveyEntry
+	
 	public SurveyEntry createSurveyEntry(SurveyEntry se) throws IllegalArgumentException {
 		if (se != null) {
 			SurveyEntry tempSurveyentry = new SurveyEntry();
@@ -240,45 +245,39 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 
-	@Override
 	public SurveyEntry getSurveyEntryBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
-		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyEntryID(se.getId());
+		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyEntryID(se);
 		return surveyentry;
 	}
 
-	@Override
-	public SurveyEntry getSurveyEntryBySurveyID(SurveyEntry se) throws IllegalArgumentException {
-		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyID(se.getId());
+	public SurveyEntry getSurveyEntryBySurveyID(Survey s) throws IllegalArgumentException {
+		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyID(s);
 		return surveyentry;
 	}
 
-	@Override
-	public void updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
+	public SurveyEntry updateSurveyEntry(SurveyEntry upSurveyEntry) throws IllegalArgumentException {
+		if (upSurveyEntry != null) {
+			SurveyEntry tempSurveyEntry = new SurveyEntry();
+			tempSurveyEntry = seMapper.update(upSurveyEntry);
+			return tempSurveyEntry;
+		}
+		return null;	
 	}
 
-	@Override
-	public void deleteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
-		seMapper.deleteSurveyEntryBySurveyEntryID(se.getId());
-		
+	public void deleteSurveyEntryBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
+		seMapper.deleteSurveyEntryBySurveyEntryID(se);	
 	}
 
-	@Override
-	public void deleteAllBySurveyID(SurveyEntry se) throws IllegalArgumentException {
-		seMapper.deleteAllBySurveyID(se.getId());
-		
+	public void deleteAllSurveyEntryBySurveyID(Survey s) throws IllegalArgumentException {
+		seMapper.deleteAllBySurveyID(s);	
 	}
 
-	@Override
-	public void deleteAllByPresentationID(SurveyEntry se) throws IllegalArgumentException {
-		seMapper.deleteAllByPresentationID(se.getId());
-		
+	public void deleteAllSurveyEntryByPresentationID(Presentation p) throws IllegalArgumentException {
+		seMapper.deleteAllByPresentationID(p);	
 	}
 
 	// Vote
 	
-	@Override
 	public Vote createVote(Vote v) throws IllegalArgumentException {
 		if (v != null) {
 			Vote tempvote = new Vote();
@@ -288,25 +287,21 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return null;
 	}
 
-	@Override
 	public Vote getVoteByVoteID(Vote v) throws IllegalArgumentException {
 		Vote vote = vMapper.findVoteByVoteID(v.getId());
 		return vote;
 	}
 
-	@Override
 	public Vector<Vote> getAllVoteByUserID(User u) throws IllegalArgumentException {
 		Vector<Vote> rs = vMapper.findVoteByUserID(u.getId());
 		return rs;
 	}
 
-	@Override
 	public Vector<Vote> getAllVoteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
 		Vector<Vote> rs = vMapper.findAllVoteBySurveyEntryID(se.getId());
 		return rs;
 	}
 
-	@Override
 	public Vote updateVote(Vote upVote) throws IllegalArgumentException {
 		if (upVote != null) {
 			Vote tempVote = vMapper.update(upVote);
@@ -316,13 +311,11 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 	}
 
-	@Override
 	public void deleteByVoteID(Vote v) throws IllegalArgumentException {
 		vMapper.deleteVoteByVoteID(v.getId());
 		
 	}
 
-	@Override
 	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException {
 		vMapper.deleteAllVoteBySurveyEntryID(v.getId());
 		
