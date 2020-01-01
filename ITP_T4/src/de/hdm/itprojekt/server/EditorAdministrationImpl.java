@@ -119,10 +119,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	
 	// Group
 	
-	public Group createGroup (Group group) {
-		Group g = new Group();
-		g= gMapper.insertGroup(group);
-		return g;
+	public Group createGroup (Group g) {
+		if(g != null) {
+			Group tempGroup = null;
+			tempGroup = gMapper.insertGroup(g);
+			return tempGroup;
+		}
+		return null;
 	}
 
 	public Group getGroupByGroupID(Group g) throws IllegalArgumentException {
@@ -145,7 +148,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	
 	public void deleteGroupByGroupID(Group g) throws IllegalArgumentException {
-		gMapper.deleteByGroupID(g);
+		gMapper.deleteGroupByGroupID(g);
 		
 	}
 		
