@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
+
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
@@ -54,21 +56,20 @@ public class UserMapper {
 	}
 	  public User findByNickname(User user) {
 		  User u = null;
-		  
 		  // Aufbau der DB-Verbindung
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
 			  // Erstellung des Prepared Statement um einen User per Nickname zu finden
 			  
-			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE nickname=? ;");
+			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE nickname=?");
 			  findBySurveyID.setString(1, user.getNickname());
 			  
 			  // ausf�hren des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
-
-			  u = new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
-			  
+			  while(rs.next()){
+			  u = new User(rs.getInt("userID"), rs.getString("nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
+			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace();
 			  return null;

@@ -18,6 +18,11 @@ public class User extends BusinessObject {
 		this.email = email;
 	}
 	
+	public User(String nickname, String email) {
+		this.nickname = nickname;
+		this.email = email;
+	}
+	
 	public User(String email) {
 		this.email = email;
 	}

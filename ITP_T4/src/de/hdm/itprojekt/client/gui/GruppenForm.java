@@ -9,6 +9,7 @@ import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionModel;
@@ -81,22 +82,6 @@ public class GruppenForm extends VerticalPanel {
 				selectionModel.setSelected(cellListDataProvider.getList().get(0), true);
 			}
 		});
-
-		GruppenErstellung.addStyleName("GruppenButton");
-		GruppenErstellung.addClickHandler(new openClickHandler());
-
-		this.add(GruppenErstellung);
-
-	}
-
-	private class openClickHandler implements ClickHandler {
-
-		public void onClick(ClickEvent event) {
-
-			//Methode, um das anzeigen der DialogBox(GruppenErstellung) zu realisieren
-			GruppenOpenForm open = new GruppenOpenForm();
-			open.openGruppenForm();
-		}
 
 	}
 }

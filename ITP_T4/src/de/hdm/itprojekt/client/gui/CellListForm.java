@@ -8,42 +8,32 @@ package de.hdm.itprojekt.client.gui;
  * Diese wiederum wird in der BasisKlasse EditorForm instanziiert.
  */	
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.FieldUpdater;
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.cell.client.TextInputCell;
-import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.view.client.ProvidesKey;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
-import de.hdm.itprojekt.client.gui.admin.AdminForm;
-import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
-import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class CellListForm extends VerticalPanel {
 	
-	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
+	Button GruppenErstellung = new Button("Neue Gruppe erstellen");
 	
 	public CellListForm(User user, List <Group> Gruppen) {
 		this.user = user;
@@ -60,6 +50,8 @@ public class CellListForm extends VerticalPanel {
 	//Vector <Group> Gruppen = null;
 	public void onLoad() {
 	   super.onLoad();
+	   GruppenErstellung.addClickHandler(new openClickHandler());
+	   this.add(GruppenErstellung);
 	   final CellTable<Group> table = new CellTable<Group>();
 	
 	    // Create a list data provider.
@@ -106,33 +98,49 @@ public class CellListForm extends VerticalPanel {
 			@Override
 			public void update(int index, Group anwender, String value) {
 				// TODO Auto-generated method stub
-				dataProvider.getList().remove(anwender);
-
-				AsyncCallback<Group> loeschenCallback = new AsyncCallback<Group>() {
-
+				editorAdministration.deleteGroupByGroupID(anwender, new AsyncCallback<Void>() {
+					
+					@Override
+					public void onSuccess(Void result) {
+						dataProvider.getList().remove(anwender);
+					}
+					
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Fail");
-
+						// TODO Auto-generated method stub
+						
 					}
-
-					@Override
-					public void onSuccess(Group result) {
-
-						Window.alert("Schmeckt");
-
-					}
-
-				};
-
-		//		adminAdministration.delete(anwender, loeschenCallback );
+				});
+				
+//				AsyncCallback<Group> loeschenCallback = new AsyncCallback<Group>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						Window.alert("Fail");
+//
+//					}
+//
+//					@Override
+//					public void onSuccess(Group result) {
+//						
+//						Window.alert("Schmeckt");
+//					}
+//				};
 			}
-
 		});
 		
-		
-		
-		
+		editColumn.setFieldUpdater(new FieldUpdater<Group, String>() {
+
+			@Override
+			public void update(int index, Group object, String value) {
+			Group g = object;
+			table.removeFromParent();
+			table.removeColumn(1);
+			table.setRemoveColumnsOnHide(true);
+			GroupEditForm edit = new GroupEditForm(user, g);
+			RootPanel.get().add(edit);
+			}
+		});
 		
 		
 		table.addColumn(nameColumn, "Gruppenname");
@@ -147,4 +155,14 @@ public class CellListForm extends VerticalPanel {
 		}
 		RootPanel.get().add(table);
    }
+	
+	private class openClickHandler implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+			
+			GroupEditForm edit = new GroupEditForm();
+			RootPanel.get().add(edit);
+			
+		}
+	}
 }
