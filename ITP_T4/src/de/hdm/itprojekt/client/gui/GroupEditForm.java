@@ -85,14 +85,18 @@ public class GroupEditForm extends VerticalPanel {
 	
 	 private class searchClickHandler implements ClickHandler{
 			
+
 			@Override
 			public void onClick(ClickEvent event) {
+
 				User name = new User(memberBox.getText(),"a");
 
 				editorAdministration.getUserByNickname(name, new AsyncCallback<User>() {
 					
 					@Override
 					public void onSuccess(User result) {
+						Window.alert("komme  rein");
+						
 						memberList.setItemText(index, result.getNickname());
 						groupMember.add(result);
 						index++;
@@ -127,6 +131,11 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				RootPanel.get().clear();
+				EditorForm editform  = new EditorForm(user, Gruppen);
+				RootPanel.get().add(editform);				
+				
+				
 			}
 		}
 	 private class backHandler implements ClickHandler{
