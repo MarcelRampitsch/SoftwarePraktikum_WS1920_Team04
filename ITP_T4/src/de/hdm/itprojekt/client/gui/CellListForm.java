@@ -153,7 +153,7 @@ public class CellListForm extends VerticalPanel {
 		for(Group group : Gruppen) {
 			list.add(group);
 		}
-		RootPanel.get().add(table);
+		this.add(table);
    }
 	
 	private class openClickHandler implements ClickHandler {

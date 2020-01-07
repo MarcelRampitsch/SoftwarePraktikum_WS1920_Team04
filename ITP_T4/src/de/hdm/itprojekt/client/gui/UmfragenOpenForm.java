@@ -197,6 +197,6 @@ public class UmfragenOpenForm extends DialogBox {
 		}
 		
 
-	}
+	} 
 
 }

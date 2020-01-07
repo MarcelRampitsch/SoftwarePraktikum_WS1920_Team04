@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
@@ -52,6 +53,8 @@ public class EditorForm extends VerticalPanel {
 	 VerticalPanel west = new VerticalPanel();
 	 VerticalPanel east = new VerticalPanel();
 	 ListBox group = new ListBox();
+	 Button neueGruppe = new Button("Neue Gruppe");
+	 Button neueUmfrage = new Button("Neue Umfrage");
 	
 	/**
 	 * 
@@ -70,7 +73,9 @@ public class EditorForm extends VerticalPanel {
 	 * onLoad-Methode: Wird ausgeführt, wenn das Panel, dem Browser hinzugefügt wurde. 
 	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Panel hinzugefügt.
 	 */
+	CellListForm celllistform ;
 	
+
 	public void onLoad() {
 		super.onLoad();
 		
@@ -107,12 +112,10 @@ public class EditorForm extends VerticalPanel {
 				public void onSuccess(Vector<Group> result) {
 					rs = result;
 					Gruppen = Collections.list(result.elements());
-					UmfragenForm umfrageForm = new UmfragenForm();
-					CellListForm celllistform = new CellListForm(user , Gruppen);
+					celllistform = new CellListForm(user , Gruppen);
 				    UmfrageEintragTable umfragen = new UmfrageEintragTable();
-					east.add(umfrageForm);
 					west.add(celllistform);
-					east.add(umfragen);
+					west.add(umfragen);
 				}
 				
 			});
@@ -148,9 +151,27 @@ public class EditorForm extends VerticalPanel {
 			}
 		});
 		
-		main.add(toAdmin);
+		 class OpenUpClickHandler implements ClickHandler{
+				
+			 public void onClick(ClickEvent event) {
+				
+				UmfragenForm uf = new UmfragenForm(user);
+			//	RootPanel.get().clear();
+				west.clear();
+				
+				west.add(uf);
+				
+			}
+		 }
+		 
+		neueUmfrage.addClickHandler(new OpenUpClickHandler());
+		
+		header.add(neueGruppe);
+		header.add(neueUmfrage);
+		header.add(toAdmin);
 		GruppenForm gruppenForm = new GruppenForm(user);
 		main.add(gruppenForm);
+		this.add(header);
 		this.add(main);
 		
 		
