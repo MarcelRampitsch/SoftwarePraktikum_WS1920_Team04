@@ -17,8 +17,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.admin.AdminForm;
 import de.hdm.itprojekt.client.gui.admin.PresentationForm.searchClickHandler;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -27,7 +29,8 @@ public class GroupEditForm extends VerticalPanel {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
 	Vector <User> groupMember = null;
-	Group g;
+	Group g =null;
+	Group group =null;
 	int index = 0;
 	
 	List <Group> Gruppen = null;
@@ -131,9 +134,22 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				RootPanel.get().clear();
-				EditorForm editform  = new EditorForm(user, Gruppen);
-				RootPanel.get().add(editform);				
+						
+				
+				group = new Group(g.getId(), g.getCreationDate(), groupBox.getText(),g.getUserID());
+				editorAdministration.updateGroup(group, new AsyncCallback<Group>() {
+					
+					@Override
+					public void onFailure(Throwable caught) {
+					Window.alert("was ist falsch gelaufen");
+					}
+
+					@Override
+					public void onSuccess(Group result) {
+					RootPanel.get().clear();
+					EditorForm editorform = new EditorForm(user,Gruppen);
+					RootPanel.get().add(editorform);
+					}});
 				
 				
 			}

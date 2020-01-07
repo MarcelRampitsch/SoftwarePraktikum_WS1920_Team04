@@ -138,11 +138,11 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return rs;	
 	}
 
-	public Group updateGroup(Group updateg) throws IllegalArgumentException {
-		if (updateg != null) {
-			Group tempGroup = null;
-			tempGroup = gMapper.updateGroup(tempGroup);
-			return tempGroup;
+	public Group updateGroup(Group g) throws IllegalArgumentException {
+		if (g != null) {
+			Group group1 = gMapper.updateGroup(g);
+		//	tempGroup = gMapper.updateGroup(tempGroup);
+			return group1;
 		}
 		return null;
 	}
