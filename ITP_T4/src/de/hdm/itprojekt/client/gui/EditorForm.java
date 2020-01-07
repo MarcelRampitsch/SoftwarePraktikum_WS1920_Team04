@@ -17,6 +17,8 @@ import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +38,7 @@ public class EditorForm extends VerticalPanel {
 	 * currentUser speichert den aktuellen Nutzer
 	 */
 	User user = null;
+	List<Presentation> Surveys;
 	List <Group> Gruppen;
 	Vector<Group> rs;
 	/**
@@ -75,6 +78,7 @@ public class EditorForm extends VerticalPanel {
 	 */
 	CellListForm celllistform ;
 	
+	
 
 	public void onLoad() {
 		super.onLoad();
@@ -113,6 +117,7 @@ public class EditorForm extends VerticalPanel {
 					rs = result;
 					Gruppen = Collections.list(result.elements());
 					celllistform = new CellListForm(user , Gruppen);
+					UmfragenTable u1 = new UmfragenTable(user, Surveys);
 				    UmfrageEintragTable umfragen = new UmfrageEintragTable();
 					west.add(celllistform);
 			//		west.add(umfragen);

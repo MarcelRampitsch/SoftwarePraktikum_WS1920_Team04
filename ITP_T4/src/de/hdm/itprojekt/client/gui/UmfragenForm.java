@@ -16,12 +16,14 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHandler;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -34,6 +36,9 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 	private Cinema selectedCinema = null;
 	private Vector<Cinema> cine = null;
 	private Cinema delete = null;
+	
+	ListDataProvider <SurveyEntry> dataProvider;	
+
 	
 	
 	 Label umfrageErstellung = new Label("Umfrageerstellung:");
@@ -168,7 +173,7 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 	 * safehandler: Wird beim Click auf <code> safeUmfrage </code> Button ausgelöst.
 	 * Der User kann damit die Umfrage speichern.
 	 */
-	private class safehandler implements ClickHandler {
+	private class safehandsler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
@@ -183,6 +188,47 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 		}
 		
 
+	}
+	
+private class safehandler implements ClickHandler{
+		
+		@Override
+		public void onClick(ClickEvent event) {	
+			RootPanel.get().clear();
+			EditorForm e1 = new EditorForm(user, Gruppen);
+			RootPanel.get().add(e1);
+			UmfragenTable umfragen = new UmfragenTable(user, null);
+			RootPanel.get().add(umfragen);
+			RootPanel.get().clear();
+			
+			SurveyEntry group1 = new SurveyEntry(1,namenBox.getText());
+			editorAdministraion.createSurveyEntry(group1, new AsyncCallback<SurveyEntry>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+						Window.alert("was ist schief gelauffen");
+				}
+
+				@Override
+				public void onSuccess(SurveyEntry result) {
+					
+					EditorForm editform = new EditorForm(user, Gruppen);
+					RootPanel.get().add(editform);
+
+					List <SurveyEntry> liste = dataProvider.getList();
+					liste.add(group1);
+
+					
+					Window.alert("EINGABE GESICHERT");
+					
+					
+				}
+				
+			});
+			
+		
+		
+}
 	}
 	
 	
