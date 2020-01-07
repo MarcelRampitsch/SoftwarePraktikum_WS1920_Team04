@@ -9,12 +9,15 @@ import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionModel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
@@ -29,59 +32,116 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class GruppenForm extends VerticalPanel {
 	
-	private EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdministration();
 
-	private User user = null;
 	
-	CellListForm c1 =null;
+	  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
-	CellList <Group> c2;
 	
-	private Vector<Group> groups = null;
+	  ListDataProvider <Group> dataProvider;	
+
+	  VerticalPanel inhalt = new VerticalPanel();
+	
+	
+	  Label gruppenerstellung = new Label("Gruppenerstellung:");
+	  Label gruppenname = new Label("Gruppenname");
+	  Label nickname = new Label("Nickname");
+	
+	  Button edit = new Button("editieren");
+	  Button close  = new Button("X");
+	
+	  TextBox gruppennamebox =new TextBox();
+	  TextBox nicknamebox = new TextBox();
+	
+	  Button speichern = new Button("sichern");
+	
+	  GruppenForm gruppenForm = null;
+
+	  User user;
 
 
-	private Vector<Group> currentsubs;
-	private ListDataProvider<Group> cellListDataProvider;
-	private SelectionModel<Group> selectionModel;
-	
 	
 	
 	public GruppenForm(User user) {
-	this.user = user;
+		this.user=user;
 	}
-
-	 Button GruppenErstellung = new Button("Neue Gruppe erstellen");
-
+	
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+	 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+	 */
+	
 	public void onLoad() {
 		super.onLoad();
 		
-		// Versuch Laden der Vorhandenn Gruppen in die CellList
+
 		
-		editorAdministraion.getAllGroupByUserID(this.user, new AsyncCallback<Vector<Group>>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Fehler beim laden der Gruppen");
-				
-			}
-
-			@Override
-			public void onSuccess(Vector<Group> result) {
-				// Daten der CellList zurücksetzen
-				
-				cellListDataProvider.getList().clear();
-				List<Group> Gruppen = null;
-				for (int i = 0; i < result.size(); i++ ) {
-					 
-					cellListDataProvider.getList().add(result.elementAt(i));
+		inhalt.add(close);
+		//close.addClickHandler(new closegruppenform());
+		inhalt.add(gruppenerstellung);
+		gruppenerstellung.addStyleName("Überschrift");
+		inhalt.add(gruppenname);
+		inhalt.add(gruppennamebox);
+		
+		inhalt.add(nickname);
+		inhalt.add(nicknamebox);
+		
+		inhalt.add(speichern);
+		inhalt.add(edit);
 					
-				//	c2.getCellParent(result.elementAt(i).getName());
-				//	groups = result;
-				}
-				
-				selectionModel.setSelected(cellListDataProvider.getList().get(0), true);
-			}
-		});
+		
+		//speichern.addClickHandler(new sichernhandler());
+		this.add(inhalt);
 
-	}
+		
 }
+	
+
+
+
+	
+//	
+//	private class closegruppenform implements ClickHandler{
+//
+//		@Override
+//		public void onClick(ClickEvent event) {
+//			closeGruppenForm();
+			
+		
+
+	
+		
+	
+//	private class sichernhandler implements ClickHandler{
+//		
+//		@Override
+//		public void onClick(ClickEvent event) {
+//			Group group1 = new Group(1,gruppennamebox.getText());
+//			editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
+//
+//				@Override
+//				public void onFailure(Throwable caught) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//
+//				@Override
+//				public void onSuccess(Group result) {
+//					
+//					List <Group> liste = dataProvider.getList();
+//					liste.add(group1);
+//					Window.alert("EINGABE GESICHERT");
+//					
+//					
+//				}
+//				
+//			});
+			
+		
+		
+}
+
+	
+
+
