@@ -8,6 +8,12 @@ public class SurveyEntry extends BusinessObject {
 	
 	private int surveyID;
 	private int presentationID;
+	
+	// TEST !!!!
+			private String name;
+			
+			private int userID;
+	//TEST !!!
 
 	public SurveyEntry(int id, Timestamp creationDate, int surveyID, int presentationID) {
 		super(id, creationDate);
@@ -15,6 +21,12 @@ public class SurveyEntry extends BusinessObject {
 		this.presentationID = presentationID;
 		
 	}
+	
+	// Konstruktur, der zum tragen kommt, wenn eine neue Group erstellt wird
+			public SurveyEntry(int userID, String name ) {
+				this.userID=userID;
+				this.name=name;
+					}
 	
 	public SurveyEntry() {
 		
