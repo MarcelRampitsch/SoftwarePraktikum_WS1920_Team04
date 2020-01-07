@@ -30,6 +30,8 @@ public class GroupEditForm extends VerticalPanel {
 	Group g;
 	int index = 0;
 	
+	List <Group> Gruppen = null;
+	
 	Label groupName = new Label("Gruppenname");
 	TextBox groupBox = new TextBox();
 	Label memberNames = new Label("Gruppenmitglieder");
@@ -43,6 +45,8 @@ public class GroupEditForm extends VerticalPanel {
 	HorizontalPanel buttonForm = new HorizontalPanel();
 	VerticalPanel main = new VerticalPanel();
 	
+	Button back = new Button("<--");
+	
 	public GroupEditForm(User user, Group g) {
 		this.user = user;
 		this.g = g;
@@ -54,6 +58,9 @@ public class GroupEditForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 
+		main.add(back);
+		back.addClickHandler(new backHandler());
+		
 		main.add(groupName);
 		main.add(groupBox);
 		main.add(memberNames);
@@ -122,4 +129,15 @@ public class GroupEditForm extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 			}
 		}
+	 private class backHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			RootPanel.get().clear();
+			EditorForm form = new EditorForm(user, Gruppen);
+			RootPanel.get().add(form);
+		}
+		 
+		 
+	 }
 }
