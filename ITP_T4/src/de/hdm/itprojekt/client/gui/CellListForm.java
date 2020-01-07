@@ -33,7 +33,7 @@ public class CellListForm extends VerticalPanel {
 	
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
-	Button GruppenErstellung = new Button("Neue Gruppe erstellen");
+	//Button GruppenErstellung = new Button("Neue Gruppe erstellen");
 	
 	public CellListForm(User user, List <Group> Gruppen) {
 		this.user = user;
@@ -50,8 +50,8 @@ public class CellListForm extends VerticalPanel {
 	//Vector <Group> Gruppen = null;
 	public void onLoad() {
 	   super.onLoad();
-	   GruppenErstellung.addClickHandler(new openClickHandler());
-	   this.add(GruppenErstellung);
+//	   GruppenErstellung.addClickHandler(new openClickHandler());
+//	   this.add(GruppenErstellung);
 	   final CellTable<Group> table = new CellTable<Group>();
 	
 	    // Create a list data provider.

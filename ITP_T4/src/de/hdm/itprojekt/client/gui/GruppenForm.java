@@ -32,6 +32,7 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class GruppenForm extends VerticalPanel {
 	
+	
 
 	
 	  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
@@ -40,14 +41,15 @@ public class GruppenForm extends VerticalPanel {
 	  ListDataProvider <Group> dataProvider;	
 
 	  VerticalPanel inhalt = new VerticalPanel();
-	
+	  
+	  List <Group> Gruppen;
 	
 	  Label gruppenerstellung = new Label("Gruppenerstellung:");
 	  Label gruppenname = new Label("Gruppenname");
 	  Label nickname = new Label("Nickname");
 	
 	  Button edit = new Button("editieren");
-	  Button close  = new Button("X");
+	  Button back  = new Button("<--");
 	
 	  TextBox gruppennamebox =new TextBox();
 	  TextBox nicknamebox = new TextBox();
@@ -77,8 +79,8 @@ public class GruppenForm extends VerticalPanel {
 		
 
 		
-		inhalt.add(close);
-		//close.addClickHandler(new closegruppenform());
+		inhalt.add(back);
+		back.addClickHandler(new backButtonHandler());
 		inhalt.add(gruppenerstellung);
 		gruppenerstellung.addStyleName("Überschrift");
 		inhalt.add(gruppenname);
@@ -91,56 +93,70 @@ public class GruppenForm extends VerticalPanel {
 		inhalt.add(edit);
 					
 		
-		//speichern.addClickHandler(new sichernhandler());
+		speichern.addClickHandler(new sichernhandler());
+		
 		this.add(inhalt);
 
 		
 }
-	
-
-
 
 	
-//	
-//	private class closegruppenform implements ClickHandler{
-//
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			closeGruppenForm();
+
+
+
+	
+	
+	private class backButtonHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			RootPanel.get().clear();
+			EditorForm editform = new EditorForm(user, Gruppen);
+			RootPanel.get().add(editform);
+		}
+	}
+			
 			
 		
-
 	
+	private class sichernhandler implements ClickHandler{
 		
-	
-//	private class sichernhandler implements ClickHandler{
-//		
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			Group group1 = new Group(1,gruppennamebox.getText());
-//			editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
-//
-//				@Override
-//				public void onFailure(Throwable caught) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//
-//				@Override
-//				public void onSuccess(Group result) {
-//					
-//					List <Group> liste = dataProvider.getList();
-//					liste.add(group1);
-//					Window.alert("EINGABE GESICHERT");
-//					
-//					
-//				}
-//				
-//			});
+		@Override
+		public void onClick(ClickEvent event) {	
+			RootPanel.get().clear();
+			
+			Group group1 = new Group(1,gruppennamebox.getText());
+			editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+						Window.alert("was ist schief geloffen");
+				}
+
+				@Override
+				public void onSuccess(Group result) {
+					
+					EditorForm editform = new EditorForm(user, Gruppen);
+					RootPanel.get().add(editform);
+
+					List <Group> liste = dataProvider.getList();
+					liste.add(group1);
+
+					
+					Window.alert("EINGABE GESICHERT");
+					
+					
+				}
+				
+			});
 			
 		
 		
 }
+	}
+	}
+
 
 	
 
