@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,6 +12,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -19,6 +21,7 @@ import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHandler;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -34,7 +37,7 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 	
 	
 	 Label umfrageErstellung = new Label("Umfrageerstellung:");
-	 Button closeButton = new Button("X");
+	 Button closeButton = new Button("<--");
 	 TextBox namenBox = new TextBox();
 	 Label changeLabel = new Label("Umfragenname:");
 	 Label datum = new Label("Datum wählen:");
@@ -45,6 +48,7 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 	 Label spielzeit = new Label("Spielzeit wählen");
 	 final ListBox dropBoxSpielzeit = new ListBox();
 	 Button safeUmfrage = new Button("Umfrage speichern");
+	 List<Group> Gruppen;
  //   private ArrayList<String> umfagen = new ArrayList<String>();
 
 
@@ -93,6 +97,7 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 		dropBoxFilm.addItem("Beispiel 3");
 		content.add(dropBoxFilm);
 		content.add(kino);
+		closeButton.addClickHandler(new BackHandler());
 		
 		content.add(dropBoxKino);
 
@@ -143,6 +148,16 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
 	 */
     
+	private class BackHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			RootPanel.get().clear();
+			EditorForm e1 = new EditorForm(user, Gruppen);
+			RootPanel.get().add(e1);
+		}
+		
+	}
     	
 	
 	
@@ -157,7 +172,14 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 
 		@Override
 		public void onClick(ClickEvent event) {
-				Window.alert("Neue Umfrage erstellt!");
+			RootPanel.get().clear();
+			EditorForm e1 = new EditorForm(user, Gruppen);
+			RootPanel.get().add(e1);
+			UmfragenTable umfragen = new UmfragenTable(user, null);
+			RootPanel.get().add(umfragen);
+			RootPanel.get().clear();
+
+			
 		}
 		
 
@@ -165,18 +187,6 @@ EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdmi
 	
 	
 	
- 
-
-		
-		
-		
-		
 	}
 	
 	
-      
-		
-
-	
-
-

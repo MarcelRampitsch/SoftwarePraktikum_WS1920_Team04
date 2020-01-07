@@ -2,7 +2,10 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.List;
 
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -84,15 +87,43 @@ public class UmfragenTable extends VerticalPanel {
 			}
 		};
 		
+		 Cell<String> positiveVoteCell = new ButtonCell();	
+			
+			Column<Presentation, String> positiveVoteColumn = new Column<Presentation, String>(positiveVoteCell) {
+
+				@Override
+				public String getValue(Presentation object) {
+					// TODO Auto-generated method stub
+					return "X";
+				}
+
+			};
+			
+			 Cell<String> negativeVoteCell = new ButtonCell();	
+				
+				Column<Presentation, String> negativeVoteColumn = new Column<Presentation, String>(negativeVoteCell) {
+
+					@Override
+					public String getValue(Presentation object) {
+						// TODO Auto-generated method stub
+						return "X";
+					}
+
+				};
 		
-		surv.addColumn(nameColumn, "Test");
-		surv.addColumn(timeslotColumn, "Timeslot");
+		
+		surv.addColumn(nameColumn, "Name");
+		surv.addColumn(dateColumn, "Date");
 		surv.addColumn(movieColumn, "Movie");
 		surv.addColumn(cinemaColumn, "Cinema");
-		surv.addColumn(dateColumn, "Date");
+		surv.addColumn(timeslotColumn, "Timeslot");
+		surv.addColumn(positiveVoteColumn,"+ Vote");
+		surv.addColumn(negativeVoteColumn, "- Vote");
 
 		
 		dataProvider.addDataDisplay(surv);
+		
+		this.add(surv);
 		
 		final List <Presentation> list = dataProvider.getList();
 		for(Presentation group : Umfrageeintrag) {
