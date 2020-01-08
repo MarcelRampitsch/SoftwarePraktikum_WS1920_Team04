@@ -144,8 +144,8 @@ public class CellListForm extends VerticalPanel {
 		
 		
 		table.addColumn(nameColumn, "Gruppenname");
-		table.addColumn(loeschenColumn, "Gruppe löschen");
-		table.addColumn(editColumn, "Gruppe editieren");
+		table.addColumn(loeschenColumn);
+		table.addColumn(editColumn);
 		
 		dataProvider.addDataDisplay(table);
 		

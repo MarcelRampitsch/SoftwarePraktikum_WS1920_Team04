@@ -22,13 +22,14 @@ import de.hdm.itprojekt.client.gui.admin.PresentationForm.searchClickHandler;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class GroupEditForm extends VerticalPanel {
 
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
-	Vector <User> groupMember = null;
+	Vector <User> groupMember = new Vector<User>();
 	Group g =null;
 	Group group =null;
 	int index = 0;
@@ -42,7 +43,6 @@ public class GroupEditForm extends VerticalPanel {
 	Button search = new Button("Add"); 
 	Button delete = new Button("X");
 	ListBox memberList = new ListBox();
-	Button x = new Button("X");
 	Button save = new Button("save");
 	HorizontalPanel buttonMember = new HorizontalPanel();
 	HorizontalPanel buttonForm = new HorizontalPanel();
@@ -53,6 +53,12 @@ public class GroupEditForm extends VerticalPanel {
 	public GroupEditForm(User user, Group g) {
 		this.user = user;
 		this.g = g;
+	}
+	
+	public GroupEditForm(User user, Group g, Vector<User> groupMember) {
+		this.user = user;
+		this.g = g;
+		this.groupMember = groupMember;
 	}
 	
 	public GroupEditForm() {
@@ -73,16 +79,18 @@ public class GroupEditForm extends VerticalPanel {
 		main.add(buttonForm);
 		buttonMember.add(search);
 		buttonMember.add(delete);
-		buttonForm.add(x);
 		buttonForm.add(save);
 		groupBox.setText(g.getName());
 		
 		search.addClickHandler(new searchClickHandler());
 		delete.addClickHandler(new deleteClickHandler());
-		x.addClickHandler(new closeClickHandler());
 		save.addClickHandler(new saveClickHandler());
 		
 		this.add(main);
+		memberList.setVisibleItemCount(groupMember.size());
+		for(int i = 0; i<groupMember.size(); i++) {
+			memberList.addItem(groupMember.elementAt(i).getNickname());
+		}
 		
 	}
 	
@@ -92,18 +100,16 @@ public class GroupEditForm extends VerticalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				User name = new User(memberBox.getText(),"a");
+				User name = new User(memberBox.getText(),"");
 
 				editorAdministration.getUserByNickname(name, new AsyncCallback<User>() {
 					
 					@Override
 					public void onSuccess(User result) {
-						Window.alert("komme  rein");
-						
-						memberList.setItemText(index, result.getNickname());
 						groupMember.add(result);
-						index++;
-						Window.alert(result.getNickname());
+						main.clear();
+						GroupEditForm form = new GroupEditForm(user, g ,groupMember);
+						RootPanel.get().add(form);
 					}
 					
 					@Override
