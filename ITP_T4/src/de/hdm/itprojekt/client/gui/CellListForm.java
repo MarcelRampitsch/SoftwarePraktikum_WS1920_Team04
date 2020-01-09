@@ -9,6 +9,7 @@ package de.hdm.itprojekt.client.gui;
  */	
 
 import java.util.List;
+import java.util.Vector;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
@@ -18,6 +19,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -27,6 +29,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class CellListForm extends VerticalPanel {
@@ -44,7 +47,8 @@ public class CellListForm extends VerticalPanel {
 	
 	 //erstellen des Data Provider
 	   List<Group> Gruppen;
-
+	   Vector<Groupmember> member = new Vector<Groupmember>();
+	   Vector<User> groupMember = new Vector<User>();
 
 	
 	//Vector <Group> Gruppen = null;
@@ -53,7 +57,7 @@ public class CellListForm extends VerticalPanel {
 //	   GruppenErstellung.addClickHandler(new openClickHandler());
 //	   this.add(GruppenErstellung);
 	   final CellTable<Group> table = new CellTable<Group>();
-	
+	   
 	    // Create a list data provider.
 		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
 
@@ -137,7 +141,39 @@ public class CellListForm extends VerticalPanel {
 			table.removeFromParent();
 			table.removeColumn(1);
 			table.setRemoveColumnsOnHide(true);
-			GroupEditForm edit = new GroupEditForm(user, g);
+			
+			editorAdministration.getAllGroupmemberByGroupID(g, new AsyncCallback<Vector<Groupmember>>() {
+				
+				@Override
+				public void onSuccess(Vector<Groupmember> result) {
+					member=result;
+				for(int i = 0; i< member.size(); i++) {
+					User u = new User(member.elementAt(i).getUserID());
+					editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
+						User u = null;
+						@Override
+						public void onSuccess(User result) {
+						u = result;
+							groupMember.add(u);}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							Window.alert("etwas ist schief gelaufen");
+						}
+						
+					});
+				}
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					Window.alert("etwas ist schief gelaufen");	
+				}			
+			});
+			
+			GroupEditForm edit = new GroupEditForm(user, g, groupMember , member);
 			RootPanel.get().add(edit);
 			}
 		});

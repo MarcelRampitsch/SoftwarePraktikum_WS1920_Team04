@@ -30,6 +30,8 @@ public class GroupEditForm extends VerticalPanel {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
 	Vector <User> groupMember = new Vector<User>();
+	Vector <Groupmember> deleteMember = new Vector<Groupmember>();
+	int p = 0;
 	Group g =null;
 	Group group =null;
 	Vector <Groupmember> member = null;
@@ -50,15 +52,19 @@ public class GroupEditForm extends VerticalPanel {
 	
 	Button back = new Button("<--");
 	
-	public GroupEditForm(User user, Group g) {
-		this.user = user;
-		this.g = g;
-	}
-	
-	public GroupEditForm(User user, Group g, Vector<User> groupMember) {
+	public GroupEditForm(User user, Group g, Vector<User> groupMember, Vector<Groupmember> member) {
 		this.user = user;
 		this.g = g;
 		this.groupMember = groupMember;
+		this.member = member;
+	}
+	
+	public GroupEditForm(int p, User user, Group g, Vector<Groupmember> deleteMember , Vector<User> groupMember) {
+		this.p = p;
+		this.user = user;
+		this.g = g;
+		this.groupMember = groupMember;
+		this.deleteMember = deleteMember;
 	}
 	
 	public GroupEditForm() {
@@ -66,37 +72,6 @@ public class GroupEditForm extends VerticalPanel {
 	
 	public void onLoad() {
 		super.onLoad();
-		
-		editorAdministration.getAllGroupmemberByGroupID(g, new AsyncCallback<Vector<Groupmember>>() {
-			
-			@Override
-			public void onSuccess(Vector<Groupmember> result) {
-				member=result;
-			for(int i = 0; i< member.size(); i++) {
-				User u = new User(member.elementAt(i).getUserID());
-				editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
-					
-					@Override
-					public void onSuccess(User result) {
-						
-					}
-					
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("etwas ist schief gelaufen");
-						
-					}
-				});
-			}
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				Window.alert("etwas ist schief gelaufen");	
-			}			
-		});
 		
 		main.add(back);
 		back.addClickHandler(new backHandler());
@@ -117,12 +92,11 @@ public class GroupEditForm extends VerticalPanel {
 		delete.addClickHandler(new deleteClickHandler());
 		save.addClickHandler(new saveClickHandler());
 		
-		this.add(main);
-		memberList.setVisibleItemCount(groupMember.size());
+		memberList.setVisibleItemCount(10);
 		for(int i = 0; i<groupMember.size(); i++) {
 			memberList.addItem(groupMember.elementAt(i).getNickname());
 		}
-		
+		this.add(main);
 	}
 	
 	 private class searchClickHandler implements ClickHandler{
@@ -141,12 +115,11 @@ public class GroupEditForm extends VerticalPanel {
 						for(int i = 0;i < groupMember.size();i++) {
 							if(groupMember.elementAt(i).getId() == result.getId()) {
 							j = 1;
-							}
-						}
+							}}
 						if(j!=1) {
 						groupMember.add(result);
 						main.clear();
-						GroupEditForm form = new GroupEditForm(user, g ,groupMember);
+						GroupEditForm form = new GroupEditForm(1,user, g, deleteMember ,groupMember);
 						RootPanel.get().add(form);}
 						else {
 						Window.alert("Der User ist bereits vorhanden");}
@@ -176,7 +149,7 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				
+								
 				for(int i = 0; i < groupMember.size(); i++) {
 					Groupmember gm = new Groupmember(g.getId(), groupMember.elementAt(i).getId());
 					editorAdministration.createGroupmember(gm, new AsyncCallback<Groupmember>() {

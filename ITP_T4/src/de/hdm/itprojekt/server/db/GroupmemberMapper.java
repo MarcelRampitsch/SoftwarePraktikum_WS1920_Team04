@@ -180,8 +180,8 @@ public class GroupmemberMapper {
 		  try {
 				// Prepared Statement zum Löschen aller Groupmember eines bestimmten User in der Datenbank 
 				PreparedStatement deleteByID = con
-						.prepareStatement("DELETE softwarepraktikum_ws1920.groupmember WHERE `groupmemberID`=?;");
-				deleteByID.setInt(1, gm.getGroupID());
+						.prepareStatement("DELETE softwarepraktikum_ws1920.groupmember WHERE groupMemberID=?;");
+				deleteByID.setInt(1, gm.getId());
 				deleteByID.executeUpdate();
 	
 				 // Fehlerbehandlung hinzufügen
