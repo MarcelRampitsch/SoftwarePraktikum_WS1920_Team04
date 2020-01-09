@@ -190,6 +190,7 @@ public class GruppenForm extends VerticalPanel {
 					liste.add(group1);
 
 					
+					
 					Window.alert("EINGABE GESICHERT");
 				}
 				
