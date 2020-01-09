@@ -135,7 +135,7 @@ public class GroupmemberMapper {
 				ResultSet rs = getnewGroup.executeQuery();
 				if (rs.next()) {
 					
-					return new Groupmember(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("groupID"), rs.getInt("userID"));
+					return new Groupmember(rs.getInt("groupMemberID"), rs.getTimestamp("creationDate"), rs.getInt("groupID"), rs.getInt("userID"));
 				}
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {

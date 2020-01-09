@@ -81,6 +81,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		User user = uMapper.findByNickname(u);
 		return user;
 	}
+	
+	public User getUserByUserID(User u) throws IllegalArgumentException {
+		User user  =uMapper.findByUserID(u);
+		return user;
+	}
+	
 	// Suchen von User Objekten deren E-Mail Adresse bekannt ist.
 	public User getUserByEmail(User u) throws IllegalArgumentException{
 		User user = uMapper.findByEmail(u);
@@ -323,4 +329,5 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		vMapper.deleteAllVoteBySurveyEntryID(v.getId());
 		
 	}
+
 }

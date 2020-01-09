@@ -18,6 +18,7 @@ public interface EditorAdministrationAsync {
 	void init(AsyncCallback<Void> callback);
 
 	// User
+	void getUserByUserID(User u, AsyncCallback<User> callback);
 	
 	void createUser(User u, AsyncCallback<User> callback);
 	
@@ -49,7 +50,7 @@ public interface EditorAdministrationAsync {
 
 
 	// GroupMember
-	//void createGroupMember(Groupmember gm, AsyncCallback<Groupmember> callback);
+	void createGroupmember(Groupmember gm, AsyncCallback<Groupmember> callback);
 
 	void getAllGroupmemberByGroupID(Group g, AsyncCallback <Vector<Groupmember>> callback);
 	

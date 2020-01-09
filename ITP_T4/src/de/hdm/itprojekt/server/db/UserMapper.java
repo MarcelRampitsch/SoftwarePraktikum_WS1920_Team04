@@ -54,6 +54,31 @@ public class UserMapper {
 		}
 		return userMapper;
 	}
+	
+	 public User findByUserID(User user) {
+		  User u = null;
+		  // Aufbau der DB-Verbindung
+		  Connection con = DBConnection.getConnection();
+		  
+		  try {
+			  // Erstellung des Prepared Statement um einen User per Nickname zu finden
+			  
+			  PreparedStatement findByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE userID=?");
+			  findByUserID.setInt(1, user.getId());
+			  
+			  // ausf�hren des Queries
+			  ResultSet rs = findByUserID.executeQuery();
+			  while(rs.next()){
+			  u = new User(rs.getInt("userID"), rs.getString("nickname"), rs.getString("email"), rs.getTimestamp("creationDate"));
+			  }
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+			  return null;
+		  }
+		  //R�ckgabe des User
+		  return u;
+	  }
+	
 	  public User findByNickname(User user) {
 		  User u = null;
 		  // Aufbau der DB-Verbindung

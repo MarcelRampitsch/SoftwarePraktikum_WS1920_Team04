@@ -32,7 +32,7 @@ public class GroupEditForm extends VerticalPanel {
 	Vector <User> groupMember = new Vector<User>();
 	Group g =null;
 	Group group =null;
-	int index = 0;
+	Vector <Groupmember> member = null;
 	
 	List <Group> Gruppen = null;
 	
@@ -66,7 +66,38 @@ public class GroupEditForm extends VerticalPanel {
 	
 	public void onLoad() {
 		super.onLoad();
-
+		
+		editorAdministration.getAllGroupmemberByGroupID(g, new AsyncCallback<Vector<Groupmember>>() {
+			
+			@Override
+			public void onSuccess(Vector<Groupmember> result) {
+				member=result;
+			for(int i = 0; i< member.size(); i++) {
+				User u = new User(member.elementAt(i).getUserID());
+				editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
+					
+					@Override
+					public void onSuccess(User result) {
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("etwas ist schief gelaufen");
+						
+					}
+				});
+			}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				Window.alert("etwas ist schief gelaufen");	
+			}			
+		});
+		
 		main.add(back);
 		back.addClickHandler(new backHandler());
 		
@@ -106,10 +137,19 @@ public class GroupEditForm extends VerticalPanel {
 					
 					@Override
 					public void onSuccess(User result) {
+						int j = 0;
+						for(int i = 0;i < groupMember.size();i++) {
+							if(groupMember.elementAt(i).getId() == result.getId()) {
+							j = 1;
+							}
+						}
+						if(j!=1) {
 						groupMember.add(result);
 						main.clear();
 						GroupEditForm form = new GroupEditForm(user, g ,groupMember);
-						RootPanel.get().add(form);
+						RootPanel.get().add(form);}
+						else {
+						Window.alert("Der User ist bereits vorhanden");}
 					}
 					
 					@Override
@@ -126,21 +166,30 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				groupMember.remove(memberList.getSelectedIndex());
+				memberList.removeItem(memberList.getSelectedIndex());
 			}
 		}
 	 
-	 private class closeClickHandler implements ClickHandler{
-			
-			@Override
-			public void onClick(ClickEvent event) {
-			}
-		}
 	 
 	 private class saveClickHandler implements ClickHandler{
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				
+				for(int i = 0; i < groupMember.size(); i++) {
+					Groupmember gm = new Groupmember(g.getId(), groupMember.elementAt(i).getId());
+					editorAdministration.createGroupmember(gm, new AsyncCallback<Groupmember>() {
 						
+						@Override
+						public void onFailure(Throwable caught) {
+						Window.alert("was ist falsch gelaufen");
+						}
+
+						@Override
+						public void onSuccess(Groupmember result) {
+						}});
+				}
 				
 				group = new Group(g.getId(), g.getCreationDate(), groupBox.getText(),g.getUserID());
 				editorAdministration.updateGroup(group, new AsyncCallback<Group>() {

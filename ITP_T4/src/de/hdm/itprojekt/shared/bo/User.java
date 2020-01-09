@@ -27,6 +27,10 @@ public class User extends BusinessObject {
 		this.email = email;
 	}
 	
+	public User(int id) {
+		super(id);
+	}
+	
 	public User() {
 	}
 	

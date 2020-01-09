@@ -17,6 +17,11 @@ public class Groupmember extends BusinessObject{
 			this.userID=userID;
 		}
 		
+		public Groupmember(int groupID, int userID) {
+			this.groupID=groupID;
+			this.userID=userID;
+		}
+		
 		public Groupmember() {
 			
 		}

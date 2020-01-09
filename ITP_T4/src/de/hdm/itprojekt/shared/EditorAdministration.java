@@ -25,6 +25,8 @@ public interface EditorAdministration extends RemoteService {
 	public User createUser(User u)
 			throws IllegalArgumentException;
 	
+	public User getUserByUserID(User u) throws IllegalArgumentException;
+	
 	// Suchen von User Objekten deren Nickname bekannt ist.
 	public User getUserByNickname(User u) throws IllegalArgumentException;
 	
@@ -64,9 +66,8 @@ public interface EditorAdministration extends RemoteService {
 	// GroupMember Methoden
 	
 	// Einen Groupmember anlegen.
-	/*public Groupmember createGroupMember(Groupmember gm)
-		throws IllegalArgumentException;
-*/
+	public Groupmember createGroupmember(Groupmember gm) throws IllegalArgumentException;
+
 	// Alle Gruppenmitglieder anhand der GruppenID suchen.
 	public Vector<Groupmember> getAllGroupmemberByGroupID(Group g) throws IllegalArgumentException;
 	
@@ -153,6 +154,8 @@ public interface EditorAdministration extends RemoteService {
 	
 	// L�schen aller Votes anhand der UmfrageeintragID.
 	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException;
+
+	
 	
 	
 	/*
