@@ -9,7 +9,9 @@ import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -37,33 +39,39 @@ public class GruppenForm extends VerticalPanel {
 	
 	  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
-	
+	  User user = null;;
 	  ListDataProvider <Group> dataProvider;	
-
-	  VerticalPanel inhalt = new VerticalPanel();
-	  
 	  List <Group> Gruppen;
+	  private Vector<User> groupMember = new Vector<User>(); 
+	  VerticalPanel inhalt = new VerticalPanel();
+	  HorizontalPanel suche = new HorizontalPanel();
+	  HorizontalPanel liste = new HorizontalPanel();
+	  
+	  
 	
 	  Label gruppenerstellung = new Label("Gruppenerstellung:");
 	  Label gruppenname = new Label("Gruppenname");
 	  Label nickname = new Label("Nickname");
+	  Label gruppenmitglieder = new Label("Gruppenmitglieder:");
 	
-	  Button edit = new Button("editieren");
 	  Button back  = new Button("<--");
 	
 	  TextBox gruppennamebox =new TextBox();
 	  TextBox nicknamebox = new TextBox();
-	
+	  
+	  ListBox mitglieder = new ListBox();
+	  
+	  Button hinzufügen = new Button("+");
+	  Button löschen = new Button("X");
 	  Button speichern = new Button("sichern");
 	
 	  GruppenForm gruppenForm = null;
-
-	  User user;
-
-
-	
 	
 	public GruppenForm(User user) {
+		this.user=user;
+	}
+	
+	public GruppenForm(User user, Vector<User> groupMember) {
 		this.user=user;
 	}
 	
@@ -77,33 +85,71 @@ public class GruppenForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		
-
-		
 		inhalt.add(back);
 		back.addClickHandler(new backButtonHandler());
 		inhalt.add(gruppenerstellung);
-		gruppenerstellung.addStyleName("Überschrift");
+		
 		inhalt.add(gruppenname);
 		inhalt.add(gruppennamebox);
 		
 		inhalt.add(nickname);
-		inhalt.add(nicknamebox);
+		suche.add(nicknamebox);
+		suche.add(hinzufügen);
+		hinzufügen.addClickHandler(new hinzufuegenHandler());
+		inhalt.add(suche);
 		
-		inhalt.add(speichern);
-		inhalt.add(edit);
-					
+		liste.add(mitglieder);
+		liste.add(löschen);
+		löschen.addClickHandler(new loeschenHandler());
+		inhalt.add(liste);
 		
+		inhalt.add(speichern);		
 		speichern.addClickHandler(new sichernhandler());
 		
-		this.add(inhalt);
-
+		mitglieder.setVisibleItemCount(10);
+		for(int i = 0; i < groupMember.size(); i++) {
+			mitglieder.addItem(groupMember.elementAt(i).getNickname());
+		}
 		
+		this.add(inhalt);
 }
 
 	
 
+	private class loeschenHandler implements ClickHandler{
 
+		@Override
+		public void onClick(ClickEvent event) {
+		}
+	}
 
+	
+	private class hinzufuegenHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			User name = new User(nicknamebox.getText(),"");
+
+			editorAdministration.getUserByNickname(name, new AsyncCallback<User>() {
+				User u = null;
+				@Override
+				public void onSuccess(User result) {
+					u = result;
+					groupMember.add(u);
+					inhalt.clear();
+					GruppenForm form = new GruppenForm(user, groupMember);
+					RootPanel.get().add(form);
+					}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					Window.alert("etwas ist schief gelaufen");
+					
+				}
+			});
+		}
+	}
 	
 	
 	private class backButtonHandler implements ClickHandler{
@@ -126,9 +172,9 @@ public class GruppenForm extends VerticalPanel {
 		public void onClick(ClickEvent event) {	
 			RootPanel.get().clear();
 			
-			Group group1 = new Group(1,gruppennamebox.getText());
+			Group group1 = new Group(gruppennamebox.getText());
 			editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
-
+				
 				@Override
 				public void onFailure(Throwable caught) {
 						Window.alert("was ist schief geloffen");
@@ -145,17 +191,12 @@ public class GruppenForm extends VerticalPanel {
 
 					
 					Window.alert("EINGABE GESICHERT");
-					
-					
 				}
 				
 			});
-			
-		
-		
+		}
+	}
 }
-	}
-	}
 
 
 	

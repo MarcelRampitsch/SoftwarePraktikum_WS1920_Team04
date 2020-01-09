@@ -46,8 +46,8 @@ public class GroupEditForm extends VerticalPanel {
 	Button delete = new Button("X");
 	ListBox memberList = new ListBox();
 	Button save = new Button("save");
-	HorizontalPanel buttonMember = new HorizontalPanel();
-	HorizontalPanel buttonForm = new HorizontalPanel();
+	HorizontalPanel searchPanel = new HorizontalPanel();
+	HorizontalPanel listPanel = new HorizontalPanel();
 	VerticalPanel main = new VerticalPanel();
 	
 	Button back = new Button("<--");
@@ -79,13 +79,13 @@ public class GroupEditForm extends VerticalPanel {
 		main.add(groupName);
 		main.add(groupBox);
 		main.add(memberNames);
-		main.add(memberBox);
-		main.add(buttonMember);
-		main.add(memberList);
-		main.add(buttonForm);
-		buttonMember.add(search);
-		buttonMember.add(delete);
-		buttonForm.add(save);
+		searchPanel.add(memberBox);
+		main.add(searchPanel);
+		listPanel.add(memberList);
+		main.add(listPanel);
+		searchPanel.add(search);
+		listPanel.add(delete);
+		main.add(save);
 		groupBox.setText(g.getName());
 		
 		search.addClickHandler(new searchClickHandler());
