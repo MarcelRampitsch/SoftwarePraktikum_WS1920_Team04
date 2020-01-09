@@ -160,11 +160,11 @@ public class EditorForm extends VerticalPanel {
 				
 			 public void onClick(ClickEvent event) {
 				
-				UmfragenForm uf = new UmfragenForm(user);
+				NewSurveyForm nsf = new NewSurveyForm();
 			//	RootPanel.get().clear();
 				west.clear();
 				
-				west.add(uf);
+				west.add(nsf);
 				
 			}
 		 }
