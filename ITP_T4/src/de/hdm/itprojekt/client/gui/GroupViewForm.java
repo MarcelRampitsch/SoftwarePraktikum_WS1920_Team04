@@ -27,4 +27,8 @@ public class GroupViewForm extends VerticalPanel {
 	ListBox memberLB = new ListBox();
 	HorizontalPanel surveyPanel = new HorizontalPanel();
 	
+	public GroupViewForm() {
+		
+	}
+	
 }
