@@ -67,6 +67,8 @@ public class GroupViewForm extends VerticalPanel {
 		
 		super.onLoad();
 		
+		buildForm();
+		
 		final CellTable<Survey> table = new CellTable<Survey>();
 		
 		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
@@ -87,6 +89,7 @@ public class GroupViewForm extends VerticalPanel {
 		
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
 		
+		this.add(mainPanel);
 		
 	}
 	
@@ -99,9 +102,7 @@ public class GroupViewForm extends VerticalPanel {
 			
 		}
 		
-		
 	}
-	
 	
 	
 }
