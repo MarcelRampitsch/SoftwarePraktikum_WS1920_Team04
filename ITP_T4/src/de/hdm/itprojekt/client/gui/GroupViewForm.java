@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.List;
+import java.util.Vector;
 
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
@@ -11,7 +12,11 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 
+import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Survey;
+import de.hdm.itprojekt.shared.bo.User;
 
 
 /*
@@ -22,6 +27,14 @@ import de.hdm.itprojekt.shared.bo.Survey;
 
 public class GroupViewForm extends VerticalPanel {
 
+	EditorAdministrationAsync editorVerwaltung = ClientSideSettings.getEditorAdministration();
+	
+	User user = null;
+	Vector<User> groupMember = new Vector<User>();
+	Group group = null;
+	
+	List<Group> Gruppen = null;
+	
 	Label groupNameLabel = new Label("Gruppenname:");
 	TextBox groupNameTB = new TextBox();
 	Label memberNamesLabel = new Label("Mitglieder:");
@@ -34,6 +47,14 @@ public class GroupViewForm extends VerticalPanel {
 	HorizontalPanel surveyPanel = new HorizontalPanel();
 	
 	List<Survey> Umfragen;
+	
+	public GroupViewForm(User user, Group group, Vector<User> groupMember) {
+		
+		this.user = user;
+		this.group = group;
+		this.groupMember = groupMember;
+		
+	}
 	
 	public GroupViewForm() {
 		
@@ -48,5 +69,7 @@ public class GroupViewForm extends VerticalPanel {
 		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
 		
 	}
+	
+	
 	
 }
