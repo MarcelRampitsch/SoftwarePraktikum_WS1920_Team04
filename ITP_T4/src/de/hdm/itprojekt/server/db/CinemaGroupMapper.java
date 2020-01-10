@@ -78,7 +78,7 @@ public class CinemaGroupMapper {
 					ResultSet rs = getnewCinemaGroup.executeQuery();
 					if (rs.next()) {
 
-						return new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
+						return new CinemaGroup(rs.getInt("cinemaGroupID"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 					}
 					 // Fehlerbehandlung hinzufügen
 				} catch (SQLException e) {
@@ -141,7 +141,7 @@ public class CinemaGroupMapper {
 			if (rs.next()) {
 				
 				// Ergebnis-Tupel in Objekt umwandeln
-				return new CinemaGroup(rs.getInt("id"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
+				return new CinemaGroup(rs.getInt("cinemaGroupID"), rs.getTimestamp("creationDate"),rs.getString("name"), rs.getInt("userID"));
 			}
 			 // Fehlerbehandlung hinzufügen
 		} catch (SQLException e) {

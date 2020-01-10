@@ -180,6 +180,7 @@ public class PresentationAddDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 		Date date = new java.sql.Date(datePicker.getValue().getTime());
+		date.after(date);
 		Presentation pres = new Presentation(name.getText(), cine.elementAt(cinemaBox.getSelectedIndex()).getId(), movie.elementAt(movieBox.getSelectedIndex()).getId(), user.getId(), timeslot.elementAt(timeslotBox.getSelectedIndex()).getId(), date, p.getId(), p.getCreationDate());
 		
 		adminAdministration.updatePresentation(pres, new AsyncCallback<Presentation>() {

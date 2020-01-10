@@ -32,6 +32,7 @@ public class Group extends BusinessObject{
 			this.userID=userID;
 			this.name=name;
 				}
+
 		
 		public Group(String name, int ID  ) {
 			super(ID);

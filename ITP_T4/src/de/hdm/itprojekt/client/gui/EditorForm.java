@@ -175,7 +175,9 @@ public class EditorForm extends VerticalPanel {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					GruppenForm gf = new GruppenForm(user);
+					Vector<User> group = new Vector<User>();
+					group.add(user);
+					GruppenForm gf = new GruppenForm(user, group);
 					west.clear();
 					
 					west.add(gf);

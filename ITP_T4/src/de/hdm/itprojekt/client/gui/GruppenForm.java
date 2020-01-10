@@ -24,6 +24,7 @@ import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
 
 /**
@@ -43,6 +44,8 @@ public class GruppenForm extends VerticalPanel {
 	  ListDataProvider <Group> dataProvider;	
 	  List <Group> Gruppen;
 	  private Vector<User> groupMember = new Vector<User>(); 
+	  String gruppname;
+	  
 	  VerticalPanel inhalt = new VerticalPanel();
 	  HorizontalPanel suche = new HorizontalPanel();
 	  HorizontalPanel liste = new HorizontalPanel();
@@ -67,12 +70,15 @@ public class GruppenForm extends VerticalPanel {
 	
 	  GruppenForm gruppenForm = null;
 	
-	public GruppenForm(User user) {
-		this.user=user;
-	}
-	
 	public GruppenForm(User user, Vector<User> groupMember) {
 		this.user=user;
+		this.groupMember = groupMember;
+	}
+	
+	public GruppenForm(User user, Vector<User> groupMember, String gruppname) {
+		this.user=user;
+		this.groupMember = groupMember;
+		this.gruppname = gruppname;
 	}
 	
 	
@@ -91,6 +97,7 @@ public class GruppenForm extends VerticalPanel {
 		
 		inhalt.add(gruppenname);
 		inhalt.add(gruppennamebox);
+		gruppennamebox.setText(gruppname);
 		
 		inhalt.add(nickname);
 		suche.add(nicknamebox);
@@ -120,6 +127,13 @@ public class GruppenForm extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			if(user.getId() != groupMember.elementAt(mitglieder.getSelectedIndex()).getId()) {
+			groupMember.remove(mitglieder.getSelectedIndex());
+			mitglieder.removeItem(mitglieder.getSelectedIndex());
+			}
+			else {
+				Window.alert("Sie können sich nicht aus der Gruppe entfernen");
+			}
 		}
 	}
 
@@ -134,11 +148,23 @@ public class GruppenForm extends VerticalPanel {
 				User u = null;
 				@Override
 				public void onSuccess(User result) {
-					u = result;
-					groupMember.add(u);
-					inhalt.clear();
-					GruppenForm form = new GruppenForm(user, groupMember);
-					RootPanel.get().add(form);
+					int j = 0;
+					for (int i = 0; i < groupMember.size(); i++) {
+						if(groupMember.elementAt(i).getId() == result.getId()) {
+						j=1;	
+						}
+					}
+					if(j!=1) {
+						u = result;
+						groupMember.add(u);
+						gruppname = gruppennamebox.getText();
+						inhalt.clear();
+						GruppenForm form = new GruppenForm(user, groupMember, gruppname);
+						RootPanel.get().add(form);
+					}
+					else {
+						Window.alert("Nutzer ist bereits in der Gruppe");
+					}
 					}
 				
 				@Override
@@ -172,7 +198,7 @@ public class GruppenForm extends VerticalPanel {
 		public void onClick(ClickEvent event) {	
 			RootPanel.get().clear();
 			
-			Group group1 = new Group(gruppennamebox.getText());
+			Group group1 = new Group(user.getId(),gruppennamebox.getText());
 			editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
 				
 				@Override
@@ -183,9 +209,22 @@ public class GruppenForm extends VerticalPanel {
 				@Override
 				public void onSuccess(Group result) {
 					
+					for(int i = 0; i < groupMember.size(); i++) {
+						Groupmember gm = new Groupmember(result.getId(), groupMember.elementAt(i).getId());
+						editorAdministration.createGroupmember(gm, new AsyncCallback<Groupmember>() {
+							
+							@Override
+							public void onFailure(Throwable caught) {
+							Window.alert("was ist falsch gelaufen");
+							}
+
+							@Override
+							public void onSuccess(Groupmember result) {
+							}});
+					}
+					
 					EditorForm editform = new EditorForm(user, Gruppen);
 					RootPanel.get().add(editform);
-
 					List <Group> liste = dataProvider.getList();
 					liste.add(group1);
 

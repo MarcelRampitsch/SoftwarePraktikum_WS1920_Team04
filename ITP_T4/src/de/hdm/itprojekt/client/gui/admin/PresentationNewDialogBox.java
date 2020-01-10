@@ -166,6 +166,7 @@ public class PresentationNewDialogBox extends DialogBox {
 		Movie m = movie.elementAt(movieBox.getSelectedIndex()-1);
 		Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex()-1);
 		Date date = new java.sql.Date(datePicker.getValue().getTime());
+		date.after(date);
 		Presentation p = new Presentation(namefield.getText(),c.getId(), m.getId(), user.getId(), t.getId(), date);
 		if(namefield.getText() != null & cinemaBox.getSelectedItemText() != "Kein Kino ausgewählt" & movieBox.getSelectedItemText() !="Kein Film ausgewählt" & timeslotBox.getSelectedItemText() != "Keine Spielzeit ausgewählt") {
 			adminAdministration.addPresentation(p, new AsyncCallback<Presentation>() {
