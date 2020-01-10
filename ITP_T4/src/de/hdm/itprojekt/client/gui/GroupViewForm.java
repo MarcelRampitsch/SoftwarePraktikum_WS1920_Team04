@@ -3,6 +3,8 @@ package de.hdm.itprojekt.client.gui;
 import java.util.List;
 import java.util.Vector;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -45,6 +47,7 @@ public class GroupViewForm extends VerticalPanel {
 	
 	ListBox memberLB = new ListBox();
 	HorizontalPanel surveyPanel = new HorizontalPanel();
+	VerticalPanel mainPanel = new VerticalPanel();
 	
 	List<Survey> Umfragen;
 	
@@ -72,8 +75,33 @@ public class GroupViewForm extends VerticalPanel {
 	
 	public void buildForm() {
 		
+		this.clear();
+		
+		mainPanel.add(groupNameLabel);
+		mainPanel.add(groupNameTB);
+		mainPanel.add(memberNamesLabel);
+		mainPanel.add(memberNamesTB);
+		mainPanel.add(surveyPanel);
+		mainPanel.add(newSurveyButton);
+		groupNameTB.setText(group.getName());
+		
+		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
 		
 		
 	}
+	
+	private class newSurveyButtonClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			
+			
+		}
+		
+		
+	}
+	
+	
 	
 }
