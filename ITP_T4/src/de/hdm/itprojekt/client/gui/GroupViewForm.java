@@ -1,5 +1,25 @@
 package de.hdm.itprojekt.client.gui;
 
-public class GroupViewForm {
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
+
+/*
+ * 
+ * @author VanDuyHo
+ * 
+ */
+
+public class GroupViewForm extends VerticalPanel {
+
+	Label groupNameLabel = new Label("Gruppenname:");
+	TextBox groupNameTB = new TextBox();
+	Label memberNamesLabel = new Label("Mitglieder:");
+	TextBox memberNamesTB = new TextBox();
+	Label surveyNameLabel = new Label("Umfrage:");
+	TextBox surveyNameTB = new TextBox();
+	Button newSurveyButton = new Button("Neu");
+	
 }
