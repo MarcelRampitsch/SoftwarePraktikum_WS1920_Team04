@@ -70,6 +70,10 @@ public class GroupViewForm extends VerticalPanel {
 		
 	}
 	
-	
+	public void buildForm() {
+		
+		
+		
+	}
 	
 }
