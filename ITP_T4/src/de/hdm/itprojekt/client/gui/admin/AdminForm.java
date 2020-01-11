@@ -89,7 +89,7 @@ public class AdminForm extends VerticalPanel{
 			main.add(verwaltungsForm);
 			}
 		});
-		Image logo = new Image("Offical_Logo.png");
+		//Image logo = new Image("Offical_Logo.png");
 		//	main.addStyleName("AdminMain");
 		//	main.add(cinemaButton);
 		//	main.add(movieButton);
@@ -124,6 +124,7 @@ public class AdminForm extends VerticalPanel{
 		}
 		
 	}
+	
 	
 	
 }
