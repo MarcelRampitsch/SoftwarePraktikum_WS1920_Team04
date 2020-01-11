@@ -118,7 +118,6 @@ public class EditorForm extends VerticalPanel {
 					Gruppen = Collections.list(result.elements());
 					celllistform = new CellListForm(user , Gruppen);
 					UmfragenTable u1 = new UmfragenTable(user, Surveys);
-				    UmfrageEintragTable umfragen = new UmfrageEintragTable();
 					west.add(celllistform);
 			//		west.add(umfragen);
 				}
