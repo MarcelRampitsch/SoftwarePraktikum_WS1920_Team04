@@ -25,7 +25,7 @@ public class UmfragenTable extends VerticalPanel {
 	User user = null;
 	
 	public UmfragenTable(User user, List <Presentation> Umfrageeintrag) {
-		this.user =user;
+		this.user = user;
 		this.Umfrageeintrag = Umfrageeintrag;
 		
 	}
@@ -41,7 +41,12 @@ public class UmfragenTable extends VerticalPanel {
 		 // Create a list data provider.
 		ListDataProvider<Presentation> dataProvider = new ListDataProvider<Presentation>();
 		
+		// Add the cellList to the dataProvider.
+		dataProvider.addDataDisplay(surv);
 		
+		/*
+		 * Namensspalte
+		 */
 		TextColumn<Presentation> nameColumn = new TextColumn<Presentation>() {
 
 			@Override
@@ -50,7 +55,11 @@ public class UmfragenTable extends VerticalPanel {
 				return object.getName();
 			}
 		};
+		surv.addColumn(nameColumn, "Name");
 		
+		/*
+		 * Zeitfensterspalte
+		 */
 		TextColumn<Presentation> timeslotColumn = new TextColumn<Presentation>() {
 
 			@Override
@@ -59,7 +68,11 @@ public class UmfragenTable extends VerticalPanel {
 				return object.getName();
 			}
 		};
+		surv.addColumn(timeslotColumn, "Timeslot");
 		
+		/*
+		 * Filmspalte
+		 */
 		TextColumn<Presentation> movieColumn = new TextColumn<Presentation>() {
 
 			@Override
@@ -68,7 +81,11 @@ public class UmfragenTable extends VerticalPanel {
 				return object.getName(); // Jeweils durch ID austauschen
 			}
 		};
+		surv.addColumn(movieColumn, "Movie");
 		
+		/*
+		 * Kinospalte
+		 */
 		TextColumn<Presentation> cinemaColumn = new TextColumn<Presentation>() {
 
 			@Override
@@ -77,7 +94,11 @@ public class UmfragenTable extends VerticalPanel {
 				return object.getName();
 			}
 		};
+		surv.addColumn(cinemaColumn, "Cinema");
 		
+		/*
+		 * Datumspalte
+		 */
 		TextColumn<Presentation> dateColumn = new TextColumn<Presentation>() {
 
 			@Override
@@ -96,32 +117,23 @@ public class UmfragenTable extends VerticalPanel {
 					// TODO Auto-generated method stub
 					return "X";
 				}
-
-			};
-			
-			 Cell<String> negativeVoteCell = new ButtonCell();	
-				
-				Column<Presentation, String> negativeVoteColumn = new Column<Presentation, String>(negativeVoteCell) {
-
-					@Override
-					public String getValue(Presentation object) {
-						// TODO Auto-generated method stub
-						return "X";
-					}
-
-				};
-		
-		
-		surv.addColumn(nameColumn, "Name");
-		surv.addColumn(dateColumn, "Date");
-		surv.addColumn(movieColumn, "Movie");
-		surv.addColumn(cinemaColumn, "Cinema");
-		surv.addColumn(timeslotColumn, "Timeslot");
+		};
 		surv.addColumn(positiveVoteColumn,"+ Vote");
+			
+		Cell<String> negativeVoteCell = new ButtonCell();	
+				
+			Column<Presentation, String> negativeVoteColumn = new Column<Presentation, String>(negativeVoteCell) {
+
+				@Override
+				public String getValue(Presentation object) {
+					// TODO Auto-generated method stub
+					return "X";
+				}
+		};
 		surv.addColumn(negativeVoteColumn, "- Vote");
 
-		
-		dataProvider.addDataDisplay(surv);
+
+		surv.addColumn(dateColumn, "Date");
 		
 		this.add(surv);
 		

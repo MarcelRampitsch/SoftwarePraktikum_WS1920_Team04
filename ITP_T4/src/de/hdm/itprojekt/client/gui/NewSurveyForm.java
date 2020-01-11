@@ -78,10 +78,23 @@ public class NewSurveyForm extends VerticalPanel {
 		inhalt.add(spielzeitDropBox);
 		inhalt.add(umfrageSichernButton);
 		umfrageSichernButton.addClickHandler(new SafeHandler());
+		/*
+		 * TODO Inhalte zu Testzwecken löschen
+		 */
+		filmDropBox.addItem("Shrek 5");
+		kinoDropBox.addItem("Cinemaxx");
+		spielzeitDropBox.addItem("19.00");
 		
 		this.add(inhalt);
 	}
+	/*
+	 * Implementierung der Click Handler
+	 */
 	
+	/*
+	 * BackHandler: Handler, der auf die Betätigung der Schaltfläche "Zurueck" reagiert,
+	 * und den Nutzer wieder auf die vorhergehende Seite befördert.
+	 */
 	private class BackHandler implements ClickHandler {
 
 		
@@ -91,10 +104,14 @@ public class NewSurveyForm extends VerticalPanel {
 			RootPanel.get().add(ef);
 		}
 	}
-	
+	/*
+	 * SafeHandler: Handler, der auf die Betätigung der Schaltfläche "Speichern" reagiert,
+	 * und dabei die zuvor eingegebenen Daten abspeichert und danach den Umfragetable anzeigt.
+	 */
 	private class SafeHandler implements ClickHandler {
 		
 		public void onClick(ClickEvent event) {
+
 			RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
@@ -116,7 +133,6 @@ public class NewSurveyForm extends VerticalPanel {
 					List <SurveyEntry> liste = dataProvider.getList();
 					liste.add(se);
 					Window.alert("Eingabe gesichert");
-					
 				}
 			});
 		}
