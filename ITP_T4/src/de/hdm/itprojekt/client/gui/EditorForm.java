@@ -56,7 +56,6 @@ public class EditorForm extends VerticalPanel {
 	 VerticalPanel west = new VerticalPanel();
 	 VerticalPanel east = new VerticalPanel();
 	 ListBox group = new ListBox();
-	 Button neueGruppe = new Button("Neue Gruppe");
 	 Button neueUmfrage = new Button("Neue Umfrage");
 	
 	/**
@@ -167,31 +166,10 @@ public class EditorForm extends VerticalPanel {
 				west.add(nsf);
 				
 			}
-		 }
-			 
-			 
-			 
-			class openGroupClickHandler implements ClickHandler{
-
-				@Override
-				public void onClick(ClickEvent event) {
-					Vector<User> group = new Vector<User>();
-					group.add(user);
-					GruppenForm gf = new GruppenForm(user, group);
-					west.clear();
-					
-					west.add(gf);
-				}
-				
-			}
-		 
+		 }		 
 		 
 		neueUmfrage.addClickHandler(new OpenUpClickHandler());
-		
-		neueGruppe.addClickHandler(new openGroupClickHandler());
-		
-		
-		header.add(neueGruppe);
+				
 		header.add(neueUmfrage);
 		header.add(toAdmin);
 //		GruppenForm gruppenForm = new GruppenForm(user);

@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.admin.AdminForm;
 import de.hdm.itprojekt.client.gui.admin.PresentationForm.searchClickHandler;
+import de.hdm.itprojekt.shared.EditorAdministration;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
@@ -30,19 +31,19 @@ public class GroupEditForm extends VerticalPanel {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
 	Vector <User> groupMember = new Vector<User>();
+	Vector <User> newMember = new Vector<User>();
 	Vector <Groupmember> deleteMember = new Vector<Groupmember>();
-	int p = 0;
 	Group g =null;
 	Group group =null;
 	Vector <Groupmember> member = null;
 	
 	List <Group> Gruppen = null;
 	
-	Label groupName = new Label("Gruppenname");
+	Label groupName = new Label("Groupname");
 	TextBox groupBox = new TextBox();
-	Label memberNames = new Label("Gruppenmitglieder");
+	Label memberNames = new Label("Groupmember");
 	TextBox memberBox = new TextBox();
-	Button search = new Button("Add"); 
+	Button search = new Button("+"); 
 	Button delete = new Button("X");
 	ListBox memberList = new ListBox();
 	Button save = new Button("save");
@@ -59,12 +60,13 @@ public class GroupEditForm extends VerticalPanel {
 		this.member = member;
 	}
 	
-	public GroupEditForm(int p, User user, Group g, Vector<Groupmember> deleteMember , Vector<User> groupMember) {
-		this.p = p;
+	public GroupEditForm(User user, Group g, Vector<Groupmember> deleteMember , Vector<User> groupMember, Vector<User> newMember, Vector<Groupmember> member) {
 		this.user = user;
 		this.g = g;
 		this.groupMember = groupMember;
 		this.deleteMember = deleteMember;
+		this.newMember = newMember;
+		this.member = member; 
 	}
 	
 	public GroupEditForm() {
@@ -118,8 +120,9 @@ public class GroupEditForm extends VerticalPanel {
 							}}
 						if(j!=1) {
 						groupMember.add(result);
+						newMember.add(result);
 						main.clear();
-						GroupEditForm form = new GroupEditForm(1,user, g, deleteMember ,groupMember);
+						GroupEditForm form = new GroupEditForm(user, g, deleteMember ,groupMember, newMember, member);
 						RootPanel.get().add(form);}
 						else {
 						Window.alert("Der User ist bereits vorhanden");}
@@ -139,8 +142,20 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				int j = 0;
+				for(int i = 0; i<member.size(); i++) {
+					if(member.elementAt(i).getUserID()==groupMember.elementAt(memberList.getSelectedIndex()).getId()) {
+						j = 1;
+					}
+				if(j!=1){
 				groupMember.remove(memberList.getSelectedIndex());
 				memberList.removeItem(memberList.getSelectedIndex());
+				}
+				else {
+				groupMember.remove(memberList.getSelectedIndex());
+				memberList.removeItem(memberList.getSelectedIndex());
+				}
+				}
 			}
 		}
 	 
@@ -149,9 +164,8 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-								
-				for(int i = 0; i < groupMember.size(); i++) {
-					Groupmember gm = new Groupmember(g.getId(), groupMember.elementAt(i).getId());
+				for(int i = 0; i < newMember.size(); i++) {
+					Groupmember gm = new Groupmember(g.getId(), newMember.elementAt(i).getId());
 					editorAdministration.createGroupmember(gm, new AsyncCallback<Groupmember>() {
 						
 						@Override
@@ -178,7 +192,6 @@ public class GroupEditForm extends VerticalPanel {
 					EditorForm editorform = new EditorForm(user,Gruppen);
 					RootPanel.get().add(editorform);
 					}});
-				
 				
 			}
 		}

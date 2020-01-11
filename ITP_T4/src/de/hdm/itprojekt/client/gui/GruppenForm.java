@@ -40,7 +40,7 @@ public class GruppenForm extends VerticalPanel {
 	
 	  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
-	  User user = null;;
+	  User user = null;
 	  ListDataProvider <Group> dataProvider;	
 	  List <Group> Gruppen;
 	  private Vector<User> groupMember = new Vector<User>(); 
@@ -113,7 +113,7 @@ public class GruppenForm extends VerticalPanel {
 		inhalt.add(speichern);		
 		speichern.addClickHandler(new sichernhandler());
 		
-		mitglieder.setVisibleItemCount(10);
+		mitglieder.setVisibleItemCount(groupMember.size());
 		for(int i = 0; i < groupMember.size(); i++) {
 			mitglieder.addItem(groupMember.elementAt(i).getNickname());
 		}
@@ -227,9 +227,6 @@ public class GruppenForm extends VerticalPanel {
 					RootPanel.get().add(editform);
 					List <Group> liste = dataProvider.getList();
 					liste.add(group1);
-
-					
-					
 					Window.alert("EINGABE GESICHERT");
 				}
 				

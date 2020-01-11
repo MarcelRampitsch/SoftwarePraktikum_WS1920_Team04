@@ -49,6 +49,8 @@ public class CellListForm extends VerticalPanel {
 	   List<Group> Gruppen;
 	   Vector<Groupmember> member = new Vector<Groupmember>();
 	   Vector<User> groupMember = new Vector<User>();
+	   Button neueGruppe = new Button("Create group");
+	   VerticalPanel inhalt = new VerticalPanel();
 
 	
 	//Vector <Group> Gruppen = null;
@@ -56,6 +58,7 @@ public class CellListForm extends VerticalPanel {
 	   super.onLoad();
 //	   GruppenErstellung.addClickHandler(new openClickHandler());
 //	   this.add(GruppenErstellung);
+	   neueGruppe.addClickHandler(new openGroupClickHandler());
 	   final CellTable<Group> table = new CellTable<Group>();
 	   
 	    // Create a list data provider.
@@ -102,6 +105,21 @@ public class CellListForm extends VerticalPanel {
 			@Override
 			public void update(int index, Group anwender, String value) {
 				// TODO Auto-generated method stub
+				editorAdministration.deleteAllGroupmemberByGroupID(anwender, new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				
 				editorAdministration.deleteGroupByGroupID(anwender, new AsyncCallback<Void>() {
 					
 					@Override
@@ -137,11 +155,7 @@ public class CellListForm extends VerticalPanel {
 
 			@Override
 			public void update(int index, Group object, String value) {
-			Group g = object;
-			table.removeFromParent();
-			table.removeColumn(1);
-			table.setRemoveColumnsOnHide(true);
-			
+			Group g = object;			
 			editorAdministration.getAllGroupmemberByGroupID(g, new AsyncCallback<Vector<Groupmember>>() {
 				
 				@Override
@@ -172,14 +186,14 @@ public class CellListForm extends VerticalPanel {
 					Window.alert("etwas ist schief gelaufen");	
 				}			
 			});
-			
+			inhalt.clear();
 			GroupEditForm edit = new GroupEditForm(user, g, groupMember , member);
-			RootPanel.get().add(edit);
+			inhalt.add(edit);
 			}
 		});
 		
 		
-		table.addColumn(nameColumn, "Gruppenname");
+		table.addColumn(nameColumn, "Groupname");
 		table.addColumn(loeschenColumn);
 		table.addColumn(editColumn);
 		
@@ -189,16 +203,20 @@ public class CellListForm extends VerticalPanel {
 		for(Group group : Gruppen) {
 			list.add(group);
 		}
-		this.add(table);
+		inhalt.add(neueGruppe);
+		inhalt.add(table);
+		this.add(inhalt);
    }
 	
-	private class openClickHandler implements ClickHandler {
+	class openGroupClickHandler implements ClickHandler{
 
+		@Override
 		public void onClick(ClickEvent event) {
-			
-			GroupEditForm edit = new GroupEditForm();
-			RootPanel.get().add(edit);
-			
+			Vector<User> group = new Vector<User>();
+			group.add(user);
+			GruppenForm gf = new GruppenForm(user, group);
+			inhalt.clear();
+			inhalt.add(gf);
 		}
 	}
 }

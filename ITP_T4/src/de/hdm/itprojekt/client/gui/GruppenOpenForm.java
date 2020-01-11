@@ -37,17 +37,17 @@ import de.hdm.itprojekt.shared.bo.User;
 		  VerticalPanel inhalt = new VerticalPanel();
 		
 		
-		  Label gruppenerstellung = new Label("Gruppenerstellung:");
-		  Label gruppenname = new Label("Gruppenname");
+		  Label gruppenerstellung = new Label("Group creation:");
+		  Label gruppenname = new Label("Groupname");
 		  Label nickname = new Label("Nickname");
 		
-		  Button edit = new Button("editieren");
+		  Button edit = new Button("edit");
 		  Button close  = new Button("X");
 		
 		  TextBox gruppennamebox =new TextBox();
 		  TextBox nicknamebox = new TextBox();
 		
-		  Button speichern = new Button("sichern");
+		  Button speichern = new Button("save");
 		
 		  GruppenForm gruppenForm = null;
 
