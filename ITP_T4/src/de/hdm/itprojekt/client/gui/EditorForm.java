@@ -58,6 +58,7 @@ public class EditorForm extends VerticalPanel {
 	 ListBox group = new ListBox();
 	 Button neueGruppe = new Button("Neue Gruppe");
 	 Button neueUmfrage = new Button("Neue Umfrage");
+	 Button gruppenAnzeigenButton = new Button("Gruppen anzeigen");
 	
 	/**
 	 * 
@@ -183,15 +184,18 @@ public class EditorForm extends VerticalPanel {
 				}
 				
 			}
-		 
+			
 		 
 		neueUmfrage.addClickHandler(new OpenUpClickHandler());
 		
 		neueGruppe.addClickHandler(new openGroupClickHandler());
 		
 		
+		
 		header.add(neueGruppe);
 		header.add(neueUmfrage);
+		header.add(gruppenAnzeigenButton);
+		
 		header.add(toAdmin);
 //		GruppenForm gruppenForm = new GruppenForm(user);
 //		main.add(gruppenForm);
