@@ -185,12 +185,25 @@ public class EditorForm extends VerticalPanel {
 				
 			}
 			
+			class gruppenAnzeigenButtonClickHandler implements ClickHandler{
+
+				@Override
+				public void onClick(ClickEvent event) {
+					
+					GroupViewForm gvf = new GroupViewForm();
+					west.clear();
+					west.add(gvf);
+						
+				}
+				
+			}
+			
 		 
 		neueUmfrage.addClickHandler(new OpenUpClickHandler());
 		
 		neueGruppe.addClickHandler(new openGroupClickHandler());
 		
-		
+		gruppenAnzeigenButton.addClickHandler(new gruppenAnzeigenButtonClickHandler());
 		
 		header.add(neueGruppe);
 		header.add(neueUmfrage);
