@@ -13,6 +13,7 @@ import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Vote;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 
 public interface EditorAdministrationAsync {
 	
@@ -52,6 +53,8 @@ public interface EditorAdministrationAsync {
 	void getAllCinemaByUser(User u, AsyncCallback<Vector<Cinema>> callback);
 	
 	void getAllMovieByUser(User u, AsyncCallback<Vector<Movie>> callback);
+
+	void getAllTimeslotByUser(User u, AsyncCallback<Vector<Timeslot>> callback);
 
 
 	// GroupMember

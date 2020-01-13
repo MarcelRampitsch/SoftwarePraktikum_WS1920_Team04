@@ -26,6 +26,7 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class NewSurveyForm extends VerticalPanel {
@@ -39,6 +40,7 @@ public class NewSurveyForm extends VerticalPanel {
 	private User user = null;
 	private Vector<Cinema> cine = null;
 	private Vector<Movie> movie = null;
+	private Vector<Timeslot> timesl = null;
 	
 	ListDataProvider <SurveyEntry> dataProvider;
 	
@@ -115,6 +117,18 @@ public class NewSurveyForm extends VerticalPanel {
 			}
 		});
 		
+		editorAdministration.getAllTimeslotByUser(this.user, new AsyncCallback<Vector<Timeslot>>() {
+			
+		public void onFailure(Throwable caught) {
+			Window.alert("Beim Laden der Timeslots ist etwas schief gelaufen");
+		}
+		public void onSuccess(Vector<Timeslot> result) {
+			for (int i= 0; i < result.size(); i++) {
+				spielzeitDropBox.addItem(result.elementAt(i).getTime());
+				timesl = result;
+				}
+			}
+		});
 		this.add(inhalt);
 	}
 	/*

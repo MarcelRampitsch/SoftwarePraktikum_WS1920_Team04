@@ -14,6 +14,7 @@ import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Vote;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 
 @RemoteServiceRelativePath("editor")
 public interface EditorAdministration extends RemoteService {
@@ -67,6 +68,8 @@ public interface EditorAdministration extends RemoteService {
 	public Vector<Cinema> getAllCinemaByUser(User u) throws IllegalArgumentException;
 	
 	public Vector<Movie> getAllMovieByUser(User u) throws IllegalArgumentException;
+	
+	public Vector<Timeslot> getAllTimeslotByUser(User u) throws IllegalArgumentException;
 
 	// GroupMember Methoden
 	

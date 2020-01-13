@@ -13,6 +13,7 @@ import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Vote;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 
 import java.sql.SQLException;
 import java.util.Vector;
@@ -28,6 +29,7 @@ import de.hdm.itprojekt.server.db.VoteMapper;
 import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
 import de.hdm.itprojekt.server.db.MovieMapper;
+import de.hdm.itprojekt.server.db.TimeslotMapper;
 
 
 /*
@@ -46,6 +48,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	private CinemaGroupMapper cgMapper = null;
 	private CinemaMapper cMapper = null;
 	private MovieMapper mMapper = null;
+	private TimeslotMapper tMapper = null;
 	
 	
 	public EditorAdministrationImpl() throws IllegalArgumentException {
@@ -63,6 +66,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		this.cgMapper = CinemaGroupMapper.CinemaGroupMapper();
 		this.cMapper = CinemaMapper.CinemaMapper();
 		this.mMapper = MovieMapper.MovieMapper();
+		this.tMapper = TimeslotMapper.TimeslotMapper();
 	}
 	
 	
@@ -113,6 +117,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		cMapper.deleteAllCinemaByUserID(u);
 		mMapper.deleteAllByUserID(u);
 		uMapper.deleteUserByUserID(u);
+		//TODO deleteUserByTimeslotID?
 	}
 	
 	// TODO : User 1?
@@ -133,6 +138,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		public Vector<Movie> getAllMovieByUser(User u) throws IllegalArgumentException{
 			Vector<Movie> rs = new Vector<Movie>();
 			rs = mMapper.findAllByUserID(u);
+			return rs;
+		}
+		// Methode um alle Timeslots eines Users zu finden
+		public Vector<Timeslot> getAllTimeslotByUser(User u) throws IllegalArgumentException{
+			Vector<Timeslot> rs = new Vector<Timeslot>();
+			rs = tMapper.findAllTimeslotByUserID(u);
 			return rs;
 		}
 
