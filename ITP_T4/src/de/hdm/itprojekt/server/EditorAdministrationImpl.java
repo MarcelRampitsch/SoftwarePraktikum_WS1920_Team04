@@ -5,6 +5,7 @@ import com.google.gwt.user.client.Window;
 
 import de.hdm.itprojekt.shared.EditorAdministration;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Presentation;
@@ -121,6 +122,19 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		rs = cMapper.findallCinemabyUserID(u);
 		return rs;
 	}
+	// Methode um alle Cinema eines User zu finden
+		public Vector<Cinema> getAllCinemaByUser(User u) throws IllegalArgumentException{
+			
+			Vector<Cinema> rs = new Vector<Cinema>();
+			rs = cMapper.findallCinemabyUserID(u);
+			return rs;
+		}
+		// Methode um alle Filme eines Users zu finden
+		public Vector<Movie> getAllMovieByUser(User u) throws IllegalArgumentException{
+			Vector<Movie> rs = new Vector<Movie>();
+			rs = mMapper.findAllByUserID(u);
+			return rs;
+		}
 
 	
 	// Group

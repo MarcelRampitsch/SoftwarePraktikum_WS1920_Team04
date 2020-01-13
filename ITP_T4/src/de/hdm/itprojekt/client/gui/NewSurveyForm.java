@@ -21,7 +21,9 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHandler;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
+import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
@@ -30,7 +32,13 @@ public class NewSurveyForm extends VerticalPanel {
 
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
+	public NewSurveyForm(User user) {
+		this.user = user;
+	}
+	
 	private User user = null;
+	private Vector<Cinema> cine = null;
+	private Vector<Movie> movie = null;
 	
 	ListDataProvider <SurveyEntry> dataProvider;
 	
@@ -39,6 +47,8 @@ public class NewSurveyForm extends VerticalPanel {
 	List <SurveyEntry> Umfrageeintrag;
 	 
 	List <Group> Gruppen;
+	
+	
 	
 	/*
 	 * Erstellung der Widgets
@@ -50,11 +60,11 @@ public class NewSurveyForm extends VerticalPanel {
 	Label datum = new Label("Datum waehlen:");
 	DatePicker datumAuswahlPicker = new DatePicker();
 	
-	Label film = new Label("Film waehlen:");
-	ListBox filmDropBox = new ListBox();
-	
 	Label kino = new Label("Kino waehlen:");
 	ListBox kinoDropBox = new ListBox();
+	
+	Label film = new Label("Film waehlen:");
+	ListBox filmDropBox = new ListBox();
 	
 	Label spielzeit = new Label("Uhrzeit auswaehlen:");
 	ListBox spielzeitDropBox = new ListBox();
@@ -70,20 +80,40 @@ public class NewSurveyForm extends VerticalPanel {
 		umfrageNameBox.getElement().setPropertyString("placeholder", "Umfragename...");
 		inhalt.add(datum);
 		inhalt.add(datumAuswahlPicker);
-		inhalt.add(film);
-		inhalt.add(filmDropBox);
 		inhalt.add(kino);
 		inhalt.add(kinoDropBox);
+		inhalt.add(film);
+		inhalt.add(filmDropBox);
 		inhalt.add(spielzeit);
 		inhalt.add(spielzeitDropBox);
 		inhalt.add(umfrageSichernButton);
 		umfrageSichernButton.addClickHandler(new SafeHandler());
-		/*
-		 * TODO Inhalte zu Testzwecken löschen
-		 */
-		filmDropBox.addItem("Shrek 5");
-		kinoDropBox.addItem("Cinemaxx");
-		spielzeitDropBox.addItem("19.00");
+		
+		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
+			
+			public void onFailure(Throwable caught) {
+				Window.alert("Beim Laden der Kinos ist etwas schief gelaufen");
+			}
+			public void onSuccess(Vector<Cinema> result) {
+				for (int i= 0; i < result.size(); i++) {
+					kinoDropBox.addItem(result.elementAt(i).getName());
+					cine = result;
+				}
+			}
+		});
+		
+		editorAdministration.getAllMovieByUser(this.user, new AsyncCallback<Vector<Movie>>() {
+			
+			public void onFailure(Throwable caught) {
+				Window.alert("Beim Laden der Filme ist etwas schief gelaufen");
+			}
+			public void onSuccess(Vector<Movie> result) {
+				for (int i= 0; i < result.size(); i++) {
+					filmDropBox.addItem(result.elementAt(i).getName());
+					movie = result;
+				}
+			}
+		});
 		
 		this.add(inhalt);
 	}

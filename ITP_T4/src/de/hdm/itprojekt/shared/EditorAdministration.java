@@ -11,6 +11,7 @@ import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Vote;
 
@@ -62,6 +63,10 @@ public interface EditorAdministration extends RemoteService {
 	//Cinema
 	Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException;
 
+	// Methode um alle Cinema eines User zu finden
+	public Vector<Cinema> getAllCinemaByUser(User u) throws IllegalArgumentException;
+	
+	public Vector<Movie> getAllMovieByUser(User u) throws IllegalArgumentException;
 
 	// GroupMember Methoden
 	

@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
@@ -47,6 +48,10 @@ public interface EditorAdministrationAsync {
 	// Cinema
 	
 	void findAllCinemaByUser1(User u, AsyncCallback<Vector<Cinema>> callback);
+	// Methode um alle Cinema eines User zu finden
+	void getAllCinemaByUser(User u, AsyncCallback<Vector<Cinema>> callback);
+	
+	void getAllMovieByUser(User u, AsyncCallback<Vector<Movie>> callback);
 
 
 	// GroupMember
