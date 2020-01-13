@@ -161,6 +161,7 @@ public class CellListForm extends VerticalPanel {
 				@Override
 				public void onSuccess(Vector<Groupmember> result) {
 					member=result;
+					
 				for(int i = 0; i< member.size(); i++) {
 					User u = new User(member.elementAt(i).getUserID());
 					editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
@@ -168,7 +169,8 @@ public class CellListForm extends VerticalPanel {
 						@Override
 						public void onSuccess(User result) {
 						u = result;
-							groupMember.add(u);}
+						groupMember.add(u);
+						}
 						
 						@Override
 						public void onFailure(Throwable caught) {
@@ -178,6 +180,9 @@ public class CellListForm extends VerticalPanel {
 						
 					});
 				}
+				inhalt.clear();
+				GroupEditForm edit = new GroupEditForm(user, g, groupMember , member);
+				inhalt.add(edit);
 				}
 				
 				@Override
@@ -186,9 +191,6 @@ public class CellListForm extends VerticalPanel {
 					Window.alert("etwas ist schief gelaufen");	
 				}			
 			});
-			inhalt.clear();
-			GroupEditForm edit = new GroupEditForm(user, g, groupMember , member);
-			inhalt.add(edit);
 			}
 		});
 		

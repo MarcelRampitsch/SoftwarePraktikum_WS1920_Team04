@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.Vector;
 import java.util.Date;
 
+import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -339,7 +340,7 @@ public class PresentationMapper {
 		  }
 		 
 	  
-	  public void deleteAllByMovieID(int id)  {
+	  public void deleteAllByMovieID(Movie m)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 
@@ -347,7 +348,7 @@ public class PresentationMapper {
               // Löschen aller Presentations die einen bestimmten Movie enthalten 
 				PreparedStatement deleteAllByMovieID = con
 						.prepareStatement("DELETE FROM softwarepraktikum_ws1920.movie WHERE movieID =?;");
-				deleteAllByMovieID.setInt(1, id);
+				deleteAllByMovieID.setInt(1, m.getId());
 				// Statement ausfüllen und als Query an die DB schicken
 				deleteAllByMovieID.executeUpdate();
 

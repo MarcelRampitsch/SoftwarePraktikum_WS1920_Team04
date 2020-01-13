@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.admin.AdminForm;
@@ -33,9 +34,9 @@ public class GroupEditForm extends VerticalPanel {
 	Vector <User> groupMember = new Vector<User>();
 	Vector <User> newMember = new Vector<User>();
 	Vector <Groupmember> deleteMember = new Vector<Groupmember>();
-	Group g =null;
-	Group group =null;
-	Vector <Groupmember> member = null;
+	Group g = null;
+	Group group = null;
+	Vector <Groupmember> member = new Vector<Groupmember>();
 	
 	List <Group> Gruppen = null;
 	
@@ -142,20 +143,22 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				int j = 0;
-				for(int i = 0; i<member.size(); i++) {
-					if(member.elementAt(i).getUserID()==groupMember.elementAt(memberList.getSelectedIndex()).getId()) {
-						j = 1;
-					}
-				if(j!=1){
-				groupMember.remove(memberList.getSelectedIndex());
+			if(groupMember.elementAt(memberList.getSelectedIndex()).getId()==user.getId()) {
+				Window.alert("Sie können sich nicht selbst löschen");
+			}
+			else {
+			if(memberList.getSelectedIndex()<member.size()) {
+				deleteMember.add(member.elementAt(memberList.getSelectedIndex()));
+				member.remove(memberList.getSelectedIndex());
 				memberList.removeItem(memberList.getSelectedIndex());
-				}
-				else {
 				groupMember.remove(memberList.getSelectedIndex());
+			}
+			else {
+				newMember.remove(memberList.getSelectedIndex()-member.size());
 				memberList.removeItem(memberList.getSelectedIndex());
-				}
-				}
+			}
+			}
+				
 			}
 		}
 	 
@@ -164,6 +167,24 @@ public class GroupEditForm extends VerticalPanel {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				if(groupBox.getText()!="") {
+				for(int j = 0; j < deleteMember.size(); j++) {
+					editorAdministration.deleteGroupmemberByGroupmemberID(deleteMember.elementAt(j), new AsyncCallback<Void>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+				}
+				
 				for(int i = 0; i < newMember.size(); i++) {
 					Groupmember gm = new Groupmember(g.getId(), newMember.elementAt(i).getId());
 					editorAdministration.createGroupmember(gm, new AsyncCallback<Groupmember>() {
@@ -194,6 +215,11 @@ public class GroupEditForm extends VerticalPanel {
 					}});
 				
 			}
+				else {
+					Window.alert("Geben sie einen Namen ein:");
+				}
+			}
+			
 		}
 	 private class backHandler implements ClickHandler{
 
