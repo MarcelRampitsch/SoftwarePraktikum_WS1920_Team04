@@ -59,7 +59,7 @@ public class GruppenForm extends VerticalPanel {
 	
 	  Button back  = new Button("<--");
 	
-	  TextBox gruppennamebox =new TextBox();
+	  TextBox gruppennamebox = new TextBox();
 	  TextBox nicknamebox = new TextBox();
 	  
 	  ListBox mitglieder = new ListBox();
@@ -196,6 +196,7 @@ public class GruppenForm extends VerticalPanel {
 		
 		@Override
 		public void onClick(ClickEvent event) {	
+			if(gruppennamebox.getText()!=""){
 			RootPanel.get().clear();
 			
 			Group group1 = new Group(user.getId(),gruppennamebox.getText());
@@ -232,6 +233,10 @@ public class GruppenForm extends VerticalPanel {
 				
 			});
 		}
+			else {
+				Window.alert("Please enter a groupname");
+			}
+	}
 	}
 }
 

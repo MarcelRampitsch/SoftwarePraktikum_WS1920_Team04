@@ -204,6 +204,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		Vector<Groupmember> gm = gmMapper.findAllByUserID(u);
 		return gm;
 	}
+	
 	public Groupmember updateGroupmember(Groupmember updateGm) throws IllegalArgumentException {
 		if (updateGm != null) {
 			Groupmember tempGroupmember = gmMapper.updateGroupmember(updateGm);
