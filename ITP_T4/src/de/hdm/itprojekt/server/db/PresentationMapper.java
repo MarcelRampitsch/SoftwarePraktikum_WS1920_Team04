@@ -94,6 +94,35 @@ public class PresentationMapper {
 		
 		}
 	  
+	  public Vector<Presentation> getAllPresentationBySearchCriteria(int date, int cinemaID, int movieID, int timeslotID){
+		  Connection con = DBConnection.getConnection();
+		  Presentation p = null;
+		  Vector<Presentation> result = new Vector<Presentation>();
+		  try {
+			  PreparedStatement getAllPresentationBySearchCriteria = con.prepareStatement("SELECT * From softwarepraktikum_ws1920.presentation"+ "WHERE date=?, cinemaID=?, movieID=?,timeslotID=?");
+			  getAllPresentationBySearchCriteria.setInt(1, date);
+			  getAllPresentationBySearchCriteria.setInt(2, cinemaID);
+			  getAllPresentationBySearchCriteria.setInt(3, movieID);
+			  getAllPresentationBySearchCriteria.setInt(4, timeslotID);
+			  ResultSet rs = getAllPresentationBySearchCriteria.executeQuery();
+
+				while (rs.next()) {
+					// Ergebnis-Tupel in Objekt umwandeln
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+
+					// Objekt in einen Ergebinsvektor übergeben
+					result.addElement(p);
+				}// Fehlerbehandlung hinzufügen
+			} catch (SQLException e) {
+			      e.printStackTrace();
+			      return null;
+			}
+			// Ergebnisvektor zurückgeben
+			return result;
+		
+	  }
+	  
+	  
 	  
 	  public Vector<Presentation> findAllByTimeslotID(int id)  {
 			// DB-Verbindung holen

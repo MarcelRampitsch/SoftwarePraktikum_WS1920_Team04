@@ -146,6 +146,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			rs = tMapper.findAllTimeslotByUserID(u);
 			return rs;
 		}
+		// Methode um alle Vorstellungen anzuzeigen, die den eingegebenen Suchkriterien entsprechen
+		public Vector<Presentation> getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t) throws IllegalArgumentException{
+			Vector<Presentation> rs = new Vector<Presentation>();
+			rs = pMapper.getAllPresentationBySearchCriteria(date, cinemaID, movieID, timeslotID);
+			return rs;
+		}
 
 	
 	// Group
