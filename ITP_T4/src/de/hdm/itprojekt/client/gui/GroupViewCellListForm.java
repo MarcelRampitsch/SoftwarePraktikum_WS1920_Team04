@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -16,6 +17,8 @@ import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
+import de.hdm.itprojekt.shared.bo.Survey;
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -32,18 +35,21 @@ public class GroupViewCellListForm extends VerticalPanel {
 	User user = null;
 
 	List<Group> Gruppen;
+	List<Survey> Umfragen;
 	
 	Vector<Groupmember> groupMember = new Vector<Groupmember>();
 	Vector<User> userMember = new Vector<User>();
+	Vector<SurveyEntry> surveyEntry = new Vector<SurveyEntry>();
 	
 	Button newSurvey = new Button("Neue Umfrage erstellen");
 	
 	VerticalPanel contentPanel = new VerticalPanel();
 	
-	public GroupViewCellListForm(User user, List<Group> Gruppen) {
+	public GroupViewCellListForm(User user, List<Group> Gruppen, List<Survey> Umfragen) {
 		
 		this.user = user;
 		this.Gruppen = Gruppen;
+		this.Umfragen = Umfragen;
 		
 	}
 	
@@ -52,10 +58,12 @@ public class GroupViewCellListForm extends VerticalPanel {
 		super.onLoad();
 		
 		final CellTable<Group> groupTable = new CellTable<Group>();
+		final CellTable<Survey> surveyTable = new CellTable<Survey>();
 
-		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
+		ListDataProvider<Group> groupDataProvider = new ListDataProvider<Group>();
+		ListDataProvider<Survey> surveyDataProvider = new ListDataProvider<Survey>();
 
-		TextColumn<Group> nameColumn = new TextColumn<Group>() {
+		TextColumn<Group> groupNameColumn = new TextColumn<Group>() {
 
 			@Override
 			public String getValue(Group object) {
@@ -65,11 +73,22 @@ public class GroupViewCellListForm extends VerticalPanel {
 			}
 			
 		};
+		
+		TextColumn<Survey> surveyNameColumn = new TextColumn<Survey>() {
+
+			@Override
+			public String getValue(Survey object) {
+			
+				return object.getName();
+		
+			}
+			
+		};
 	
 		
-		Cell<String> deleteCell = new ButtonCell();	
+		Cell<String> deleteGroupCell = new ButtonCell();	
 		
-		Column<Group, String> deleteColumn = new Column<Group, String>(deleteCell) {
+		Column<Group, String> deleteGroupColumn = new Column<Group, String>(deleteGroupCell) {
 
 			@Override
 			public String getValue(Group object) {
@@ -80,9 +99,22 @@ public class GroupViewCellListForm extends VerticalPanel {
 
 		};
 		
-		Cell<String> editCell = new ButtonCell();
+		Cell<String> deleteSurveyCell = new ButtonCell();	
+		
+		Column<Survey, String> deleteSurveyColumn = new Column<Survey, String>(deleteSurveyCell) {
 
-		Column<Group, String> editColumn = new Column<Group, String>(editCell) {
+			@Override
+			public String getValue(Survey object) {
+				
+				return "X";
+			
+			}
+
+		};
+		
+		Cell<String> editGroupCell = new ButtonCell();
+
+		Column<Group, String> editGroupColumn = new Column<Group, String>(editGroupCell) {
 
 			@Override
 			public String getValue(Group object) {
@@ -93,7 +125,20 @@ public class GroupViewCellListForm extends VerticalPanel {
 
 		};
 		
+		Cell<String> editSurveyCell = new ButtonCell();
+
+		Column<Survey, String> editColumn = new Column<Survey, String>(editSurveyCell) {
+
+			@Override
+			public String getValue(Survey object) {
+				
+				return "Edit";
+			
+			}
+
+		};
 		
+
 		
 		
 		
