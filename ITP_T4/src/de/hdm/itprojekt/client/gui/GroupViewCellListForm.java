@@ -6,6 +6,8 @@ import java.util.Vector;
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -43,6 +45,7 @@ public class GroupViewCellListForm extends VerticalPanel {
 	Vector<User> userMember = new Vector<User>();
 	Vector<SurveyEntry> surveyEntry = new Vector<SurveyEntry>();
 	
+	Button newGroup = new Button("Neue Gruppe erstellen");
 	Button newSurvey = new Button("Neue Umfrage erstellen");
 	
 	VerticalPanel contentPanel = new VerticalPanel();
@@ -59,6 +62,7 @@ public class GroupViewCellListForm extends VerticalPanel {
 		
 		super.onLoad();
 		
+		newGroup.addClickHandler(new newGroupClickHandler());
 		newSurvey.addClickHandler(new newSurveyClickHandler());
 		
 		final CellTable<Group> groupTable = new CellTable<Group>();
@@ -281,50 +285,50 @@ public class GroupViewCellListForm extends VerticalPanel {
 		});
 		
 		
-		editSurveyColumn.setFieldUpdater(new FieldUpdater<Survey, String>() {
-
-			@Override
-			public void update(int index, Survey object, String value) {
-			
-			Survey s = object;			
-			editorAdministration.getSurveyBySurveyID(s, new AsyncCallback<Vector<SurveyEntry>>() {
-				
-				@Override
-				public void onSuccess(Vector<SurveyEntry> result) {
-					surveyEntry = result;
-				for (int i = 0; i< surveyEntry.size(); i++) {
-					SurveyEntry se = new SurveyEntry(surveyEntry.elementAt(i).getSurveyEntryID());
-					editorAdministration.getSurveyEntryBySurveyEntryID(se, new AsyncCallback<SurveyEntry>() {
-						SurveyEntry se = null;
-						@Override
-						public void onSuccess(SurveyEntry result) {
-						se = result;
-						surveyEntry.add(se);
-						}
-						
-						@Override
-						public void onFailure(Throwable caught) {
-							Window.alert("Fehler!");
-						}
-						
-					});
-				}
-				contentPanel.clear();
-				GroupViewForm groupViewForm = new GroupViewForm(user, s, surveyEntry);
-				contentPanel.add(groupViewForm);
-				}
-				
-				@Override
-				public void onFailure(Throwable caught) {
-					
-					Window.alert("Fehler!");	
-				}			
-			
-			});
-			
-			}
-		
-		});
+//		editSurveyColumn.setFieldUpdater(new FieldUpdater<Survey, String>() {
+//
+//			@Override
+//			public void update(int index, Survey object, String value) {
+//			
+//			Survey s = object;			
+//			editorAdministration.getSurveyBySurveyID(s, new AsyncCallback<Vector<SurveyEntry>>() {
+//				
+//				@Override
+//				public void onSuccess(Vector<SurveyEntry> result) {
+//					surveyEntry = result;
+//				for (int i = 0; i< surveyEntry.size(); i++) {
+//					SurveyEntry se = new SurveyEntry(surveyEntry.elementAt(i).getSurveyEntryID());
+//					editorAdministration.getSurveyEntryBySurveyEntryID(se, new AsyncCallback<SurveyEntry>() {
+//						SurveyEntry se = null;
+//						@Override
+//						public void onSuccess(SurveyEntry result) {
+//						se = result;
+//						surveyEntry.add(se);
+//						}
+//						
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							Window.alert("Fehler!");
+//						}
+//						
+//					});
+//				}
+//				contentPanel.clear();
+//				GroupViewForm groupViewForm = new GroupViewForm(user, s, surveyEntry);
+//				contentPanel.add(groupViewForm);
+//				}
+//				
+//				@Override
+//				public void onFailure(Throwable caught) {
+//					
+//					Window.alert("Fehler!");	
+//				}			
+//			
+//			});
+//			
+//			}
+//		
+//		});
 		
 		groupTable.addColumn(groupNameColumn, "Gruppenname:");
 		groupTable.addColumn(deleteGroupColumn);
@@ -336,7 +340,7 @@ public class GroupViewCellListForm extends VerticalPanel {
 		for(Group group : Gruppen) {
 			groupList.add(group);
 		}
-		contentPanel.add(newSurvey);
+		contentPanel.add(newGroup);
 		contentPanel.add(groupTable);
 		this.add(contentPanel);
 		
@@ -356,6 +360,33 @@ public class GroupViewCellListForm extends VerticalPanel {
 	
 	}
 
+	class newGroupClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			Vector<User> group = new Vector<User>();
+			group.add(user);
+			GruppenForm gruppenForm = new GruppenForm(user, group);
+			contentPanel.clear();
+			contentPanel.add(gruppenForm);
+		
+		}
+		
+	}
+	
+	class newSurveyClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+
+			NewSurveyForm newSurveyForm = new NewSurveyForm(user);
+			contentPanel.clear();
+			contentPanel.add(newSurveyForm);
+			
+		}
+		
+	}
 	
 	
 }
