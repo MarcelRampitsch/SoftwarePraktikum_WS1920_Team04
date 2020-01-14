@@ -9,6 +9,7 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -139,10 +140,100 @@ public class GroupViewCellListForm extends VerticalPanel {
 		};
 		
 
+		deleteGroupColumn.setFieldUpdater(new FieldUpdater<Group, String>() {
+
+			@Override
+			public void update(int index, Group anwender, String value) {
+				
+				editorAdministration.deleteAllGroupmemberByGroupID(anwender, new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						
+						
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						
+						
+						
+					}
+				
+				});
+				
+				editorAdministration.deleteGroupByGroupID(anwender, new AsyncCallback<Void>() {
+					
+					@Override
+					public void onSuccess(Void result) {
+						
+						groupDataProvider.getList().remove(anwender);
+					
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						
+					
+						
+					}
+				
+				});
+				
+			}
+		
+		});
+		
+		deleteSurveyColumn.setFieldUpdater(new FieldUpdater<Survey, String>() {
+
+			@Override
+			public void update(int index, Survey anwender, String value) {
+				
+				editorAdministration.deleteAllSurveyEntryBySurveyID(anwender, new AsyncCallback<Void>() {
+				
+					@Override
+					public void onFailure(Throwable caught) {
+						
+						
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						
+						
+						
+					}
+				
+				});
+				
+				editorAdministration.deleteSurveyBySurveyID(anwender, new AsyncCallback<Void>() {
+			
+					@Override
+					public void onSuccess(Void result) {
+						
+						surveyDataProvider.getList().remove(anwender);
+					
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						
+					
+						
+					}
+				
+				});
+				
+			}
+		
+		});
+	
+	
 		
 		
-		
-		
+	
 	}
 
 	
