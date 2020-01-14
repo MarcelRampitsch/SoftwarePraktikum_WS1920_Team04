@@ -9,8 +9,10 @@ import java.sql.Timestamp;
 import java.util.Vector;
 import java.util.Date;
 
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -94,16 +96,16 @@ public class PresentationMapper {
 		
 		}
 	  
-	  public Vector<Presentation> getAllPresentationBySearchCriteria(int date, int cinemaID, int movieID, int timeslotID){
+	  public Vector<Presentation> getAllPresentationBySearchCriteria(java.sql.Date date, Cinema c, Movie m, Timeslot t){
 		  Connection con = DBConnection.getConnection();
 		  Presentation p = null;
 		  Vector<Presentation> result = new Vector<Presentation>();
 		  try {
 			  PreparedStatement getAllPresentationBySearchCriteria = con.prepareStatement("SELECT * From softwarepraktikum_ws1920.presentation"+ "WHERE date=?, cinemaID=?, movieID=?,timeslotID=?");
-			  getAllPresentationBySearchCriteria.setInt(1, date);
-			  getAllPresentationBySearchCriteria.setInt(2, cinemaID);
-			  getAllPresentationBySearchCriteria.setInt(3, movieID);
-			  getAllPresentationBySearchCriteria.setInt(4, timeslotID);
+			  getAllPresentationBySearchCriteria.setDate(1, date);
+			  getAllPresentationBySearchCriteria.setInt(2, c.getId());
+			  getAllPresentationBySearchCriteria.setInt(3, c.getId());
+			  getAllPresentationBySearchCriteria.setInt(4, t.getId());
 			  ResultSet rs = getAllPresentationBySearchCriteria.executeQuery();
 
 				while (rs.next()) {

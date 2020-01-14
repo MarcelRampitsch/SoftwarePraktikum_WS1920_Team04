@@ -160,7 +160,7 @@ public class EditorForm extends VerticalPanel {
 				
 			 public void onClick(ClickEvent event) {
 				
-				NewSurveyForm nsf = new NewSurveyForm();
+				NewSurveyForm nsf = new NewSurveyForm(user);
 			//	RootPanel.get().clear();
 				west.clear();
 				

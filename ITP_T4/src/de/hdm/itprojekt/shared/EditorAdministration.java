@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.shared;
 
+import java.sql.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -71,7 +72,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	public Vector<Timeslot> getAllTimeslotByUser(User u) throws IllegalArgumentException;
 	
-	public Vector<Presentation> getAllPresentationBySearchCriteria() throws IllegalArgumentException;
+	public Vector<Presentation> getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t) throws IllegalArgumentException;
 
 	// GroupMember Methoden
 	

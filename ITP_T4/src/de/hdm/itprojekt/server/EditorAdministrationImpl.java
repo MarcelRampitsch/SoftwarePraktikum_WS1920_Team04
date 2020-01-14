@@ -15,6 +15,7 @@ import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Vote;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -149,7 +150,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		// Methode um alle Vorstellungen anzuzeigen, die den eingegebenen Suchkriterien entsprechen
 		public Vector<Presentation> getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t) throws IllegalArgumentException{
 			Vector<Presentation> rs = new Vector<Presentation>();
-			rs = pMapper.getAllPresentationBySearchCriteria(date, cinemaID, movieID, timeslotID);
+			rs = pMapper.getAllPresentationBySearchCriteria(d, c, m, t);
 			return rs;
 		}
 

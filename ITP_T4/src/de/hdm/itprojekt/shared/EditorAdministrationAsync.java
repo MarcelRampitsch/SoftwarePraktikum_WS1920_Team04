@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.shared;
 
+import java.sql.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -56,7 +57,7 @@ public interface EditorAdministrationAsync {
 
 	void getAllTimeslotByUser(User u, AsyncCallback<Vector<Timeslot>> callback);
 
-	void getAllPresentationBySearchCriteria(AsyncCallback<Vector<Presentation>> callback);
+	void getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t, AsyncCallback<Vector<Presentation>> callback);
 
 	// GroupMember
 	void createGroupmember(Groupmember gm, AsyncCallback<Groupmember> callback);
