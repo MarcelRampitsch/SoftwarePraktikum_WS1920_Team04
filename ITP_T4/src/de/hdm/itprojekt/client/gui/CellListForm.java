@@ -25,6 +25,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.NoSelectionModel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
@@ -99,6 +102,17 @@ public class CellListForm extends VerticalPanel {
 			}
 
 		};
+		
+		nameColumn.setFieldUpdater(new FieldUpdater<Group,String>(){
+
+			@Override
+			public void update(int index, Group anwender, String value) {
+				
+				
+				
+					}
+				});
+		
 		
 		loeschenColumn.setFieldUpdater(new FieldUpdater<Group, String>() {
 
@@ -198,6 +212,27 @@ public class CellListForm extends VerticalPanel {
 		table.addColumn(nameColumn, "Groupname");
 		table.addColumn(loeschenColumn);
 		table.addColumn(editColumn);
+		
+		
+		
+		NoSelectionModel<Group> selectionModelMyObj = new NoSelectionModel<Group>();
+		Handler tableHandle = new SelectionChangeEvent.Handler() 
+		{
+
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				Group clickedObj = selectionModelMyObj.getLastSelectedObject();
+				if(table.getKeyboardSelectedColumn()==0)
+				{
+					inhalt.clear();
+					GroupViewForm viewForm = new GroupViewForm(user,clickedObj);
+					RootPanel.get().add(viewForm);
+				}
+			}
+		};
+		
+		selectionModelMyObj.addSelectionChangeHandler(tableHandle);
+		table.setSelectionModel(selectionModelMyObj);
 		
 		dataProvider.addDataDisplay(table);
 		

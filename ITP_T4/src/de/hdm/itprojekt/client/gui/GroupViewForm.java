@@ -6,6 +6,8 @@ import java.util.Vector;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -17,6 +19,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -29,24 +32,21 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class GroupViewForm extends VerticalPanel {
 
-	EditorAdministrationAsync editorVerwaltung = ClientSideSettings.getEditorAdministration();
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	User user = null;
 	Vector<User> groupMember = new Vector<User>();
+	Vector<Groupmember> member = new Vector<Groupmember>();
 	Group group = null;
 	
 	List<Group> Gruppen = null;
 	
-	Label groupNameLabel = new Label("Gruppenname:");
-	TextBox groupNameTB = new TextBox();
+	Label groupNameLabel = new Label();
 	Label memberNamesLabel = new Label("Mitglieder:");
-	TextBox memberNamesTB = new TextBox();
 	Label surveyNameLabel = new Label("Umfrage:");
-	TextBox surveyNameTB = new TextBox();
 	Button newSurveyButton = new Button("Neu");
 	
 	ListBox memberLB = new ListBox();
-	HorizontalPanel surveyPanel = new HorizontalPanel();
 	VerticalPanel mainPanel = new VerticalPanel();
 	
 	List<Survey> Umfragen;
@@ -59,8 +59,13 @@ public class GroupViewForm extends VerticalPanel {
 		
 	}
 	
-	public GroupViewForm() {
+	public GroupViewForm(User user, Group group) {
 		
+		this.user = user;
+		this.group = group;
+	}
+	
+	public GroupViewForm() {
 	}
 	
 	public void onLoad() {
@@ -70,24 +75,56 @@ public class GroupViewForm extends VerticalPanel {
 		buildForm();
 		
 		final CellTable<Survey> table = new CellTable<Survey>();
-		
 		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
 		
-	}
+		editorAdministration.getAllGroupmemberByGroupID(group, new AsyncCallback<Vector<Groupmember>>() {
+			
+			@Override
+			public void onSuccess(Vector<Groupmember> result) {
+				member=result;
+				
+			for(int i = 0; i< member.size(); i++) {
+				User u = new User(member.elementAt(i).getUserID());
+				editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
+					User u = null;
+					@Override
+					public void onSuccess(User result) {
+					u = result;
+					groupMember.add(u);
+					memberLB.addItem(result.getNickname());
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("etwas ist schief gelaufen");
+					}
+					
+				});
+			}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				Window.alert("etwas ist schief gelaufen");	
+			}			
+		});
+		memberLB.setVisibleItemCount(2);
+		}
 	
 	public void buildForm() {
 		
 		this.clear();
 		
 		mainPanel.add(groupNameLabel);
-		mainPanel.add(groupNameTB);
+		groupNameLabel.setText(group.getName());
 		mainPanel.add(memberNamesLabel);
-		mainPanel.add(memberNamesTB);
-		mainPanel.add(surveyPanel);
+		mainPanel.add(memberLB);
 		mainPanel.add(newSurveyButton);
-		groupNameTB.setText(group.getName());
-		
+		mainPanel.add(surveyNameLabel);
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
+		
 		
 		this.add(mainPanel);
 		
@@ -97,8 +134,7 @@ public class GroupViewForm extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
-			
+			Window.alert(groupMember.elementAt(0).getNickname());
 			
 		}
 		
