@@ -9,6 +9,7 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -57,6 +58,8 @@ public class GroupViewCellListForm extends VerticalPanel {
 	public void onLoad() {
 		
 		super.onLoad();
+		
+		newSurvey.addClickHandler(new newSurveyClickHandler());
 		
 		final CellTable<Group> groupTable = new CellTable<Group>();
 		final CellTable<Survey> surveyTable = new CellTable<Survey>();
@@ -128,7 +131,7 @@ public class GroupViewCellListForm extends VerticalPanel {
 		
 		Cell<String> editSurveyCell = new ButtonCell();
 
-		Column<Survey, String> editColumn = new Column<Survey, String>(editSurveyCell) {
+		Column<Survey, String> editSurveyColumn = new Column<Survey, String>(editSurveyCell) {
 
 			@Override
 			public String getValue(Survey object) {
@@ -231,12 +234,128 @@ public class GroupViewCellListForm extends VerticalPanel {
 		});
 	
 	
+		editGroupColumn.setFieldUpdater(new FieldUpdater<Group, String>() {
+
+			@Override
+			public void update(int index, Group object, String value) {
+			
+			Group g = object;			
+			editorAdministration.getAllGroupmemberByGroupID(g, new AsyncCallback<Vector<Groupmember>>() {
+				
+				@Override
+				public void onSuccess(Vector<Groupmember> result) {
+					groupMember = result;
+					
+				for (int i = 0; i< groupMember.size(); i++) {
+					User u = new User(groupMember.elementAt(i).getUserID());
+					editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
+						User u = null;
+						@Override
+						public void onSuccess(User result) {
+						u = result;
+						userMember.add(u);
+						}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("Fehler!");
+						}
+						
+					});
+				}
+				contentPanel.clear();
+				GroupEditForm groupEditForm = new GroupEditForm(user, g, userMember , groupMember);
+				contentPanel.add(groupEditForm);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					
+					Window.alert("Fehler!");	
+				}			
+			
+			});
+			
+			}
+		
+		});
 		
 		
+		editSurveyColumn.setFieldUpdater(new FieldUpdater<Survey, String>() {
+
+			@Override
+			public void update(int index, Survey object, String value) {
+			
+			Survey s = object;			
+			editorAdministration.getSurveyBySurveyID(s, new AsyncCallback<Vector<SurveyEntry>>() {
+				
+				@Override
+				public void onSuccess(Vector<SurveyEntry> result) {
+					surveyEntry = result;
+				for (int i = 0; i< surveyEntry.size(); i++) {
+					SurveyEntry se = new SurveyEntry(surveyEntry.elementAt(i).getSurveyEntryID());
+					editorAdministration.getSurveyEntryBySurveyEntryID(se, new AsyncCallback<SurveyEntry>() {
+						SurveyEntry se = null;
+						@Override
+						public void onSuccess(SurveyEntry result) {
+						se = result;
+						surveyEntry.add(se);
+						}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("Fehler!");
+						}
+						
+					});
+				}
+				contentPanel.clear();
+				GroupViewForm groupViewForm = new GroupViewForm(user, s, surveyEntry);
+				contentPanel.add(groupViewForm);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					
+					Window.alert("Fehler!");	
+				}			
+			
+			});
+			
+			}
+		
+		});
+		
+		groupTable.addColumn(groupNameColumn, "Gruppenname:");
+		groupTable.addColumn(deleteGroupColumn);
+		groupTable.addColumn(editGroupColumn);
+		
+		groupDataProvider.addDataDisplay(groupTable);
+		
+		final List<Group> groupList = groupDataProvider.getList();
+		for(Group group : Gruppen) {
+			groupList.add(group);
+		}
+		contentPanel.add(newSurvey);
+		contentPanel.add(groupTable);
+		this.add(contentPanel);
+		
+		surveyTable.addColumn(surveyNameColumn, "Umfrage:");
+		surveyTable.addColumn(deleteSurveyColumn);
+		surveyTable.addColumn(editSurveyColumn);
+		
+		surveyDataProvider.addDataDisplay(surveyTable);
+		
+		final List<Survey> surveyList = surveyDataProvider.getList();
+		for(Survey survey : Umfragen) {
+			surveyList.add(survey);
+		}
+		contentPanel.add(newSurvey);
+		contentPanel.add(surveyTable);
+		this.add(contentPanel);
 	
 	}
 
-	
 	
 	
 }
