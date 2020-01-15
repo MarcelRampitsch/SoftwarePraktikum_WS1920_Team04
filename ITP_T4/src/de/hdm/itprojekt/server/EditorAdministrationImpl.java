@@ -153,6 +153,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			rs = pMapper.getAllPresentationBySearchCriteria(p);
 			return rs;
 		}
+		// Methode um alle Präsentationen anhand des Umfrageeintrags zu finden
+		public Vector<Presentation> getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+			Vector<Presentation> rs = new Vector<Presentation>();
+			rs = pMapper.getAllPresentationBySurveyEntry(se);
+			return rs;
+		}
 
 	
 	// Group

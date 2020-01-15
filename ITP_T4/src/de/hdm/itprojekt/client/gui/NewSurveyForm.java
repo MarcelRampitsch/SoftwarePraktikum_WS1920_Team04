@@ -35,50 +35,48 @@ import de.hdm.itprojekt.shared.bo.User;
 public class NewSurveyForm extends VerticalPanel {
 
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-	
+
 	public NewSurveyForm(User user) {
 		this.user = user;
 	}
-	
+
 	private User user = null;
 	private Vector<Cinema> cine = null;
 	private Vector<Movie> movie = null;
 	private Vector<Timeslot> timesl = null;
-	
-	ListDataProvider <SurveyEntry> dataProvider;
-	
+	private Vector<Presentation> prese = null;
+
+	ListDataProvider<SurveyEntry> dataProvider;
+
 	VerticalPanel inhalt = new VerticalPanel();
-	
-	List <SurveyEntry> Umfrageeintrag;
-	 
-	List <Group> Gruppen;
-	
-	
-	
+
+	List<SurveyEntry> Umfrageeintrag;
+
+	List<Group> Gruppen;
+
 	/*
 	 * Erstellung der Widgets
 	 */
-	Button zurueckButton = new Button ("Zurueck");
-	
+	Button zurueckButton = new Button("Zurueck");
+
 	TextBox umfrageNameBox = new TextBox();
-	
+
 	Label datum = new Label("Datum waehlen:");
 	DatePicker datumAuswahlPicker = new DatePicker();
-	
+
 	Label kino = new Label("Kino waehlen:");
 	ListBox kinoDropBox = new ListBox();
-	
+
 	Label film = new Label("Film waehlen:");
 	ListBox filmDropBox = new ListBox();
-	
+
 	Label spielzeit = new Label("Uhrzeit auswaehlen:");
 	ListBox spielzeitDropBox = new ListBox();
-	
-	Button vorstellungSuchenButton = new Button ("Vorstellung suchen");
-	
-	Button umfrageSichernButton = new Button ("Umfrage speichern");
-	
-	
+
+	Button vorstellungSuchenButton = new Button("Vorstellung suchen");
+
+	Button umfrageSichernButton = new Button("Umfrage speichern");
+
 	public void onLoad() {
 		super.onLoad();
 		inhalt.add(zurueckButton);
@@ -97,42 +95,45 @@ public class NewSurveyForm extends VerticalPanel {
 		inhalt.add(umfrageSichernButton);
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
-		
+
 		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
-			
+
 			public void onFailure(Throwable caught) {
 				Window.alert("Beim Laden der Kinos ist etwas schief gelaufen");
 			}
+
 			public void onSuccess(Vector<Cinema> result) {
-				for (int i= 0; i < result.size(); i++) {
+				for (int i = 0; i < result.size(); i++) {
 					kinoDropBox.addItem(result.elementAt(i).getName());
 					cine = result;
 				}
 			}
 		});
-		
+
 		editorAdministration.getAllMovieByUser(this.user, new AsyncCallback<Vector<Movie>>() {
-			
+
 			public void onFailure(Throwable caught) {
 				Window.alert("Beim Laden der Filme ist etwas schief gelaufen");
 			}
+
 			public void onSuccess(Vector<Movie> result) {
-				for (int i= 0; i < result.size(); i++) {
+				for (int i = 0; i < result.size(); i++) {
 					filmDropBox.addItem(result.elementAt(i).getName());
 					movie = result;
 				}
 			}
 		});
-		
+
 		editorAdministration.getAllTimeslotByUser(this.user, new AsyncCallback<Vector<Timeslot>>() {
-			
-		public void onFailure(Throwable caught) {
-			Window.alert("Beim Laden der Timeslots ist etwas schief gelaufen");
-		}
-		public void onSuccess(Vector<Timeslot> result) {
-			for (int i= 0; i < result.size(); i++) {
-				spielzeitDropBox.addItem(result.elementAt(i).getTime());
-				timesl = result;
+
+			public void onFailure(Throwable caught) {
+				Window.alert("Beim Laden der Timeslots ist etwas schief gelaufen");
+			}
+
+			public void onSuccess(Vector<Timeslot> result) {
+				for (int i = 0; i < result.size(); i++) {
+					spielzeitDropBox.addItem(result.elementAt(i).getTime());
+					timesl = result;
 				}
 			}
 		});
@@ -141,56 +142,65 @@ public class NewSurveyForm extends VerticalPanel {
 	/*
 	 * Implementierung der Click Handler
 	 */
-	
+
 	/*
-	 * BackHandler: Handler, der auf die Betätigung der Schaltfläche "Zurueck" reagiert,
-	 * und den Nutzer wieder auf die vorhergehende Seite befördert.
+	 * BackHandler: Handler, der auf die Betätigung der Schaltfläche "Zurueck"
+	 * reagiert, und den Nutzer wieder auf die vorhergehende Seite befördert.
 	 */
 	private class BackHandler implements ClickHandler {
 
-		
 		public void onClick(ClickEvent event) {
 			RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
 		}
 	}
+
 	private class SearchHandler implements ClickHandler {
-		
+
 		public void onClick(ClickEvent event) {
 			Cinema c = cine.elementAt(kinoDropBox.getSelectedIndex());
 			Movie m = movie.elementAt(filmDropBox.getSelectedIndex());
 			Timeslot t = timesl.elementAt(spielzeitDropBox.getSelectedIndex());
 			Date date = new java.sql.Date(datumAuswahlPicker.getValue().getTime());
-			Presentation p = new Presentation(umfrageNameBox.getText(),c.getId(), m.getId(), user.getId(), t.getId(), date);
+			Presentation p = new Presentation(umfrageNameBox.getText(), c.getId(), m.getId(), user.getId(), t.getId(),
+					date);
 			/*
-			 * if(umfrageNameBox.getText() != null & kinoDropBox.getSelectedItemText() != "Kein Kino ausgewÃ¤hlt" & filmDropBox.getSelectedItemText() !="Kein Film ausgewÃ¤hlt" & spielzeitDropBox.getSelectedItemText() != "Keine Spielzeit ausgewÃ¤hlt") {
+			 * if(umfrageNameBox.getText() != null & kinoDropBox.getSelectedItemText() !=
+			 * "Kein Kino ausgewÃ¤hlt" & filmDropBox.getSelectedItemText()
+			 * !="Kein Film ausgewÃ¤hlt" & spielzeitDropBox.getSelectedItemText() !=
+			 * "Keine Spielzeit ausgewÃ¤hlt") {
 			 */
-				editorAdministration.getAllPresentationBySearchCriteria(p, new AsyncCallback<Vector<Presentation>>() {
+			editorAdministration.getAllPresentationBySearchCriteria(p, new AsyncCallback<Vector<Presentation>>() {
 
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Bei der Suche der Vorstellungen ist etwas schief gelaufen");
-						
-					}
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Bei der Suche der Vorstellungen ist etwas schief gelaufen");
 
-					@Override
-					public void onSuccess(Vector<Presentation> result) {
-						ListBox vorstellungenDropBox = new ListBox();
-						inhalt.add(vorstellungenDropBox);
-						
+				}
+
+				@Override
+				public void onSuccess(Vector<Presentation> result) {
+					ListBox vorstellungenDropBox = new ListBox();
+					inhalt.add(vorstellungenDropBox);
+					for (int i = 0; i < result.size(); i++) {
+						vorstellungenDropBox.addItem(result.elementAt(i).getName());
+						prese = result;
+
 					}
-				});
+				}
+			});
+
 		}
-	
 	}
-	
+
 	/*
-	 * SafeHandler: Handler, der auf die Betätigung der Schaltfläche "Speichern" reagiert,
-	 * und dabei die zuvor eingegebenen Daten abspeichert und danach den Umfragetable anzeigt.
+	 * SafeHandler: Handler, der auf die Betätigung der Schaltfläche "Speichern"
+	 * reagiert, und dabei die zuvor eingegebenen Daten abspeichert und danach den
+	 * Umfragetable anzeigt.
 	 */
 	private class SafeHandler implements ClickHandler {
-		
+
 		public void onClick(ClickEvent event) {
 
 			RootPanel.get().clear();
@@ -198,10 +208,10 @@ public class NewSurveyForm extends VerticalPanel {
 			RootPanel.get().add(ef);
 			UmfragenTable umfragen = new UmfragenTable(user, null);
 			RootPanel.get().add(umfragen);
-			
+
 			SurveyEntry se = new SurveyEntry(1, umfrageNameBox.getText());
 			editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
-				
+
 				public void onFailure(Throwable caught) {
 					Window.alert("Beim Hinzufügen des Umfrageeintrages ist etwas schief gelaufen.");
 				}
@@ -210,8 +220,8 @@ public class NewSurveyForm extends VerticalPanel {
 				public void onSuccess(SurveyEntry result) {
 					EditorForm editform = new EditorForm(user, Gruppen);
 					RootPanel.get().add(editform);
-					
-					List <SurveyEntry> liste = dataProvider.getList();
+
+					List<SurveyEntry> liste = dataProvider.getList();
 					liste.add(se);
 					Window.alert("Eingabe gesichert");
 				}

@@ -12,6 +12,7 @@ import java.util.Date;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -101,7 +102,7 @@ public class PresentationMapper {
 		  
 		  Vector<Presentation> result = new Vector<Presentation>();
 		  try {
-			  PreparedStatement getAllPresentationBySearchCriteria = con.prepareStatement("SELECT * From softwarepraktikum_ws1920.presentation"+ "WHERE date=?, cinemaID=?, movieID=?,timeslotID=?");
+			  PreparedStatement getAllPresentationBySearchCriteria = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.presentation"+"WHERE date=? AND cinemaID=? AND movieID=? AND timeslotID=?");
 			  getAllPresentationBySearchCriteria.setDate(1, p.getDate());
 			  getAllPresentationBySearchCriteria.setInt(2, p.getCinemaID());
 			  getAllPresentationBySearchCriteria.setInt(3, p.getMovieID());
@@ -206,6 +207,36 @@ public class PresentationMapper {
 				// Ergebnis-Tupel erstellen
 
 				ResultSet rs = findAllByUSerID.executeQuery();
+
+				while (rs.next()) {
+					// Ergebnis-Tupel in Objekt umwandeln
+					p = new Presentation(rs.getString("name"),rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
+
+					result.addElement(p);
+				} // Fehlerbehandlung hinzufügen
+			} catch (SQLException e) {
+			      e.printStackTrace();
+			      return null;
+			}
+			// Ergebnisvektor zurückgeben
+			return result;
+		
+		}
+	  public Vector<Presentation> getAllPresentationBySurveyEntry(SurveyEntry se)  {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+			Presentation p = null;
+			// Ergebnisvektor vorbereiten
+			Vector<Presentation> result = new Vector<Presentation>();
+			try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema zu finden
+				PreparedStatement findAllBySurveyEntryID = con.prepareStatement(
+						"SELECT * From softwarepraktikum_ws1920.presentation "
+						+ "WHERE SurveyEntryID=? ");
+				findAllBySurveyEntryID.setInt(1, se.getId());
+				
+				// Ergebnis-Tupel erstellen
+
+				ResultSet rs = findAllBySurveyEntryID.executeQuery();
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
