@@ -96,21 +96,21 @@ public class PresentationMapper {
 		
 		}
 	  
-	  public Vector<Presentation> getAllPresentationBySearchCriteria(java.sql.Date date, Cinema c, Movie m, Timeslot t){
+	  public Vector<Presentation> getAllPresentationBySearchCriteria(Presentation p){
 		  Connection con = DBConnection.getConnection();
-		  Presentation p = null;
+		  
 		  Vector<Presentation> result = new Vector<Presentation>();
 		  try {
 			  PreparedStatement getAllPresentationBySearchCriteria = con.prepareStatement("SELECT * From softwarepraktikum_ws1920.presentation"+ "WHERE date=?, cinemaID=?, movieID=?,timeslotID=?");
-			  getAllPresentationBySearchCriteria.setDate(1, date);
-			  getAllPresentationBySearchCriteria.setInt(2, c.getId());
-			  getAllPresentationBySearchCriteria.setInt(3, c.getId());
-			  getAllPresentationBySearchCriteria.setInt(4, t.getId());
+			  getAllPresentationBySearchCriteria.setDate(1, p.getDate());
+			  getAllPresentationBySearchCriteria.setInt(2, p.getCinemaID());
+			  getAllPresentationBySearchCriteria.setInt(3, p.getMovieID());
+			  getAllPresentationBySearchCriteria.setInt(4, p.getTimeslotID());
 			  ResultSet rs = getAllPresentationBySearchCriteria.executeQuery();
 
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
-					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("id"), rs.getTimestamp("creationDate"));
+					p = new Presentation(rs.getString("name"), rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
 
 					// Objekt in einen Ergebinsvektor übergeben
 					result.addElement(p);

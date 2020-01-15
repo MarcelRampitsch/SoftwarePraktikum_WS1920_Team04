@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -20,10 +21,12 @@ import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHandler;
+import de.hdm.itprojekt.client.gui.admin.AdminForm;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
@@ -71,6 +74,8 @@ public class NewSurveyForm extends VerticalPanel {
 	Label spielzeit = new Label("Uhrzeit auswaehlen:");
 	ListBox spielzeitDropBox = new ListBox();
 	
+	Button vorstellungSuchenButton = new Button ("Vorstellung suchen");
+	
 	Button umfrageSichernButton = new Button ("Umfrage speichern");
 	
 	
@@ -88,7 +93,9 @@ public class NewSurveyForm extends VerticalPanel {
 		inhalt.add(filmDropBox);
 		inhalt.add(spielzeit);
 		inhalt.add(spielzeitDropBox);
+		inhalt.add(vorstellungSuchenButton);
 		inhalt.add(umfrageSichernButton);
+		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
 		
 		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
@@ -148,6 +155,36 @@ public class NewSurveyForm extends VerticalPanel {
 			RootPanel.get().add(ef);
 		}
 	}
+	private class SearchHandler implements ClickHandler {
+		
+		public void onClick(ClickEvent event) {
+			Cinema c = cine.elementAt(kinoDropBox.getSelectedIndex());
+			Movie m = movie.elementAt(filmDropBox.getSelectedIndex());
+			Timeslot t = timesl.elementAt(spielzeitDropBox.getSelectedIndex());
+			Date date = new java.sql.Date(datumAuswahlPicker.getValue().getTime());
+			Presentation p = new Presentation(umfrageNameBox.getText(),c.getId(), m.getId(), user.getId(), t.getId(), date);
+			/*
+			 * if(umfrageNameBox.getText() != null & kinoDropBox.getSelectedItemText() != "Kein Kino ausgew√§hlt" & filmDropBox.getSelectedItemText() !="Kein Film ausgew√§hlt" & spielzeitDropBox.getSelectedItemText() != "Keine Spielzeit ausgew√§hlt") {
+			 */
+				editorAdministration.getAllPresentationBySearchCriteria(p, new AsyncCallback<Vector<Presentation>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Bei der Suche der Vorstellungen ist etwas schief gelaufen");
+						
+					}
+
+					@Override
+					public void onSuccess(Vector<Presentation> result) {
+						ListBox vorstellungenDropBox = new ListBox();
+						inhalt.add(vorstellungenDropBox);
+						
+					}
+				});
+		}
+	
+	}
+	
 	/*
 	 * SafeHandler: Handler, der auf die Bet‰tigung der Schaltfl‰che "Speichern" reagiert,
 	 * und dabei die zuvor eingegebenen Daten abspeichert und danach den Umfragetable anzeigt.

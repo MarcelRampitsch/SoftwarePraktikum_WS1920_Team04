@@ -72,7 +72,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	public Vector<Timeslot> getAllTimeslotByUser(User u) throws IllegalArgumentException;
 	
-	public Vector<Presentation> getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t) throws IllegalArgumentException;
+	public Vector<Presentation> getAllPresentationBySearchCriteria(Presentation p) throws IllegalArgumentException;
 
 	// GroupMember Methoden
 	

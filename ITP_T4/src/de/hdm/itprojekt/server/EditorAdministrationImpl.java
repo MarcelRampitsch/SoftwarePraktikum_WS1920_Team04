@@ -148,9 +148,9 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			return rs;
 		}
 		// Methode um alle Vorstellungen anzuzeigen, die den eingegebenen Suchkriterien entsprechen
-		public Vector<Presentation> getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t) throws IllegalArgumentException{
+		public Vector<Presentation> getAllPresentationBySearchCriteria(Presentation p) throws IllegalArgumentException{
 			Vector<Presentation> rs = new Vector<Presentation>();
-			rs = pMapper.getAllPresentationBySearchCriteria(d, c, m, t);
+			rs = pMapper.getAllPresentationBySearchCriteria(p);
 			return rs;
 		}
 

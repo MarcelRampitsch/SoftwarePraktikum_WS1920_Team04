@@ -57,7 +57,7 @@ public interface EditorAdministrationAsync {
 
 	void getAllTimeslotByUser(User u, AsyncCallback<Vector<Timeslot>> callback);
 
-	void getAllPresentationBySearchCriteria(Date d, Cinema c, Movie m, Timeslot t, AsyncCallback<Vector<Presentation>> callback);
+	void getAllPresentationBySearchCriteria(Presentation p, AsyncCallback<Vector<Presentation>> callback);
 
 	// GroupMember
 	void createGroupmember(Groupmember gm, AsyncCallback<Groupmember> callback);
