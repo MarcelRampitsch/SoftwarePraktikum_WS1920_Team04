@@ -60,6 +60,12 @@ public class MovieForm  extends VerticalPanel{
     	
     	super.onLoad();
     	
+		//CSS Stylename Vergabe
+
+    	editMovie.addStyleName("editMovieStyle");
+    	newMovie.addStyleName("newMovieStyle");
+    	deleteMovie.addStyleName("deleteMovieStyle");
+    	
     	newMovie.addClickHandler(new addMovieClickHandler());
 		editMovie.addClickHandler(new editMovieClickHandler());
 		deleteMovie.addClickHandler(new deleteMovieClickHandler());

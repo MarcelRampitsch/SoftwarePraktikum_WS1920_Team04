@@ -69,6 +69,12 @@ public class CinemaForm extends VerticalPanel {
 		
 		super.onLoad();
 		
+		//CSS Stylename Vergabe
+		
+		editCinema.addStyleName("editCinemaStyle");
+		newCinema.addStyleName("newCinemaStyle");
+		deleteCinema.addStyleName("deleteCinemaStyle");
+		
 		//this.add(cinemaGroup);
 		
 //		cinemaGroupPanel1.add(cinemaGroupBox);

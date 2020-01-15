@@ -68,6 +68,12 @@ public class TimeslotForm extends VerticalPanel {
     	
     	super.onLoad();
     	
+		//CSS Stylename Vergabe
+    	
+    	timeslotEdit.addStyleName("timeslotEditStyle");
+    	timeslotNew.addStyleName("timeslotNewStyle");
+    	timeslotDelete.addStyleName("timeslotDeleteStyle");
+    	
     	this.add(timeslotLabel);
     	
 

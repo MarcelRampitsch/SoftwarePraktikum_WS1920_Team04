@@ -92,6 +92,15 @@ public class PresentationForm extends VerticalPanel{
 	    public void onLoad() {
 	    	
 	    	super.onLoad();
+	    	
+			//CSS Stylename Vergabe
+	    	
+	    	presentationAdd.addStyleName("presentationEditStyle");
+	    	presentationNew.addStyleName("presentationNewStyle");
+	    	presentationDelete.addStyleName("presentationDeleteStyle");
+	    	search.addStyleName("searchStyle");
+
+	    	
 	    	this.add(pcinemaLabel);
 	    	this.add(cinemaDrop);
 	    	

@@ -27,6 +27,96 @@
 	transition: 0.5s;	
 }
 
+/* CinemaForm */
+
+
+.editCinemaStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.newCinemaStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.deleteCinemaStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+
+/* MovieForm */
+
+.editMovieStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.newMovieStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.deleteMovieStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+
+/* TimeslotForm */
+
+.timeslotEditStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.timeslotNewStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.timeslotDeleteStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+/* PresentationForm */
+
+.presentationEditStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.presentationNewStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.presentationDeleteStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.searchStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+
 
 
 
