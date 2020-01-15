@@ -27,6 +27,50 @@
 	transition: 0.5s;	
 }
 
+/* EditCinemaGroupDialogBox */
+
+.cinemaGroupSafeStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.cinemaGroupCloseStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+/* CinemaGroupAddDialogBox */
+
+.cinemaGroupAddSafeStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.cinemaGroupAddCloseStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+/* DeleteCinemaGroupDialogBox */
+
+.deleteCinemaGroupYesStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.deleteCinemaGroupNoStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+
+
 /* CinemaForm */
 
 
@@ -47,6 +91,53 @@
 	color: #f2f2f2;
 	transition: 0.5s;	
 }
+
+/* EditCinemaDialogBox */
+
+.CinemaSafeStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.cinemaCloseStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+/* CinemaAddDialogBox */
+
+
+.cinemaAddSafeStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.cinemaAddCloseStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+
+/* DeleteCinemDialogBox */
+
+
+.deleteCinemaYesStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+
+.deleteCinemaNoStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
 
 
 /* MovieForm */

@@ -44,6 +44,12 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 	public void onLoad() {
 		super.onLoad();
 		
+		//CSS Stylename Vergabe
+
+		yes.addStyleName("deleteCinemaGroupYesStyle");
+		no.addStyleName("deleteCinemaGroupNoStyle");
+		
+		
 		content.add(cinemaLabel);
 		
 		horzcontent.add(yes);

@@ -46,6 +46,12 @@ public class EditCinemaDialogBox extends DialogBox {
 	
 	public void onLoad() {
 		super.onLoad();
+		
+		//CSS Stylename Vergabe
+		
+		safe.addStyleName("CinemaSafeStyle");
+		close.addStyleName("cinemaCloseStyle");
+		
 		content.add(close);
 		content.add(cinemaGroup);
 		content.add(cinemaGroupBox);

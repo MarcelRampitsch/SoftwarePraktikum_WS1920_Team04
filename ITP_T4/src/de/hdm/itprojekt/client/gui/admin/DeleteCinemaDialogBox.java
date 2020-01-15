@@ -38,6 +38,13 @@ public class DeleteCinemaDialogBox extends DialogBox {
 	public void onLoad() {
 		super.onLoad();
 		
+		
+		//CSS Stylename Vergabe
+
+		yes.addStyleName("deleteCinemaYesStyle");
+		no.addStyleName("deleteCinemaNoStyle");
+		
+		
 		content.add(cinemaLabel);
 		
 		horzcontent.add(yes);
