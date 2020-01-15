@@ -64,8 +64,8 @@ public class GruppenForm extends VerticalPanel {
 	  
 	  ListBox mitglieder = new ListBox();
 	  
-	  Button hinzufÃ¼gen = new Button("+");
-	  Button lÃ¶schen = new Button("X");
+	  Button hinzufügen = new Button("+");
+	  Button löschen = new Button("X");
 	  Button speichern = new Button("sichern");
 	
 	  GruppenForm gruppenForm = null;
@@ -101,13 +101,13 @@ public class GruppenForm extends VerticalPanel {
 		
 		inhalt.add(nickname);
 		suche.add(nicknamebox);
-		suche.add(hinzufÃ¼gen);
-		hinzufÃ¼gen.addClickHandler(new hinzufuegenHandler());
+		suche.add(hinzufügen);
+		hinzufügen.addClickHandler(new hinzufuegenHandler());
 		inhalt.add(suche);
 		
 		liste.add(mitglieder);
-		liste.add(lÃ¶schen);
-		lÃ¶schen.addClickHandler(new loeschenHandler());
+		liste.add(löschen);
+		löschen.addClickHandler(new loeschenHandler());
 		inhalt.add(liste);
 		
 		inhalt.add(speichern);		
