@@ -98,9 +98,10 @@ public interface EditorAdministration extends RemoteService {
 	// Survey Methoden
 	
 	// Eine Ummfage anlegen.
-	public Survey createSurvey(Survey s)
-			throws IllegalArgumentException;
+	public Survey createSurvey(Survey s) throws IllegalArgumentException;
 
+	public Vector<Survey> getAllSurveyByGroupID(Group g) throws IllegalArgumentException;
+	
 	// Survey anhand der SurveyID suchen.
 	public Survey getSurveyBySurveyID(Survey s) throws IllegalArgumentException;
 	

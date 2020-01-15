@@ -241,6 +241,11 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		}
 		return null;
 	}
+	
+	public Vector<Survey> getAllSurveyByGroupID(Group g) throws IllegalArgumentException {
+		Vector<Survey> survey = sMapper.findAllSurveyByGroup(g);
+		return survey;
+	}
 
 	public Survey getSurveyBySurveyID(Survey s) throws IllegalArgumentException {
 		Survey survey = sMapper.findBySurveyID(s);

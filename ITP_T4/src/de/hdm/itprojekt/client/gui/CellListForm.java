@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.client.gui;
 
 
+import java.util.Collections;
+
 /**
  * 
  * @author serhatulus, Dominik Thumm
@@ -25,12 +27,17 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.NoSelectionModel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
+import de.hdm.itprojekt.shared.bo.Survey;
+
 
 public class CellListForm extends VerticalPanel {
 	
@@ -46,6 +53,7 @@ public class CellListForm extends VerticalPanel {
 
 	
 	 //erstellen des Data Provider
+	   List<Survey> Umfragen;
 	   List<Group> Gruppen;
 	   Vector<Groupmember> member = new Vector<Groupmember>();
 	   Vector<User> groupMember = new Vector<User>();
@@ -72,7 +80,7 @@ public class CellListForm extends VerticalPanel {
 			// TODO Auto-generated method stub
 			return object.getName();
 		}
-	};
+	   };
 		
 		
 		
@@ -198,6 +206,44 @@ public class CellListForm extends VerticalPanel {
 		table.addColumn(nameColumn, "Groupname");
 		table.addColumn(loeschenColumn);
 		table.addColumn(editColumn);
+		
+		
+		
+		NoSelectionModel<Group> selectionModelMyObj = new NoSelectionModel<Group>();
+		Handler tableHandle = new SelectionChangeEvent.Handler() 
+		{
+
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				Group clickedObj = selectionModelMyObj.getLastSelectedObject();
+				if(table.getKeyboardSelectedColumn()==0)
+				{
+					editorAdministration.getAllSurveyByGroupID(clickedObj, new AsyncCallback<Vector<Survey>>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void onSuccess(Vector<Survey> result) {
+							Umfragen = Collections.list(result.elements());
+							inhalt.clear();
+							GroupViewForm viewForm = new GroupViewForm(user,clickedObj,Umfragen);
+							RootPanel.get().add(viewForm);	
+						}
+					});
+					
+									
+				}
+			}
+		};
+
+		selectionModelMyObj.addSelectionChangeHandler(tableHandle);
+		table.setSelectionModel(selectionModelMyObj);
+
+
 		
 		dataProvider.addDataDisplay(table);
 		

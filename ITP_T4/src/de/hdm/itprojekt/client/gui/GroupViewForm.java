@@ -1,11 +1,16 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -40,19 +45,18 @@ public class GroupViewForm extends VerticalPanel {
 	Vector<Groupmember> member = new Vector<Groupmember>();
 	Group group = null;
 	
-	List<Group> Gruppen = null;
+	List<Survey> Umfragen;
 	
 	Button back = new Button("<--");
 	Label groupNameLabel = new Label();
 	Label memberNamesLabel = new Label("Mitglieder:");
 	Label surveyNameLabel = new Label("Umfrage:");
 	Button newSurveyButton = new Button("+");
+	CellTable<Survey> table = new CellTable<Survey>();
 	
 	ListBox memberLB = new ListBox();
 	VerticalPanel mainPanel = new VerticalPanel();
 	HorizontalPanel umfragePanel = new HorizontalPanel();
-	
-	List<Survey> Umfragen;
 	
 	public GroupViewForm(User user, Group group, Vector<User> groupMember) {
 		
@@ -62,10 +66,11 @@ public class GroupViewForm extends VerticalPanel {
 		
 	}
 	
-	public GroupViewForm(User user, Group group) {
+	public GroupViewForm(User user, Group group, List<Survey> Umfragen) {
 		
 		this.user = user;
 		this.group = group;
+		this.Umfragen = Umfragen;
 	}
 	
 	public GroupViewForm() {
@@ -74,11 +79,8 @@ public class GroupViewForm extends VerticalPanel {
 	public void onLoad() {
 		
 		super.onLoad();
-		
 		buildForm();
 		
-		final CellTable<Survey> table = new CellTable<Survey>();
-		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
 		
 		editorAdministration.getAllGroupmemberByGroupID(group, new AsyncCallback<Vector<Groupmember>>() {
 			
@@ -113,6 +115,38 @@ public class GroupViewForm extends VerticalPanel {
 				Window.alert("etwas ist schief gelaufen");	
 			}			
 		});
+		
+		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
+		
+		TextColumn<Survey> nameColumn = new TextColumn<Survey>() {
+
+			@Override
+			public String getValue(Survey object) {
+				// TODO Auto-generated method stub
+				return object.getName();
+			}
+		};
+			
+		Cell<String> loeschenCell = new ButtonCell();	
+			
+		Column<Survey, String> loeschenColumn = new Column<Survey, String>(loeschenCell) {
+
+			@Override
+			public String getValue(Survey object) {
+				// TODO Auto-generated method stub
+				return "X";
+			}
+		};
+		
+		table.addColumn(nameColumn);
+		table.addColumn(loeschenColumn);
+		
+		dataProvider.addDataDisplay(table);
+		
+		final List <Survey> list = dataProvider.getList();
+		for(Survey survey: Umfragen) {
+			list.add(survey);
+		}		
 		memberLB.setVisibleItemCount(2);
 		}
 	
@@ -129,8 +163,7 @@ public class GroupViewForm extends VerticalPanel {
 		umfragePanel.add(newSurveyButton);
 		mainPanel.add(umfragePanel);
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
-		
-		
+		mainPanel.add(table);
 		this.add(mainPanel);
 		
 	}
@@ -151,7 +184,7 @@ public class GroupViewForm extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			RootPanel.get().clear();
-			EditorForm form = new EditorForm(user, Gruppen);
+			EditorForm form = new EditorForm(user);
 			RootPanel.get().add(form);
 		}
 	 }

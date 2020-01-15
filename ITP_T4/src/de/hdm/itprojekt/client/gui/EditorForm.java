@@ -56,9 +56,6 @@ public class EditorForm extends VerticalPanel {
 	 VerticalPanel west = new VerticalPanel();
 	 VerticalPanel east = new VerticalPanel();
 	 ListBox group = new ListBox();
-	 Button neueGruppe = new Button("Neue Gruppe");
-	 Button neueUmfrage = new Button("Neue Umfrage");
-	 Button gruppenAnzeigenButton = new Button("Gruppen anzeigen");
 	
 	/**
 	 * 
@@ -70,6 +67,10 @@ public class EditorForm extends VerticalPanel {
 	public EditorForm(User user, List <Group> Gruppen){
 		this.user = user;
 		this.Gruppen = Gruppen;
+	}
+	
+	public EditorForm(User user) {
+		this.user = user;
 	}
 	
 	
@@ -155,60 +156,6 @@ public class EditorForm extends VerticalPanel {
 				Window.Location.replace("/Admin.html");
 			}
 		});
-		
-		 class OpenUpClickHandler implements ClickHandler{
-				
-			 public void onClick(ClickEvent event) {
-				
-				NewSurveyForm nsf = new NewSurveyForm(user);
-			//	RootPanel.get().clear();
-				west.clear();
-				
-				west.add(nsf);
-				
-			}
-		 }
-			 
-			 
-			 
-			class openGroupClickHandler implements ClickHandler{
-
-				@Override
-				public void onClick(ClickEvent event) {
-					Vector<User> group = new Vector<User>();
-					group.add(user);
-					GruppenForm gf = new GruppenForm(user, group);
-					west.clear();
-					
-					west.add(gf);
-				}
-				
-			}
-			
-			class gruppenAnzeigenButtonClickHandler implements ClickHandler{
-
-				@Override
-				public void onClick(ClickEvent event) {
-					
-					GroupViewForm gvf = new GroupViewForm();
-					west.clear();
-					west.add(gvf);
-						
-				}
-				
-			}
-			
-		 
-		neueUmfrage.addClickHandler(new OpenUpClickHandler());
-				
-		
-		neueGruppe.addClickHandler(new openGroupClickHandler());
-		
-		gruppenAnzeigenButton.addClickHandler(new gruppenAnzeigenButtonClickHandler());
-		
-		header.add(neueGruppe);
-		header.add(neueUmfrage);
-		header.add(gruppenAnzeigenButton);
 		
 		header.add(toAdmin);
 //		GruppenForm gruppenForm = new GruppenForm(user);

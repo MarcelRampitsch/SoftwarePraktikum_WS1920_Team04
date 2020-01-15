@@ -22,25 +22,28 @@ private static final long serialversionUID = 1l;
 		}
 	
 	public Survey() {
-		
+	}
+	
+	public Survey (String name) {
+		this.name = name;
 	}
 
 	public String getName() {
 		return name;
 	}
-	public void setName() {
+	public void setName(String name) {
 		this.name = name;
 	}
 	public int getUserID() {
 		return userID;
 	}
-	public void setUserID() {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	public int getGroupID() {
 		return groupID;
 	}
-	public void setGroupID() {
+	public void setGroupID(int groupID) {
 		this.groupID = groupID;
 	}
 }

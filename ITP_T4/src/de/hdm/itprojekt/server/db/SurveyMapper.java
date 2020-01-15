@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Group;
+import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -15,7 +16,7 @@ public class SurveyMapper {
 	
 	/**
 	 * Die Klasse SurveyMapper bildet <code>Survey</code> Objekte auf eine
-	 * relationale Datenbank ab. Ebenfalls ist es möglich aus Datenbank-Tupel
+	 * relationale Datenbank ab. Ebenfalls ist es mï¿½glich aus Datenbank-Tupel
 	 * Java-Objekte zu erzeugen.
 	 * 
 	 * Zur Verwaltung der Objekte implementiert die Mapper-Klasse entsprechende
@@ -27,8 +28,8 @@ public class SurveyMapper {
 
 	/**
 	 * Die Klasse SurveyMapper wird nur einmal instantiiert
-	 * (Singleton-Eigenschaft). Damit diese Eigenschaft erfüllt werden kann, wird
-	 * zunächst eine Variable mit dem Schlüsselwort static und dem Standardwert null
+	 * (Singleton-Eigenschaft). Damit diese Eigenschaft erfï¿½llt werden kann, wird
+	 * zunï¿½chst eine Variable mit dem Schlï¿½sselwort static und dem Standardwert null
 	 * erzeugt. Sie speichert die Instanz dieser Klasse.
 	 */
 	
@@ -38,9 +39,9 @@ public class SurveyMapper {
 	
 	
 	/**
-	 * Methode zum Sicherstellen der Singleton-Eigenschaft. Diese sorgt dafür, dass
+	 * Methode zum Sicherstellen der Singleton-Eigenschaft. Diese sorgt dafï¿½r, dass
 	 * nur eine einzige Instanz der SurveyMapper-Klasse existiert. Aufgerufen wird
-	 * die Klasse somit über SurveyMapper.surveyMapper() und nicht über den
+	 * die Klasse somit ï¿½ber SurveyMapper.surveyMapper() und nicht ï¿½ber den
 	 * New-Operator.
 	 * 
 	 * @return Das <code/>SurveyMapper<code/> Objekt.
@@ -64,7 +65,7 @@ public class SurveyMapper {
 			  PreparedStatement findBySurveyID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=? ;");
 			  findBySurveyID.setInt(1, s.getId());
 			  
-			  // Ausführen des Queries
+			  // Ausfï¿½hren des Queries
 			  ResultSet rs = findBySurveyID.executeQuery();
 
 			  s = new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
@@ -73,9 +74,41 @@ public class SurveyMapper {
 			  e.printStackTrace();
 			  return null;
 		  }
-		  //Rückgabe des Survey
+		  //Rï¿½ckgabe des Survey
 		  return s;
 	  }
+	  
+	  public Vector<Survey> findAllSurveyByGroup(Group g)  {
+			// DB-Verbindung holen
+			Connection con = DBConnection.getConnection();
+			Survey s = null;
+			// Ergebnisvektor vorbereiten
+			Vector<Survey> result = new Vector<Survey>();
+			try { // Prepared Statement erstellen um alle PrÃ¤sentationen eines bestimmten Movies zu finden
+				PreparedStatement findAllGroup = con.prepareStatement(
+						"SELECT * From softwarepraktikum_ws1920.survey "
+						+ "WHERE groupID=? ");
+				findAllGroup.setInt(1, g.getId());
+
+                  // Ergebnis-Tupel erstellen
+
+				ResultSet rs = findAllGroup.executeQuery();
+
+				while (rs.next()) {
+					// Ergebnis-Tupel in Objekt umwandeln
+					s = new Survey(rs.getInt("surveyID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
+
+					// Objekt in einen Ergebinsvektor Ã¼bergeben
+					result.addElement(s);
+				}// Fehlerbehandlung hinzufÃ¼gen
+			} catch (SQLException e) {
+			      e.printStackTrace();
+			      return null;
+			}
+			// Ergebnisvektor zurÃ¼ckgeben
+			return result;
+		
+		}
 	  
 	  // Methode zum Finden eines Surveys anhand des Namens
 	  public Survey findByName(Survey s) {
@@ -97,7 +130,7 @@ public class SurveyMapper {
 		  return s;
 	  }
 	  
-	  // Methode zum einfügen von Surveys in die Datenbank
+	  // Methode zum einfï¿½gen von Surveys in die Datenbank
 	  public Survey insert(Survey s) {
 		  
 		  Connection con = DBConnection.getConnection();
@@ -124,7 +157,7 @@ public class SurveyMapper {
 		  return null;
 	  }
 	  
-	  // Methode zum Löschen eines Surveys anhand der SurveyID
+	  // Methode zum Lï¿½schen eines Surveys anhand der SurveyID
 	  public void deleteSurveyBySurveyID (Survey s) {
 		  
 		  Connection con = DBConnection.getConnection();
@@ -169,7 +202,7 @@ public class SurveyMapper {
 		  return null;
 	  }
 	  
-	  // Methode zum löschen aller Surveys die von einem User erstellt wurden
+	  // Methode zum lï¿½schen aller Surveys die von einem User erstellt wurden
 	  public void deleteAllByUserID(User u) {
 
 		  Connection con = DBConnection.getConnection();
@@ -186,7 +219,7 @@ public class SurveyMapper {
 		  }
 	  }
 	  
-	  // Methode zum Löschen aller Surveys die einer Gruppe zugeordnet sind
+	  // Methode zum Lï¿½schen aller Surveys die einer Gruppe zugeordnet sind
 	  public void deleteAllSurveyByGroupID (Group g) {
 
 		  Connection con = DBConnection.getConnection();

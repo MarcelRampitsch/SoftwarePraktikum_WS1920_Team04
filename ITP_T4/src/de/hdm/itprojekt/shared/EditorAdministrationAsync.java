@@ -76,6 +76,8 @@ public interface EditorAdministrationAsync {
 
 	// Survey
 	void createSurvey(Survey s, AsyncCallback<Survey> callback);
+	
+	void getAllSurveyByGroupID(Group g, AsyncCallback<Vector<Survey>> callback);
 
 	void getSurveyBySurveyID(Survey s, AsyncCallback<Survey> callback);
 	
@@ -119,6 +121,8 @@ public interface EditorAdministrationAsync {
 	void deleteByVoteID(Vote v, AsyncCallback<Void> callback);
 	
 	void deleteAllBySurveyEntryID(Vote v, AsyncCallback<Void> callback);
+
+	
 	
 	
 	
