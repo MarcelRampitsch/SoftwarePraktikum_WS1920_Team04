@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -41,13 +42,15 @@ public class GroupViewForm extends VerticalPanel {
 	
 	List<Group> Gruppen = null;
 	
+	Button back = new Button("<--");
 	Label groupNameLabel = new Label();
 	Label memberNamesLabel = new Label("Mitglieder:");
 	Label surveyNameLabel = new Label("Umfrage:");
-	Button newSurveyButton = new Button("Neu");
+	Button newSurveyButton = new Button("+");
 	
 	ListBox memberLB = new ListBox();
 	VerticalPanel mainPanel = new VerticalPanel();
+	HorizontalPanel umfragePanel = new HorizontalPanel();
 	
 	List<Survey> Umfragen;
 	
@@ -116,13 +119,15 @@ public class GroupViewForm extends VerticalPanel {
 	public void buildForm() {
 		
 		this.clear();
-		
+		mainPanel.add(back);
+		back.addClickHandler(new backHandler());
 		mainPanel.add(groupNameLabel);
 		groupNameLabel.setText(group.getName());
 		mainPanel.add(memberNamesLabel);
 		mainPanel.add(memberLB);
-		mainPanel.add(newSurveyButton);
-		mainPanel.add(surveyNameLabel);
+		umfragePanel.add(surveyNameLabel);
+		umfragePanel.add(newSurveyButton);
+		mainPanel.add(umfragePanel);
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
 		
 		
@@ -134,11 +139,21 @@ public class GroupViewForm extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			Window.alert(groupMember.elementAt(0).getNickname());
+			mainPanel.clear();
+			NewSurveyForm nsf = new NewSurveyForm(user);
+			RootPanel.get().add(nsf);
 			
 		}
-		
 	}
 	
+	private class backHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			RootPanel.get().clear();
+			EditorForm form = new EditorForm(user, Gruppen);
+			RootPanel.get().add(form);
+		}
+	 }
 	
 }
