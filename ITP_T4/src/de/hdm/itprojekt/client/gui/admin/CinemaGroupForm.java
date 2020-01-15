@@ -50,6 +50,10 @@ public class CinemaGroupForm extends VerticalPanel{
 	public void onLoad() {
 		super.onLoad();
 		
+		editCinemaGroup.addStyleName("editCinemaGroupStyle");
+		newCinemaGroup.addStyleName("newCinemaGroupStyle");
+		deleteCinemaGroup.addStyleName("deleteCinemaGroupStyle");
+		
 		
 		// Laden der CinemaGroups aus der Datenbank
 		cinemaGroupPanel1.add(cinemaGroupBox);

@@ -7,7 +7,25 @@
 
 
 
-/* AdminForm */
+/* CinemaGroupForm */
+
+.editCinemaGroupStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.deleteCinemaGroupStyle:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.newCinemaGroupStyle:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
 
 
 
