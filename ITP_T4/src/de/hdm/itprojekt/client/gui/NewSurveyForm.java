@@ -58,16 +58,17 @@ public class NewSurveyForm extends VerticalPanel {
 	 * Erstellung der Widgets
 	 */
 	Button zurueckButton = new Button("Zurueck");
-
+	
+	Label name = new Label("Bitte Name der Umfrage eingeben:");
 	TextBox umfrageNameBox = new TextBox();
 
-	Label datum = new Label("Datum waehlen:");
+	Label datum = new Label("Datum auswaehlen:");
 	DatePicker datumAuswahlPicker = new DatePicker();
 
-	Label kino = new Label("Kino waehlen:");
+	Label kino = new Label("Kino auswaehlen:");
 	ListBox kinoDropBox = new ListBox();
 
-	Label film = new Label("Film waehlen:");
+	Label film = new Label("Film auswaehlen:");
 	ListBox filmDropBox = new ListBox();
 
 	Label spielzeit = new Label("Uhrzeit auswaehlen:");
@@ -81,6 +82,7 @@ public class NewSurveyForm extends VerticalPanel {
 		super.onLoad();
 		inhalt.add(zurueckButton);
 		zurueckButton.addClickHandler(new BackHandler());
+		inhalt.add(name);
 		inhalt.add(umfrageNameBox);
 		umfrageNameBox.getElement().setPropertyString("placeholder", "Umfragename...");
 		inhalt.add(datum);
