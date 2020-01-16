@@ -11,6 +11,9 @@ public class User extends BusinessObject {
 
 	private String nickname;
 	private String email;
+	private boolean loggedIn = false;
+	private String url;
+	
 
 	public User(int id, String nickname, String email, Timestamp creationDate) {
 		super(id, creationDate);
@@ -49,6 +52,28 @@ public class User extends BusinessObject {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public void setIsLoggedIn(boolean b) {
+		this.loggedIn=b;
+		
+	}
+	
+	public boolean getLoggedIn() {
+		return this.loggedIn;
+		
+	}
+	
+	public void setURL (String url) {
+    	 this.url= url;
+
+		
+	}
+	
+    public String getURL () {
+    	return this.url;
+		
+	}
+	
 
 }
 

@@ -39,6 +39,8 @@
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/editor/login</url-pattern>
 		<url-pattern>/admin/login</url-pattern>
+		<url-pattern>/itp_t4/login</url-pattern>
+		
 	</servlet-mapping>
 	
   

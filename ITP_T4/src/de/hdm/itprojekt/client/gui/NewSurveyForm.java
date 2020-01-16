@@ -27,6 +27,7 @@ import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
@@ -36,8 +37,9 @@ public class NewSurveyForm extends VerticalPanel {
 
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
-	public NewSurveyForm(User user) {
+	public NewSurveyForm(User user, Group group) {
 		this.user = user;
+		this.group = group;
 	}
 
 	private User user = null;
@@ -54,6 +56,7 @@ public class NewSurveyForm extends VerticalPanel {
 
 	List<Group> Gruppen;
 
+	Group group;
 	/*
 	 * Erstellung der Widgets
 	 */
@@ -146,8 +149,8 @@ public class NewSurveyForm extends VerticalPanel {
 	 */
 
 	/*
-	 * BackHandler: Handler, der auf die Betätigung der Schaltfläche "Zurueck"
-	 * reagiert, und den Nutzer wieder auf die vorhergehende Seite befördert.
+	 * BackHandler: Handler, der auf die Betï¿½tigung der Schaltflï¿½che "Zurueck"
+	 * reagiert, und den Nutzer wieder auf die vorhergehende Seite befï¿½rdert.
 	 */
 	private class BackHandler implements ClickHandler {
 
@@ -197,37 +200,60 @@ public class NewSurveyForm extends VerticalPanel {
 	}
 
 	/*
-	 * SafeHandler: Handler, der auf die Betätigung der Schaltfläche "Speichern"
+	 * SafeHandler: Handler, der auf die Betï¿½tigung der Schaltflï¿½che "Speichern"
 	 * reagiert, und dabei die zuvor eingegebenen Daten abspeichert und danach den
 	 * Umfragetable anzeigt.
 	 */
 	private class SafeHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
+			Window.alert(group.getName());
 
+			
+			
+			
+			Survey s = new Survey(umfrageNameBox.getText(), user.getId(),group.getId());
+			editorAdministration.createSurvey(s, new AsyncCallback<Survey>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(Survey result) {
+					if (false) {  // WIrd ausgefÃ¼hrt wenn der Nutzer eine Veranstaltung ausgewÃ¤hlt hat
+						
+					
+					SurveyEntry se = new SurveyEntry(result.getId(),"Hier sollte die VeranstaltungsID stehen!" );
+					editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
+
+						public void onFailure(Throwable caught) {
+							Window.alert("Beim Hinzufï¿½gen des Umfrageeintrages ist etwas schief gelaufen.");
+						}
+
+						@Override
+						public void onSuccess(SurveyEntry result) {
+							EditorForm editform = new EditorForm(user, Gruppen);
+							RootPanel.get().add(editform);
+
+							List<SurveyEntry> liste = dataProvider.getList();
+							liste.add(se);
+							Window.alert("Eingabe gesichert");
+						}
+					});
+					}
+				}
+				
+			});
 			RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
 			UmfragenTable umfragen = new UmfragenTable(user, null);
 			RootPanel.get().add(umfragen);
 
-			SurveyEntry se = new SurveyEntry(1, umfrageNameBox.getText());
-			editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
-
-				public void onFailure(Throwable caught) {
-					Window.alert("Beim Hinzufügen des Umfrageeintrages ist etwas schief gelaufen.");
-				}
-
-				@Override
-				public void onSuccess(SurveyEntry result) {
-					EditorForm editform = new EditorForm(user, Gruppen);
-					RootPanel.get().add(editform);
-
-					List<SurveyEntry> liste = dataProvider.getList();
-					liste.add(se);
-					Window.alert("Eingabe gesichert");
-				}
-			});
+			
 		}
 	}
 }

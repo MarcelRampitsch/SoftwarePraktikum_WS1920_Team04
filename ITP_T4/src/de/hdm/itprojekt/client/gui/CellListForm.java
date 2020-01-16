@@ -60,6 +60,8 @@ public class CellListForm extends VerticalPanel {
 	   Button neueGruppe = new Button("Create group");
 	   VerticalPanel inhalt = new VerticalPanel();
 
+	   // Create a list data provider.
+		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
 	
 	//Vector <Group> Gruppen = null;
 	public void onLoad() {
@@ -69,8 +71,7 @@ public class CellListForm extends VerticalPanel {
 	   neueGruppe.addClickHandler(new openGroupClickHandler());
 	   final CellTable<Group> table = new CellTable<Group>();
 	   
-	    // Create a list data provider.
-		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
+	   
 
 	   
 	   TextColumn<Group> nameColumn = new TextColumn<Group>() {
@@ -255,6 +256,11 @@ public class CellListForm extends VerticalPanel {
 		inhalt.add(table);
 		this.add(inhalt);
    }
+	
+	public ListDataProvider<Group> getDataProvider() {
+		return this.dataProvider;
+	}
+	
 	
 	class openGroupClickHandler implements ClickHandler{
 

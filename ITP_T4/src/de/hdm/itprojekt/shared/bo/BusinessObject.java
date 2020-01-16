@@ -1,42 +1,54 @@
 package de.hdm.itprojekt.shared.bo;
-	
 
-	import java.io.Serializable;
-	import java.sql.Timestamp;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
-	public abstract class BusinessObject implements Serializable {
-		
-		private static final long serialversionUID = 1l;
-		
-		private int id;
-		private Timestamp creationDate;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-		public BusinessObject() {
-		}
+public abstract class BusinessObject implements IsSerializable {
 
-		public BusinessObject(int id, Timestamp creationDate) {
-			this.id =id;
-			this.creationDate = creationDate;
-		}
-		
-		public BusinessObject(int id) {
-			this.id =id;
-		}
-		
-		public void setId(int id) {
-			this.id = id;
-		}
+	private static final long serialVersionUID = 1L;
 
-		public void setCreationDate(Timestamp creationDate) {
-			this.creationDate = creationDate;
-		}
+	private int id;
+	private Timestamp creationDate;
 
-		public int getId() {
-			return id;
-		}
-
-		public Timestamp getCreationDate() {
-			return creationDate;
-		}
+	public BusinessObject() {
 	}
 
+	public BusinessObject(int id, Timestamp creationDate) {
+		this.id = id;
+		this.creationDate = creationDate;
+	}
+
+	public BusinessObject(int id) {
+		this.id = id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public boolean equals(Object o) {
+		boolean result = false;
+
+		if (o!= null && o instanceof BusinessObject) {
+			BusinessObject bo = (BusinessObject) o;
+			if (bo.getId() == this.id) {
+				result = true;
+			}
+		}
+		return result;
+	}
+}

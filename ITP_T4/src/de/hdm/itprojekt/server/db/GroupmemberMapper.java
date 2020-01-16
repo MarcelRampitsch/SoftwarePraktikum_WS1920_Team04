@@ -73,7 +73,7 @@ public class GroupmemberMapper {
 
 			while (rs.next()) {
 				// Ergebnis-Tupel in Objekt umwandeln
-				gm = new Groupmember(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("groupID"), rs.getInt("userID"));
+				gm = new Groupmember(rs.getInt("groupMemberID"), rs.getTimestamp("creationDate"), rs.getInt("groupID"), rs.getInt("userID"));
 
 				result.addElement(gm);
 			}// Fehlerbehandlung hinzufügen

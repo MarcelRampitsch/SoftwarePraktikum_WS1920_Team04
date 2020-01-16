@@ -21,6 +21,12 @@ private static final long serialversionUID = 1l;
 		this.groupID = groupID;
 		}
 	
+	public Survey(String name, int userID, int groupID) {
+		this.name = name;
+		this.userID = userID;
+		this.groupID = groupID;
+		}
+	
 	public Survey() {
 	}
 	

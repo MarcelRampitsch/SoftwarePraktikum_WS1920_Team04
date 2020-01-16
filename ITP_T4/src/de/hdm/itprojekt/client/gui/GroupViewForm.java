@@ -173,7 +173,7 @@ public class GroupViewForm extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			mainPanel.clear();
-			NewSurveyForm nsf = new NewSurveyForm(user);
+			NewSurveyForm nsf = new NewSurveyForm(user,group);
 			RootPanel.get().add(nsf);
 			
 		}

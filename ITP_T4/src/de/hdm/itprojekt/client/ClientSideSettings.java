@@ -29,7 +29,7 @@ public class ClientSideSettings extends CommonSettings {
 	private static AdminAdministrationAsync adminAdministration = null;	
 	private static EditorAdministrationAsync editorAdministration = null;
 	
-	//private static LoginAdministrationAsync loginAdministration = null;
+	private static LoginAdministrationAsync loginAdministration = null;
 	
 	public static EditorAdministrationAsync getEditorAdministration() {
 
@@ -51,7 +51,7 @@ public class ClientSideSettings extends CommonSettings {
 		return adminAdministration; 
 		}
 	
-/*	public static LoginAdministrationAsync getLoginAdministration() {
+	public static LoginAdministrationAsync getLoginAdministration() {
 
 
 		if (loginAdministration == null) {
@@ -60,7 +60,7 @@ public class ClientSideSettings extends CommonSettings {
 		}
 
 		return loginAdministration;
-	} */
+	} 
 
 	
 	class InitCallback implements AsyncCallback<Void> {

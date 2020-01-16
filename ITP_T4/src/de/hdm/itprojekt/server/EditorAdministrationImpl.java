@@ -153,7 +153,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			rs = pMapper.getAllPresentationBySearchCriteria(p);
 			return rs;
 		}
-		// Methode um alle Präsentationen anhand des Umfrageeintrags zu finden
+		// Methode um alle Prï¿½sentationen anhand des Umfrageeintrags zu finden
 		public Vector<Presentation> getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
 			Vector<Presentation> rs = new Vector<Presentation>();
 			rs = pMapper.getAllPresentationBySurveyEntry(se);
@@ -216,6 +216,22 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	public Vector<Groupmember> getAllGroupmemberByUserID(User u) throws IllegalArgumentException {
 		Vector<Groupmember> gm = gmMapper.findAllByUserID(u);
 		return gm;
+	}
+	
+	public Vector<Group> getAllGroupsIamMemberFrom(User u) throws IllegalArgumentException {
+	//	System.out.println(u.getId());
+		Vector<Groupmember> gm = gmMapper.findAllByUserID(u);
+		Vector <Group> groups = new Vector<Group>();
+		for(Groupmember g: gm) {
+			Group ng = new Group("",g.getGroupID());
+		//	System.out.println(ng.getId());
+			ng = gMapper.findByGroupID(ng);
+		//	System.out.println(ng.getName());
+		   groups.add(ng);
+		}
+		//System.out.println(groups.size());
+		return groups;
+		
 	}
 	
 	public Groupmember updateGroupmember(Groupmember updateGm) throws IllegalArgumentException {

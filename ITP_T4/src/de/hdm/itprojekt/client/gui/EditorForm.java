@@ -5,11 +5,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.admin.VerwaltungsForm;
@@ -84,6 +86,7 @@ public class EditorForm extends VerticalPanel {
 
 	public void onLoad() {
 		super.onLoad();
+	//	Window.alert(user.getEmail());
 		
 		/*
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
@@ -96,7 +99,7 @@ public class EditorForm extends VerticalPanel {
 		west.setStylePrimaryName("West");
 		east.setStylePrimaryName("East");
 		
-		editorAdministration.getUserByEmail(user, new AsyncCallback<User>() {
+	/*	editorAdministration.getUserByEmail(user, new AsyncCallback<User>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -105,8 +108,8 @@ public class EditorForm extends VerticalPanel {
 
 			@Override
 			public void onSuccess(User result) {
-			user = result;
-			editorAdministration.getAllGroupByUserID(user, new AsyncCallback<Vector<Group>>() {
+			user = result; */
+			editorAdministration.getAllGroupByUserID(user, new AsyncCallback<Vector<Group>>() { 
 				
 				@Override
 				public void onFailure(Throwable caught) {
@@ -121,12 +124,40 @@ public class EditorForm extends VerticalPanel {
 					celllistform = new CellListForm(user , Gruppen);
 					UmfragenTable u1 = new UmfragenTable(user, Surveys);
 					west.add(celllistform);
+					editorAdministration.getAllGroupsIamMemberFrom(user, new AsyncCallback<Vector<Group>>() { 
+						
+						@Override
+						public void onFailure(Throwable caught) {
+						//	Window.alert("Fehler liste");
+							
+						}
+
+						@Override
+						public void onSuccess(Vector<Group> result) {
+							rs = result;
+							
+							ListDataProvider<Group> dp = celllistform.getDataProvider();
+							List <Group> liste = dp.getList();
+							for(Group g :result) {
+								if(!liste.contains(g)) {
+									liste.add(g);
+
+								}else {
+							//		Window.alert("bereits in der Liste");
+								}
+
+							}
+					//		west.add(umfragen);
+						}
+						
+					});
 			//		west.add(umfragen);
 				}
 				
 			});
-			}
-		});
+			
+	//		}
+	//	});
 		
 		/*
 		 * Instanzierung aller nötigen Formen, die in der EditorForm angezeigt werden sollen. 
@@ -157,7 +188,25 @@ public class EditorForm extends VerticalPanel {
 			}
 		});
 		
+		//Button, dessen ClickEvent zum Admin Mode führt.
+	/*		Button logout = new Button("Logout", new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						Window.Location.assign(user.getURL());
+					}
+				});  */
+		
+		Anchor logOutLink = new Anchor("Logout");
+		
+		logOutLink.setHref(user.getURL());
+		
+		
+		
+		
+		
 		header.add(toAdmin);
+		header.add(logOutLink);
 //		GruppenForm gruppenForm = new GruppenForm(user);
 //		main.add(gruppenForm);
 		

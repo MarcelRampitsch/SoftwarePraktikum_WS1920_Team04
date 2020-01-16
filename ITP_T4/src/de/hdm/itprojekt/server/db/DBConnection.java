@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import com.google.appengine.api.rdbms.AppEngineDriver;
+
 public class DBConnection {
 
 
@@ -38,12 +40,13 @@ public class DBConnection {
 
 		if (con == null) {
 			try {
+			//	DriverManager.registerDriver(new AppEngineDriver());
 				
 				/*
 				 * Neue Instanz mysl Konnektor (JDBC). Bisher nur localUrl, später durch googleUrl ersetzt.
 				 */
 
-				Class.forName("com.mysql.cj.jdbc.Driver"); // lädt den JDBC Driver Connector für mysql
+				Class.forName("com.mysql.jdbc.Driver"); // lädt den JDBC Driver Connector für mysql
 				con = DriverManager.getConnection(localUrl);
 				
 				/*
