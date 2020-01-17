@@ -4,7 +4,9 @@ package de.hdm.itprojekt.shared.bo;
 	import java.io.Serializable;
 	import java.sql.Timestamp;
 
-	public abstract class BusinessObject implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+	public abstract class BusinessObject implements IsSerializable {
 		
 		private static final long serialversionUID = 1l;
 		
@@ -38,5 +40,18 @@ package de.hdm.itprojekt.shared.bo;
 		public Timestamp getCreationDate() {
 			return creationDate;
 		}
+		
+		public boolean equals(Object o) {
+			boolean result = false;
+
+			if (o!= null && o instanceof BusinessObject) {
+				BusinessObject bo = (BusinessObject) o;
+				if (bo.getId() == this.id) {
+					result = true;
+				}
+			}
+			return result;
+		}
 	}
+	
 
