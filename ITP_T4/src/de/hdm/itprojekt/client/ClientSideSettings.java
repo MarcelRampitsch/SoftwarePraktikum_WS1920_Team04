@@ -17,11 +17,6 @@ import de.hdm.itprojekt.shared.LoginAdministrationAsync;
 /**
 * Klasse mit Eigenschaften und Diensten, die für alle Client-seitigen Klassen
 * relevant sind.
-* 
-* @author thies
-* @version 1.0
-* @since 28.02.2012
-* 
 */
 
 public class ClientSideSettings extends CommonSettings {
@@ -29,7 +24,7 @@ public class ClientSideSettings extends CommonSettings {
 	private static AdminAdministrationAsync adminAdministration = null;	
 	private static EditorAdministrationAsync editorAdministration = null;
 	
-	//private static LoginAdministrationAsync loginAdministration = null;
+	private static LoginAdministrationAsync loginAdministration = null;
 	
 	public static EditorAdministrationAsync getEditorAdministration() {
 
@@ -51,7 +46,7 @@ public class ClientSideSettings extends CommonSettings {
 		return adminAdministration; 
 		}
 	
-/*	public static LoginAdministrationAsync getLoginAdministration() {
+	public static LoginAdministrationAsync getLoginAdministration() {
 
 
 		if (loginAdministration == null) {
@@ -60,7 +55,7 @@ public class ClientSideSettings extends CommonSettings {
 		}
 
 		return loginAdministration;
-	} */
+	} 
 
 	
 	class InitCallback implements AsyncCallback<Void> {
