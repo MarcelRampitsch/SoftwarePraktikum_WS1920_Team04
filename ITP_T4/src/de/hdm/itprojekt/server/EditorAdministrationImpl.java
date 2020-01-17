@@ -200,23 +200,6 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	// Groupmember
 	// TODO Wie hat die createGroupMember Methode auszusehen?
 	
-	public Vector<Group> getAllGroupsIamMemberFrom(User u) throws IllegalArgumentException {
-		//	System.out.println(u.getId());
-			Vector<Groupmember> gm = gmMapper.findAllByUserID(u);
-			Vector <Group> groups = new Vector<Group>();
-			for(Groupmember g: gm) {
-				Group ng = new Group("",g.getGroupID());
-			//	System.out.println(ng.getId());
-				ng = gMapper.findByGroupID(ng);
-			//	System.out.println(ng.getName());
-			   groups.add(ng);
-			}
-			//System.out.println(groups.size());
-			return groups;
-
-		}
-
-	
 	public Groupmember createGroupmember(Groupmember gm) throws IllegalArgumentException {
 		if(gm != null) {
 		gm = gmMapper.insertGroupmember(gm);

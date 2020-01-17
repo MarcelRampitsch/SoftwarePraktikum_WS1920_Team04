@@ -12,6 +12,5 @@ public interface LoginAdministration  extends RemoteService {
 	
 	User login(String url);
 
-	User login(String url);
 
 }
