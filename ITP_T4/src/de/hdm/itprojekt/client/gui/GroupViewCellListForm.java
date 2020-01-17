@@ -380,7 +380,7 @@ public class GroupViewCellListForm extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 
-			NewSurveyForm newSurveyForm = new NewSurveyForm(user);
+			NewSurveyForm newSurveyForm = new NewSurveyForm(user,null);
 			contentPanel.clear();
 			contentPanel.add(newSurveyForm);
 			
