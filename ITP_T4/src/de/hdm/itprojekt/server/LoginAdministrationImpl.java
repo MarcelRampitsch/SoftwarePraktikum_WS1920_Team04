@@ -1,17 +1,17 @@
 package de.hdm.itprojekt.server;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.shared.LoginAdministration;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class LoginAdministrationImpl extends RemoteServiceServlet implements LoginAdministration {
 
 	private static LoginAdministrationImpl loginAdministration = null;
-	private EditorAdministrationImpl editorAdministration = null;
+	private static EditorAdministrationImpl editorAdministration = null;
 
 	public LoginAdministrationImpl() throws IllegalArgumentException {
 
@@ -31,7 +31,7 @@ public class LoginAdministrationImpl extends RemoteServiceServlet implements Log
 		}
 
 		try {
-			// System.out.println("Lade Google User");
+			//System.out.println("Lade Google User");
 
 			UserService userService = UserServiceFactory.getUserService();
 			com.google.appengine.api.users.User clientApiUser = userService.getCurrentUser();

@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 import com.google.appengine.api.rdbms.AppEngineDriver;
 
-
 public class DBConnection {
 
 
@@ -41,6 +40,7 @@ public class DBConnection {
 
 		if (con == null) {
 			try {
+			//	DriverManager.registerDriver(new AppEngineDriver());
 				
 				/*
 				 * Neue Instanz mysl Konnektor (JDBC). Bisher nur localUrl, später durch googleUrl ersetzt.

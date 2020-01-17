@@ -140,7 +140,7 @@ public class SurveyMapper {
 			  
 			  insert.setString(1, s.getName());
 			  insert.setInt(2, s.getGroupID());
- 			  insert.setInt(3, s.getUserID());
+			  insert.setInt(3, s.getUserID());
 			  
 			  insert.executeUpdate();
 			  

@@ -79,7 +79,6 @@ public interface EditorAdministration extends RemoteService {
 	// GroupMember Methoden
 	
 	public Vector<Group> getAllGroupsIamMemberFrom(User u )throws IllegalArgumentException;
-
 	
 	// Einen Groupmember anlegen.
 	public Groupmember createGroupmember(Groupmember gm) throws IllegalArgumentException;
@@ -180,7 +179,6 @@ public interface EditorAdministration extends RemoteService {
 	public Presentation getPresentation() throws IllegalArgumentException;
 	
 	public void setPresentation(Presentation p) throws IllegalArgumentException;
-
 	public void delete(Presentation p) throws IllegalArgumentException;
 	*/
 }

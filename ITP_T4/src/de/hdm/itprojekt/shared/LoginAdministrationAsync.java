@@ -11,5 +11,4 @@ public interface LoginAdministrationAsync {
 	void login(String url, AsyncCallback<User> callback);
 
 
-
 }

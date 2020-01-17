@@ -18,8 +18,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.ListDataProvider;
-import de.hdm.itprojekt.shared.bo.Survey;
-
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHandler;
@@ -29,6 +27,7 @@ import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
@@ -42,6 +41,7 @@ public class NewSurveyForm extends VerticalPanel {
 		this.user = user;
 		this.group = group;
 	}
+
 	private User user = null;
 	private Vector<Cinema> cine = null;
 	private Vector<Movie> movie = null;
@@ -55,10 +55,8 @@ public class NewSurveyForm extends VerticalPanel {
 	List<SurveyEntry> Umfrageeintrag;
 
 	List<Group> Gruppen;
-	
+
 	Group group;
-
-
 	/*
 	 * Erstellung der Widgets
 	 */
@@ -211,50 +209,51 @@ public class NewSurveyForm extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			Window.alert(group.getName());
 
-
+			
+			
+			
 			Survey s = new Survey(umfrageNameBox.getText(), user.getId(),group.getId());
 			editorAdministration.createSurvey(s, new AsyncCallback<Survey>(){
 
 				@Override
 				public void onFailure(Throwable caught) {
-					//Window.alert("Beim Hinzuf�gen des Umfrageeintrages ist etwas schief gelaufen.");
+					// TODO Auto-generated method stub
+					
 				}
 
 				@Override
-					public void onSuccess(Survey result) {
-						if (false) {  // WIrd ausgeführt wenn der Nutzer eine Veranstaltung ausgewählt hat
+				public void onSuccess(Survey result) {
+					if (false) {  // WIrd ausgeführt wenn der Nutzer eine Veranstaltung ausgewählt hat
+						
+					
+					SurveyEntry se = new SurveyEntry(result.getId(),"Hier sollte die VeranstaltungsID stehen!" );
+					editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
 
-
-						SurveyEntry se = new SurveyEntry(result.getId(),"Hier sollte die VeranstaltungsID stehen!" );
-						editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
-
-							public void onFailure(Throwable caught) {
-								Window.alert("Beim Hinzufügen des Umfrageeintrages ist etwas schief gelaufen.");
-							}
-
-							@Override
-							public void onSuccess(SurveyEntry result) {
-								EditorForm editform = new EditorForm(user, Gruppen);
-								RootPanel.get().add(editform);
-
-								List<SurveyEntry> liste = dataProvider.getList();
-								liste.add(se);
-								Window.alert("Eingabe gesichert");
-							}
-						});
+						public void onFailure(Throwable caught) {
+							Window.alert("Beim Hinzuf�gen des Umfrageeintrages ist etwas schief gelaufen.");
 						}
+
+						@Override
+						public void onSuccess(SurveyEntry result) {
+							EditorForm editform = new EditorForm(user, Gruppen);
+							RootPanel.get().add(editform);
+
+							List<SurveyEntry> liste = dataProvider.getList();
+							liste.add(se);
+							Window.alert("Eingabe gesichert");
+						}
+					});
 					}
-
-				});
-				RootPanel.get().clear();
-				EditorForm ef = new EditorForm(user, Gruppen);
-				RootPanel.get().add(ef);
-				UmfragenTable umfragen = new UmfragenTable(user, null);
-				RootPanel.get().add(umfragen);
-
-
+				}
 				
-		
+			});
+			RootPanel.get().clear();
+			EditorForm ef = new EditorForm(user, Gruppen);
+			RootPanel.get().add(ef);
+			UmfragenTable umfragen = new UmfragenTable(user, null);
+			RootPanel.get().add(umfragen);
+
+			
 		}
 	}
 }

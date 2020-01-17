@@ -27,7 +27,6 @@ private static final long serialversionUID = 1l;
 		this.groupID = groupID;
 		}
 	
-	
 	public Survey() {
 	}
 	

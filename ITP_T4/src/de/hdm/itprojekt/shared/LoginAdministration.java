@@ -9,6 +9,8 @@ import de.hdm.itprojekt.shared.bo.User;
 public interface LoginAdministration  extends RemoteService {
 	
 	void init();
+	
+	User login(String url);
 
 	User login(String url);
 
