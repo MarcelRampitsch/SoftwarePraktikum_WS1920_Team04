@@ -18,7 +18,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Image
 
 import de.hdm.itprojekt.client.gui.EditorForm;
 import de.hdm.itprojekt.client.gui.GruppenForm;
