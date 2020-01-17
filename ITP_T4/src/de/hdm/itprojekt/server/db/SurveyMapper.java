@@ -136,9 +136,11 @@ public class SurveyMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(name) VALUES(?);");
+			  PreparedStatement insert = con.prepareStatement("INSERT INTO softwarepraktikum_ws1920.survey(name, groupID, userID) VALUES(?,?,?);");
 			  
 			  insert.setString(1, s.getName());
+			  insert.setInt(2, s.getGroupID());
+ 			  insert.setInt(3, s.getUserID());
 			  
 			  insert.executeUpdate();
 			  
@@ -147,7 +149,7 @@ public class SurveyMapper {
 			  ResultSet rs = getnewSurvey.executeQuery();
 			  
 			  if (rs.next()) {
-				  return new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
+				  return new Survey(rs.getInt("surveyID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"), rs.getInt("groupID"));
 			  }
 			  
 		  } catch (SQLException e) {

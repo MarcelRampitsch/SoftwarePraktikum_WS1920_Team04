@@ -134,7 +134,10 @@ public class GroupMapper {
 				// Statement ausfüllen und als Query an die DB schicken
 				ResultSet rs = findByGroupID.executeQuery();
 				// Ergebnis-Tupel in Objekt umwandeln
-				gr = new Group(rs.getInt("groupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+				 while(rs.next()){
+
+	 				  gr = new Group(rs.getInt("groupID"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"));
+	 				  }
 				 // Fehlerbehandlung hinzufügen
 			} catch (SQLException e2) {
 			      e2.printStackTrace();

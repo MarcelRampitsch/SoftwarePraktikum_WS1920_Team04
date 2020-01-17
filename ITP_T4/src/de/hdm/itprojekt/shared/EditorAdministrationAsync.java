@@ -73,7 +73,8 @@ public interface EditorAdministrationAsync {
 	
 	void deleteAllGroupmemberByGroupID(Group g, AsyncCallback<Void> callback);
 	
-	
+	void getAllGroupsIamMemberFrom(User u,AsyncCallback<Vector<Group>> callback); 
+
 
 	// Survey
 	void createSurvey(Survey s, AsyncCallback<Survey> callback);
