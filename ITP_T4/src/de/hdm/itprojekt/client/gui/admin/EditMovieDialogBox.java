@@ -48,6 +48,11 @@ VerticalPanel content = new VerticalPanel();
 	public void onLoad() {
 		super.onLoad();
 		
+		//CSS StyleNamenVergabe
+
+		close.addStyleName("MovieEditCloseBox");
+		safe.addStyleName("MovieEditSafeBox");
+		
 		content.add(close);
 		content.add(cinema);
 		content.add(box);

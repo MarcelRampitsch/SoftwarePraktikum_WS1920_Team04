@@ -41,6 +41,11 @@ public class DeleteMovieDialogBox extends DialogBox {
 	public void onLoad() {
 		super.onLoad();
 		
+		//CSS SytleNamenVergabe
+		
+		yes.addStyleName("deleteMovieYesBox");
+		no.addStyleName("deleteMovieNoBox");
+		
 		content.add(movieLabel);
 		
 		horzcontent.add(yes);

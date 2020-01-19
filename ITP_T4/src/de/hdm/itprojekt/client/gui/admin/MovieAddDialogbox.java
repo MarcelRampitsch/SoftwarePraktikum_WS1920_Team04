@@ -57,6 +57,10 @@ public class MovieAddDialogbox extends DialogBox {
 	public void onLoad() {
 		super.onLoad();
 		
+		//CSS StyleNamenVergabe
+		close.addStyleName("movieCloseBox");
+		safe.addStyleName("movieSafeBox");
+		
 		content.add(close);
 		close.addClickHandler(new closeHandler());
 
