@@ -54,6 +54,11 @@ public class TimeSlotAddDialogBox extends DialogBox {
 		
 		super.onLoad();
 		
+		//CSS StyleNamenVergabe
+		close.addStyleName("timeSlotAddClose");
+		safe.addStyleName("timeSlotAddSafe");
+		
+		
 		content.add(close);
 		close.addClickHandler(new closehandler());
 		

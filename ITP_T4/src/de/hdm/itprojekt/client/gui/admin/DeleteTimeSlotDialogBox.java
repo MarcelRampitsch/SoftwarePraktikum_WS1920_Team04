@@ -51,6 +51,11 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 	public void onLoad() {
 		super.onLoad();
 		
+		//CSS StyleNamenVergabe
+		
+		yes.addStyleName("timeSlotDeleteYes");
+		no.addStyleName("timeSlotDeleteNo");
+		
 		
 		content.add(timeslot);
 		

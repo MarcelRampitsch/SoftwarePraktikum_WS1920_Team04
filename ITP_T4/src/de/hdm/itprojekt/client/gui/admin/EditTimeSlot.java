@@ -57,6 +57,10 @@ public class EditTimeSlot extends DialogBox	 {
 	
 	public void onLoad() {
 		
+		//CSS StyleNamenVergabe
+		close.addStyleName("timeSlotEditClose");
+		safe.addStyleName("timeSlotEditSafe");
+				
 		super.onLoad();
 		
 		content.add(close);

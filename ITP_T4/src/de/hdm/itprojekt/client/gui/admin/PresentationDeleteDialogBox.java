@@ -51,6 +51,10 @@ public class PresentationDeleteDialogBox extends DialogBox {
 	public void onLoad() {
 		super.onLoad();
 		
+		//CSS StyleNamenVergabe 
+    	yes.addStyleName("presentationDeleteSaveBox");
+    	no.addStyleName("presentationDeleteCancelBox");
+		
 		
 		content.add(pres);
 		

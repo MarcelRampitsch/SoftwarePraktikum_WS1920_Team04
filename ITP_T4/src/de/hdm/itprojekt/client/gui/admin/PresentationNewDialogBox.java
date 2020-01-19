@@ -60,6 +60,11 @@ public class PresentationNewDialogBox extends DialogBox {
     
     public void onLoad() {
     	super.onLoad();
+    	
+    	//CSS StyleNamenVergabe 
+    	yes.addStyleName("presentationNewSaveBox");
+    	no.addStyleName("presentationNewCancelBox");
+    	
     	buttoncontent.add(no);
     	no.addClickHandler(new close());
     	content.add(namebox);

@@ -120,6 +120,7 @@ public class VerwaltungsForm extends VerticalPanel {
 		 
 		 
 		 
+		 
 		 panel.add(cinemagroupform, "CinemaGroup");
 //		sp1.addStyleName("verwaltung");
 		

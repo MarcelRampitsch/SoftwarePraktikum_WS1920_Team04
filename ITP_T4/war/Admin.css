@@ -225,6 +225,49 @@
 	transition: 0.5s;	
 }
 
+/*EditTimeSlot*/
+
+.timeSlotEditClose:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.timeSlotEditSafe:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+/* DeleteTimeSlotDialogBox*/
+.timeSlotDeleteNo:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.timeSlotDeleteYes:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+/*TimeSlotAddDialogBox*/
+.timeSlotAddClose:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.timeSlotAddSafe:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+/*Delete
+
+
+
 /* PresentationForm */
 
 .presentationEditStyle:hover{
@@ -251,9 +294,60 @@
 	transition: 0.5s;
 }
 
+/*PresentationEditDialogBox*/
+.presentationSaveEditBox:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.presentationCancelEditSBox:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+/*PresentationNewDialogBox*/
+.presentationNewSaveBox:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.presentationNewCancelBox:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.presentationDeleteSaveBox:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+/*PresentationDeleteDialogBox*/
+.presentationDeleteSaveBox:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.presentationDeleteCancelBox:hover{
+background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;		
+}
+
+/* .cinemagroupform:hover{
+	ckground: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+ */
+}
 
 
-
+}
 
 
 
