@@ -30,9 +30,10 @@ public class GroupEditForm extends VerticalPanel {
 
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	User user = null;
-	Vector <User> groupMember = new Vector<User>();
+	Vector <User> groupMember = null;
 	Vector <User> newMember = new Vector<User>();
 	Vector <Groupmember> deleteMember = new Vector<Groupmember>();
+	int j = 0;
 	Group g = null;
 	Group group = null;
 	Vector <Groupmember> member = new Vector<Groupmember>();
@@ -73,6 +74,7 @@ public class GroupEditForm extends VerticalPanel {
 	}
 	
 	public void onLoad() {
+		
 		super.onLoad();
 		
 		main.add(back);
@@ -226,7 +228,7 @@ public class GroupEditForm extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			RootPanel.get().clear();
 			EditorForm form = new EditorForm(user, Gruppen);
-			RootPanel.get().add(form);
+			RootPanel.get().add(form);	
 		}
 		 
 		 

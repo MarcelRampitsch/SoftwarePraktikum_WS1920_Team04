@@ -41,22 +41,21 @@ public class GroupViewForm extends VerticalPanel {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	User user = null;
-	Vector<User> groupMember = new Vector<User>();
 	Vector<Groupmember> member = new Vector<Groupmember>();
+	Vector<User> groupMember = new Vector<User>();
 	Group group = null;
 	
 	List<Survey> Umfragen;
 	
 	Button back = new Button("<--");
 	Label groupNameLabel = new Label();
-	Label memberNamesLabel = new Label("Mitglieder:");
-	Label surveyNameLabel = new Label("Umfrage:");
-	Button newSurveyButton = new Button("+");
+	Button newSurveyButton = new Button("Neue Umfrage erstellen");
+	Button editGroupButton = new Button("edit");
+	Button deleteGroupButton = new Button("X");
 	CellTable<Survey> table = new CellTable<Survey>();
 	
-	ListBox memberLB = new ListBox();
 	VerticalPanel mainPanel = new VerticalPanel();
-	HorizontalPanel umfragePanel = new HorizontalPanel();
+	HorizontalPanel editPanel = new HorizontalPanel();
 	
 	public GroupViewForm(User user, Group group, Vector<User> groupMember) {
 		
@@ -80,41 +79,7 @@ public class GroupViewForm extends VerticalPanel {
 		
 		super.onLoad();
 		buildForm();
-		
-		
-		editorAdministration.getAllGroupmemberByGroupID(group, new AsyncCallback<Vector<Groupmember>>() {
-			
-			@Override
-			public void onSuccess(Vector<Groupmember> result) {
-				member=result;
-				
-			for(int i = 0; i< member.size(); i++) {
-				User u = new User(member.elementAt(i).getUserID());
-				editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
-					User u = null;
-					@Override
-					public void onSuccess(User result) {
-					u = result;
-					groupMember.add(u);
-					memberLB.addItem(result.getNickname());
-					}
-					
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("etwas ist schief gelaufen");
-					}
-					
-				});
-			}
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				Window.alert("etwas ist schief gelaufen");	
-			}			
-		});
+
 		
 		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
 		
@@ -138,7 +103,7 @@ public class GroupViewForm extends VerticalPanel {
 			}
 		};
 		
-		table.addColumn(nameColumn);
+		table.addColumn(nameColumn, "Umfragename");
 		table.addColumn(loeschenColumn);
 		
 		dataProvider.addDataDisplay(table);
@@ -147,7 +112,6 @@ public class GroupViewForm extends VerticalPanel {
 		for(Survey survey: Umfragen) {
 			list.add(survey);
 		}		
-		memberLB.setVisibleItemCount(2);
 		}
 	
 	public void buildForm() {
@@ -156,16 +120,98 @@ public class GroupViewForm extends VerticalPanel {
 		mainPanel.add(back);
 		back.addClickHandler(new backHandler());
 		mainPanel.add(groupNameLabel);
+		editPanel.add(editGroupButton);
+		editPanel.add(deleteGroupButton);
+		mainPanel.add(editPanel);
+		editGroupButton.addClickHandler(new editGroupButtonClickHandler());
+		deleteGroupButton.addClickHandler(new deleteGroupButtonClickHandler());
 		groupNameLabel.setText(group.getName());
-		mainPanel.add(memberNamesLabel);
-		mainPanel.add(memberLB);
-		umfragePanel.add(surveyNameLabel);
-		umfragePanel.add(newSurveyButton);
-		mainPanel.add(umfragePanel);
+		mainPanel.add(newSurveyButton);
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
 		mainPanel.add(table);
 		this.add(mainPanel);
 		
+	}
+	
+	private class deleteGroupButtonClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			editorAdministration.deleteAllGroupmemberByGroupID(group, new AsyncCallback<Void>() {
+				
+			@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub					
+				}
+				
+				@Override
+					public void onSuccess(Void result) {
+					
+					editorAdministration.deleteGroupByGroupID(group, new AsyncCallback<Void>() {
+						
+						@Override
+							public void onSuccess(Void result) {
+							}
+										
+						@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub				
+							}
+					});
+					}
+			});
+			EditorForm form = new EditorForm(user);
+			RootPanel.get().clear();
+			RootPanel.get().add(form);
+		}
+	}
+	
+	private class editGroupButtonClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			editorAdministration.getAllGroupmemberByGroupID(group, new AsyncCallback<Vector<Groupmember>>() {
+				
+				@Override
+				public void onSuccess(Vector<Groupmember> result) {
+					member=result;
+				
+					for(int i = 0; i< member.size(); i++) {
+						int j=i;
+						User u = new User(member.elementAt(i).getUserID());
+						editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
+							User u = null;
+							
+							@Override
+							public void onSuccess(User result) {
+								u = result;
+								groupMember.add(u);
+								if(j < member.size()+1) {
+									mainPanel.clear();
+									GroupEditForm edit = new GroupEditForm(user, group, groupMember, member);
+									mainPanel.add(edit);
+								}
+							}
+						
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								Window.alert("etwas ist schief gelaufen");
+							}
+						});
+					}
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					Window.alert("etwas ist schief gelaufen");	
+				}			
+			});
+			
+		}
 	}
 	
 	private class newSurveyButtonClickHandler implements ClickHandler {
@@ -175,7 +221,6 @@ public class GroupViewForm extends VerticalPanel {
 			mainPanel.clear();
 			NewSurveyForm nsf = new NewSurveyForm(user,group);
 			RootPanel.get().add(nsf);
-			
 		}
 	}
 	
