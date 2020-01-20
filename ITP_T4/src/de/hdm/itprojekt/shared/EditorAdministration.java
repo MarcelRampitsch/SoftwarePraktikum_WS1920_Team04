@@ -74,7 +74,7 @@ public interface EditorAdministration extends RemoteService {
 	
 	public Vector<Presentation> getAllPresentationBySearchCriteria(Presentation p) throws IllegalArgumentException;
 	
-	public Vector<Presentation> getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException;
+	public Cinema getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException;
 
 	// GroupMember Methoden
 	

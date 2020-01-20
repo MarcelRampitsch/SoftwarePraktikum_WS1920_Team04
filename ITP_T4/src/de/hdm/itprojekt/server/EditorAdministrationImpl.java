@@ -154,10 +154,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			return rs;
 		}
 		// Methode um alle Pr�sentationen anhand des Umfrageeintrags zu finden
-		public Vector<Presentation> getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
-			Vector<Presentation> rs = new Vector<Presentation>();
-			rs = pMapper.getAllPresentationBySurveyEntry(se);
-			return rs;
+		public Cinema getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+			Presentation rs = new Presentation();
+			rs = pMapper.getAllPresentationByPresentationID(se);
+			Cinema c = new Cinema(rs.getCinemaID(),null,"","",0,0);
+			c = cMapper.findCinemaByCinemaID(c);
+			return c;
 		}
 
 	
