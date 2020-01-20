@@ -65,6 +65,10 @@ public class PresentationAddDialogBox extends DialogBox {
     
     public void onLoad() {
     	super.onLoad();
+    	
+    	
+    	yes.addStyleName("editpressafe");
+    	no.addStyleName("editpresclose");
     	buttoncontent.add(no);
     	no.addClickHandler(new close());
     	content.add(nameLabel);

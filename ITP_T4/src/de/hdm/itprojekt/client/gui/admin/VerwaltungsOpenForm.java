@@ -53,6 +53,10 @@ public class VerwaltungsOpenForm extends DialogBox {
 
 	public void onLoad() {
 		super.onLoad();
+		
+		close.addStyleName("presentationEditCloser");
+		sichern.addStyleDependentName("ff");
+		
 		inhalt.add(close);
 		close.addClickHandler(new schließen());
 		

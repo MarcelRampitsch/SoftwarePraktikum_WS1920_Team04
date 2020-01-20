@@ -177,7 +177,7 @@
 
 /* DeleteMovieDialogBox*/
 .deleteMovieYesBox:hover{
-	background: #1c59ae;
+	background: #169f11;
 	color: #f2f2f2;
 	transition: 0.5s;
 }
@@ -246,7 +246,7 @@
 }
 
 .timeSlotDeleteYes:hover{
-	background: #1c59ae;
+	background: #169f11;
 	color: #f2f2f2;
 	transition: 0.5s;
 }
@@ -328,7 +328,7 @@
 
 /*PresentationDeleteDialogBox*/
 .presentationDeleteSaveBox:hover{
-	background: #1c59ae;
+	background: #169f11;
 	color: #f2f2f2;
 	transition: 0.5s;
 }
@@ -339,15 +339,39 @@ background: #c91821;
 	transition: 0.5s;		
 }
 
+.presentationEditCloser:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.ff:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+
+.editpressafe:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.editpresclose:hover{
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
 /* .cinemagroupform:hover{
 	ckground: #c91821;
 	color: #f2f2f2;
 	transition: 0.5s;	
  */
-}
 
 
-}
+
+
 
 
 
