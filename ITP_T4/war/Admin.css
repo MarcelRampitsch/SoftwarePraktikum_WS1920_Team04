@@ -372,8 +372,23 @@ background: #c91821;
 }
 
 .gwt-StackPanel  .gwt-StackPanelItem-selected{
-	color: black;
+	color: #000080;
 	
+	
+}
+
+
+/* Styled alle Buttons im Admin */
+button.gwt-Button {
+	border: none;
+	background: #404040;
+	color: #ffffff;
+	font-family: sans-serif;
+	text-align: center;
+	border-radius: 0px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	width: 100%;
 }
 
 
