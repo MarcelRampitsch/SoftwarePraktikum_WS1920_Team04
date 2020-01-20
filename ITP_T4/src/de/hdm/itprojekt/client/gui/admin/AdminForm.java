@@ -111,6 +111,7 @@ public class AdminForm extends VerticalPanel{
 					});
 			
 			main.add(toBesucher);
+			toBesucher.addStyleName("EditorButton");
 		this.add(main);
 	}
 

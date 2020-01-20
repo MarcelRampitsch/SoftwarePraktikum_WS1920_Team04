@@ -367,13 +367,15 @@ background: #c91821;
 
 
 .gwt-StackPanel .gwt-StackPanelItem{
-	color: grey;
+	color:  #b3b3b3;
+    background: #404040 !important;
+	
 	
 }
 
 .gwt-StackPanel  .gwt-StackPanelItem-selected{
-	color: #000080;
-	
+	color: white;	
+	background: #404040 !important;
 	
 }
 
@@ -391,6 +393,11 @@ button.gwt-Button {
 	width: 100%;
 }
 
+.EditorButton:hover{
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
 
 
 
