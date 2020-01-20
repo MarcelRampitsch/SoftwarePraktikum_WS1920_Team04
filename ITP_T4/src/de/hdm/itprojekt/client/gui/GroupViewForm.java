@@ -3,11 +3,13 @@ package de.hdm.itprojekt.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.Arrays;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -37,7 +39,7 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 
 public class GroupViewForm extends VerticalPanel {
-
+	private static final List<String> colors = Arrays.asList("red","blue","yellow");
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	User user = null;
@@ -75,6 +77,8 @@ public class GroupViewForm extends VerticalPanel {
 	public GroupViewForm() {
 	}
 	
+	
+	
 	public void onLoad() {
 		
 		super.onLoad();
@@ -111,7 +115,12 @@ public class GroupViewForm extends VerticalPanel {
 		final List <Survey> list = dataProvider.getList();
 		for(Survey survey: Umfragen) {
 			list.add(survey);
-		}		
+		}
+//		UmfragenCell cell = new UmfragenCell();
+//		CellList<String> cellList = new CellList<String>(cell);
+//		cellList.setRowData(0,colors);
+//		
+//		this.add(cellList);
 		}
 	
 	public void buildForm() {

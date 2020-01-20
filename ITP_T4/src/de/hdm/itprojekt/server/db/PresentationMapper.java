@@ -222,17 +222,16 @@ public class PresentationMapper {
 			return result;
 		
 		}
-	  public Vector<Presentation> getAllPresentationBySurveyEntry(SurveyEntry se)  {
+	  public Presentation getAllPresentationByPresentationID(SurveyEntry se)  {
 			// DB-Verbindung holen
 			Connection con = DBConnection.getConnection();
 			Presentation p = null;
 			// Ergebnisvektor vorbereiten
-			Vector<Presentation> result = new Vector<Presentation>();
 			try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema zu finden
 				PreparedStatement findAllBySurveyEntryID = con.prepareStatement(
 						"SELECT * From softwarepraktikum_ws1920.presentation "
-						+ "WHERE SurveyEntryID=? ");
-				findAllBySurveyEntryID.setInt(1, se.getId());
+						+ "WHERE PresentationID=? ");
+				findAllBySurveyEntryID.setInt(1, se.getPresentationID());
 				
 				// Ergebnis-Tupel erstellen
 
@@ -241,15 +240,14 @@ public class PresentationMapper {
 				while (rs.next()) {
 					// Ergebnis-Tupel in Objekt umwandeln
 					p = new Presentation(rs.getString("name"),rs.getInt("cinemaID"), rs.getInt("movieID"), rs.getInt("userID"), rs.getInt("timeslotID"), rs.getDate("date"), rs.getInt("presentationID"), rs.getTimestamp("creationDate"));
-
-					result.addElement(p);
 				} // Fehlerbehandlung hinzufügen
+				return p;
 			} catch (SQLException e) {
 			      e.printStackTrace();
-			      return null;
+			      return p;
 			}
 			// Ergebnisvektor zurückgeben
-			return result;
+			
 		
 		}
 	  

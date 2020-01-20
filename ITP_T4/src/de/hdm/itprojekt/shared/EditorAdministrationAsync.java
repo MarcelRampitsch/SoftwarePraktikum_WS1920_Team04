@@ -59,7 +59,7 @@ public interface EditorAdministrationAsync {
 
 	void getAllPresentationBySearchCriteria(Presentation p, AsyncCallback<Vector<Presentation>> callback);
 	
-	void getAllPresentationBySurveyEntry(SurveyEntry se, AsyncCallback<Vector<Presentation>> callback);
+	void getAllPresentationBySurveyEntry(SurveyEntry se, AsyncCallback<Cinema> callback);
 	// GroupMember
 	void createGroupmember(Groupmember gm, AsyncCallback<Groupmember> callback);
 
