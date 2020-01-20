@@ -363,6 +363,23 @@ background: #c91821;
 	color: #f2f2f2;
 	transition: 0.5s;	
 }
+
+
+
+.gwt-StackPanel .gwt-StackPanelItem{
+	color: grey;
+	
+}
+
+.gwt-StackPanel  .gwt-StackPanelItem-selected{
+	color: black;
+	
+}
+
+
+
+
+
 /* .cinemagroupform:hover{
 	ckground: #c91821;
 	color: #f2f2f2;
