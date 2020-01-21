@@ -5,6 +5,7 @@ import com.google.gwt.user.client.Window;
 
 import de.hdm.itprojekt.shared.EditorAdministration;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
@@ -120,14 +121,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		uMapper.deleteUserByUserID(u);
 		//TODO deleteUserByTimeslotID?
 	}
-	
-	// TODO : User 1?
-	// Methode um alle Cinema eines User zu finden
-	public Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException{
-		Vector<Cinema> rs = new Vector<Cinema>();
-		rs = cMapper.findallCinemabyUserID(u);
-		return rs;
-	}
+	// Methode um alle Kinogruppen eines Users zu finden
+		public Vector<CinemaGroup> getAllCinemaGroupByUser(User u) throws IllegalArgumentException{
+			
+			Vector<CinemaGroup> rs = new Vector<CinemaGroup>();
+			rs = cgMapper.findAllCinemaGroupByUserID(u);
+			return rs;
+		}
 	// Methode um alle Cinema eines User zu finden
 		public Vector<Cinema> getAllCinemaByUser(User u) throws IllegalArgumentException{
 			

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Vector;
 
+import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.User;
@@ -205,6 +206,37 @@ public class CinemaGroupMapper {
 		}
 		// Ergebnisvektor zurückgeben
 		return result;
+	}
+	public Vector<CinemaGroup> findAllCinemaGroupByUserID(User u) {
+
+		Connection con = DBConnection.getConnection();
+
+		CinemaGroup cinemagroup = null;
+
+		Vector<CinemaGroup> result = new Vector<CinemaGroup>();
+
+		try {
+			PreparedStatement findAllCinemaGroupByUserID = con
+					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinemagroup " + "WHERE userID=? ");
+
+			findAllCinemaGroupByUserID.setInt(1, u.getId());
+
+			ResultSet rs = findAllCinemaGroupByUserID.executeQuery();
+
+			while (rs.next()) {
+
+				cinemagroup = new CinemaGroup(rs.getInt("cinemaGroupID"), rs.getTimestamp("creationDate"),
+						rs.getString("name"), rs.getInt("userID"));
+
+				result.addElement(cinemagroup);
+			} // Fehlerbehandlung hinzufügen
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		// Ergebnisvektor zurückgeben
+		return result;
+
 	}
 
 	public void deleteAllCinemaGroupByUserID(User u) {
