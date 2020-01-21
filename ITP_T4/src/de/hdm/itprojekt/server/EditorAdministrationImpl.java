@@ -5,6 +5,7 @@ import com.google.gwt.user.client.Window;
 
 import de.hdm.itprojekt.shared.EditorAdministration;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
@@ -160,6 +161,16 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			Cinema c = new Cinema(rs.getCinemaID(),null,"","",0,0);
 			c = cMapper.findCinemaByCinemaID(c);
 			return c;
+		}
+		
+		// Methode um alle Pr�sentationen anhand des Umfrageeintrags zu finden
+		public CinemaGroup getCinemaGroupBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+			Presentation rs = new Presentation();
+			rs = pMapper.getAllPresentationByPresentationID(se);
+			Cinema c = new Cinema(rs.getCinemaID(),null,"","",0,0);
+			c = cMapper.findCinemaByCinemaID(c);
+			CinemaGroup cg = new CinemaGroup("", c.getCinemaGroupID());
+			return cg;
 		}
 		
 		public Movie getMovieBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{

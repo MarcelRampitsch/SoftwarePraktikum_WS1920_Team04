@@ -10,6 +10,7 @@ import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Movie;
@@ -75,6 +76,7 @@ public interface EditorAdministration extends RemoteService {
 	public Vector<Presentation> getAllPresentationBySearchCriteria(Presentation p) throws IllegalArgumentException;
 	
 	public Cinema getCinemaBySurveyEntry(SurveyEntry se) throws IllegalArgumentException;
+	public CinemaGroup getCinemaGroupBySurveyEntry(SurveyEntry se) throws IllegalArgumentException;
 	public Movie getMovieBySurveyEntry(SurveyEntry se) throws IllegalArgumentException;
 	public Timeslot getTimeslotBySurveyEntry(SurveyEntry se) throws IllegalArgumentException;
 	public Presentation getPresentationBySurveyEntry (SurveyEntry se) throws IllegalArgumentException; 

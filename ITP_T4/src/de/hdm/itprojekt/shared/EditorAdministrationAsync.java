@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Movie;
@@ -61,6 +62,7 @@ public interface EditorAdministrationAsync {
 	void getAllPresentationBySearchCriteria(Presentation p, AsyncCallback<Vector<Presentation>> callback);
 	
 	void getCinemaBySurveyEntry(SurveyEntry se, AsyncCallback<Cinema> callback);
+	void getCinemaGroupBySurveyEntry(SurveyEntry se, AsyncCallback<CinemaGroup> callback);
     void getMovieBySurveyEntry(SurveyEntry se, AsyncCallback<Movie> callback);
     void getTimeslotBySurveyEntry(SurveyEntry se, AsyncCallback<Timeslot> callback);
     void getPresentationBySurveyEntry(SurveyEntry se, AsyncCallback<Presentation> callback);
