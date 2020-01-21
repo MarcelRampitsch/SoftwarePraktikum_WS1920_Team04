@@ -24,7 +24,7 @@ public class UmfragenCell extends AbstractCell<SurveyEntry> {
 	Movie m = new Movie();
 	Timeslot t = new Timeslot();
 	Presentation p = new Presentation();
-	String date = new String();
+//	String date = new String();
 	Vote v = new Vote();
 
 	@Override
@@ -94,7 +94,7 @@ public class UmfragenCell extends AbstractCell<SurveyEntry> {
 			
 		// Kinoteil des SurvyEntrys
 			sb.appendHtmlConstant("<div>");
-			sb.appendEscaped(cg.getName());
+			sb.appendEscaped(cg.getName() + " in ");
 			sb.appendEscaped(c.getName());
 			sb.appendEscaped(c.getLocation());
 			sb.appendHtmlConstant("</div>");
@@ -106,7 +106,7 @@ public class UmfragenCell extends AbstractCell<SurveyEntry> {
 			
 		// Zeit des SurvyEntrys	
 			sb.appendHtmlConstant("<div>");
-			sb.appendEscaped(p.getDate().toString());
+//			sb.appendEscaped(p.getDate().toString());
 			sb.appendEscaped(t.getTime());
 			sb.appendHtmlConstant("</div>");
 		

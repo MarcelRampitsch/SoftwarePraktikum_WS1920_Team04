@@ -207,8 +207,10 @@ public class CinemaMapper {
 			ResultSet rs = findCinemaByCinemaID.executeQuery();
 
 			// Ergebnis-Tupel in Objekt umwandeln
+			while(rs.next()) {
 			c = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"),
 					rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

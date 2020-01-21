@@ -70,9 +70,10 @@ public class MovieMapper {
 			ResultSet rs = findByMovieID.executeQuery();
 
 			// Hinzuf�gen der Attribute zum Movieobjekt
+			while(rs.next()) {
 			mo = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"),
 					rs.getInt("userID"));
-
+			}
 			// Fehlerbehandlung (Fangen der SQLException und Ausgabe des Fehlers)
 		} catch (SQLException e) {
 			e.printStackTrace();

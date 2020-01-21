@@ -66,8 +66,10 @@ public class TimeslotMapper {
 			// Statement ausfüllen und als Query an die DB schicken
 			ResultSet rs = findByTimeslotID.executeQuery();
 			// Ergebnis-Tupel in Objekt umwandeln
-			te = new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("id"),
+			while(rs.next()) {
+			te = new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("timeslotID"),
 					rs.getTimestamp("creationDate"));
+			}
 			// Fehlerbehandlung hinzufügen
 		} catch (SQLException e2) {
 			e2.printStackTrace();

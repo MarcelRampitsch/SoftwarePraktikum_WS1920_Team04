@@ -2,8 +2,13 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.List;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 
@@ -21,6 +26,7 @@ public class UmfragenTable extends VerticalPanel {
 	List<SurveyEntry> eintrag;
 	Survey s = null;
 	
+	Button back = new Button("<-");
 	Label name = new Label();
 	UmfragenCell cell = new UmfragenCell();
 	CellList<SurveyEntry> list = new CellList<SurveyEntry>(cell);
@@ -43,12 +49,27 @@ public class UmfragenTable extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		name.setText(s.getName());
+		main.add(back);
 		main.add(name);
 		main.add(list);
+		back.addClickHandler(new backHandler());
 		this.add(main);
+		Window.alert("" + eintrag.get(0).getId());
+		list.setRowCount(eintrag.size(), true);
+		list.setRowData(0, eintrag);
 	}
 	
 	public ListDataProvider<SurveyEntry> getDataProvider() {
  		return this.Umfrageeintrag;
  	}
+	
+	private class backHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			RootPanel.get().clear();
+			EditorForm form = new EditorForm(user);
+			RootPanel.get().add(form);
+		}
+	 }
 }
