@@ -24,6 +24,7 @@ import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHan
 import de.hdm.itprojekt.client.gui.admin.AdminForm;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
@@ -43,6 +44,7 @@ public class NewSurveyForm extends VerticalPanel {
 	}
 
 	private User user = null;
+	private Vector<CinemaGroup> cinegroup = null;
 	private Vector<Cinema> cine = null;
 	private Vector<Movie> movie = null;
 	private Vector<Timeslot> timesl = null;
@@ -68,6 +70,9 @@ public class NewSurveyForm extends VerticalPanel {
 	Label datum = new Label("Datum auswaehlen:");
 	DatePicker datumAuswahlPicker = new DatePicker();
 
+	Label kinogruppe = new Label("Kinogruppe auswaehlen");
+	ListBox kinogruppeDropBox = new ListBox();
+	
 	Label kino = new Label("Kino auswaehlen:");
 	ListBox kinoDropBox = new ListBox();
 
@@ -91,6 +96,8 @@ public class NewSurveyForm extends VerticalPanel {
 		inhalt.add(datum);
 		inhalt.add(datumAuswahlPicker);
 		inhalt.add(kino);
+		inhalt.add(kinogruppeDropBox);
+		inhalt.add(kino);
 		inhalt.add(kinoDropBox);
 		inhalt.add(film);
 		inhalt.add(filmDropBox);
@@ -101,6 +108,20 @@ public class NewSurveyForm extends VerticalPanel {
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
 
+		editorAdministration.getAllCinemaGroupByUser(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
+			
+			public void onFailure(Throwable caught) {
+				Window.alert("Beim Laden der CinemaGroup ist etwas schief gelaufen");
+			}
+			
+			public void onSuccess(Vector<CinemaGroup> result) {
+				for (int i = 0; i < result.size(); i++) {
+					kinogruppeDropBox.addItem(result.elementAt(i).getName());
+					cinegroup = result;
+				}
+			}
+		});
+		
 		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
 
 			public void onFailure(Throwable caught) {

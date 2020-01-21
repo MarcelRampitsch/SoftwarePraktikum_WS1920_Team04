@@ -121,14 +121,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		uMapper.deleteUserByUserID(u);
 		//TODO deleteUserByTimeslotID?
 	}
-	
-	// TODO : User 1?
-	// Methode um alle Cinema eines User zu finden
-	public Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException{
-		Vector<Cinema> rs = new Vector<Cinema>();
-		rs = cMapper.findallCinemabyUserID(u);
-		return rs;
-	}
+	// Methode um alle Kinogruppen eines Users zu finden
+		public Vector<CinemaGroup> getAllCinemaGroupByUser(User u) throws IllegalArgumentException{
+			
+			Vector<CinemaGroup> rs = new Vector<CinemaGroup>();
+			rs = cgMapper.findAllCinemaGroupByUserID(u);
+			return rs;
+		}
 	// Methode um alle Cinema eines User zu finden
 		public Vector<Cinema> getAllCinemaByUser(User u) throws IllegalArgumentException{
 			
@@ -423,6 +422,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException {
 		vMapper.deleteAllVoteBySurveyEntryID(v.getId());
 		
+	}
+
+	@Override
+	public Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException {
+		Vector<Cinema> rs = new Vector<Cinema>();
+		rs = cMapper.findallCinemabyUserID(u);
+		return rs;
 	}
 
 }

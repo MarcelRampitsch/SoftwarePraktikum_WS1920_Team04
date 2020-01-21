@@ -3,6 +3,7 @@ package de.hdm.itprojekt.shared;
 import java.sql.Date;
 import java.util.Vector;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -20,7 +21,7 @@ import de.hdm.itprojekt.shared.bo.Timeslot;
 
 @RemoteServiceRelativePath("editor")
 public interface EditorAdministration extends RemoteService {
-	
+
 	void init() throws IllegalArgumentException;
 	
 	// User Methoden
@@ -65,6 +66,8 @@ public interface EditorAdministration extends RemoteService {
 	
 	//Cinema
 	Vector<Cinema> findAllCinemaByUser1(User u) throws IllegalArgumentException;
+	
+	Vector<CinemaGroup> getAllCinemaGroupByUser(User u);
 
 	// Methode um alle Cinema eines User zu finden
 	public Vector<Cinema> getAllCinemaByUser(User u) throws IllegalArgumentException;
