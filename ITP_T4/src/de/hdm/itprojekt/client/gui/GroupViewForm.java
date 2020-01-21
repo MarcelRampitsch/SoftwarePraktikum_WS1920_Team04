@@ -3,7 +3,9 @@ package de.hdm.itprojekt.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
 import java.util.Arrays;
+import java.util.Collections;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.Cell;
@@ -23,12 +25,16 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.NoSelectionModel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.Survey;
+import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 
 
@@ -39,7 +45,6 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 
 public class GroupViewForm extends VerticalPanel {
-	private static final List<String> colors = Arrays.asList("red","blue","yellow");
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	User user = null;
@@ -48,6 +53,7 @@ public class GroupViewForm extends VerticalPanel {
 	Group group = null;
 	
 	List<Survey> Umfragen;
+	List<SurveyEntry> UmfragenEintrag;
 	
 	Button back = new Button("<--");
 	Label groupNameLabel = new Label();
@@ -55,9 +61,14 @@ public class GroupViewForm extends VerticalPanel {
 	Button editGroupButton = new Button("edit");
 	Button deleteGroupButton = new Button("X");
 	CellTable<Survey> table = new CellTable<Survey>();
+	UmfragenCell umfragenCell = new UmfragenCell();
+	CellList<SurveyEntry> cellList = new CellList<SurveyEntry>(umfragenCell);
 	
 	VerticalPanel mainPanel = new VerticalPanel();
 	HorizontalPanel editPanel = new HorizontalPanel();
+	
+	ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
+	ListDataProvider<SurveyEntry> surveyEntryProvider = new ListDataProvider<SurveyEntry>();
 	
 	public GroupViewForm(User user, Group group, Vector<User> groupMember) {
 		
@@ -82,11 +93,8 @@ public class GroupViewForm extends VerticalPanel {
 	public void onLoad() {
 		
 		super.onLoad();
-		buildForm();
-
-		
-		ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
-		
+		buildForm();	
+	
 		TextColumn<Survey> nameColumn = new TextColumn<Survey>() {
 
 			@Override
@@ -110,17 +118,47 @@ public class GroupViewForm extends VerticalPanel {
 		table.addColumn(nameColumn, "Umfragename");
 		table.addColumn(loeschenColumn);
 		
+		NoSelectionModel<Survey> selectionModelSurvey = new NoSelectionModel<Survey>();
+		Handler tableHandle = new SelectionChangeEvent.Handler() 
+		{
+
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				Survey clickedObj = selectionModelSurvey.getLastSelectedObject();
+				editorAdministration.getAllSurveyEntryBySurveyID(clickedObj, new AsyncCallback<Vector<SurveyEntry>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Vector<SurveyEntry> result) {
+						UmfragenEintrag = Collections.list(result.elements());
+						UmfragenTable form = new UmfragenTable(user , UmfragenEintrag, clickedObj);
+						mainPanel.clear();
+						RootPanel.get().add(form);
+					}
+				});
+			}
+		};
+
+		selectionModelSurvey.addSelectionChangeHandler(tableHandle);
+		table.setSelectionModel(selectionModelSurvey);
+		
 		dataProvider.addDataDisplay(table);
+		surveyEntryProvider.addDataDisplay(cellList);
 		
 		final List <Survey> list = dataProvider.getList();
-		for(Survey survey: Umfragen) {
+			for(Survey survey: Umfragen) {
 			list.add(survey);
-		}
-//		UmfragenCell cell = new UmfragenCell();
-//		CellList<String> cellList = new CellList<String>(cell);
-//		cellList.setRowData(0,colors);
-//		
-//		this.add(cellList);
+			}
+		
+		final List <SurveyEntry> surveyEntrylist = surveyEntryProvider.getList();
+			for(SurveyEntry surveyEntry: UmfragenEintrag) {
+			surveyEntrylist.add(surveyEntry);
+			}
 		}
 	
 	public void buildForm() {
@@ -138,8 +176,8 @@ public class GroupViewForm extends VerticalPanel {
 		mainPanel.add(newSurveyButton);
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
 		mainPanel.add(table);
+		mainPanel.add(cellList);
 		this.add(mainPanel);
-		
 	}
 	
 	private class deleteGroupButtonClickHandler implements ClickHandler {

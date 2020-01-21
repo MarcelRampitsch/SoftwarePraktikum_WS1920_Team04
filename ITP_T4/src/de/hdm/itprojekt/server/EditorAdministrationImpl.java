@@ -154,12 +154,34 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			return rs;
 		}
 		// Methode um alle Pr�sentationen anhand des Umfrageeintrags zu finden
-		public Cinema getAllPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+		public Cinema getCinemaBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
 			Presentation rs = new Presentation();
 			rs = pMapper.getAllPresentationByPresentationID(se);
 			Cinema c = new Cinema(rs.getCinemaID(),null,"","",0,0);
 			c = cMapper.findCinemaByCinemaID(c);
 			return c;
+		}
+		
+		public Movie getMovieBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+			Presentation rs = new Presentation();
+			rs = pMapper.getAllPresentationByPresentationID(se);
+			Movie m = new Movie(rs.getMovieID(),null,"",0);
+			m = mMapper.findByMovieID(m);
+			return m;
+		}
+		
+		public Timeslot getTimeslotBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+			Presentation rs = new Presentation();
+			rs = pMapper.getAllPresentationByPresentationID(se);
+			Timeslot t = new Timeslot("",0,rs.getTimeslotID(),null);
+			t = tMapper.findByTimeslotID(t);
+			return t;
+		}
+		
+		public Presentation getPresentationBySurveyEntry(SurveyEntry se) throws IllegalArgumentException{
+			Presentation rs = new Presentation();
+			rs = pMapper.getAllPresentationByPresentationID(se);
+			return rs;
 		}
 
 	
@@ -321,8 +343,8 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		return surveyentry;
 	}
 
-	public SurveyEntry getSurveyEntryBySurveyID(Survey s) throws IllegalArgumentException {
-		SurveyEntry surveyentry = seMapper.findSurveyEntryBySurveyID(s);
+	public Vector <SurveyEntry> getAllSurveyEntryBySurveyID(Survey s) throws IllegalArgumentException {
+		Vector <SurveyEntry> surveyentry = seMapper.findAllSurveyEntryBySurveyID(s);
 		return surveyentry;
 	}
 

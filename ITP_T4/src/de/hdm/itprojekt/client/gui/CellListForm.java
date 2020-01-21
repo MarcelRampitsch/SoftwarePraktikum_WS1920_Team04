@@ -120,8 +120,6 @@ public class CellListForm extends VerticalPanel {
 
 		selectionModelMyObj.addSelectionChangeHandler(tableHandle);
 		table.setSelectionModel(selectionModelMyObj);
-
-
 		
 		dataProvider.addDataDisplay(table);
 		
