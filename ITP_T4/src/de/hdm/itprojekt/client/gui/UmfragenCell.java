@@ -1,50 +1,40 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.util.Vector;
 
 import com.google.gwt.cell.client.AbstractCell;
-import com.google.gwt.core.shared.GWT;
-import com.google.gwt.safecss.shared.SafeStyles;
-import com.google.gwt.safecss.shared.SafeStylesUtils;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Cinema;
+import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
-import de.hdm.itprojekt.shared.bo.Timeslot;;
+import de.hdm.itprojekt.shared.bo.Timeslot;
+import de.hdm.itprojekt.shared.bo.Vote;;
 
 public class UmfragenCell extends AbstractCell<SurveyEntry> {
 	
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	CinemaGroup cg = new CinemaGroup();
 	Cinema c = new Cinema();
 	Movie m = new Movie();
 	Timeslot t = new Timeslot();
 	Presentation p = new Presentation();
-	
-	
-	interface Templates extends SafeHtmlTemplates{
-		@SafeHtmlTemplates.Template("\"<div style=\\\"{0}\\\">{1}</div>\"")
-		SafeHtml cell(SafeStyles styles, SafeHtml value);
-	}
-	
-	private static Templates templates = GWT.create(Templates.class);
-	
+	String date = new String();
+	Vote v = new Vote();
+
 	@Override
 	public void render(Context context, SurveyEntry value, SafeHtmlBuilder sb) {
 		// TODO Auto-generated method stub
 		if(value == null) {
 			return;
 		}
-		editorAdministration.getAllPresentationBySurveyEntry(value, new AsyncCallback<Cinema>() {
+		
+		editorAdministration.getCinemaBySurveyEntry(value, new AsyncCallback<Cinema>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -58,18 +48,71 @@ public class UmfragenCell extends AbstractCell<SurveyEntry> {
 			}
 		});
 		
-		sb.appendHtmlConstant("<table>");
+		editorAdministration.getMovieBySurveyEntry(value, new AsyncCallback<Movie>() {
 
-	      // Add the contact image.
-	      sb.appendHtmlConstant("<tr><td rowspan='2'>");
-	      sb.appendHtmlConstant("</td>");
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
 
-	      // Add the name and address.
-	      sb.appendHtmlConstant("<td style='font-size:95%;'>");
-	      sb.appendEscaped(c.getName());
-	      sb.appendHtmlConstant("</td></tr><tr><td>");
-	      sb.appendEscaped(c.getLocation());
-	      sb.appendHtmlConstant("</td></tr></table>");
+			@Override
+			public void onSuccess(Movie result) {
+				m = result;
+			}
+		});
+		
+		editorAdministration.getTimeslotBySurveyEntry(value, new AsyncCallback<Timeslot>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Timeslot result) {
+				t = result;
+			}
+		});
+		
+		editorAdministration.getPresentationBySurveyEntry(value, new AsyncCallback<Presentation>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Presentation result) {
+				p = result;
+			}
+		});
+		
+		sb.appendHtmlConstant("<div>");
+			
+		// Kinoteil des SurvyEntrys
+			sb.appendHtmlConstant("<div>");
+			sb.appendEscaped(cg.getName());
+			sb.appendEscaped(c.getName());
+			sb.appendEscaped(c.getLocation());
+			sb.appendHtmlConstant("</div>");
+		
+		// Filmteil des SurvyEntrys
+			sb.appendHtmlConstant("<div>");
+			sb.appendEscaped(m.getName());
+			sb.appendHtmlConstant("</div>");
+			
+		// Zeit des SurvyEntrys	
+			sb.appendHtmlConstant("<div>");
+			sb.appendEscaped(p.getDate().toString());
+			sb.appendEscaped(t.getTime());
+			sb.appendHtmlConstant("</div>");
+		
+		//Ergebniss des SurvyEntrys
+	      
+	    sb.appendHtmlConstant("</div>");
 	}
 }
 

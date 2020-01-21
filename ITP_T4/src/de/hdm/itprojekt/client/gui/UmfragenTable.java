@@ -2,19 +2,14 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.List;
 
-import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.Cell;
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
-import de.hdm.itprojekt.shared.bo.Group;
-import de.hdm.itprojekt.shared.bo.Presentation;
+import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.User;
 
@@ -23,128 +18,37 @@ public class UmfragenTable extends VerticalPanel {
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
 	User user = null;
+	List<SurveyEntry> eintrag;
+	Survey s = null;
 	
-	public UmfragenTable(User user, List <Presentation> Umfrageeintrag) {
+	Label name = new Label();
+	UmfragenCell cell = new UmfragenCell();
+	CellList<SurveyEntry> list = new CellList<SurveyEntry>(cell);
+	VerticalPanel main = new VerticalPanel();
+	
+	
+	public UmfragenTable() {
+	}
+	
+	public UmfragenTable(User user, List<SurveyEntry> eintrag, Survey s) {
 		this.user = user;
-		this.Umfrageeintrag = Umfrageeintrag;
-		
+		this.eintrag = eintrag;		
+		this.s = s;
 	}
 	
 	 //erstellen des Data Provider
-	   List<Presentation> Umfrageeintrag;
+	   ListDataProvider<SurveyEntry> Umfrageeintrag = new ListDataProvider<SurveyEntry>();
 	
 	
 	public void onLoad() {
 		super.onLoad();
-		final CellTable <Presentation> surv = new CellTable <Presentation> (); 
-		
-		 // Create a list data provider.
-		ListDataProvider<Presentation> dataProvider = new ListDataProvider<Presentation>();
-		
-		// Add the cellList to the dataProvider.
-		dataProvider.addDataDisplay(surv);
-		
-		/*
-		 * Namensspalte
-		 */
-		TextColumn<Presentation> nameColumn = new TextColumn<Presentation>() {
-
-			@Override
-			public String getValue(Presentation object) {
-				// TODO Auto-generated method stub
-				return object.getName();
-			}
-		};
-		surv.addColumn(nameColumn, "Name");
-		
-		/*
-		 * Zeitfensterspalte
-		 */
-		TextColumn<Presentation> timeslotColumn = new TextColumn<Presentation>() {
-
-			@Override
-			public String getValue(Presentation object) {
-				// TODO Auto-generated method stub
-				return object.getName();
-			}
-		};
-		surv.addColumn(timeslotColumn, "Timeslot");
-		
-		/*
-		 * Filmspalte
-		 */
-		TextColumn<Presentation> movieColumn = new TextColumn<Presentation>() {
-
-			@Override
-			public String getValue(Presentation object) {
-				// TODO Auto-generated method stub
-				return object.getName(); // Jeweils durch ID austauschen
-			}
-		};
-		surv.addColumn(movieColumn, "Movie");
-		
-		/*
-		 * Kinospalte
-		 */
-		TextColumn<Presentation> cinemaColumn = new TextColumn<Presentation>() {
-
-			@Override
-			public String getValue(Presentation object) {
-				// TODO Auto-generated method stub
-				return object.getName();
-			}
-		};
-		surv.addColumn(cinemaColumn, "Cinema");
-		
-		/*
-		 * Datumspalte
-		 */
-		TextColumn<Presentation> dateColumn = new TextColumn<Presentation>() {
-
-			@Override
-			public String getValue(Presentation object) {
-				// TODO Auto-generated method stub
-				return object.getName();
-			}
-		};
-		
-		 Cell<String> positiveVoteCell = new ButtonCell();	
-			
-			Column<Presentation, String> positiveVoteColumn = new Column<Presentation, String>(positiveVoteCell) {
-
-				@Override
-				public String getValue(Presentation object) {
-					// TODO Auto-generated method stub
-					return "X";
-				}
-		};
-		surv.addColumn(positiveVoteColumn,"+ Vote");
-			
-		Cell<String> negativeVoteCell = new ButtonCell();	
-				
-			Column<Presentation, String> negativeVoteColumn = new Column<Presentation, String>(negativeVoteCell) {
-
-				@Override
-				public String getValue(Presentation object) {
-					// TODO Auto-generated method stub
-					return "X";
-				}
-		};
-		surv.addColumn(negativeVoteColumn, "- Vote");
-
-
-		surv.addColumn(dateColumn, "Date");
-		
-		this.add(surv);
-		
-		final List <Presentation> list = dataProvider.getList();
-		for(Presentation group : Umfrageeintrag) {
-			list.add(group);
-		}
-		RootPanel.get().add(surv);
-
-		
-		
+		name.setText(s.getName());
+		main.add(name);
+		main.add(list);
+		this.add(main);
 	}
 	
+	public ListDataProvider<SurveyEntry> getDataProvider() {
+ 		return this.Umfrageeintrag;
+ 	}
 }

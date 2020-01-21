@@ -250,8 +250,8 @@ public class NewSurveyForm extends VerticalPanel {
 			RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
-			UmfragenTable umfragen = new UmfragenTable(user, null);
-			RootPanel.get().add(umfragen);
+//			UmfragenTable umfragen = new UmfragenTable(user, null);
+//			RootPanel.get().add(umfragen);
 
 			
 		}
