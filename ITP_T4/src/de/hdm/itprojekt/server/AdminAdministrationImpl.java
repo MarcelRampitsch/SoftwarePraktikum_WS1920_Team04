@@ -10,6 +10,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
 import de.hdm.itprojekt.server.db.GroupMapper;
+import de.hdm.itprojekt.client.Admin;
 import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
 import de.hdm.itprojekt.server.db.MovieMapper;
@@ -122,6 +123,12 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}
 	
 	public void deleteCinemaGroup (CinemaGroup cg) throws IllegalArgumentException{
+		Vector<Cinema> rs = cMapper.findAllCinemaByCinemaGroupID(cg.getId());
+		for (int i = 0; i < rs.size(); i++) {
+			rs.elementAt(i);
+			Cinema c = new Cinema(rs.elementAt(i).getId(), rs.elementAt(i).getCreationDate(),rs.elementAt(i).getLocation(),rs.elementAt(i).getName(),0, rs.elementAt(i).getUserID());
+			cMapper.updateCinema(c);
+		}
 		cgMapper.deleteCinemaGroupByID(cg.getId());
 	}
 	
