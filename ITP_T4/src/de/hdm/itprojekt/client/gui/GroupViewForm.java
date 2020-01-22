@@ -104,19 +104,19 @@ public class GroupViewForm extends VerticalPanel {
 			}
 		};
 			
-		Cell<String> loeschenCell = new ButtonCell();	
-			
-		Column<Survey, String> loeschenColumn = new Column<Survey, String>(loeschenCell) {
-
-			@Override
-			public String getValue(Survey object) {
-				// TODO Auto-generated method stub
-				return "X";
-			}
-		};
+		//Cell<String> loeschenCell = new ButtonCell();	
+//			
+//		Column<Survey, String> loeschenColumn = new Column<Survey, String>(loeschenCell) {
+//
+//			@Override
+//			public String getValue(Survey object) {
+//				// TODO Auto-generated method stub
+//				return "X";
+//			}
+//		};
 		
 		table.addColumn(nameColumn, "Umfragename");
-		table.addColumn(loeschenColumn);
+		//able.addColumn(loeschenColumn);
 		
 		NoSelectionModel<Survey> selectionModelSurvey = new NoSelectionModel<Survey>();
 		Handler tableHandle = new SelectionChangeEvent.Handler() 
