@@ -115,7 +115,6 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 	
 	public void onClick(ClickEvent event) {
 		
-
 		adminAdministration.deleteTimeslot(time, new AsyncCallback<Void>() {
 			
 			@Override

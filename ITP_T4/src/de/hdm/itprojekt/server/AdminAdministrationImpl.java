@@ -5,6 +5,7 @@ import de.hdm.itprojekt.shared.bo.*;
 
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -13,6 +14,7 @@ import de.hdm.itprojekt.server.db.CinemaGroupMapper;
 import de.hdm.itprojekt.server.db.CinemaMapper;
 import de.hdm.itprojekt.server.db.MovieMapper;
 import de.hdm.itprojekt.server.db.PresentationMapper;
+import de.hdm.itprojekt.server.db.SurveyEntryMapper;
 import de.hdm.itprojekt.server.db.TimeslotMapper;
 import de.hdm.itprojekt.server.db.UserMapper;
 
@@ -30,6 +32,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	private TimeslotMapper tMapper = null;
 	private UserMapper uMapper = null; 
 	private GroupMapper gMapper = null;
+	private SurveyEntryMapper seMapper = null;
 
 
 	public AdminAdministrationImpl() throws IllegalArgumentException{
@@ -44,6 +47,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.tMapper = TimeslotMapper.TimeslotMapper();
 		this.uMapper = UserMapper.UserMapper();
 		this.gMapper = GroupMapper.GroupMapper();
+		this.seMapper = SurveyEntryMapper.SurveyEntryMapper();
 
 	}
 	
@@ -67,6 +71,12 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}	
 	// Methode zum Löschen eines bestimmten Kinos
 	public void deleteCinema (Cinema c) throws IllegalArgumentException {
+		Vector <Presentation> rs = pMapper.findAllByCinemaID(c);
+		Window.alert(rs.elementAt(0) + "");
+		for (int i = 0; i < rs.size(); i++) {
+			seMapper.deleteAllByPresentationID(rs.elementAt(i));
+		}
+		pMapper.deleteAllByCinemaID(c);
 		cMapper.deleteCinemaByCinemaID(c.getId());
 	}
 	// Methode um alle Cinema eines User zu finden
@@ -140,6 +150,11 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}		
 	
 	public void deleteMovie(Movie m) throws IllegalArgumentException{
+		Vector<Presentation> rs = pMapper.findAllByMovieID(m);
+		for (int i = 0; i < rs.size(); i++) {
+			seMapper.deleteAllByPresentationID(rs.elementAt(i));
+		}
+		pMapper.deleteAllByMovieID(m);
 		mMapper.deleteByMovieID(m);
 	}
 	
@@ -154,8 +169,12 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}
 
 	public void deleteTimeslot(Timeslot t) throws IllegalArgumentException {
+		Vector <Presentation> rs = pMapper.findAllByTimeslotID(t);
+		for (int i = 0; i < rs.size(); i++) {
+			seMapper.deleteAllByPresentationID(rs.elementAt(i));
+		}
+		pMapper.deleteAllByTimeslotID(t);
 		tMapper.deleteByTimeslotID(t);
-		
 	}
 
 	public Timeslot addTimeslot(Timeslot t) throws IllegalArgumentException {
@@ -180,6 +199,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 
 
 	public void deletePresentation(Presentation p) throws IllegalArgumentException {
+		seMapper.deleteAllByPresentationID(p);
 		pMapper.deleteByPresentationID(p);	
 	}
 

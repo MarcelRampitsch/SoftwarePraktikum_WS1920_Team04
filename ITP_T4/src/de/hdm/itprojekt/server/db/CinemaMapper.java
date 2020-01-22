@@ -107,8 +107,7 @@ public class CinemaMapper {
 
 		try {
 			// Prepared Statement erstellen um ein Cinema zu finden
-			PreparedStatement deleteCinemaByCinemaID = con
-					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema " + "WHERE cinemaID=? ");
+			PreparedStatement deleteCinemaByCinemaID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema " + "WHERE cinemaID=? ");
 
 			// PreparedStatement zum Löschen einer bestimmten Cinema in der Datenbank
 			deleteCinemaByCinemaID.setInt(1, id);

@@ -93,7 +93,6 @@ public class DeleteMovieDialogBox extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				
-
 				adminAdministration.deleteMovie(movie, new AsyncCallback<Void>() {
 
 					@Override
