@@ -185,18 +185,31 @@ public class NewSurveyForm extends VerticalPanel {
 	private class SearchHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
+			
 			Cinema c = cine.elementAt(kinoDropBox.getSelectedIndex());
 			Movie m = movie.elementAt(filmDropBox.getSelectedIndex());
 			Timeslot t = timesl.elementAt(spielzeitDropBox.getSelectedIndex());
 			Date date = new java.sql.Date(datumAuswahlPicker.getValue().getTime());
 			Presentation p = new Presentation(umfrageNameBox.getText(), c.getId(), m.getId(), user.getId(), t.getId(),
 					date);
+			
 			/*
-			 * if(umfrageNameBox.getText() != null & kinoDropBox.getSelectedItemText() !=
-			 * "Kein Kino ausgew√§hlt" & filmDropBox.getSelectedItemText()
-			 * !="Kein Film ausgew√§hlt" & spielzeitDropBox.getSelectedItemText() !=
-			 * "Keine Spielzeit ausgew√§hlt") {
+			 * TODO: Wenn ein Kino nicht Teil einer Kinogruppe ist soll diese Meldung nicht erscheinen.
+			 * 		 Weglassen, da standardm‰ﬂig immer schon etwas ausgew‰hlt ist?
 			 */
+			if(kinogruppeDropBox.getSelectedItemText() == null) {
+				Window.alert("Bitte Kinogruppe ausw‰hlen");
+			}
+			else if(kinoDropBox.getSelectedItemText() == null) {
+				Window.alert("Bitte Kino ausw‰hlen");
+			}
+			else if(filmDropBox.getSelectedItemText() == null) {
+				Window.alert("Bitte Film ausw‰hlen");
+			}
+			else if(spielzeitDropBox.getSelectedItemText() == null) {
+				Window.alert("Bitte Spielzeit ausw‰hlen");
+			}
+			 
 			editorAdministration.getAllPresentationBySearchCriteria(p, new AsyncCallback<Vector<Presentation>>() {
 
 				@Override
@@ -207,6 +220,7 @@ public class NewSurveyForm extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Vector<Presentation> result) {
+
 					ListBox vorstellungenDropBox = new ListBox();
 					inhalt.add(vorstellungenDropBox);
 					for (int i = 0; i < result.size(); i++) {
