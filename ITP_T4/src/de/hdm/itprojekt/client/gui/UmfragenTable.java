@@ -133,13 +133,13 @@ public class UmfragenTable extends VerticalPanel {
 					NodeList<Element> nodes = parent.getFirstChildElement().getElementsByTagName("input");
 					int surveyEntryID = Integer.parseInt(parent.getFirstChildElement().getAttribute("data-seid"));
 					int userID = Integer.parseInt(parent.getFirstChildElement().getAttribute("data-userid"));
-					consoleLog(nodes.getItem(0).getAttribute("checked"));
-					if(nodes.getItem(0).hasAttribute("checked")) {
+					consoleLog(nodes.getItem(0).toString());
+					if(InputElement.as(nodes.getItem(0)).isChecked()) {
 						// +1
 						Vote v = new Vote(surveyEntryID,userID,1);
 						doAction(v);
 					}
-					if(nodes.getItem(1).hasAttribute("checked")) {
+					if(InputElement.as(nodes.getItem(1)).isChecked()) {
 						// -1
 						Vote v = new Vote(surveyEntryID,userID,-1);
 						doAction(v);
@@ -164,8 +164,9 @@ public class UmfragenTable extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Vote result) {
+					consoleLog("You voted "+ result.getVoteResult());
 					// TODO Auto-generated method stub
-					Window.alert("You voted "+ v.getVoteResult() );
+					Window.alert("You voted "+ result.getVoteResult() );
 				}
 				
 			});

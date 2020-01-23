@@ -387,7 +387,8 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			tempvote = vMapper.insert(v);
 			return tempvote;
 		}
-		return null;
+		Vote v1 = getVoteResult(new SurveyEntry(v.getSurveyEntryID(),null,0,0));
+		return v1;
 	}
 
 	public Vote getVoteByVoteID(Vote v) throws IllegalArgumentException {
@@ -403,6 +404,17 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	public Vector<Vote> getAllVoteBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
 		Vector<Vote> rs = vMapper.findAllVoteBySurveyEntryID(se.getId());
 		return rs;
+	}
+	
+	public Vote getVoteResult(SurveyEntry se)  throws IllegalArgumentException {
+		Vector<Vote> rs = vMapper.findAllVoteBySurveyEntryID(se.getId());
+		Vote v = new Vote();
+		v.setSurveyEntryID(se.getId());
+		for(int i=0; i>rs.size(); i++) {
+			v.setVoteResult(v.getVoteResult()+rs.elementAt(i).getVoteResult());
+		}
+		return v;
+		
 	}
 
 	public Vote updateVote(Vote upVote) throws IllegalArgumentException {

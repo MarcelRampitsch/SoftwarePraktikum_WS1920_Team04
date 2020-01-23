@@ -70,7 +70,7 @@ public class VoteMapper {
 
 			while (rs.next()) {
 
-				return v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
+				return v = new Vote(rs.getInt("voteID"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
 						rs.getInt("userID"), rs.getInt("voteResult"));
 
 			}
@@ -105,7 +105,7 @@ public class VoteMapper {
 
 			while (rs.next()) {
 
-				v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
+				v = new Vote(rs.getInt("voteID"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
 						rs.getInt("userID"), rs.getInt("voteResult"));
 
 				result.addElement(v);
@@ -134,14 +134,14 @@ public class VoteMapper {
 		try {
 
 			PreparedStatement findAllVoteBySurveyEntryID = con
-					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.vote" + "WHERE surveyentryID=?");
+					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.vote WHERE surveyentryID=?");
 			findAllVoteBySurveyEntryID.setInt(1, id);
 
 			ResultSet rs = findAllVoteBySurveyEntryID.executeQuery();
 
 			while (rs.next()) {
 
-				v = new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
+				v = new Vote(rs.getInt("voteID"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
 						rs.getInt("userID"), rs.getInt("voteResult"));
 
 				result.addElement(v);
@@ -154,6 +154,7 @@ public class VoteMapper {
 			return null;
 
 		}
+		System.out.println(result.size());
 
 		return result;
 
@@ -181,7 +182,7 @@ public class VoteMapper {
 
 			if (rs.next()) {
 
-				return new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
+				return new Vote(rs.getInt("voteID"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
 						rs.getInt("userID"), rs.getInt("voteResult"));
 
 			}
@@ -216,7 +217,7 @@ public class VoteMapper {
 
 			if (rs.next()) {
 
-				return new Vote(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
+				return new Vote(rs.getInt("voteID"), rs.getTimestamp("creationDate"), rs.getInt("surveyentryID"),
 						rs.getInt("userID"), rs.getInt("voteResult"));
 
 			}
