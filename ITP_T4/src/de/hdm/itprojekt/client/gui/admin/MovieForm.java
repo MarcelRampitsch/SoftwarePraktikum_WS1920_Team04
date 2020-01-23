@@ -32,7 +32,7 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class MovieForm  extends VerticalPanel{
 	
-    private Label movieLabel = new Label("Movie");
+    //private Label movieLabel = new Label("Movie");
 	
     AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
@@ -70,7 +70,7 @@ public class MovieForm  extends VerticalPanel{
 		editMovie.addClickHandler(new editMovieClickHandler());
 		deleteMovie.addClickHandler(new deleteMovieClickHandler());
     	
-    	this.add(movieLabel);    	
+    	//this.add(movieLabel);    	
     	moviePanel1.add(movieBox);
     	
     	adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {

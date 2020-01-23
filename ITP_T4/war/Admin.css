@@ -397,7 +397,19 @@ button.gwt-Button {
 	background: #169f11;
 	color: #f2f2f2;
 	transition: 0.5s;
+   font-size: 15px;
+   font-weight: bold;
+	
 }
+
+
+.gwt-Label{ 
+   font-weight: bold;
+   margin:3px;
+   text-decoration: underline;
+}
+
+
 
 
 

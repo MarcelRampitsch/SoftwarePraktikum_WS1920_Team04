@@ -194,6 +194,7 @@ public class EditorForm extends VerticalPanel {
 						Window.Location.assign(user.getURL());
 					}
 				});  */
+		toAdmin.addStyleName("AdminButton");
 		
 		Anchor logOutLink = new Anchor("Logout");
 		

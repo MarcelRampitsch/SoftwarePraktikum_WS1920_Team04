@@ -101,7 +101,7 @@ public class PresentationForm extends VerticalPanel{
 	    	search.addStyleName("searchStyle");
 
 	    	
-	    	this.add(pcinemaLabel);
+	    	this.add(pcinemaLabel);	    	
 	    	this.add(cinemaDrop);
 	    	
 	    	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
@@ -127,7 +127,9 @@ public class PresentationForm extends VerticalPanel{
 	    	
 	    	
 	    	this.add(pmovieLabel);
+	    	
 	    	this.add(movieDrop);
+	    	
 	    	
             adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
 	    		

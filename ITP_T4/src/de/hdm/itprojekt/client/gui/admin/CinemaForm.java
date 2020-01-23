@@ -30,7 +30,7 @@ import de.hdm.itprojekt.shared.bo.User;
 public class CinemaForm extends VerticalPanel {
 
 	//private Label cinemaGroup = new Label("CinemaGroup");
-	private Label cinema = new Label("Cinema");
+	//private Label cinema = new Label("Cinema");
 	
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
@@ -97,7 +97,7 @@ public class CinemaForm extends VerticalPanel {
 //		this.add(cinemaGroupPanel1);
 //		this.add(cinemaGroupPanel2);
 		
-		this.add(cinema);
+		//this.add(cinema);
 		
 		cinemaPanel1.add(cinemaBox);
 		

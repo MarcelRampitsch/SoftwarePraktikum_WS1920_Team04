@@ -24,3 +24,16 @@
 
 
 /*VoteForm*/
+
+
+
+
+
+
+.AdminButton:hover{
+	background: #169f11;
+	color: white;
+	transition: 0.5s;
+   font-size: 15px;
+   font-weight: bold;
+}

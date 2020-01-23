@@ -31,7 +31,7 @@ public class TimeslotForm extends VerticalPanel {
 	
 	
 	ListBox timeslotbox = new ListBox();
-    Label timeslotLabel = new Label("Timeslot");
+   // Label timeslotLabel = new Label("Timeslot");
 //	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
     
@@ -74,7 +74,7 @@ public class TimeslotForm extends VerticalPanel {
     	timeslotNew.addStyleName("timeslotNewStyle");
     	timeslotDelete.addStyleName("timeslotDeleteStyle");
     	
-    	this.add(timeslotLabel);
+    	//this.add(timeslotLabel);
     	
 
     	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {

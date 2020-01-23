@@ -103,13 +103,13 @@ public class AdminForm extends VerticalPanel{
 
 			//Button, dessen ClickEvent zum Admin Mode führt.		
 			Button toBesucher = new Button("EditorModus", new ClickHandler() {
+				
 						@Override
 						public void onClick(ClickEvent event) {
 							// TODO Auto-generated method stub
 							Window.Location.replace("/ITP_T4.html");
 						}
 					});
-			
 			main.add(toBesucher);
 			toBesucher.addStyleName("EditorButton");
 		this.add(main);
