@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.user.client.ui.HasVisibility;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.UmfragenOpenForm.CloseUmfrageOpenFormClickHandler;
@@ -83,7 +84,8 @@ public class NewSurveyForm extends VerticalPanel {
 	ListBox spielzeitDropBox = new ListBox();
 
 	Button vorstellungSuchenButton = new Button("Vorstellung suchen");
-
+	ListBox vorstellungenDropBox = new ListBox();
+	
 	Button umfrageSichernButton = new Button("Umfrage speichern");
 
 	public void onLoad() {
@@ -104,6 +106,7 @@ public class NewSurveyForm extends VerticalPanel {
 		inhalt.add(spielzeit);
 		inhalt.add(spielzeitDropBox);
 		inhalt.add(vorstellungSuchenButton);
+		inhalt.add(vorstellungenDropBox);
 		inhalt.add(umfrageSichernButton);
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
@@ -220,9 +223,7 @@ public class NewSurveyForm extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Vector<Presentation> result) {
-
-					ListBox vorstellungenDropBox = new ListBox();
-					inhalt.add(vorstellungenDropBox);
+					vorstellungenDropBox.clear();
 					for (int i = 0; i < result.size(); i++) {
 						vorstellungenDropBox.addItem(result.elementAt(i).getName());
 						prese = result;
