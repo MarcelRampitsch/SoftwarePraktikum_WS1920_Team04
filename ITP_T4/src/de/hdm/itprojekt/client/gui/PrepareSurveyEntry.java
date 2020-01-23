@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.List;
+import java.util.Vector;
 
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -36,8 +37,9 @@ public class PrepareSurveyEntry {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	SurveyEntry se;
 	List<SafeHtml> data;
-	int outstandingCalls = 3;
+	int outstandingCalls = 4;
 	UmfragenTable ut;
+	Vector<Vote>votes;
 	
 	
 	public PrepareSurveyEntry () {
@@ -117,8 +119,31 @@ public class PrepareSurveyEntry {
 			}
 		});
 		
-	}
 	
+		editorAdministration.getAllVoteBySurveyEntryID(value, new AsyncCallback<Vector<Vote>>() {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			createSafeHtml();
+		}
+
+		@Override
+		public void onSuccess(Vector <Vote> result) {
+			votes = result;
+			Window.alert(result.size()+ "");
+			createSafeHtml();
+			
+		}
+	});
+	
+}
+	
+
+
+	
+	@SuppressWarnings("deprecation")
+
 	public void createSafeHtml() {
 		
 		//Window.alert("alertini");
@@ -126,6 +151,21 @@ public class PrepareSurveyEntry {
 			outstandingCalls -= 1;
 			return; 
 		}	
+		
+		boolean voted = false;
+		Vote vote =null;
+		
+		if(votes == null) {
+			
+
+		}else {
+		for(int i=0; i<votes.size(); i++ ) {
+			if(votes.elementAt(i).getUserID()==ut.user.getId()) {
+				voted= true;
+				vote= votes.elementAt(i);
+			}
+		}
+		}
 		shb.appendHtmlConstant("<div data-userID=\""+ut.user.getId()+"\" data-seID=\""+se.getId()+ "\" >");
 		// Kinoteil des SurvyEntrys
 		shb.appendHtmlConstant("<div>");
@@ -153,6 +193,22 @@ public class PrepareSurveyEntry {
 		RadioButton rb_nein = new RadioButton("Nein");
 		rb_nein.setName(se.getId()+"");
 		Button save = new Button("Save");
+		
+		if(voted) {
+			save.setEnabled(false);
+			rb_ja.setEnabled(false); // geht nicht
+			rb_nein.setEnabled(false);
+			if(vote != null ) {
+				if(vote.getVoteResult()>0) {
+					rb_ja.setValue(true); // geht nicht
+				}else {
+					rb_nein.setValue(true);
+				}
+			}
+		}
+		
+		
+		
 		save.addClickHandler(new saveHandler());
 		shb.appendEscaped("Ja");
 		shb.appendHtmlConstant("<input type='radio' name='"+se.getId()+"'>");//rb_ja.toString());
