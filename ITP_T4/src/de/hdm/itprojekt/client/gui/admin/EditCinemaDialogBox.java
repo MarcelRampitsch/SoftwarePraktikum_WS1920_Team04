@@ -88,6 +88,10 @@ public class EditCinemaDialogBox extends DialogBox {
 		this.add(content);
 	}
 	
+	/*
+	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
+	 */
+	
 	public void openCinemaEdit() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
@@ -104,6 +108,11 @@ public class EditCinemaDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
+	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
 	private class closeCinemaEditForm implements ClickHandler{
 		
 		@Override
@@ -112,9 +121,9 @@ public class EditCinemaDialogBox extends DialogBox {
 		}
 
 	
-		
 	}
 	
+	// ClickHandler der das Speichern der DialogBox ermöglicht
 	private class safeCinemaEditForm implements ClickHandler{
 		
 		@Override
@@ -141,6 +150,7 @@ public class EditCinemaDialogBox extends DialogBox {
 			}else Window.alert("Prüfen sie ihre Texteingabe");
 	}
 	}
+	//Überprüft ob die Symbole zulässig sind
 	private int isValidSymbol() {
 
 		

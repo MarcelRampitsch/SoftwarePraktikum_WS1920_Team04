@@ -71,6 +71,11 @@ public class MovieAddDialogbox extends DialogBox {
 		this.add(content);
 	
 	}
+	
+	
+	/*
+	 * Methode die das Schließen der DialogBox realisiert
+	 */
 	public void CloseMovieGroup() {
 		this.hide();
 		this.clear();
@@ -78,8 +83,11 @@ public class MovieAddDialogbox extends DialogBox {
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(false);
 	
-
 }
+	
+	/*
+	 * Methode die das Öffnen der DialogBox realisiert
+	 */
 	
 	public void openMovieAdd() {
 			this.setGlassEnabled(true);
@@ -87,6 +95,10 @@ public class MovieAddDialogbox extends DialogBox {
 			this.center();
 			this.show();
 	}
+	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
 	
 	
 	// ClickHandler der das Schließen der DialogBox ermöglicht

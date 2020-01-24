@@ -60,6 +60,10 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		this.add(content);
 	}
 	
+	/*
+	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
+	 */
+	
 	public void openCimemaGroupDelete() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);

@@ -60,6 +60,10 @@ public class DeleteMovieDialogBox extends DialogBox {
 		
 	}
 	
+	/*
+	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
+	 */
+	
 	public void openMovieDelete() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
@@ -76,7 +80,11 @@ public class DeleteMovieDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
 	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
     private class closeMovieForm implements ClickHandler{
 		
 		@Override
@@ -86,8 +94,8 @@ public class DeleteMovieDialogBox extends DialogBox {
 		}
 
 	}
-    
- private class deleteMovie implements ClickHandler{
+	// ClickHandler der das löschen deines Movie ermöglicht
+    private class deleteMovie implements ClickHandler{
 		
 	
 			@Override

@@ -66,6 +66,10 @@ VerticalPanel content = new VerticalPanel();
 		this.add(content);
 	}
 	
+	/*
+	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
+	 */
+	
 	public void openMovieEdit() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
@@ -82,6 +86,12 @@ VerticalPanel content = new VerticalPanel();
 		this.setGlassEnabled(false);
 	}
 	
+	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
+	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
 	private class closeMovieEditForm implements ClickHandler{
 		
 		@Override
@@ -90,10 +100,9 @@ VerticalPanel content = new VerticalPanel();
 			
 		}
 
-	
-		
 	}
-	
+
+	// ClickHandler der das Speichern der ermöglicht
 	private class safeCMovieEditForm implements ClickHandler{
 		
 		@Override
@@ -118,6 +127,8 @@ VerticalPanel content = new VerticalPanel();
 			}else Window.alert("Ihre Texteingabe hat ungültige Symbole");
 		}
 	}
+	
+	// auf zulässige Zeichen überprüfen
 	private int isValidSymbol() {
 
 		 final String symbol = box.getText().toUpperCase().trim();

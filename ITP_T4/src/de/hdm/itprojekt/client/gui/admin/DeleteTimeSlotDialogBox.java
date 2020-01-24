@@ -104,14 +104,12 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 			closeTimeSlot();
 			
 
-			
-	
-
 		}
     }
+    
+	// ClickHandler der das löschen deines Timeslot ermöglicht
     private class deleteTimeslot implements ClickHandler{
 
-		
 	
 	public void onClick(ClickEvent event) {
 		

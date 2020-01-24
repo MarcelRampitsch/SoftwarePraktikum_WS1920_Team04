@@ -74,7 +74,9 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 		this.add(content);
 	}
 	
-	
+	/*
+	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
+	 */
 	
 	public void openCinemaGroupEdit() {
 		this.setGlassEnabled(true);
@@ -92,7 +94,11 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 		this.setGlassEnabled(false);
 	}
 
-
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
+	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
 	private class closehandler implements ClickHandler{
 
 		@Override
@@ -101,7 +107,8 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 
 		}
 	}
-
+	
+	// ClickHandler der das Speichern der ermöglicht
 	private class safehandler implements ClickHandler{
 
 		@Override
@@ -125,6 +132,7 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 			}else Window.alert("Prüfen sie ihre Texteingaben");
 		}
 	}
+	// auf zulässige Zeichen überprüfen
 	private int isValidSymbol() {
 		
 		 final String symbol = cinemagroupbox.getText().toUpperCase().trim();

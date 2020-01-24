@@ -102,6 +102,10 @@ public class EditTimeSlot extends DialogBox	 {
 		this.setGlassEnabled(false);
 	}
 	
+	/*
+	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
+	 */
+	
 	
 /*
  * Dieser ClickHandler kommt zum Tragen, wenn auf den closeButton geklickt wird
