@@ -77,7 +77,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 		
 		
 	}
-	
+	// Zum schließen der CinemaGroupAddDialogBox
 	public void CloseCinemaGroup() {
 		this.hide();
 		this.clear();
@@ -87,7 +87,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 	
 
 }
-	
+	// Zum Öffnen der CinemaGroupAddDialogBox
 	public void openCinemaGroup() {
 			this.setGlassEnabled(true);
 			this.setAnimationEnabled(true);
@@ -97,7 +97,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 	
 	
 	
-	
+	// ClickHandler der das Schließen der DialogBox ermöglicht
 	private class closeHandler implements ClickHandler{
 
 		@Override
@@ -107,7 +107,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 		}
 		
 	}
-	
+	// ClickHandler der das Speichern einer CinemaGroup ermöglicht
 	private class safeCinemaGroupForm implements ClickHandler{
 		CinemaGroup cinemagroup = null;
 
@@ -134,7 +134,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 		}	
 			
 		}
-	
+	// überprüfen ob es sich bei der Eingabe um ein zulässiges Symbol handelt (noch anpassen)
 	private int isValidSymbol() {
 				
 		 final String symbol = cinemagroupbox.getText().toUpperCase().trim();

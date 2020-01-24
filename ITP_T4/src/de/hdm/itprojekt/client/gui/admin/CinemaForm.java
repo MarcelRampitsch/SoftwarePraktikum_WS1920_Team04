@@ -147,8 +147,9 @@ public class CinemaForm extends VerticalPanel {
 //		}
 //			
 	
-
-	
+	/**
+	 * ClickHandler zum anlegen eines neuen Cinema
+	 */
     public class addCinemaClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {
@@ -159,7 +160,9 @@ public class CinemaForm extends VerticalPanel {
 		}
 			
 	}
-    
+    /**
+	 * ClickHandler zum editieren eines Cinema
+	 */
    public class editCinemaClickHandler implements ClickHandler{
 		
 		public void onClick(ClickEvent event) {

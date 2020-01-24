@@ -52,7 +52,7 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	private MovieMapper mMapper = null;
 	private TimeslotMapper tMapper = null;
 	
-	
+//	Default-Konstruktor
 	public EditorAdministrationImpl() throws IllegalArgumentException {
 	}
 	

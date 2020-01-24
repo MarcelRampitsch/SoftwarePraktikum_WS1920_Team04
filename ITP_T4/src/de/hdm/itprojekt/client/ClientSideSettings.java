@@ -21,33 +21,46 @@ import de.hdm.itprojekt.shared.LoginAdministrationAsync;
 
 public class ClientSideSettings extends CommonSettings {
 	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>AdminAdministration</code>.
+	   */
+	
 	private static AdminAdministrationAsync adminAdministration = null;	
+	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
+	
 	private static EditorAdministrationAsync editorAdministration = null;
 	
 	private static LoginAdministrationAsync loginAdministration = null;
 	
 	public static EditorAdministrationAsync getEditorAdministration() {
-
+	    // Gab es bislang noch keine EditorAdministration-Instanz, dann...
 		if (editorAdministration == null) {
+		      // Zunächst instantiieren wir EditorAdministration
 			editorAdministration = GWT.create(EditorAdministration.class);
 			editorAdministration.init(new ClientSideSettings().new InitCallback());
 		}
-
+	    // Rückgabe von EditorAdministration.
 		return editorAdministration;
 	}
 	
+	
 	public static AdminAdministrationAsync getAdminAdministration() {
-		
+	    // Gab es bislang noch keine AdminAdministration-Instanz, dann...
 		if (adminAdministration == null) { 
+		      // Zunächst instantiieren wir AdminAdministration
 			adminAdministration = GWT.create(AdminAdministration.class); 
 			adminAdministration.init(new ClientSideSettings().new InitCallback()); 
 			  }
-		
+	    // Rückgabe von AdminAdministration.
 		return adminAdministration; 
 		}
 	
 	public static LoginAdministrationAsync getLoginAdministration() {
-
 
 		if (loginAdministration == null) {
 			loginAdministration = GWT.create(LoginAdministration.class);

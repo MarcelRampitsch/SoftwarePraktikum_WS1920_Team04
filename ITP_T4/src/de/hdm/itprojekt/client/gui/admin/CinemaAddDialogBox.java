@@ -98,6 +98,7 @@ public class CinemaAddDialogBox extends DialogBox {
 		this.add(content);
 	}
 	
+	// Zum Öffnen der CinemaAddDialogBox
 	public void openCinema() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
@@ -105,7 +106,7 @@ public class CinemaAddDialogBox extends DialogBox {
 		this.show();	
 	}
 	
-	
+	// Zum Schließen der CinemaAddDialogBox
 	public void closeCinemaForm() {
 		this.hide();
 		this.clear();
@@ -159,7 +160,7 @@ public class CinemaAddDialogBox extends DialogBox {
 	}
 	}
 	
-	
+	// überprüfen ob es sich bei der Eingabe um ein zulässiges Symbol handelt (noch anpassen)
 	private int isValidSymbol() {
 
 		

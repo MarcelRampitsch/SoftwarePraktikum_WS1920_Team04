@@ -35,7 +35,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	private GroupMapper gMapper = null;
 	private SurveyEntryMapper seMapper = null;
 
-
+    //	Default-Konstruktor
 	public AdminAdministrationImpl() throws IllegalArgumentException{
 	}
 	

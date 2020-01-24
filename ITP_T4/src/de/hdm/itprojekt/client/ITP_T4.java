@@ -27,6 +27,10 @@ import java.util.Vector;
  */
 public class ITP_T4 implements EntryPoint {
 
+	 /*
+     * Zunächst weisen wir der EditorAdministration eine editor-Instanz zu.
+     */
+
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	LoginAdministrationAsync loginService = ClientSideSettings.getLoginAdministration();
 
@@ -43,8 +47,6 @@ public class ITP_T4 implements EntryPoint {
 	   * <code>public void onModuleLoad()</code>. 
 	   */
 	
-//	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-
 	
 	@Override
 	public void onModuleLoad() {
@@ -75,25 +77,6 @@ public class ITP_T4 implements EntryPoint {
 		
 	}
 	
-	//public void loadEditor() {
-		
-	//	RootPanel.get().add(new EditorForm(currentUser, Gruppen));
-
-		
-		
- //	}
-	
-/*	public static class aktuellerUser{
-		
-		public static User currentUser = null;
-		public static User getCurrentUser() {
-			return currentUser;
-		}
-		public static void setCurrentUser(User currentUser) {
-			aktuellerUser.currentUser = currentUser;
-		}
-		
-	} */
 	
 	public void loadLogin(User userBO) {
 		// Assemble login panel.
@@ -105,14 +88,7 @@ public class ITP_T4 implements EntryPoint {
 		loginPanel.add(signInLink);
 		RootPanel.get().add(loginPanel);
 
-//		und dann?
-
 	}  
-	
-	
-	
-	
-	
 	
 	
 }
