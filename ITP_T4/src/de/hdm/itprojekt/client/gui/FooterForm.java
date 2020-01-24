@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.Label;
 
 public class FooterForm extends HorizontalPanel {
 
-	public void onLoad() FooterForm() {
+	public void onLoad() {
 		
 		Label footerTxt = new Label("IT-Projekt WS19/20 Team04 Kinofix © Copyright 2020");
 		
