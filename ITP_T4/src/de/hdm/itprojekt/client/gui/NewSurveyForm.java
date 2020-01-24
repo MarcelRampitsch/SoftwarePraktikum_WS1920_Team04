@@ -34,11 +34,16 @@ import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
-
+/*
+ * Diese Klasse dient der Erstellung von SurveyEntrys. Hier können Vorstellungen gesucht werden,
+ * und diese dann als SurveyEntry gespeichert werden. Die Anzeige der SurveyEntrys erfolgt
+ * dann in einer CellList.
+ */
 public class NewSurveyForm extends VerticalPanel {
 
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
+	// Konstruktor
 	public NewSurveyForm(User user, Group group) {
 		this.user = user;
 		this.group = group;
@@ -88,6 +93,9 @@ public class NewSurveyForm extends VerticalPanel {
 	
 	Button umfrageSichernButton = new Button("Umfrage speichern");
 
+	/*
+	 * Laden der Widgets und füllen mit den entsprechenden Objekten Kinogruppe, Kino, Film und Timeslot
+	 */
 	public void onLoad() {
 		super.onLoad();
 		inhalt.add(zurueckButton);
@@ -185,6 +193,10 @@ public class NewSurveyForm extends VerticalPanel {
 		}
 	}
 
+	/*
+	 * SearchHandler: Handler der auf die Betätigung der Schaltfläche "Suchen"
+	 * reagiert, und dabei dann die gefundenen Vorstellungen ausgibt.
+	 */
 	private class SearchHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
@@ -243,11 +255,7 @@ public class NewSurveyForm extends VerticalPanel {
 	private class SafeHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			Window.alert(group.getName());
 
-			
-			
-			
 			Survey s = new Survey(umfrageNameBox.getText(), user.getId(),group.getId());
 			editorAdministration.createSurvey(s, new AsyncCallback<Survey>(){
 
@@ -259,7 +267,6 @@ public class NewSurveyForm extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Survey result) {
-					if (false) {  // WIrd ausgefÃ¼hrt wenn der Nutzer eine Veranstaltung ausgewÃ¤hlt hat
 						
 					
 					SurveyEntry se = new SurveyEntry(result.getId(),"Hier sollte die VeranstaltungsID stehen!" );
@@ -280,16 +287,10 @@ public class NewSurveyForm extends VerticalPanel {
 						}
 					});
 					}
-				}
-				
 			});
 			RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
-//			UmfragenTable umfragen = new UmfragenTable(user, null);
-//			RootPanel.get().add(umfragen);
-
-			
 		}
 	}
 }
