@@ -119,24 +119,52 @@ public class EditCinemaDialogBox extends DialogBox {
 		
 		@Override
 		public void onClick(ClickEvent event) { 
-			if (cinemaGroupBox.getSelectedIndex() == 0) {
-				c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), 0, cine.getUserID());}
-			else {
-				c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText(), box.getText(), cinemag.elementAt(cinemaGroupBox.getSelectedIndex()-1).getId(), cine.getUserID());}
-				adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
+			if(isValidSymbol()==0 && isValidSymbol2()==0) {
+				if (cinemaGroupBox.getSelectedIndex() == 0) {
+					c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText().trim(), box.getText().trim(), 0, cine.getUserID());}
+				else {
+					c = new Cinema(cine.getId(), cine.getCreationDate(), locationBox.getText().trim(), box.getText().trim(), cinemag.elementAt(cinemaGroupBox.getSelectedIndex()-1).getId(), cine.getUserID());}
+					adminAdministration.updateCinema(c, new AsyncCallback<Cinema>() {
 					
-					@Override
-					public void onFailure(Throwable caught) {
-					Window.alert("was ist falsch geloffen");
-					}
+						@Override
+						public void onFailure(Throwable caught) {
+						Window.alert("was ist falsch geloffen");
+						}
 
-					@Override
-					public void onSuccess(Cinema result) {
-					closeCinemaEditForm();
-					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(user,1);
-					RootPanel.get().add(adminform);
-					}});			
+						@Override
+						public void onSuccess(Cinema result) {
+						closeCinemaEditForm();
+						RootPanel.get().clear();
+						AdminForm adminform = new AdminForm(user,1);
+						RootPanel.get().add(adminform);
+						}});			
+			}else Window.alert("Prüfen sie ihre Texteingabe");
 	}
+	}
+	private int isValidSymbol() {
+
+		
+		 final String symbol = box.getText().toUpperCase().trim();
+		 box.setFocus(true);
+
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+	       box.selectAll();
+	       return 1;
+	     }
+	     else return 0;
+	}
+	
+	private int isValidSymbol2() {
+
+		
+		 final String symbol = locationBox.getText().toUpperCase().trim();
+		 box.setFocus(true);
+
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+	       locationBox.selectAll();
+	       return 1;
+	     }else return 0;
 	}
 }

@@ -119,6 +119,7 @@ public class TimeSlotAddDialogBox extends DialogBox {
 
 		Timeslot ts = null;
 			public void onClick(ClickEvent event) {
+				if(isValidSymbol1()==1) {
 				ts = new Timeslot(timeslotbox.getText(), user.getId());
 				//Window.alert(ts.getTime());
 				
@@ -137,12 +138,18 @@ public class TimeSlotAddDialogBox extends DialogBox {
 					AdminForm adminform = new AdminForm(user, 3);
 					RootPanel.get().add(adminform);
 					}});
-			
-			
-			
-			
-			
+				}else Window.alert("Muss 18:00 Uhr entsprechen");
 			}
+	}
+	private int isValidSymbol1() {
+
+		
+		 final String symbol = timeslotbox.getText();
+
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (symbol.matches("^[0-2]{1}[0-9]{1}[:]{1}[0-5]{1}[0-9]{1}")){
+	    	 return 1;  
+	     }else return 0;
 	}
 }
 

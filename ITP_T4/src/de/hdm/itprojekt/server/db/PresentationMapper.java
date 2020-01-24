@@ -170,7 +170,7 @@ public class PresentationMapper {
 		try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema
 				// zu finden
 			PreparedStatement findAllByCinemaID = con
-					.prepareStatement("SELECT * From softwarepraktikum_ws1920.presentation " + "WHERE cinemaID=? ");
+					.prepareStatement("SELECT * From softwarepraktikum_ws1920.presentation WHERE cinemaID=?");
 			findAllByCinemaID.setInt(1, c.getId());
 
 			// Ergebnis-Tupel erstellen

@@ -107,6 +107,7 @@ public class MovieAddDialogbox extends DialogBox {
 		Movie m = null;
 		@Override
 		public void onClick(ClickEvent event) {
+			if(isValidSymbol()==0) {
 			m = new Movie(moviebox.getText(),user.getId());
 			
 			adminAdministration.addMovie(m, new AsyncCallback<Movie>() {
@@ -123,26 +124,22 @@ public class MovieAddDialogbox extends DialogBox {
 				AdminForm adminform = new AdminForm(user,2);
 				RootPanel.get().add(adminform);
 				isValidSymbol();
-;				}});
-		
-	}
-		
-		private void isValidSymbol() {
-
-			
-			 final String symbol = moviebox.getText().toUpperCase().trim();
-			 moviebox.setFocus(true);
-
-		     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
-		     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
-		       Window.alert("'" + symbol + "' is not a valid symbol.");
-		       moviebox.selectAll();
-		       return;
-		     }
-			  }
-	
-
+				}});
+			}else Window.alert("Ihre Texteingabe hat ungültige Symbole");
+	}	
 }
+	private int isValidSymbol() {
+
+		 final String symbol = moviebox.getText().toUpperCase().trim();
+		 moviebox.setFocus(true);
+
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+	    	 moviebox.selectAll();
+	       return 1;
+	     }
+	     else return 0;
+	}
 }
 
 

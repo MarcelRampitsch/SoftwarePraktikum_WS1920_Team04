@@ -135,10 +135,11 @@ public class CinemaAddDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			int cinemaGroupID = cinemaGroupBox.getSelectedIndex();
+			if(isValidSymbol()==0 && isValidSymbol2()==0){
 			if(cinemaGroupBox.getSelectedItemText() == "Keine Kinogruppe") {
 			c = new Cinema(locationBox.getText(), box.getText(), user.getId(), 0);
 			}else {
-				c = new Cinema(locationBox.getText(), box.getText(), user.getId(), cine.elementAt(cinemaGroupID).getId());
+				c = new Cinema(locationBox.getText(), box.getText(), user.getId(), cine.elementAt(cinemaGroupID-1).getId());
 			}
 			adminAdministration.addCinema(c, new AsyncCallback<Cinema>() {
 				
@@ -153,14 +154,13 @@ public class CinemaAddDialogBox extends DialogBox {
 				RootPanel.get().clear();
 				AdminForm adminform = new AdminForm(user, 1);
 				RootPanel.get().add(adminform);
-				isValidSymbol();
-				isValidSymbol2();
 				}});
-		}
+		}else Window.alert("Prüfen sie ihre Texteingaben");
+	}
 	}
 	
 	
-	private void isValidSymbol() {
+	private int isValidSymbol() {
 
 		
 		 final String symbol = box.getText().toUpperCase().trim();
@@ -168,13 +168,13 @@ public class CinemaAddDialogBox extends DialogBox {
 
 	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
 	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
-	       Window.alert("'" + symbol + "' is not a valid symbol.");
 	       box.selectAll();
-	       return;
+	       return 1;
 	     }
-		  }
+	     else return 0;
+	}
 	
-	private void isValidSymbol2() {
+	private int isValidSymbol2() {
 
 		
 		 final String symbol = box.getText().toUpperCase().trim();
@@ -182,9 +182,8 @@ public class CinemaAddDialogBox extends DialogBox {
 
 	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
 	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
-	       Window.alert("'" + symbol + "' is not a valid symbol.");
 	       locationBox.selectAll();
-	       return;
-	     }
-		  }
+	       return 1;
+	     }else return 0;
+	}
 }

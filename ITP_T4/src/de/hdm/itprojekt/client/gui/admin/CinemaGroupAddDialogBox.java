@@ -114,7 +114,7 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 		@Override
 		public void onClick(ClickEvent event) {
 			cinemagroup = new CinemaGroup(cinemagroupbox.getText(), user.getId());
-			
+			if(isValidSymbol()==0) {
 			adminAdministration.addCinemaGroup(cinemagroup, new AsyncCallback<CinemaGroup>() {
 				
 				@Override
@@ -130,25 +130,23 @@ public class CinemaGroupAddDialogBox extends DialogBox {
 				RootPanel.get().add(adminform);	
 				isValidSymbol();
 				}});
+			}else Window.alert("Prüfen sie ihre Texteingaben");
+		}	
+			
+		}
+	
+	private int isValidSymbol() {
 				
-		}
-			
-			
-		}
-	
-	  private void isValidSymbol() {
+		 final String symbol = cinemagroupbox.getText().toUpperCase().trim();
+		 cinemagroupbox.setFocus(true);
 
-	
-	 final String symbol = cinemagroupbox.getText().toUpperCase().trim();
-	 cinemagroupbox.setFocus(true);
-
-     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
-     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
-       Window.alert("'" + symbol + "' is not a valid symbol.");
-       cinemagroupbox.selectAll();
-       return;
-     }
-	  }
+	     // Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
+	     if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+	       cinemagroupbox.selectAll();
+	       return 1;
+	     }
+	     else return 0;
+	}
 		
 		
 	}

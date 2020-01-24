@@ -73,13 +73,13 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	// Methode zum Löschen eines bestimmten Kinos
 	public void deleteCinema (Cinema c) throws IllegalArgumentException {
 		Vector <Presentation> rs = pMapper.findAllByCinemaID(c);
-		Window.alert(rs.elementAt(0) + "");
 		for (int i = 0; i < rs.size(); i++) {
 			seMapper.deleteAllByPresentationID(rs.elementAt(i));
 		}
 		pMapper.deleteAllByCinemaID(c);
 		cMapper.deleteCinemaByCinemaID(c.getId());
 	}
+	
 	// Methode um alle Cinema eines User zu finden
 	public Vector<Cinema> findAllCinemaByUser(User u) throws IllegalArgumentException{
 		

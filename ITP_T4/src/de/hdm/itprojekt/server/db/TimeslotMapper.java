@@ -121,7 +121,7 @@ public class TimeslotMapper {
 			// Ergebnis-Tupel in Objekt umwandeln
 			ResultSet rs = getnewTimeslot.executeQuery();
 			if (rs.next()) {
-				return new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("id"),
+				return new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("timeslotID"),
 						rs.getTimestamp("creationDate"));
 			}
 			// Fehlerbehandlung hinzufügen
@@ -153,7 +153,7 @@ public class TimeslotMapper {
 			ResultSet rs = stm.executeQuery();
 			if (rs.next()) {
 				// Ergebnis-Tupel in Objekt umwandeln
-				return new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("id"),
+				return new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("timeslotID"),
 						rs.getTimestamp("creationDate"));
 			}
 			// Fehlerbehandlung hinzufügen
