@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.gui.EditorForm;
+import de.hdm.itprojekt.client.gui.LoginForm;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.LoginAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
@@ -66,7 +67,8 @@ public class ITP_T4 implements EntryPoint {
 					RootPanel.get().add(new EditorForm(result, Gruppen));
 
 				}else {
-					loadLogin(result);
+					RootPanel.get().add(new LoginForm(result));
+//					loadLogin(result);
 					
 				}
 
