@@ -58,6 +58,8 @@ public class EditorForm extends VerticalPanel {
 	 VerticalPanel west = new VerticalPanel();
 	 VerticalPanel east = new VerticalPanel();
 	 ListBox group = new ListBox();
+	 
+	 VerticalPanel contentPanel = new VerticalPanel();
 	
 	/**
 	 * 
@@ -92,12 +94,12 @@ public class EditorForm extends VerticalPanel {
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
 		 */
 		
-		this.setStylePrimaryName("EditorForm");
-		header.setStylePrimaryName("Header");
-		main.setStylePrimaryName("Main");
-		center.setStylePrimaryName("Center");
-		west.setStylePrimaryName("West");
-		east.setStylePrimaryName("East");
+//		this.setStylePrimaryName("EditorForm");
+//		header.setStylePrimaryName("Header");
+//		main.setStylePrimaryName("Main");
+//		center.setStylePrimaryName("Center");
+//		west.setStylePrimaryName("West");
+//		east.setStylePrimaryName("East");
 		
 	/*	editorAdministration.getUserByEmail(user, new AsyncCallback<User>() {
 			@Override
@@ -121,7 +123,8 @@ public class EditorForm extends VerticalPanel {
 					Gruppen = Collections.list(result.elements());
 					celllistform = new CellListForm(user , Gruppen);
 //					UmfragenTable u1 = new UmfragenTable(user, Surveys);
-					west.add(celllistform);
+					contentPanel.add(celllistform);
+					contentPanel.addStyleName("content");
 					editorAdministration.getAllGroupsIamMemberFrom(user, new AsyncCallback<Vector<Group>>() { 
 						
 						@Override
@@ -173,18 +176,18 @@ public class EditorForm extends VerticalPanel {
 		
 		
 		
-		main.add(center);
-		main.add(east);
-		main.add(west);
+//		main.add(center);
+//		main.add(east);
+//		main.add(west);
 		
 		//Button, dessen ClickEvent zum Admin Mode führt.
-		Button toAdmin = new Button("Admin", new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				Window.Location.replace("/Admin.html");
-			}
-		});
+//		Button toAdmin = new Button("Admin", new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				Window.Location.replace("/Admin.html");
+//			}
+//		});
 		
 		//Button, dessen ClickEvent zum Admin Mode führt.
 	/*		Button logout = new Button("Logout", new ClickHandler() {
@@ -194,24 +197,29 @@ public class EditorForm extends VerticalPanel {
 						Window.Location.assign(user.getURL());
 					}
 				});  */
-		toAdmin.addStyleName("AdminButton");
-		
-		Anchor logOutLink = new Anchor("Logout");
-		
-		logOutLink.setHref(user.getURL());
-		
-		
+//		toAdmin.addStyleName("AdminButton");
+//		
+//		Anchor logOutLink = new Anchor("Logout");
+//		
+//		logOutLink.setHref(user.getURL());
 		
 		
 		
-		header.add(toAdmin);
-		header.add(logOutLink);
+		
+		
+//		header.add(toAdmin);
+//		header.add(logOutLink);
 //		GruppenForm gruppenForm = new GruppenForm(user);
 //		main.add(gruppenForm);
 		
 
-		this.add(header);
-		this.add(main);
+//		this.add(header);
+//		this.add(main);
+			
+		
+		this.add(new ToolbarForm(user));
+		this.add(contentPanel);
+		this.add(new FooterForm());
 		
 		
 	}
