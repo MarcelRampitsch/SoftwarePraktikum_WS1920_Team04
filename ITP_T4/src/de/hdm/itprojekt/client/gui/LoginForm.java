@@ -12,6 +12,8 @@ import de.hdm.itprojekt.shared.bo.User;
  * 
  * @author VanDuyHo
  * 
+ * Login bei dem ein User mit seinem Google-Account sich einloggen kann 
+ * 
  */
 public class LoginForm extends VerticalPanel {
 
@@ -29,7 +31,7 @@ public class LoginForm extends VerticalPanel {
 
 		signInLink.setHref(user.getURL());
 		Label welcomeLabel = new Label("Herzlich Willkommen bei Kinofix!");
-		Label txtLabel = new Label("Bitte melden Sie ich sich mit Ihrem Google-Account an, um KinoFix zu nutzen.");
+		Label txtLabel = new Label("Bitte melden Sie ich sich mit Ihrem Google-Account an, um Kinofix zu nutzen.");
 		HorizontalPanel loginPanel = new HorizontalPanel();
 		welcomeLabel.setStyleName("h1");
 		googleSignIn.setStylePrimaryName("signinwithgoogle");

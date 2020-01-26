@@ -17,6 +17,8 @@ import de.hdm.itprojekt.shared.bo.User;
  * 
  * @author VanDuyHo
  * 
+ * Toolbar die auf jeder Seite am oberen Rand angezeigt wird
+ * 
  */
 public class ToolbarForm extends HorizontalPanel {
 	
