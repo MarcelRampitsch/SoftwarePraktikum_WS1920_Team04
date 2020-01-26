@@ -1,28 +1,21 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import java.util.Arrays;
 import java.util.Collections;
 
-import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.Cell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
@@ -47,6 +40,7 @@ import de.hdm.itprojekt.shared.bo.User;
 public class GroupViewForm extends VerticalPanel {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
+	//Initalisierung relevanter Variablen, Widgets und ListDataProvider
 	User user = null;
 	Vector<Groupmember> member = new Vector<Groupmember>();
 	Vector<User> groupMember = new Vector<User>();
@@ -57,7 +51,7 @@ public class GroupViewForm extends VerticalPanel {
 	
 	Button back = new Button("<--");
 	Label groupNameLabel = new Label();
-	Button newSurveyButton = new Button("Neue Umfrage erstellen");
+	Button newSurveyButton = new Button("Create new Survey:");
 	Button editGroupButton = new Button("edit");
 	Button deleteGroupButton = new Button("X");
 	CellTable<Survey> table = new CellTable<Survey>();
@@ -67,9 +61,11 @@ public class GroupViewForm extends VerticalPanel {
 	VerticalPanel mainPanel = new VerticalPanel();
 	HorizontalPanel editPanel = new HorizontalPanel();
 	
+	ListDataProvider <Group> dataProviderGroup;	
 	ListDataProvider<Survey> dataProvider = new ListDataProvider<Survey>();
 	ListDataProvider<SurveyEntry> surveyEntryProvider = new ListDataProvider<SurveyEntry>();
 	
+	//Erstellung der GroupViewForm constructor
 	public GroupViewForm(User user, Group group, Vector<User> groupMember) {
 		
 		this.user = user;
@@ -93,7 +89,7 @@ public class GroupViewForm extends VerticalPanel {
 	public void onLoad() {
 		
 		super.onLoad();
-		buildForm();	
+		buildForm();
 	
 		TextColumn<Survey> nameColumn = new TextColumn<Survey>() {
 
@@ -103,20 +99,8 @@ public class GroupViewForm extends VerticalPanel {
 				return object.getName();
 			}
 		};
-			
-		//Cell<String> loeschenCell = new ButtonCell();	
-//			
-//		Column<Survey, String> loeschenColumn = new Column<Survey, String>(loeschenCell) {
-//
-//			@Override
-//			public String getValue(Survey object) {
-//				// TODO Auto-generated method stub
-//				return "X";
-//			}
-//		};
 		
-		table.addColumn(nameColumn, "Umfragename");
-		//able.addColumn(loeschenColumn);
+		table.addColumn(nameColumn, "Surveyname");
 		
 		NoSelectionModel<Survey> selectionModelSurvey = new NoSelectionModel<Survey>();
 		Handler tableHandle = new SelectionChangeEvent.Handler() 
@@ -125,6 +109,7 @@ public class GroupViewForm extends VerticalPanel {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				Survey clickedObj = selectionModelSurvey.getLastSelectedObject();
+				//Alle SurveyEntrys eines Survey finden
 				editorAdministration.getAllSurveyEntryBySurveyID(clickedObj, new AsyncCallback<Vector<SurveyEntry>>() {
 
 					@Override
@@ -136,8 +121,11 @@ public class GroupViewForm extends VerticalPanel {
 					@Override
 					public void onSuccess(Vector<SurveyEntry> result) {
 						UmfragenEintrag = Collections.list(result.elements());
+						//Neues UmfragenForm erstellen 
 						UmfragenTable form = new UmfragenTable(user , UmfragenEintrag, clickedObj);
+						//Das "mainPanel" widget leeren
 						mainPanel.clear();
+						//Das UmfragenForm dem RootPanel hinzufuegen
 						RootPanel.get().add(form);
 					}
 				});
@@ -163,13 +151,17 @@ public class GroupViewForm extends VerticalPanel {
 	
 	public void buildForm() {
 		
+		//Aufbau des GroupViewForm
 		this.clear();
 		mainPanel.add(back);
 		back.addClickHandler(new backHandler());
 		mainPanel.add(groupNameLabel);
-		editPanel.add(editGroupButton);
-		editPanel.add(deleteGroupButton);
-		mainPanel.add(editPanel);
+		//Wenn group UserID = userID dann kann die Group editiert werden
+		if(group.getUserID()==user.getId()) {
+			editPanel.add(editGroupButton);
+			editPanel.add(deleteGroupButton);
+			mainPanel.add(editPanel);
+		}
 		editGroupButton.addClickHandler(new editGroupButtonClickHandler());
 		deleteGroupButton.addClickHandler(new deleteGroupButtonClickHandler());
 		groupNameLabel.setText(group.getName());
@@ -180,11 +172,12 @@ public class GroupViewForm extends VerticalPanel {
 		this.add(mainPanel);
 	}
 	
+	//ClickHandler zur löschung der Group
 	private class deleteGroupButtonClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
+			// Alle Groupmember der Group löschen
 			editorAdministration.deleteAllGroupmemberByGroupID(group, new AsyncCallback<Void>() {
 				
 			@Override
@@ -194,7 +187,7 @@ public class GroupViewForm extends VerticalPanel {
 				
 				@Override
 					public void onSuccess(Void result) {
-					
+					//Löschen der aktuellen Group
 					editorAdministration.deleteGroupByGroupID(group, new AsyncCallback<Void>() {
 						
 						@Override
@@ -208,26 +201,27 @@ public class GroupViewForm extends VerticalPanel {
 					});
 					}
 			});
-			EditorForm form = new EditorForm(user);
+			EditorForm form = new EditorForm(user, group);
 			RootPanel.get().clear();
 			RootPanel.get().add(form);
 		}
 	}
-	
+	//ClickHandler um EditGroupForm zu öffnen
 	private class editGroupButtonClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
+			//Alle Groupmember einer Group bekommen
 			editorAdministration.getAllGroupmemberByGroupID(group, new AsyncCallback<Vector<Groupmember>>() {
 				
 				@Override
 				public void onSuccess(Vector<Groupmember> result) {
 					member=result;
-				
+					//for schleife um User zu erstellen 
 					for(int i = 0; i< member.size(); i++) {
 						int j=i;
 						User u = new User(member.elementAt(i).getUserID());
+						//Alle User einer Group zu bekommen
 						editorAdministration.getUserByUserID(u, new AsyncCallback<User>() {
 							User u = null;
 							
@@ -235,6 +229,7 @@ public class GroupViewForm extends VerticalPanel {
 							public void onSuccess(User result) {
 								u = result;
 								groupMember.add(u);
+								//Wenn der letzte User durchgegangen ist wird ein neues Form geöffnet mit dem aktuellen User, group sowie Groupmember
 								if(j < member.size()+1) {
 									mainPanel.clear();
 									GroupEditForm edit = new GroupEditForm(user, group, groupMember, member);
@@ -261,6 +256,7 @@ public class GroupViewForm extends VerticalPanel {
 		}
 	}
 	
+	//neuen Survey erstellen Form öffnen
 	private class newSurveyButtonClickHandler implements ClickHandler {
 
 		@Override
@@ -271,6 +267,7 @@ public class GroupViewForm extends VerticalPanel {
 		}
 	}
 	
+	//Zurück zur Startseite
 	private class backHandler implements ClickHandler{
 
 		@Override

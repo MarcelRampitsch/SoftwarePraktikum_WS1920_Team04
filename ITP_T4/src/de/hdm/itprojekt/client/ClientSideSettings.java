@@ -3,7 +3,6 @@ package de.hdm.itprojekt.client;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import de.hdm.itprojekt.client.ClientSideSettings.InitCallback;
 import de.hdm.itprojekt.shared.AdminAdministration;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.CommonSettings;
@@ -35,12 +34,17 @@ public class ClientSideSettings extends CommonSettings {
 	
 	private static EditorAdministrationAsync editorAdministration = null;
 	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>LoginAdministration</code>.
+	   */
+	
 	private static LoginAdministrationAsync loginAdministration = null;
 	
 	public static EditorAdministrationAsync getEditorAdministration() {
 	    // Gab es bislang noch keine EditorAdministration-Instanz, dann...
 		if (editorAdministration == null) {
-		      // Zunächst instantiieren wir EditorAdministration
+		    // Zunächst instantiieren wir EditorAdministration
 			editorAdministration = GWT.create(EditorAdministration.class);
 			editorAdministration.init(new ClientSideSettings().new InitCallback());
 		}
@@ -58,32 +62,31 @@ public class ClientSideSettings extends CommonSettings {
 			  }
 	    // Rückgabe von AdminAdministration.
 		return adminAdministration; 
-		}
+	}
+	
 	
 	public static LoginAdministrationAsync getLoginAdministration() {
-
+		// Gab es bislang noch keine LoginAdministration-Instanz, dann...
 		if (loginAdministration == null) {
+			// Zunächst instantiieren wir LoginAdministration
 			loginAdministration = GWT.create(LoginAdministration.class);
 			loginAdministration.init(new ClientSideSettings().new InitCallback());
 		}
-
+		// Rückgabe von LoginAdministration.
 		return loginAdministration;
 	} 
 
 	
 	class InitCallback implements AsyncCallback<Void> {
 
-
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
-
 			// Nothing happens!
 		}
 	} 

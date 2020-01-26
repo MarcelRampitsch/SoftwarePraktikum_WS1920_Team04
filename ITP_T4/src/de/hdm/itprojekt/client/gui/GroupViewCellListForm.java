@@ -35,7 +35,7 @@ import de.hdm.itprojekt.shared.bo.User;
 public class GroupViewCellListForm extends VerticalPanel {
 	
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-	
+	//Initalisierung relevanter Variablen und Widgets
 	User user = null;
 
 	List<Group> Gruppen;
@@ -45,8 +45,8 @@ public class GroupViewCellListForm extends VerticalPanel {
 	Vector<User> userMember = new Vector<User>();
 	Vector<SurveyEntry> surveyEntry = new Vector<SurveyEntry>();
 	
-	Button newGroup = new Button("Neue Gruppe erstellen");
-	Button newSurvey = new Button("Neue Umfrage erstellen");
+	Button newGroup = new Button("Create a new Group");
+	Button newSurvey = new Button("Create a new Survey");
 	
 	VerticalPanel contentPanel = new VerticalPanel();
 	
@@ -67,10 +67,10 @@ public class GroupViewCellListForm extends VerticalPanel {
 		
 		final CellTable<Group> groupTable = new CellTable<Group>();
 		final CellTable<Survey> surveyTable = new CellTable<Survey>();
-
+		
 		ListDataProvider<Group> groupDataProvider = new ListDataProvider<Group>();
 		ListDataProvider<Survey> surveyDataProvider = new ListDataProvider<Survey>();
-
+		
 		TextColumn<Group> groupNameColumn = new TextColumn<Group>() {
 
 			@Override
@@ -344,7 +344,7 @@ public class GroupViewCellListForm extends VerticalPanel {
 		contentPanel.add(groupTable);
 		this.add(contentPanel);
 		
-		surveyTable.addColumn(surveyNameColumn, "Umfrage:");
+		surveyTable.addColumn(surveyNameColumn, "Survey:");
 		surveyTable.addColumn(deleteSurveyColumn);
 		surveyTable.addColumn(editSurveyColumn);
 		

@@ -13,15 +13,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.Cell;
-import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -41,59 +36,63 @@ import de.hdm.itprojekt.shared.bo.Survey;
 
 public class CellListForm extends VerticalPanel {
 	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-	User user = null;
-	//Button GruppenErstellung = new Button("Neue Gruppe erstellen");
 	
+	//Initialisierung relevanter Variablen und Widgets
+	User user = null;
+	List<Survey> Umfragen;
+	List<Group> Gruppen;
+	Vector<Groupmember> member = new Vector<Groupmember>();
+	Vector<User> groupMember = new Vector<User>();
+	Button neueGruppe = new Button("Create group");
+	VerticalPanel inhalt = new VerticalPanel();
+	
+	// Create a list data provider.
+	ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
+	
+	// Erstellung der <code>CellListForm</code> Constructor
 	public CellListForm(User user, List <Group> Gruppen) {
 		this.user = user;
 		this.Gruppen = Gruppen;
-}
+	}
 	
-
-	
-	 //erstellen des Data Provider
-	   List<Survey> Umfragen;
-	   List<Group> Gruppen;
-	   Vector<Groupmember> member = new Vector<Groupmember>();
-	   Vector<User> groupMember = new Vector<User>();
-	   Button neueGruppe = new Button("Create group");
-	   VerticalPanel inhalt = new VerticalPanel();
-	   
-	// Create a list data provider.
-	 		ListDataProvider<Group> dataProvider = new ListDataProvider<Group>();
-
-	  
-	
-	//Vector <Group> Gruppen = null;
 	public void onLoad() {
 	   super.onLoad();
-//	   GruppenErstellung.addClickHandler(new openClickHandler());
-//	   this.add(GruppenErstellung);
+	   
 	   neueGruppe.addClickHandler(new openGroupClickHandler());
+	   
+	   //Erstellung eins CellTables in dem alle Gruppen in denen der User vorhanden ist angezeigt werden
 	   final CellTable<Group> table = new CellTable<Group>();
 	   
-	   
-
-	   
+	   //Erzeugen einer TextSpalte in dem der Name der Gruppe angezeigt wirde
 	   TextColumn<Group> nameColumn = new TextColumn<Group>() {
 
-		@Override
-		public String getValue(Group object) {
-			// TODO Auto-generated method stub
-			return object.getName();
-		}
+		   @Override
+			public String getValue(Group object) {
+			   // Übergabe des Gruppenname an die Textspalte
+			   return object.getName();
+		   }
 	   };
-		
-		table.addColumn(nameColumn, "Groupname");
-		
-		NoSelectionModel<Group> selectionModelMyObj = new NoSelectionModel<Group>();
-		Handler tableHandle = new SelectionChangeEvent.Handler() 
+	   
+	   //Dem CellTable "table" die Spalte "nameColumn" hinzufügen und die Spalten Überschrift setzen "Groupname"
+	   table.addColumn(nameColumn, "Groupname");
+	   
+	   //Erstellung eines NoSelectionModels des Typs Group
+	   NoSelectionModel<Group> selectionModelMyObj = new NoSelectionModel<Group>();
+	   //Erstellung eines SelectionChangeEvent Handler mit dem Namen "tableHandle"
+	   Handler tableHandle = new SelectionChangeEvent.Handler() 
 		{
 
 			@Override
+			// Methode zur behandlung einer Auswahl eines objectes
 			public void onSelectionChange(SelectionChangeEvent event) {
+				// Die Ausgewaehlte Gruppe speichern
 				Group clickedObj = selectionModelMyObj.getLastSelectedObject();
+				// Wenn die ausgewählte Spalte die erste Spalte ist dann werden alle Umfragen dieser Gruppe gesucht
 				if(table.getKeyboardSelectedColumn()==0)
 				{
 					editorAdministration.getAllSurveyByGroupID(clickedObj, new AsyncCallback<Vector<Survey>>() {
@@ -106,21 +105,25 @@ public class CellListForm extends VerticalPanel {
 
 						@Override
 						public void onSuccess(Vector<Survey> result) {
+							//Umwandeln des Surveyvectors in eine List mit Survey objekten
 							Umfragen = Collections.list(result.elements());
+							//Den inhalt des widgets "inhalt" löschen
 							inhalt.clear();
+							//Erstellen eines neuen GroupViewForm widgets
 							GroupViewForm viewForm = new GroupViewForm(user,clickedObj,Umfragen);
+							//Dem Rootpanel dieses widget hinzufügen
 							RootPanel.get().add(viewForm);	
 						}
-					});
-					
-									
+					});				
 				}
 			}
 		};
-
+		// Dem NoSelectionModel den ChangeEventHandler "tableHandle" hinzufügen
 		selectionModelMyObj.addSelectionChangeHandler(tableHandle);
+		// Dem CellTable das NoSelectionModel hinzufügen
 		table.setSelectionModel(selectionModelMyObj);
 		
+		//Dem DataProvider "dataProvider" der aus Group objekten besteht wird eine Ausgabe hinzugefügt hier der CellTable "table"
 		dataProvider.addDataDisplay(table);
 		
 		final List <Group> list = dataProvider.getList();
@@ -130,14 +133,14 @@ public class CellListForm extends VerticalPanel {
 		inhalt.add(neueGruppe);
 		inhalt.add(table);
 		this.add(inhalt);
-   }
+	}
 	
+	// Methode ListDataProvider die einen DataProvider zurück gibt
 	public ListDataProvider<Group> getDataProvider() {
  		return this.dataProvider;
  	}
-		
 	
-	
+	// ClickHandler zur öffnung des Gruppenerstellungs Form GruppenForm
 	class openGroupClickHandler implements ClickHandler{
 
 		@Override

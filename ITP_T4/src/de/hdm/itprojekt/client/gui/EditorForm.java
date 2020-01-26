@@ -1,26 +1,16 @@
 package de.hdm.itprojekt.client.gui;
 
-import com.google.gwt.core.client.Callback;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
-import de.hdm.itprojekt.client.gui.admin.VerwaltungsForm;
-import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Presentation;
-import de.hdm.itprojekt.shared.bo.SurveyEntry;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,13 +26,13 @@ import java.util.Vector;
 
 public class EditorForm extends VerticalPanel {
 	
-	/* 
-	 * currentUser speichert den aktuellen Nutzer
-	 */
+	//Initialisierung relevanter Variablen
 	User user = null;
+	Group deleteGroup= null;
 	List<Presentation> Surveys;
 	List <Group> Gruppen;
 	Vector<Group> rs;
+	
 	/**
 	 * <code>header</code>: Oberer Teil des Fensters. Erstreckt sich über die ganze Länge der Anwendung
 	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels, außer <code>header</code>
@@ -50,16 +40,15 @@ public class EditorForm extends VerticalPanel {
 	 * <code>east</code>: Rechte Seite der Anwendung. Enhält die Formen <code>umfrageForm</code>
 	 * <code>west</code>: Linke Seite der Anwendung. Enhält die Formen <code>gruppenForm</code>
 	 */
-	
-	 HorizontalPanel header = new HorizontalPanel();
-	 HorizontalPanel main = new HorizontalPanel();
-	 EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-	 VerticalPanel center = new VerticalPanel();
-	 VerticalPanel west = new VerticalPanel();
-	 VerticalPanel east = new VerticalPanel();
-	 ListBox group = new ListBox();
-	 
-	 VerticalPanel contentPanel = new VerticalPanel();
+	//Initialisierung relevanter Widgets
+	HorizontalPanel header = new HorizontalPanel();
+	HorizontalPanel main = new HorizontalPanel();
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	VerticalPanel center = new VerticalPanel();
+	VerticalPanel west = new VerticalPanel();
+	VerticalPanel east = new VerticalPanel();
+	ListBox group = new ListBox(); 
+	VerticalPanel contentPanel = new VerticalPanel();
 	
 	/**
 	 * 
@@ -68,9 +57,15 @@ public class EditorForm extends VerticalPanel {
 	 * 
 	 */
 	
+	// Erstellung der <code>EditorForm</code> Constructoren
 	public EditorForm(User user, List <Group> Gruppen){
 		this.user = user;
 		this.Gruppen = Gruppen;
+	}
+	
+	public EditorForm(User user, Group deleteGroup) {
+		this.user = user;
+		this.deleteGroup = deleteGroup;
 	}
 	
 	public EditorForm(User user) {
@@ -101,127 +96,51 @@ public class EditorForm extends VerticalPanel {
 //		west.setStylePrimaryName("West");
 //		east.setStylePrimaryName("East");
 		
-	/*	editorAdministration.getUserByEmail(user, new AsyncCallback<User>() {
+		//Methoden aufruf um alle Gruppen eines User zu bekommen
+		editorAdministration.getAllGroupByUserID(user, new AsyncCallback<Vector<Group>>() { 
+				
 			@Override
 			public void onFailure(Throwable caught) {
-			Window.alert("GetUser Fehler");
+				// TODO Auto-generated method stub
 			}
-			@Override
-			public void onSuccess(User result) {
-			user = result; */
-			editorAdministration.getAllGroupByUserID(user, new AsyncCallback<Vector<Group>>() { 
-				
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
 
-				@Override
-				public void onSuccess(Vector<Group> result) {
-					rs = result;
-					Gruppen = Collections.list(result.elements());
-					celllistform = new CellListForm(user , Gruppen);
-//					UmfragenTable u1 = new UmfragenTable(user, Surveys);
-					contentPanel.add(celllistform);
-					contentPanel.addStyleName("content");
-					editorAdministration.getAllGroupsIamMemberFrom(user, new AsyncCallback<Vector<Group>>() { 
+			@Override
+			public void onSuccess(Vector<Group> result) {
+				rs = result;
+				// Vector result in eine List "Gruppen" umwandeln
+				Gruppen = Collections.list(result.elements());
+				Gruppen.remove(deleteGroup);
+				// Widget celllistform aufrufen
+				celllistform = new CellListForm(user , Gruppen);
+//				UmfragenTable u1 = new UmfragenTable(user, Surveys);
+				contentPanel.add(celllistform);
+				contentPanel.addStyleName("content");
+				//Methoden aufruf um alle Gruppen zu finden in denen der User ein Mitglied ist
+				editorAdministration.getAllGroupsIamMemberFrom(user, new AsyncCallback<Vector<Group>>() { 
 						
 						@Override
 						public void onFailure(Throwable caught) {
 						//	Window.alert("Fehler liste");
-							
 						}
 
 						@Override
 						public void onSuccess(Vector<Group> result) {
 							rs = result;
-							
+							//ListDataProvider des celllistform erstellt 
 							ListDataProvider<Group> dp = celllistform.getDataProvider();
 							List <Group> liste = dp.getList();
 							for(Group g :result) {
+								//List mit Group objekten befüllen und zuvor prüfen ob diese bereits in der Liste vorhanden sind
 								if(!liste.contains(g)) {
 									liste.add(g);
-
-								}else {
-							//		Window.alert("bereits in der Liste");
 								}
-
 							}
-					//		west.add(umfragen);
 						}
-						
 					});
-			//		west.add(umfragen);
 				}
-				
 			});
-			
-	//		}
-	//	});
-		
-		/*
-		 * Instanzierung aller nötigen Formen, die in der EditorForm angezeigt werden sollen. 
-		 */
-		
-	//	VoteForm voteForm = new VoteForm(currentUser);
-		
-		
-
-		/**
-		 *  Jede Form wird demjeweiligen Panel hinzugefügt.
-		 */
-		
-	//	center.add(voteForm);
-		
-		
-		
-//		main.add(center);
-//		main.add(east);
-//		main.add(west);
-		
-		//Button, dessen ClickEvent zum Admin Mode führt.
-//		Button toAdmin = new Button("Admin", new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				// TODO Auto-generated method stub
-//				Window.Location.replace("/Admin.html");
-//			}
-//		});
-		
-		//Button, dessen ClickEvent zum Admin Mode führt.
-	/*		Button logout = new Button("Logout", new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						// TODO Auto-generated method stub
-						Window.Location.assign(user.getURL());
-					}
-				});  */
-//		toAdmin.addStyleName("AdminButton");
-//		
-//		Anchor logOutLink = new Anchor("Logout");
-//		
-//		logOutLink.setHref(user.getURL());
-		
-		
-		
-		
-		
-//		header.add(toAdmin);
-//		header.add(logOutLink);
-//		GruppenForm gruppenForm = new GruppenForm(user);
-//		main.add(gruppenForm);
-		
-
-//		this.add(header);
-//		this.add(main);
-			
-		
 		this.add(new ToolbarForm(user));
 		this.add(contentPanel);
 		this.add(new FooterForm());
-		
-		
 	}
-
 }

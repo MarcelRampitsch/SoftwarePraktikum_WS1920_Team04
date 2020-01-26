@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -16,13 +15,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.view.client.SelectionModel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 
-import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 import de.hdm.itprojekt.shared.EditorAdministrationAsync;
-import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
@@ -39,7 +35,7 @@ public class GruppenForm extends VerticalPanel {
 
 	
 	  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-	
+	  //Initalisierung relevanter Variablen, Widgets und ListDataProvider
 	  User user = null;
 	  ListDataProvider <Group> dataProvider;	
 	  List <Group> Gruppen;
@@ -70,16 +66,17 @@ public class GruppenForm extends VerticalPanel {
 	
 	  GruppenForm gruppenForm = null;
 	
-	public GruppenForm(User user, Vector<User> groupMember) {
-		this.user=user;
-		this.groupMember = groupMember;
-	}
+	  //Erstellung der GroupViewForm constructor
+	  public GruppenForm(User user, Vector<User> groupMember) {
+		  this.user=user;
+		  this.groupMember = groupMember;
+	  }
 	
-	public GruppenForm(User user, Vector<User> groupMember, String gruppname) {
-		this.user=user;
-		this.groupMember = groupMember;
-		this.gruppname = gruppname;
-	}
+	  public GruppenForm(User user, Vector<User> groupMember, String gruppname) {
+		  this.user=user;
+		  this.groupMember = groupMember;
+		  this.gruppname = gruppname;
+	  }
 	
 	
 	/*
@@ -91,6 +88,7 @@ public class GruppenForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		
+		//Aufbau des "GruppenForm" Widgets
 		inhalt.add(back);
 		back.addClickHandler(new backButtonHandler());
 		inhalt.add(gruppenerstellung);
@@ -122,22 +120,24 @@ public class GruppenForm extends VerticalPanel {
 }
 
 	
-
+	//Löschen ClickHandler
 	private class loeschenHandler implements ClickHandler{
 
 		@Override
 		public void onClick(ClickEvent event) {
+			//Wenn der in der Liste Ausgewählt User ungleich des Aktuellen User ist wirde er in einen Vector gespeichert
 			if(user.getId() != groupMember.elementAt(mitglieder.getSelectedIndex()).getId()) {
 			groupMember.remove(mitglieder.getSelectedIndex());
 			mitglieder.removeItem(mitglieder.getSelectedIndex());
 			}
+			//Wenn der in der Liste Ausgewählt User gleich des Aktuellen User ist kommt eine FehlerMeldung
 			else {
-				Window.alert("Sie können sich nicht aus der Gruppe entfernen");
+				Window.alert("You can't remove yourself from your Group");
 			}
 		}
 	}
 
-	
+	//Hinzufügen ClickHandler
 	private class hinzufuegenHandler implements ClickHandler{
 
 		@Override
@@ -149,11 +149,14 @@ public class GruppenForm extends VerticalPanel {
 				@Override
 				public void onSuccess(User result) {
 					int j = 0;
+					//Pruefen ob der User bereits im "groupMember" Vector vorhanden ist 
 					for (int i = 0; i < groupMember.size(); i++) {
+						//Wenn Ja dann setze j=1
 						if(groupMember.elementAt(i).getId() == result.getId()) {
 						j=1;	
 						}
 					}
+					//Wenn j ungleich 1 wird der User dem groupMember Vector hinzugefügt
 					if(j!=1) {
 						u = result;
 						groupMember.add(u);
@@ -162,8 +165,9 @@ public class GruppenForm extends VerticalPanel {
 						GruppenForm form = new GruppenForm(user, groupMember, gruppname);
 						RootPanel.get().add(form);
 					}
+					//Wenn j = 0 Fehlerausgabe
 					else {
-						Window.alert("Nutzer ist bereits in der Gruppe");
+						Window.alert("This user is already in this Group");
 					}
 					}
 				
@@ -177,7 +181,7 @@ public class GruppenForm extends VerticalPanel {
 		}
 	}
 	
-	
+	//ClickHandler zurück zur Startseite
 	private class backButtonHandler implements ClickHandler{
 
 		@Override
@@ -191,11 +195,12 @@ public class GruppenForm extends VerticalPanel {
 			
 			
 		
-	
+	//Clickhandler zum sichern der Group
 	private class sichernhandler implements ClickHandler{
 		
 		@Override
 		public void onClick(ClickEvent event) {	
+			//Wenn Groupname nicht leer ist dann wird die Group erstellt
 			if(gruppennamebox.getText()!=""){
 			RootPanel.get().clear();
 			
@@ -209,7 +214,7 @@ public class GruppenForm extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Group result) {
-					
+					//Neuer Groupmember wird erzeugt und der Datenbank hinzugefügt
 					for(int i = 0; i < groupMember.size(); i++) {
 						Groupmember gm = new Groupmember(result.getId(), groupMember.elementAt(i).getId());
 						editorAdministration.createGroupmember(gm, new AsyncCallback<Groupmember>() {
@@ -223,7 +228,7 @@ public class GruppenForm extends VerticalPanel {
 							public void onSuccess(Groupmember result) {
 							}});
 					}
-					
+					//EditorForm wird aufgerufen und die neue Gruppe wird dem dataProvider hinzugefügt
 					EditorForm editform = new EditorForm(user, Gruppen);
 					RootPanel.get().add(editform);
 					List <Group> liste = dataProvider.getList();
@@ -233,6 +238,7 @@ public class GruppenForm extends VerticalPanel {
 				
 			});
 		}
+			//Wenn kein Groupname dann wird dieser Fehler ausgegebne
 			else {
 				Window.alert("Please enter a groupname");
 			}
