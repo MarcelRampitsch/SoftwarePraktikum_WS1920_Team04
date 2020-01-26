@@ -92,6 +92,7 @@ public class GruppenForm extends VerticalPanel {
 		super.onLoad();
 		
 		inhalt.add(back);
+		back.addStyleName("backButtonStyle");
 		back.addClickHandler(new backButtonHandler());
 		inhalt.add(gruppenerstellung);
 		
@@ -102,15 +103,18 @@ public class GruppenForm extends VerticalPanel {
 		inhalt.add(nickname);
 		suche.add(nicknamebox);
 		suche.add(hinzufuegen);
+		hinzufuegen.addStyleName("addButtonStyle");
 		hinzufuegen.addClickHandler(new hinzufuegenHandler());
 		inhalt.add(suche);
 		
 		liste.add(mitglieder);
 		liste.add(loeschen);
+		loeschen.addStyleName("deleteButtonStyle");
 		loeschen.addClickHandler(new loeschenHandler());
 		inhalt.add(liste);
 		
-		inhalt.add(speichern);		
+		inhalt.add(speichern);
+		speichern.addStyleName("saveButtonStyle");
 		speichern.addClickHandler(new sichernhandler());
 		
 		mitglieder.setVisibleItemCount(groupMember.size());

@@ -70,6 +70,7 @@ public class CellListForm extends VerticalPanel {
 	   super.onLoad();
 //	   GruppenErstellung.addClickHandler(new openClickHandler());
 //	   this.add(GruppenErstellung);
+	   neueGruppe.addStyleName("createGroupStyle");
 	   neueGruppe.addClickHandler(new openGroupClickHandler());
 	   final CellTable<Group> table = new CellTable<Group>();
 	   
