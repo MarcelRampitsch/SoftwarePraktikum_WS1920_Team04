@@ -17,18 +17,18 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 public class LoginForm extends VerticalPanel {
 
+	//Initialisierung relevanter Variablen
 	User user = null;
 	Anchor signInLink = new Anchor();
 	Image googleSignIn = new Image ("/images/googleLogin.png");
 	
+	// Erstellen der Login constructor
 	public LoginForm(User user) {
-		
 		this.user = user;
-
 	}
 	
 	public void onLoad() {
-
+		//Aufbau des LoginForms sowie styling der Widgets
 		signInLink.setHref(user.getURL());
 		Label welcomeLabel = new Label("Herzlich Willkommen bei Kinofix!");
 		Label txtLabel = new Label("Bitte melden Sie ich sich mit Ihrem Google-Account an, um Kinofix zu nutzen.");
@@ -43,7 +43,6 @@ public class LoginForm extends VerticalPanel {
 		this.add(welcomeLabel);
 		this.add(txtLabel);
 		this.add(loginPanel);
-		
 	}
 
 }

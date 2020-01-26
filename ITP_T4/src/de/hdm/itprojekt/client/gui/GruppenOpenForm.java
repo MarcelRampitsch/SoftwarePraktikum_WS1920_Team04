@@ -9,7 +9,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -30,36 +29,24 @@ import de.hdm.itprojekt.shared.bo.User;
 	public class GruppenOpenForm extends DialogBox{
 		
 		  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-		
-		
+		  
+		  //Initalisierung relevanter Variablen, Widgets und ListDataProvider	
 		  ListDataProvider <Group> dataProvider;	
-
 		  VerticalPanel inhalt = new VerticalPanel();
-		
-		
 		  Label gruppenerstellung = new Label("Group creation:");
 		  Label gruppenname = new Label("Groupname");
 		  Label nickname = new Label("Nickname");
-		
 		  Button edit = new Button("edit");
 		  Button close  = new Button("X");
-		
 		  TextBox gruppennamebox =new TextBox();
 		  TextBox nicknamebox = new TextBox();
-		
 		  Button speichern = new Button("save");
-		
 		  GruppenForm gruppenForm = null;
-
 		  User user;
-
-
 		
-		
-		public GruppenOpenForm() {
-			
-		}
-		
+		  //Erstellung der GroupViewForm constructor
+		  public GruppenOpenForm() {
+		  }
 		
 		/*
 		 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
@@ -70,8 +57,7 @@ import de.hdm.itprojekt.shared.bo.User;
 		public void onLoad() {
 			super.onLoad();
 			
-
-			
+			//Aufbau des Widgets
 			inhalt.add(close);
 			close.addClickHandler(new closegruppenform());
 			inhalt.add(gruppenerstellung);
@@ -85,13 +71,9 @@ import de.hdm.itprojekt.shared.bo.User;
 			inhalt.add(speichern);
 			inhalt.add(edit);
 						
-			
 			speichern.addClickHandler(new sichernhandler());
-			this.add(inhalt);
-
-			
+			this.add(inhalt);	
 	}
-		
 		
 		public void openGruppenForm() {
 			this.setGlassEnabled(true);
@@ -108,27 +90,23 @@ import de.hdm.itprojekt.shared.bo.User;
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(false);
 		}
-
-	
-		
 		
 		private class closegruppenform implements ClickHandler{
 	
 			@Override
 			public void onClick(ClickEvent event) {
-				closeGruppenForm();
-				
+				closeGruppenForm();	
 			}
-	
-		
-			
 		}
 		
+		//Sichern ClickHandler
 		private class sichernhandler implements ClickHandler{
 			
-			@Override
+			@Override			
 			public void onClick(ClickEvent event) {
+				//Gruppe wird erstellt
 				Group group1 = new Group(1,gruppennamebox.getText());
+				//Erstellt Gruppe in Datenbank speichern
 				editorAdministration.createGroup(group1, new AsyncCallback<Group>(){
 
 					@Override
