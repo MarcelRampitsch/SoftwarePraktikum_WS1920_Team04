@@ -134,6 +134,7 @@ public class NewSurveyForm extends VerticalPanel {
 			public void onSuccess(Vector<CinemaGroup> result) {
 				for (int i = 0; i < result.size(); i++) {
 					kinogruppeDropBox.addItem(result.elementAt(i).getName());
+					kinogruppeDropBox.setSelectedIndex(-1);
 					cinegroup = result;
 				}
 			}
@@ -148,6 +149,7 @@ public class NewSurveyForm extends VerticalPanel {
 			public void onSuccess(Vector<Cinema> result) {
 				for (int i = 0; i < result.size(); i++) {
 					kinoDropBox.addItem(result.elementAt(i).getName());
+					kinoDropBox.setSelectedIndex(-1);
 					cine = result;
 				}
 			}
@@ -162,6 +164,7 @@ public class NewSurveyForm extends VerticalPanel {
 			public void onSuccess(Vector<Movie> result) {
 				for (int i = 0; i < result.size(); i++) {
 					filmDropBox.addItem(result.elementAt(i).getName());
+					filmDropBox.setSelectedIndex(-1);
 					movie = result;
 				}
 			}
@@ -176,6 +179,7 @@ public class NewSurveyForm extends VerticalPanel {
 			public void onSuccess(Vector<Timeslot> result) {
 				for (int i = 0; i < result.size(); i++) {
 					spielzeitDropBox.addItem(result.elementAt(i).getTime());
+					spielzeitDropBox.setSelectedIndex(-1);
 					timesl = result;
 				}
 			}
