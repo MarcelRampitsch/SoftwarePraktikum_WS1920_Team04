@@ -28,6 +28,18 @@
 
 
 
+.newButtonStyle:hover {
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
+.editButtonStyle:hover{
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
 .saveButtonStyle:hover{
 	background: #1c59ae;
 	color: #f2f2f2;
@@ -52,7 +64,7 @@
 	transition: 0.5s;	
 }
 
-.createGroupStyle:hover {
+.createButtonStyle:hover {
 	background: #169f11;
 	color: #f2f2f2;
 	transition: 0.5s;	

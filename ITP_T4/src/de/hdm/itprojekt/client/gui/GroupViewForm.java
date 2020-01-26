@@ -165,15 +165,19 @@ public class GroupViewForm extends VerticalPanel {
 		
 		this.clear();
 		mainPanel.add(back);
+		back.addStyleName("backButtonStyle");
 		back.addClickHandler(new backHandler());
 		mainPanel.add(groupNameLabel);
 		editPanel.add(editGroupButton);
+		editGroupButton.addStyleName("editButtonStyle");
 		editPanel.add(deleteGroupButton);
+		deleteGroupButton.addStyleName("deleteButtonStyle");
 		mainPanel.add(editPanel);
 		editGroupButton.addClickHandler(new editGroupButtonClickHandler());
 		deleteGroupButton.addClickHandler(new deleteGroupButtonClickHandler());
 		groupNameLabel.setText(group.getName());
 		mainPanel.add(newSurveyButton);
+		newSurveyButton.addStyleName("newButtonStyle");
 		newSurveyButton.addClickHandler(new newSurveyButtonClickHandler());
 		mainPanel.add(table);
 		mainPanel.add(cellList);
