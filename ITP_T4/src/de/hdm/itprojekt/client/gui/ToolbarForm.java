@@ -42,10 +42,10 @@ public class ToolbarForm extends HorizontalPanel {
 		super.onLoad();
 		
 		Button adminBtn = new Button("Admin");
-		adminBtn.addStyleName("button");
+		adminBtn.addStyleName("toolbar-button");
 		
 		Button logoutBtn = new Button("Logout");
-		logoutBtn.addStyleName("button");
+		logoutBtn.addStyleName("toolbar-button");
 		
 		adminBtn.addClickHandler(new adminBtnClickHandler());
 		logoutBtn.addClickHandler(new logoutBtnClickHandler());

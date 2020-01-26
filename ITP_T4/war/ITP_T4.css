@@ -28,16 +28,32 @@
 
 
 
+* {
+	font-family: 'Montserrat', sans-serif !important;
+}
+
+button.gwt-Button:hover {
+	background: rgb(242, 210, 37) !important;
+	color: rgb(25, 31, 31);
+	font-weight: bold !important;
+}
+
 .content {
 	height: 100%;
+	width: 100%;
 	padding: 0px;
 	margin: 0px;
 	margin-top: 120px;
+	margin-bottom: 80px;
 	text-align: -webkit-center;
 	z-index: -1;
+	-moz-box-shadow: 0 0 10px #000000;
+	-webkit-box-shadow: 0 0 10px #000000;
+	box-shadow: 0 0 10px #000000;
+	background: white;
 }
 
-.button {
+.toolbar-button {
 	margin: 10px !important;
 	width: 180px;
 	height: 40px;
