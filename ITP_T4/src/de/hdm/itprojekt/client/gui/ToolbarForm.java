@@ -13,11 +13,23 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.User;
 
+/*
+ * 
+ * @author VanDuyHo
+ * 
+ */
 public class ToolbarForm extends HorizontalPanel {
 	
 	User user = null;
-	
 	Anchor logOutLink = new Anchor();
+	
+	Label l = new HTML("<p>Möchten Sie zurück zum Login?</p><br>");
+	
+	Button yB = new Button("Ja");
+	Button nB = new Button("Nein");
+	
+	VerticalPanel vp = new VerticalPanel();
+	HorizontalPanel hp = new HorizontalPanel();	
 	
 	public ToolbarForm(User user) {
 		
@@ -61,16 +73,13 @@ public class ToolbarForm extends HorizontalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			
+
 			DialogBox db = new DialogBox();
-			VerticalPanel vp = new VerticalPanel();
-			HorizontalPanel hp = new HorizontalPanel();			
-			Button yB = new Button("Ja");
-			Button nB = new Button("Nein", new noClickHandler(db));
+			nB.addClickHandler(new noClickHandler(db));
 			logOutLink.setHref(user.getURL());
 			logOutLink.getElement().appendChild(yB.getElement());
-			Label l = new HTML("<p>Möchten Sie zurück zum Login?</p><br>");
 			db.setText("Logout");
-			vp.add(l);
+			vp.add(l);	
 			hp.add(logOutLink);
 			hp.add(nB);
 			vp.add(hp);
@@ -106,8 +115,12 @@ public class ToolbarForm extends HorizontalPanel {
 				dbox.setAnimationEnabled(false);
 				dbox.setGlassEnabled(false);
 				
+				hp.remove(yB);
+				hp.remove(nB);
+				vp.remove(l);
+				
 			}
-
+			
 		}
 
 	}
