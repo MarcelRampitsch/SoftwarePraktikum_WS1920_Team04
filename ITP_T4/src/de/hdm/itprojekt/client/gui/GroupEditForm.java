@@ -22,7 +22,11 @@ import de.hdm.itprojekt.shared.bo.Groupmember;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class GroupEditForm extends VerticalPanel {
-
+	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	//Initalisierung relevanter Variablen
@@ -69,6 +73,14 @@ public class GroupEditForm extends VerticalPanel {
 	
 	public GroupEditForm() {
 	}
+	
+	
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+	 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+	 */
 	
 	public void onLoad() {
 		
@@ -133,6 +145,7 @@ public class GroupEditForm extends VerticalPanel {
 					}
 					
 					@Override
+					//Falls keine User der Gruppe hinzufügen werden konnten, wird ein WindowAlert ausgegeben.
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 						Window.alert("etwas ist schief gelaufen");

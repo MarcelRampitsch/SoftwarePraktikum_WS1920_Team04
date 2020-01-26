@@ -26,6 +26,15 @@ import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.Vote;
 
 public class PrepareSurveyEntry {
+	
+	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
+	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	
+	//Erstellung der notwendigen Widgets und Variablen
 	CinemaGroup cg = new CinemaGroup();
 	Cinema c = new Cinema();
 	Movie m = new Movie();
@@ -34,7 +43,8 @@ public class PrepareSurveyEntry {
 //	String date = new String();
 	Vote v = new Vote();
 	SafeHtmlBuilder shb = new SafeHtmlBuilder();
-	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	
+	
 	SurveyEntry se;
 	List<SafeHtml> data;
 	int outstandingCalls = 4;

@@ -35,12 +35,16 @@ import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 /*
- * Diese Klasse dient der Erstellung von SurveyEntrys. Hier können Vorstellungen gesucht werden,
+ * Diese Klasse dient der Erstellung von SurveyEntrys. Hier kï¿½nnen Vorstellungen gesucht werden,
  * und diese dann als SurveyEntry gespeichert werden. Die Anzeige der SurveyEntrys erfolgt
  * dann in einer CellList.
  */
 public class NewSurveyForm extends VerticalPanel {
 
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
 	// Konstruktor
@@ -94,7 +98,9 @@ public class NewSurveyForm extends VerticalPanel {
 	Button umfrageSichernButton = new Button("Umfrage speichern");
 
 	/*
-	 * Laden der Widgets und füllen mit den entsprechenden Objekten Kinogruppe, Kino, Film und Timeslot
+	 * onLoad-Methode: Wird ausgefÃ¼hrt, wenn das Widget, dem Browser hinzugefÃ¼gt wurde. 
+	 * Die dieser Klasse dazugehÃ¶rigen grafischen Elemente werden dem Widget hinzugefÃ¼gt.
+	 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
 	 */
 	public void onLoad() {
 		super.onLoad();
@@ -194,7 +200,7 @@ public class NewSurveyForm extends VerticalPanel {
 	}
 
 	/*
-	 * SearchHandler: Handler der auf die Betätigung der Schaltfläche "Suchen"
+	 * SearchHandler: Handler der auf die Betï¿½tigung der Schaltflï¿½che "Suchen"
 	 * reagiert, und dabei dann die gefundenen Vorstellungen ausgibt.
 	 */
 	private class SearchHandler implements ClickHandler {
@@ -210,19 +216,19 @@ public class NewSurveyForm extends VerticalPanel {
 			
 			/*
 			 * TODO: Wenn ein Kino nicht Teil einer Kinogruppe ist soll diese Meldung nicht erscheinen.
-			 * 		 Weglassen, da standardmäßig immer schon etwas ausgewählt ist?
+			 * 		 Weglassen, da standardmï¿½ï¿½ig immer schon etwas ausgewï¿½hlt ist?
 			 */
 			if(kinogruppeDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Kinogruppe auswählen");
+				Window.alert("Bitte Kinogruppe auswï¿½hlen");
 			}
 			else if(kinoDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Kino auswählen");
+				Window.alert("Bitte Kino auswï¿½hlen");
 			}
 			else if(filmDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Film auswählen");
+				Window.alert("Bitte Film auswï¿½hlen");
 			}
 			else if(spielzeitDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Spielzeit auswählen");
+				Window.alert("Bitte Spielzeit auswï¿½hlen");
 			}
 			 
 			editorAdministration.getAllPresentationBySearchCriteria(p, new AsyncCallback<Vector<Presentation>>() {

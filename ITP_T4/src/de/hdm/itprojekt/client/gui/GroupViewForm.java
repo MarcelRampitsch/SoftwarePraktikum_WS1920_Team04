@@ -38,6 +38,11 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 
 public class GroupViewForm extends VerticalPanel {
+	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	//Initalisierung relevanter Variablen, Widgets und ListDataProvider
@@ -85,6 +90,11 @@ public class GroupViewForm extends VerticalPanel {
 	}
 	
 	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+	 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+	 */
 	
 	public void onLoad() {
 		

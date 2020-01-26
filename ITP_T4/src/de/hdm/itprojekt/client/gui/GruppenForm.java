@@ -33,8 +33,13 @@ public class GruppenForm extends VerticalPanel {
 	
 	
 
-	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	  
+	  
 	  //Initalisierung relevanter Variablen, Widgets und ListDataProvider
 	  User user = null;
 	  ListDataProvider <Group> dataProvider;	

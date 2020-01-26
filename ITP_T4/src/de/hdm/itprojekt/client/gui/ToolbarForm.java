@@ -41,6 +41,12 @@ public class ToolbarForm extends HorizontalPanel {
 		
 	}
 	
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+	 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+	 */
 	public void onLoad() {
 		
 		super.onLoad();
@@ -63,6 +69,7 @@ public class ToolbarForm extends HorizontalPanel {
 		
 	}
 	
+	//ClickHandler der zum Tragen kommt, falls auf den Admin-Button geklickt wird
 	private class adminBtnClickHandler implements ClickHandler {
 
 		@Override
@@ -74,6 +81,7 @@ public class ToolbarForm extends HorizontalPanel {
 			
 	}
 	
+	//ClickHandler mit dem ein User sich vom System ausloggen kann
 	private class logoutBtnClickHandler implements ClickHandler {
 
 		@Override
@@ -102,6 +110,7 @@ public class ToolbarForm extends HorizontalPanel {
 			
 	}
 	
+	//ClickHandler mit dem sich ein DialogFenster öffnet
 	private class noClickHandler implements ClickHandler {
 
 		DialogBox dbox;

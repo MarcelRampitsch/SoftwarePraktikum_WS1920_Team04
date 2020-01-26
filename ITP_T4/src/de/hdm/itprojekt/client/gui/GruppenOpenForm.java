@@ -28,6 +28,10 @@ import de.hdm.itprojekt.shared.bo.User;
  	
 	public class GruppenOpenForm extends DialogBox{
 		
+		/**
+		   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+		   * namens <code>EditorAdministration</code>.
+		   */
 		  EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 		  
 		  //Initalisierung relevanter Variablen, Widgets und ListDataProvider	
@@ -75,6 +79,9 @@ import de.hdm.itprojekt.shared.bo.User;
 			this.add(inhalt);	
 	}
 		
+		/*
+		 * Dialog-spezifische Methode mit der sich eine DialogBox öffnen lässt
+		 */
 		public void openGruppenForm() {
 			this.setGlassEnabled(true);
 			this.setAnimationEnabled(true);
@@ -83,6 +90,9 @@ import de.hdm.itprojekt.shared.bo.User;
 		}
 		
 		
+		/*
+		 * Dialog-spezifische Methode mit der sich eine DialogBox schließen lässt
+		 */
 		public void closeGruppenForm() {
 			this.hide();
 			this.clear();
@@ -91,6 +101,8 @@ import de.hdm.itprojekt.shared.bo.User;
 			this.setGlassEnabled(false);
 		}
 		
+		
+		//ClickHandler mit der sich ein DialogFenster schließen lässt
 		private class closegruppenform implements ClickHandler{
 	
 			@Override
@@ -99,7 +111,7 @@ import de.hdm.itprojekt.shared.bo.User;
 			}
 		}
 		
-		//Sichern ClickHandler
+		//ClickHandler der beim Anklicken eine neue Gruppe erstellt
 		private class sichernhandler implements ClickHandler{
 			
 			@Override			

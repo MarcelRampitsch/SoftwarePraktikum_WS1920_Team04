@@ -31,8 +31,14 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class UmfragenOpenForm extends DialogBox {
 	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministraion = ClientSideSettings.getEditorAdministration();
 	
+	
+	//Erstellung notwendiger Widgets sowie Variablen
 	private User user = null;
 	private Cinema selectedCinema = null;
 	private Vector<Cinema> cine = null;
@@ -51,7 +57,6 @@ public class UmfragenOpenForm extends DialogBox {
 	 Label spielzeit = new Label("Spielzeit wählen");
 	 final ListBox dropBoxSpielzeit = new ListBox();
 	 Button safeUmfrage = new Button("Umfrage speichern");
- //   private ArrayList<String> umfagen = new ArrayList<String>();
 
 
      CloseUmfrageOpenFormClickHandler closeHandler;
@@ -143,7 +148,7 @@ public class UmfragenOpenForm extends DialogBox {
 	   
 		
 	}
-	
+	//Methode mit der sich ein DialogFenster öffnen lässt
 	public void umfrageEditForm() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
@@ -151,6 +156,7 @@ public class UmfragenOpenForm extends DialogBox {
 		this.show();
 	}
 	
+	//Methode mit der sich ein DialogFenster schließen lässt
 	public void closeUmfrageOpenForm() {
 		this.hide();
 		this.clear();

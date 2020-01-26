@@ -18,6 +18,10 @@ import de.hdm.itprojekt.shared.bo.Timeslot;
 
 public class NewSurveyCell extends AbstractCell<SurveyEntry> {
 
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
 	Cinema c = new Cinema();
@@ -26,6 +30,7 @@ public class NewSurveyCell extends AbstractCell<SurveyEntry> {
 	SafeHtmlBuilder shb;
 
 	@Override
+	//Die Render-Methode wird gebraucht um einzelne Zellen in einem CellWidget bearbeiten zu lassen 
 	public void render(Context context, SurveyEntry value, SafeHtmlBuilder sb) {
 		// TODO Auto-generated method stub
 		if(value == null) {
@@ -34,7 +39,7 @@ public class NewSurveyCell extends AbstractCell<SurveyEntry> {
 		shb = sb;
 		
 		shb.appendHtmlConstant("<div>");
-		shb.appendHtmlConstant("<Umfrageeinträge:>");
+		shb.appendHtmlConstant("<Umfrageeintrï¿½ge:>");
 		
 		editorAdministration.getCinemaBySurveyEntry(value, new AsyncCallback<Cinema>() {
 			

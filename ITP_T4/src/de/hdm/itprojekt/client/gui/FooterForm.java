@@ -14,12 +14,15 @@ public class FooterForm extends HorizontalPanel {
 
 	public void onLoad() {
 		
+		//Label welches angezeigt wird, wenn man sich im BenutzerClient befindet.
 		Label footerTxt = new Label("IT-Projekt WS19/20 Team04 Kinofix © Copyright 2020");
 		
 		this.setHorizontalAlignment(ALIGN_CENTER);
 		this.setVerticalAlignment(ALIGN_MIDDLE);
 		
 		this.addStyleName("footer");
+		
+		//Lable wird dem Panel(VerticalPanel) hinzugefügt, damit es zum anzeigen gebracht wird
 		this.add(footerTxt);
 		
 	}

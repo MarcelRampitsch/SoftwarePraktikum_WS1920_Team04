@@ -35,7 +35,10 @@ import de.hdm.itprojekt.shared.bo.Vote;
 
 public class UmfragenTable extends VerticalPanel {
 	
-//	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
 
@@ -71,6 +74,11 @@ public class UmfragenTable extends VerticalPanel {
 	   ListDataProvider<SurveyEntry> Umfrageeintrag = new ListDataProvider<SurveyEntry>();
 	
 	
+	   /*
+		 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+		 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+		 * Den Buttons werden deren Funktion entsprechend ClickHandler zugewiesen. 
+		 */
 	public void onLoad() {
 		super.onLoad();
 		name.setText(s.getName());
@@ -88,6 +96,8 @@ public class UmfragenTable extends VerticalPanel {
  		return this.Umfrageeintrag;
  	}
 	
+	
+	//ClickHandler mit dem man auf die EditorForm zurückgelangt 
 	private class backHandler implements ClickHandler{
 
 		@Override

@@ -20,7 +20,14 @@ import de.hdm.itprojekt.shared.bo.Vote;;
 
 public class UmfragenCell extends AbstractCell<SurveyEntry> {
 	
+	
+	/**
+	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	   * namens <code>EditorAdministration</code>.
+	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
+	
+	//Erstellung der notwendigen Widget sowie Variablen
 	CinemaGroup cg = new CinemaGroup();
 	Cinema c = new Cinema();
 	Movie m = new Movie();
