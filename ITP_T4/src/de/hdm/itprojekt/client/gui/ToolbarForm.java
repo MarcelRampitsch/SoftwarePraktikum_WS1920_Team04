@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -25,6 +26,7 @@ public class ToolbarForm extends HorizontalPanel {
 	User user = null;
 	Anchor logOutLink = new Anchor();
 	
+	Image logo = new Image("/images/kinofixLogo.png");
 	Label l = new HTML("<p>Möchten Sie zurück zum Login?</p><br>");
 	
 	Button yB = new Button("Ja");
@@ -53,7 +55,9 @@ public class ToolbarForm extends HorizontalPanel {
 		logoutBtn.addClickHandler(new logoutBtnClickHandler());
 		
 		this.addStyleName("toolbar");
+		logo.setStylePrimaryName("logo");
 		
+		this.add(logo);
 		this.add(adminBtn);
 		this.add(logoutBtn);
 		
@@ -75,7 +79,8 @@ public class ToolbarForm extends HorizontalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			
-
+			yB.addStyleName("yesButtonStyle");
+			nB.addStyleName("noButtonStyle");
 			DialogBox db = new DialogBox();
 			nB.addClickHandler(new noClickHandler(db));
 			logOutLink.setHref(user.getURL());

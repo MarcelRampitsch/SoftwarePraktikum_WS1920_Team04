@@ -28,6 +28,23 @@
 
 
 
+.logo {
+	margin: 10px;
+	padding: 10px;	
+}
+
+.yesButtonStyle:hover {
+	background: #169f11;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
+.noButtonStyle:hover {
+	background: #c91821;
+	color: #f2f2f2;
+	transition: 0.5s;	
+}
+
 .newButtonStyle:hover {
 	background: #169f11;
 	color: #f2f2f2;
@@ -101,9 +118,9 @@ button.gwt-Button {
 }
 
 .toolbar-button {
-	margin: 10px !important;
-	width: 180px;
-	height: 40px;
+	margin: 35px !important;
+	width: 90px;
+	height: 30px;
 	color: rgb(25, 31, 31) !important;
 	box-shadow: 0px 0px 5px rgba(242, 210, 37);
 	font-size: 1.2em;
