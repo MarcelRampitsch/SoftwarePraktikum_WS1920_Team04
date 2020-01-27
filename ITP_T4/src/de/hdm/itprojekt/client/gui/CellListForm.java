@@ -19,7 +19,6 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
@@ -111,8 +110,8 @@ public class CellListForm extends VerticalPanel {
 							inhalt.clear();
 							//Erstellen eines neuen GroupViewForm widgets
 							GroupViewForm viewForm = new GroupViewForm(user,clickedObj,Umfragen);
-							//Dem Rootpanel dieses widget hinzufügen
-							RootPanel.get().add(viewForm);	
+							//Dem inhalt-Panel dieses widget hinzufügen
+							inhalt.add(viewForm);
 						}
 					});				
 				}

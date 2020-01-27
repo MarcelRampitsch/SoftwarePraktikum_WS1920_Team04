@@ -135,8 +135,8 @@ public class GroupViewForm extends VerticalPanel {
 						UmfragenTable form = new UmfragenTable(user , UmfragenEintrag, clickedObj);
 						//Das "mainPanel" widget leeren
 						mainPanel.clear();
-						//Das UmfragenForm dem RootPanel hinzufuegen
-						RootPanel.get().add(form);
+						//Das UmfragenForm dem mainPanel hinzufuegen
+						mainPanel.add(form);
 					}
 				});
 			}
@@ -277,7 +277,7 @@ public class GroupViewForm extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			mainPanel.clear();
 			NewSurveyForm nsf = new NewSurveyForm(user,group);
-			RootPanel.get().add(nsf);
+			mainPanel.add(nsf);
 		}
 	}
 	

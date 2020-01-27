@@ -83,6 +83,7 @@ public class UmfragenTable extends VerticalPanel {
 		super.onLoad();
 		name.setText(s.getName());
 		main.add(back);
+		back.addStyleName("backButtonStyle");
 		main.add(name);
 		main.add(list);
 		back.addClickHandler(new backHandler());
