@@ -111,7 +111,7 @@ public class NewSurveyForm extends VerticalPanel {
 		umfrageNameBox.getElement().setPropertyString("placeholder", "Umfragename...");
 		inhalt.add(datum);
 		inhalt.add(datumAuswahlPicker);
-		inhalt.add(kino);
+		inhalt.add(kinogruppe);
 		inhalt.add(kinogruppeDropBox);
 		inhalt.add(kino);
 		inhalt.add(kinoDropBox);
@@ -217,23 +217,22 @@ public class NewSurveyForm extends VerticalPanel {
 			Date date = new java.sql.Date(datumAuswahlPicker.getValue().getTime());
 			Presentation p = new Presentation(umfrageNameBox.getText(), c.getId(), m.getId(), user.getId(), t.getId(),
 					date);
-			
 			/*
-			 * TODO: Wenn ein Kino nicht Teil einer Kinogruppe ist soll diese Meldung nicht erscheinen.
-			 * 		 Weglassen, da standardmï¿½ï¿½ig immer schon etwas ausgewï¿½hlt ist?
+			 * If Else Abfrage: Für den Fall, dass bei einem Feld kein Wert ausgewählt wurde, wird eine entsprechende Fehlermeldung ausgegeben.
 			 */
-			if(kinogruppeDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Kinogruppe auswï¿½hlen");
+			if(kinogruppeDropBox.getSelectedIndex() == -1) {
+				Window.alert("Bitte Kinogruppe auswählen");
 			}
-			else if(kinoDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Kino auswï¿½hlen");
+			else if(kinoDropBox.getSelectedIndex() == -1) {
+				Window.alert("Bitte Kino auswählen");
 			}
-			else if(filmDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Film auswï¿½hlen");
+			else if(filmDropBox.getSelectedIndex() == -1) {
+				Window.alert("Bitte Film auswählen");
 			}
-			else if(spielzeitDropBox.getSelectedItemText() == null) {
-				Window.alert("Bitte Spielzeit auswï¿½hlen");
+			else if(spielzeitDropBox.getSelectedIndex() == -1) {
+				Window.alert("Bitte Spielzeit auswählen");
 			}
+			else {
 			 
 			editorAdministration.getAllPresentationBySearchCriteria(p, new AsyncCallback<Vector<Presentation>>() {
 
@@ -246,14 +245,18 @@ public class NewSurveyForm extends VerticalPanel {
 				@Override
 				public void onSuccess(Vector<Presentation> result) {
 					vorstellungenDropBox.clear();
-					for (int i = 0; i < result.size(); i++) {
-						vorstellungenDropBox.addItem(result.elementAt(i).getName());
-						prese = result;
-
+					if (result.isEmpty()) {
+						Window.alert("Es konnte keine Vorstellung mit diesen Daten gefunden werden");
+					}
+					else {
+						for (int i = 0; i < result.size(); i++) {
+							vorstellungenDropBox.addItem(result.elementAt(i).getName());
+							prese = result;
+						}
 					}
 				}
 			});
-
+			}
 		}
 	}
 
