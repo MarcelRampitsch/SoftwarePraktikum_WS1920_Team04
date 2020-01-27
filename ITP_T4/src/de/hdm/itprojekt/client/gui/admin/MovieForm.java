@@ -30,173 +30,168 @@ import de.hdm.itprojekt.shared.bo.User;
  *
  */
 
-public class MovieForm  extends VerticalPanel{
+public class MovieForm extends VerticalPanel {
 	
-    //private Label movieLabel = new Label("Movie");
-	
-    AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
-    private ListBox movieBox = new ListBox();
-    
-    Button editMovie = new Button("Edit");
-    Button newMovie = new Button("New");
-    Button deleteMovie = new Button("Delete");
-    
+	//Erstellung der notwendigen Widgets sowie Attribute
+	private ListBox movieBox = new ListBox();
+	Button editMovie = new Button("Edit");
+	Button newMovie = new Button("New");
+	Button deleteMovie = new Button("Delete");
+
 	HorizontalPanel moviePanel1 = new HorizontalPanel();
 	HorizontalPanel moviePanel2 = new HorizontalPanel();
-	
-    private User user = null;
+
+	private User user = null;
 	private Movie selectedMovie = null;
 	private Vector<Movie> movie = null;
 	private Movie delete = null;
 
-    
-    public MovieForm(User user) {
-    	this.user  = user;
-    }
+	
+	public MovieForm(User user) {
+		this.user = user;
+	}
 
-    
-    public void onLoad() {
-    	
-    	super.onLoad();
-    	
-		//CSS Stylename Vergabe
+	public void onLoad() {
 
-    	editMovie.addStyleName("editMovieStyle");
-    	newMovie.addStyleName("newMovieStyle");
-    	deleteMovie.addStyleName("deleteMovieStyle");
-    	
-    	newMovie.addClickHandler(new addMovieClickHandler());
+		super.onLoad();
+
+		// CSS Stylename Vergabe
+
+		editMovie.addStyleName("editMovieStyle");
+		newMovie.addStyleName("newMovieStyle");
+		deleteMovie.addStyleName("deleteMovieStyle");
+
+		newMovie.addClickHandler(new addMovieClickHandler());
 		editMovie.addClickHandler(new editMovieClickHandler());
 		deleteMovie.addClickHandler(new deleteMovieClickHandler());
-    	
-    	//this.add(movieLabel);    	
-    	moviePanel1.add(movieBox);
-    	
-    	adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
-			
+
+		moviePanel1.add(movieBox);
+
+		adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
+
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("was ist falsch geloffen");
 			}
 
-			@Override 
+			@Override
 			public void onSuccess(Vector<Movie> result) {
-				
-				for (int i = 0; i < result.size(); i++ ) {
+
+				for (int i = 0; i < result.size(); i++) {
 					movieBox.addItem(result.elementAt(i).getName());
 					movie = result;
 				}
 			}
 		});
-    	
-    	moviePanel2.add(editMovie);
+
+		moviePanel2.add(editMovie);
 		moviePanel2.add(newMovie);
 		moviePanel2.add(deleteMovie);
-		
 
 		this.add(moviePanel1);
 		this.add(moviePanel2);
-     	
-    }
-    
-    /*
+
+	}
+
+	/*
 	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
 	 */
-	
+
 	/**
 	 * ClickHandler für Erstellung eines Movie
 	 */
 
-    public class addMovieClickHandler implements ClickHandler{
-		
+	public class addMovieClickHandler implements ClickHandler {
+
 		public void onClick(ClickEvent event) {
-			
+
 			MovieAddDialogbox movie = new MovieAddDialogbox(user);
 			movie.openMovieAdd();
-			
+
 		}
-		
+
 	}
-    
-    /**
+
+	/**
 	 * ClickHandler zum editieren eines Movie
 	 */
-	public class editMovieClickHandler implements ClickHandler{
-		
+	public class editMovieClickHandler implements ClickHandler {
+
 		public void onClick(ClickEvent event) {
-	
+
 			selectedMovie = movie.elementAt(movieBox.getSelectedIndex());
 			EditMovieDialogBox edit = new EditMovieDialogBox(selectedMovie, user);
 			edit.openMovieEdit();
-			
+
 		}
 	}
-	
+
 	/**
 	 * ClickHandler zum löschen eines Movie
 	 */
-	public class deleteMovieClickHandler implements ClickHandler{
-		
+	public class deleteMovieClickHandler implements ClickHandler {
+
 		public void onClick(ClickEvent event) {
-					
+
 			delete = movie.elementAt(movieBox.getSelectedIndex());
 			DeleteMovieDialogBox edit = new DeleteMovieDialogBox(delete, user);
 			edit.openMovieDelete();
-			
+
 		}
 	}
-	
-	
-	private class addCinemaGroupCallback implements AsyncCallback <Movie>{
+
+	private class addCinemaGroupCallback implements AsyncCallback<Movie> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onSuccess(Movie result) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
-	
-	
-	private class editMovieCallback implements AsyncCallback <Movie>{
+
+	private class editMovieCallback implements AsyncCallback<Movie> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onSuccess(Movie result) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
-	
-	
-	private class deleteMovieCallback implements AsyncCallback <Movie>{
+
+	private class deleteMovieCallback implements AsyncCallback<Movie> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onSuccess(Movie result) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
-	
-	
+
 }

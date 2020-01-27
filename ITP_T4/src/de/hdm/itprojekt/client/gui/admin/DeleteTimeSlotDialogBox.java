@@ -24,55 +24,49 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 public class DeleteTimeSlotDialogBox extends DialogBox {
 
-	VerticalPanel content = new VerticalPanel();
-	
-	HorizontalPanel horzcontent = new HorizontalPanel();
-
-	Timeslot time = null;
-	
-	Label timeslot = new Label("Timeslot wirklich löschen?");
-	
-	Button yes = new Button ("yes");
-	Button no = new Button ("no");
-	
-	
-	
-	User user = null;
-	
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 
+	VerticalPanel content = new VerticalPanel();
+	HorizontalPanel horzcontent = new HorizontalPanel();
+	Timeslot time = null;
+	Label timeslot = new Label("Timeslot wirklich löschen?");
+	Button yes = new Button("yes");
+	Button no = new Button("no");
+	User user = null;
 	
-	public DeleteTimeSlotDialogBox(Timeslot timeslot,User user) {
-		this.time=timeslot;
-		this.user=user;
+	
+
+	public DeleteTimeSlotDialogBox(Timeslot timeslot, User user) {
+		this.time = timeslot;
+		this.user = user;
 	}
-	
-	
+
 	public void onLoad() {
 		super.onLoad();
-		
-		//CSS StyleNamenVergabe
-		
+
+		// CSS StyleNamenVergabe
+
 		yes.addStyleName("timeSlotDeleteYes");
 		no.addStyleName("timeSlotDeleteNo");
-		
-		
+
 		content.add(timeslot);
-		
+
 		horzcontent.add(yes);
 		horzcontent.add(no);
 		content.add(horzcontent);
 
 		no.addClickHandler(new closetimeslot());
-		
+
 		yes.addClickHandler(new deleteTimeslot());
-		
+
 		this.add(content);
-				
+
 	}
-	
-	
-	
+
 	/*
 	 * Methode die das Anzeigen der DialogBox realisiert
 	 */
@@ -80,9 +74,9 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
 		this.center();
-		this.show();	
+		this.show();
 	}
-	
+
 	/*
 	 * Methode die das schließen des Fensters realisiert
 	 */
@@ -93,42 +87,40 @@ public class DeleteTimeSlotDialogBox extends DialogBox {
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(false);
 	}
-	
+
 	/*
 	 * Der ClickHandler der zum Tragen kommt, falls auf den no-button geklickt wird
 	 */
-    private class closetimeslot implements ClickHandler{
-		
+	private class closetimeslot implements ClickHandler {
+
 		@Override
 		public void onClick(ClickEvent event) {
 			closeTimeSlot();
-			
 
 		}
-    }
-    
-	// ClickHandler der das löschen deines Timeslot ermöglicht
-    private class deleteTimeslot implements ClickHandler{
-
-	
-	public void onClick(ClickEvent event) {
-		
-		adminAdministration.deleteTimeslot(time, new AsyncCallback<Void>() {
-			
-			@Override
-			public void onFailure(Throwable caught) {
-					Window.alert("????");
-			}
-			
-			public void onSuccess(Void result) {
-				closeTimeSlot();
-				RootPanel.get().clear();
-				AdminForm adminform = new AdminForm(user,3);
-				RootPanel.get().add(adminform);
-			}
-		});
-
 	}
 
-}
+	// ClickHandler der das löschen deines Timeslot ermöglicht
+	private class deleteTimeslot implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+
+			adminAdministration.deleteTimeslot(time, new AsyncCallback<Void>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("????");
+				}
+
+				public void onSuccess(Void result) {
+					closeTimeSlot();
+					RootPanel.get().clear();
+					AdminForm adminform = new AdminForm(user, 3);
+					RootPanel.get().add(adminform);
+				}
+			});
+
+		}
+
+	}
 }

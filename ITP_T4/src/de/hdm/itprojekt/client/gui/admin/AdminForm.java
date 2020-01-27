@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.client.gui.admin;
 
-
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,59 +16,52 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.AdminAdministrationAsync;
 
-
 /**
  * 
- * @author DominikThumm, VanDuyHo
- * AdminForm vereint alle grafischen Elemente dieses Packages, zur kompletten Anzeige
- * des Admin-Client
+ * @author DominikThumm, VanDuyHo 
+ * 
+ * AdminForm vereint alle grafischen Elemente
+ * dieses Packages, zur kompletten Anzeige des Admin-Client
  * 
  */
 
-public class AdminForm extends VerticalPanel{
-	/* 
+public class AdminForm extends VerticalPanel {
+	
+
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+
+	/*Erstellung der notwendigen Attribute
 	 * currentUser speichert den aktuellen Nutzer
 	 */
-	
-	/**
-	 * 
-	 * <code>main</code>: Zentraler Bestandteil. Umschließt alle anderen Panels
-	 */
-	
-	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-	
 	public User currentUser;
 	public User u;
 	int a = 0;
-	
-	/*
-	VerticalPanel main = new VerticalPanel();
-	Button cinemaButton = new Button("Cinema");
-	Button movieButton = new Button("Movie");
-	Button timeslotButton = new Button("Timeslot");
-	Button presentationButton = new Button("Presentation");  */
-	
+
+
 	private VerticalPanel main = new VerticalPanel();
 
-	
 	/**
 	 * 
-	 * @param currentUser 
-	 * Der aktuelle Nutzer (Admin) wird der AdminForm übergeben. So können alle anderen Formen diesen bei Bedarf verwenden.
+	 * @param currentUser Der aktuelle Nutzer (Admin) wird der AdminForm übergeben.
+	 *                    So können alle anderen Formen diesen bei Bedarf verwenden.
 	 * 
 	 */
 	public AdminForm(User currentUser, int a) {
 		this.currentUser = currentUser;
 		this.a = a;
 	}
-	
-	
+
 	/*
-	 * onLoad-Methode: Wird ausgeführt, wenn das Panel, dem Browser hinzugefügt wurde. 
-	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Panel hinzugefügt.
+	 * onLoad-Methode: Wird ausgeführt, wenn das Panel, dem Browser hinzugefügt
+	 * wurde. Die dieser Klasse dazugehörigen grafischen Elemente werden dem Panel
+	 * hinzugefügt.
 	 */
 	public void onLoad() {
-		
+
 		super.onLoad();
 		/*
 		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
@@ -84,48 +76,24 @@ public class AdminForm extends VerticalPanel{
 
 			@Override
 			public void onSuccess(User result) {
-			currentUser = result;
-			VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser, a);
-			main.add(verwaltungsForm);
+				currentUser = result;
+				VerwaltungsForm verwaltungsForm = new VerwaltungsForm(currentUser, a);
+				main.add(verwaltungsForm);
 			}
 		});
-		//Image logo = new Image("Offical_Logo.png");
-		//	main.addStyleName("AdminMain");
-		//	main.add(cinemaButton);
-		//	main.add(movieButton);
-		//	main.add(timeslotButton);
-		//	main.add(presentationButton);
 
-		//	this.add(main);
-		
-		//	RootPanel.get("container").add(main);
-			
+		// Button, dessen ClickEvent zum Admin Mode führt.
+		Button toBesucher = new Button("EditorModus", new ClickHandler() {
 
-			//Button, dessen ClickEvent zum Admin Mode führt.		
-			Button toBesucher = new Button("EditorModus", new ClickHandler() {
-				
-						@Override
-						public void onClick(ClickEvent event) {
-							// TODO Auto-generated method stub
-							Window.Location.replace("/ITP_T4.html");
-						}
-					});
-			main.add(toBesucher);
-			toBesucher.addStyleName("EditorButton");
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Window.Location.replace("/ITP_T4.html");
+			}
+		});
+		main.add(toBesucher);
+		toBesucher.addStyleName("EditorButton");
 		this.add(main);
 	}
 
-	private class CinemaHandler implements ClickHandler {
-
-		@Override
-		public void onClick(ClickEvent event) {
-			
-
-			
-		}
-		
-	}
-	
-	
-	
 }

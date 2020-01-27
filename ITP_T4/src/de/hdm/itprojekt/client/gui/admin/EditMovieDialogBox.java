@@ -20,23 +20,21 @@ import de.hdm.itprojekt.shared.bo.User;
 
 public class EditMovieDialogBox extends DialogBox {
 	
-VerticalPanel content = new VerticalPanel();
+
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
+	
+	VerticalPanel content = new VerticalPanel();
 	
 	Movie movie = null; 
 	User user = null;
 	Movie m = null;
-	
-	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-	
 	Button close = new Button ("X");
-	
 	Label cinema = new Label("Movie");
-	
 	TextBox box = new TextBox();
-	
-	
-	
-	
 	Button safe = new Button("save");
 	
 	

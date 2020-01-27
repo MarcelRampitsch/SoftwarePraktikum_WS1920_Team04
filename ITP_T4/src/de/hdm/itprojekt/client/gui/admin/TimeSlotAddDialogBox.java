@@ -26,22 +26,22 @@ import de.hdm.itprojekt.shared.bo.User;
  */
 public class TimeSlotAddDialogBox extends DialogBox {
 	
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration() ;
+	
+	//Erstellung aller notwendigen Widgets sowie Attribute
 	HorizontalPanel timeslotcontent = new HorizontalPanel();
-	
 	VerticalPanel content = new VerticalPanel();
-	
 	Label timeslot = new Label("Timeslot:");
-	
 	TextBox timeslotbox = new TextBox();
-	
 	Button close = new Button("X");
-	
 	Button safe = new Button("save");
-	
 	User user = null;
 	
 	
-	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration() ;
 
 	
 	

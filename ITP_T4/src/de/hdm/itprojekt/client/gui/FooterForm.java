@@ -11,6 +11,12 @@ import com.google.gwt.user.client.ui.Label;
  * 
  */
 public class FooterForm extends HorizontalPanel {
+	
+	/*
+	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
+	 * Die dieser Klasse dazugehörigen grafischen Elemente werden dem Widget hinzugefügt.
+	 * 
+	 */
 
 	public void onLoad() {
 		

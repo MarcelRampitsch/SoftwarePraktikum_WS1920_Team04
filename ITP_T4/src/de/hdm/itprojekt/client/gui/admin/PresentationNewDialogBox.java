@@ -27,97 +27,102 @@ import de.hdm.itprojekt.shared.bo.Timeslot;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class PresentationNewDialogBox extends DialogBox {
-	
+
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-    
+
+	//Widgets + Attribute
 	VerticalPanel content = new VerticalPanel();
-    HorizontalPanel buttoncontent  = new HorizontalPanel();
-    
-    Label namebox = new Label("Name");
-    TextBox namefield = new TextBox();
-    
-    User user = null;
-    Vector <Cinema> cine = null;
-    Vector <Movie> movie = null;
-    Vector <Timeslot> timeslot = null;
-    
-    Button yes = new Button("save");
-    Button no = new Button("X");
-    
-    ListBox cinemaBox = new ListBox();
-    ListBox movieBox = new ListBox();
-    ListBox timeslotBox = new ListBox();
-    DatePicker datePicker = new DatePicker();
-    
-    Label pcinemaLabel = new Label("Cinema");
-    Label pmovieLabel = new Label("Movie");
-    Label ptimeslotLabel = new Label("Timeslot");
-    Label dateLabel = new Label("Date");
-    
-    public PresentationNewDialogBox (User user) {
-    	this.user = user;
-    }
-    
-    public void onLoad() {
-    	super.onLoad();
-    	
-    	//CSS StyleNamenVergabe 
-    	yes.addStyleName("presentationNewSaveBox");
-    	no.addStyleName("presentationNewCancelBox");
-    	
-    	buttoncontent.add(no);
-    	no.addClickHandler(new close());
-    	content.add(namebox);
-    	content.add(namefield);
-    	content.add(pcinemaLabel);
-    	content.add(cinemaBox);
-    	content.add(pmovieLabel);
-    	content.add(movieBox);
-    	content.add(dateLabel);
-    	content.add(datePicker);
-    	content.add(ptimeslotLabel);
-    	content.add(timeslotBox);
-    	buttoncontent.add(yes);
-    	yes.addClickHandler(new save());
-    	content.add(buttoncontent);
-    	this.add(content);
-    	
-    	adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
-    		
+	HorizontalPanel buttoncontent = new HorizontalPanel();
+
+	Label namebox = new Label("Name");
+	TextBox namefield = new TextBox();
+
+	User user = null;
+	Vector<Cinema> cine = null;
+	Vector<Movie> movie = null;
+	Vector<Timeslot> timeslot = null;
+
+	Button yes = new Button("save");
+	Button no = new Button("X");
+
+	ListBox cinemaBox = new ListBox();
+	ListBox movieBox = new ListBox();
+	ListBox timeslotBox = new ListBox();
+	DatePicker datePicker = new DatePicker();
+
+	Label pcinemaLabel = new Label("Cinema");
+	Label pmovieLabel = new Label("Movie");
+	Label ptimeslotLabel = new Label("Timeslot");
+	Label dateLabel = new Label("Date");
+
+	public PresentationNewDialogBox(User user) {
+		this.user = user;
+	}
+
+	public void onLoad() {
+		super.onLoad();
+
+		// CSS StyleNamenVergabe
+		yes.addStyleName("presentationNewSaveBox");
+		no.addStyleName("presentationNewCancelBox");
+
+		buttoncontent.add(no);
+		no.addClickHandler(new close());
+		content.add(namebox);
+		content.add(namefield);
+		content.add(pcinemaLabel);
+		content.add(cinemaBox);
+		content.add(pmovieLabel);
+		content.add(movieBox);
+		content.add(dateLabel);
+		content.add(datePicker);
+		content.add(ptimeslotLabel);
+		content.add(timeslotBox);
+		buttoncontent.add(yes);
+		yes.addClickHandler(new save());
+		content.add(buttoncontent);
+		this.add(content);
+
+		adminAdministration.findAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
+
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("was ist falsch geloffen");
 			}
 
-			@Override 
+			@Override
 			public void onSuccess(Vector<Cinema> result) {
 				cinemaBox.addItem("Kein Kino ausgewählt");
-				for (int i = 0; i < result.size(); i++ ) {
+				for (int i = 0; i < result.size(); i++) {
 					cinemaBox.addItem(result.elementAt(i).getName());
 					cine = result;
 				}
 			}
 		});
-    	
-    	adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
-			
+
+		adminAdministration.getAllMovieByUserID(this.user, new AsyncCallback<Vector<Movie>>() {
+
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("was ist falsch geloffen");
 			}
 
-			@Override 
+			@Override
 			public void onSuccess(Vector<Movie> result) {
 				movieBox.addItem("Kein Film ausgewählt");
-				for (int i = 0; i < result.size(); i++ ) {
+				for (int i = 0; i < result.size(); i++) {
 					movieBox.addItem(result.elementAt(i).getName());
 					movie = result;
 				}
 			}
 		});
-    	
-    	adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
-    		
+
+		adminAdministration.getAllTimeslotByUserID(this.user, new AsyncCallback<Vector<Timeslot>>() {
+
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("was ist falsch geloffen");
@@ -125,13 +130,13 @@ public class PresentationNewDialogBox extends DialogBox {
 
 			public void onSuccess(Vector<Timeslot> result) {
 				timeslotBox.addItem("Keine Spielzeit ausgewählt");
-				for (int i = 0; i < result.size(); i++ ) {
+				for (int i = 0; i < result.size(); i++) {
 					timeslotBox.addItem(result.elementAt(i).getTime());
 					timeslot = result;
 				}
 			}
-		});    	
-    } 
+		});
+	}
 
 	/*
 	 * Methode die das Anzeigen der DialogBox realisiert
@@ -140,9 +145,9 @@ public class PresentationNewDialogBox extends DialogBox {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
 		this.center();
-		this.show();	
+		this.show();
 	}
-	
+
 	/*
 	 * Methode die das schließen des Fensters realisiert
 	 */
@@ -153,45 +158,46 @@ public class PresentationNewDialogBox extends DialogBox {
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(false);
 	}
-    
-    
-    private class close implements ClickHandler{
+
+	private class close implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
 			closePresentation();
 		}
-    }
-    
-    private class save implements ClickHandler{
+	}
+
+	private class save implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-		Cinema c = cine.elementAt(cinemaBox.getSelectedIndex()-1);
-		Movie m = movie.elementAt(movieBox.getSelectedIndex()-1);
-		Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex()-1);
-		Date date = new java.sql.Date(datePicker.getValue().getTime());
-		date.after(date);
-		Presentation p = new Presentation(namefield.getText(),c.getId(), m.getId(), user.getId(), t.getId(), date);
-		if(namefield.getText() != null & cinemaBox.getSelectedItemText() != "Kein Kino ausgewählt" & movieBox.getSelectedItemText() !="Kein Film ausgewählt" & timeslotBox.getSelectedItemText() != "Keine Spielzeit ausgewählt") {
-			adminAdministration.addPresentation(p, new AsyncCallback<Presentation>() {
-	
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-	
-				@Override
-				public void onSuccess(Presentation result) {
-					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(user,4);
-					RootPanel.get().add(adminform);
-					closePresentation();
-					
-				}
-			});
+			Cinema c = cine.elementAt(cinemaBox.getSelectedIndex() - 1);
+			Movie m = movie.elementAt(movieBox.getSelectedIndex() - 1);
+			Timeslot t = timeslot.elementAt(timeslotBox.getSelectedIndex() - 1);
+			Date date = new java.sql.Date(datePicker.getValue().getTime());
+			date.after(date);
+			Presentation p = new Presentation(namefield.getText(), c.getId(), m.getId(), user.getId(), t.getId(), date);
+			if (namefield.getText() != null & cinemaBox.getSelectedItemText() != "Kein Kino ausgewählt"
+					& movieBox.getSelectedItemText() != "Kein Film ausgewählt"
+					& timeslotBox.getSelectedItemText() != "Keine Spielzeit ausgewählt") {
+				adminAdministration.addPresentation(p, new AsyncCallback<Presentation>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onSuccess(Presentation result) {
+						RootPanel.get().clear();
+						AdminForm adminform = new AdminForm(user, 4);
+						RootPanel.get().add(adminform);
+						closePresentation();
+
+					}
+				});
+			}
 		}
-		}
-}
+	}
 }

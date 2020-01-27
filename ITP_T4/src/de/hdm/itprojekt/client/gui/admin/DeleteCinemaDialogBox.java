@@ -16,61 +16,63 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class DeleteCinemaDialogBox extends DialogBox {
+
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
+	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
+	
+	//Erstellung der notwendigen Widget sowie Attribute
 	VerticalPanel content = new VerticalPanel();
-	
 	HorizontalPanel horzcontent = new HorizontalPanel();
 
-	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
-
 	Cinema cinema = null;
-	User currentUser = null; 
+	User currentUser = null;
 	Label cinemaLabel = new Label("Cinema wirklich löschen?");
 	CinemaForm cinemaform;
-	Button yes = new Button ("yes");
-	Button no = new Button ("no");
+	Button yes = new Button("yes");
+	Button no = new Button("no");
+
+	
 	
 	public DeleteCinemaDialogBox(Cinema cinema, User currentUser) {
 		this.cinema = cinema;
 		this.currentUser = currentUser;
 	}
-	
+
 	public void onLoad() {
 		super.onLoad();
-		
-		
-		//CSS Stylename Vergabe
+
+		// CSS Stylename Vergabe
 
 		yes.addStyleName("deleteCinemaYesStyle");
 		no.addStyleName("deleteCinemaNoStyle");
-		
-		
+
 		content.add(cinemaLabel);
-		
+
 		horzcontent.add(yes);
 		horzcontent.add(no);
 		content.add(horzcontent);
 		no.addClickHandler(new closeCinemaForm());
 		yes.addClickHandler(new deleteCinema());
-		
+
 		this.add(content);
-		
-		
-		
+
 	}
-	
+
 	/*
 	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
 	 */
-	
+
 	public void openCinemaDelete() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
 		this.center();
-		this.show();	
+		this.show();
 	}
-	
-	
+
 	public void closeCinemaForm() {
 		this.hide();
 		this.clear();
@@ -78,37 +80,36 @@ public class DeleteCinemaDialogBox extends DialogBox {
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(false);
 	}
-	
+
 	/*
 	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
 	 */
-	
-	
-	
+
 	/**
-	 * closeCinemaForm ClickHandler: Wird beim Click auf <code> no </code> Button ausgelöst.
-	 * Der User bestätigt damit, dass das Cinema nicht gelöscht werden soll.
+	 * closeCinemaForm ClickHandler: Wird beim Click auf <code> no </code> Button
+	 * ausgelöst. Der User bestätigt damit, dass das Cinema nicht gelöscht werden
+	 * soll.
 	 */
-	
-    private class closeCinemaForm implements ClickHandler{
-		
+
+	private class closeCinemaForm implements ClickHandler {
+
 		@Override
 		public void onClick(ClickEvent event) {
 			closeCinemaForm();
 		}
 
 	}
-    
-    /**
-	 * deleteCinema ClickHandler: Wird beim Click auf <code> yes </code> Button ausgelöst.
-	 * Der User bestätigt damit, dass das Cinema gelöscht werden soll.
+
+	/**
+	 * deleteCinema ClickHandler: Wird beim Click auf <code> yes </code> Button
+	 * ausgelöst. Der User bestätigt damit, dass das Cinema gelöscht werden soll.
 	 */
-    
-    private class deleteCinema implements ClickHandler{
-		
+
+	private class deleteCinema implements ClickHandler {
+
 		@Override
 		public void onClick(ClickEvent event) {
-			
+
 			adminAdministration.deleteCinema(cinema, new AsyncCallback<Void>() {
 
 				@Override
@@ -116,10 +117,10 @@ public class DeleteCinemaDialogBox extends DialogBox {
 					// TODO Auto-generated method stub
 					closeCinemaForm();
 					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(currentUser,1);
+					AdminForm adminform = new AdminForm(currentUser, 1);
 					RootPanel.get().add(adminform);
 				}
-				
+
 				@Override
 				public void onFailure(Throwable caught) {
 					// TODO Auto-generated method stub
@@ -129,31 +130,5 @@ public class DeleteCinemaDialogBox extends DialogBox {
 		}
 
 	}
-    
-    /**
-	 * CallBack des Clickhandlers <code> deleteCinema ClickHandler </code>
-	 * Bei erfolgreichem Rückruf (onSucess) wird das Cinema Objekt gelöscht. Danach wird die dazugehörige <code> DeleteCinemaDialogBox </code> geschlossen. 
-	 * 
-	 */
-    /**
-	class DeleteCallBack implements AsyncCallback<Void>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			Window.alert("Fehler");
-			
-		}
-
-		@Override
-		public void onSuccess(Void result) {
-			Window.alert("Erfolg");
-			closeCinemaForm();
-
-			
-		}
-    
-
-    
-	}*/
 
 }

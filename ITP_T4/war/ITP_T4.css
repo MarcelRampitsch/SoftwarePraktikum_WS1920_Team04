@@ -186,3 +186,8 @@ button.gwt-Button {
 	box-shadow: 0 0 10px #000000;
 	z-index: 11;
 }
+
+.logo {
+	margin: 10px;
+	padding: 10px;	
+}

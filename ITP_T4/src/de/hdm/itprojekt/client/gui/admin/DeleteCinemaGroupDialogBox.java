@@ -17,41 +17,38 @@ import de.hdm.itprojekt.shared.bo.Cinema;
 import de.hdm.itprojekt.shared.bo.CinemaGroup;
 import de.hdm.itprojekt.shared.bo.User;
 
-
 public class DeleteCinemaGroupDialogBox extends DialogBox {
 
-    VerticalPanel content = new VerticalPanel();
-	
-	HorizontalPanel horzcontent = new HorizontalPanel();
-
+	/**
+	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
+	 * namens <code>adminAdministration</code>.
+	 */
 	AdminAdministrationAsync adminAdministration = ClientSideSettings.getAdminAdministration();
 	
-	User user = null; 
+	VerticalPanel content = new VerticalPanel();
+	HorizontalPanel horzcontent = new HorizontalPanel();
+	User user = null;
 	CinemaGroup cinemaGroup = null;
-
-
-	
 	Label cinemaLabel = new Label("CinemaGroup wirklich löschen?");
+	Button yes = new Button("yes");
+	Button no = new Button("no");
 	
-	Button yes = new Button ("yes");
-	Button no = new Button ("no");
-	
+
 	public DeleteCinemaGroupDialogBox(CinemaGroup cinemaGroup, User user) {
-		this.cinemaGroup=cinemaGroup;
-		this.user=user;
+		this.cinemaGroup = cinemaGroup;
+		this.user = user;
 	}
-	
+
 	public void onLoad() {
 		super.onLoad();
-		
-		//CSS Stylename Vergabe
+
+		// CSS Stylename Vergabe
 
 		yes.addStyleName("deleteCinemaGroupYesStyle");
 		no.addStyleName("deleteCinemaGroupNoStyle");
-		
-		
+
 		content.add(cinemaLabel);
-		
+
 		horzcontent.add(yes);
 		horzcontent.add(no);
 		content.add(horzcontent);
@@ -59,19 +56,18 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		yes.addClickHandler(new deleteCinemaGroup());
 		this.add(content);
 	}
-	
+
 	/*
 	 * Methoden zum Öffnen und Schließen der DeleteCinemaDialogBox.
 	 */
-	
+
 	public void openCimemaGroupDelete() {
 		this.setGlassEnabled(true);
 		this.setAnimationEnabled(true);
 		this.center();
-		this.show();	
+		this.show();
 	}
-	
-	
+
 	public void closeCinemaGroupForm() {
 		this.hide();
 		this.clear();
@@ -79,44 +75,42 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(false);
 	}
-	
+
 	/*
 	 * Ab hier folgen alle CLICKHANDLER und CALLBACKS dieser Klasse!
 	 */
-	
-	
-	
+
 	/**
-	 * closeCinemaGroupForm ClickHandler: Wird beim Click auf <code> no </code> Button ausgelöst.
-	 * Der User bestätigt damit, dass die CinemaGroup nicht gelöscht werden soll.
+	 * closeCinemaGroupForm ClickHandler: Wird beim Click auf <code> no </code>
+	 * Button ausgelöst. Der User bestätigt damit, dass die CinemaGroup nicht
+	 * gelöscht werden soll.
 	 */
-	
-	
-	
-    private class closeCinemaGroupForm implements ClickHandler{
-		
+
+	private class closeCinemaGroupForm implements ClickHandler {
+
 		@Override
 		public void onClick(ClickEvent event) {
-			closeCinemaGroupForm();	
+			closeCinemaGroupForm();
 		}
 	}
-    
-    /**
-	 * deleteCinemaGroup ClickHandler: Wird beim Click auf <code> yes </code> Button ausgelöst.
-	 * Der User bestätigt damit, dass die CinemaGroup gelöscht werden soll.
+
+	/**
+	 * deleteCinemaGroup ClickHandler: Wird beim Click auf <code> yes </code> Button
+	 * ausgelöst. Der User bestätigt damit, dass die CinemaGroup gelöscht werden
+	 * soll.
 	 */
-    
-    private class deleteCinemaGroup implements ClickHandler{
-		
+
+	private class deleteCinemaGroup implements ClickHandler {
+
 		@Override
 		public void onClick(ClickEvent event) {
-			
+
 			adminAdministration.deleteCinemaGroup(cinemaGroup, new AsyncCallback<Void>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
 				@Override
@@ -124,40 +118,14 @@ public class DeleteCinemaGroupDialogBox extends DialogBox {
 					// TODO Auto-generated method stub
 					closeCinemaGroupForm();
 					RootPanel.get().clear();
-					AdminForm adminform = new AdminForm(user,0);
+					AdminForm adminform = new AdminForm(user, 0);
 					RootPanel.get().add(adminform);
-					
+
 				}
 			});
 
-			
 		}
 
 	}
-    
-    /**
-   	 * CallBack des Clickhandlers <code> deleteCinemaGroup ClickHandler </code>
-   	 * Bei erfolgreichem Rückruf (onSucess) wird das CinemaGroup Objekt gelöscht. Danach wird die dazugehörige <code> DeleteCinemaGroupDialogBox </code> geschlossen. 
-   	 * 
-   	 */
-  /* 	class DeleteCallBack implements AsyncCallback<Void>{
 
-   		@Override
-   		public void onFailure(Throwable caught) {
-   			Window.alert("Fehler");
-   			
-   		}
-
-   		@Override
-   		public void onSuccess(Void result) {
-   			Window.alert("Erfolg");
-   			closeCinemaGroupForm();
-
-   			
-   		}
-       
-
-       
-   	} */
-    
 }
