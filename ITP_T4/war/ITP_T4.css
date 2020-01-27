@@ -29,8 +29,10 @@
 
 
 .logo {
+	max-width: 100%;
+	height: auto;
 	margin: 10px;
-	padding: 10px;	
+	padding: 10px;
 }
 
 .searchButtonStyle:hover {
@@ -121,6 +123,7 @@ button.gwt-Button {
 	-webkit-box-shadow: 0 0 10px #000000;
 	box-shadow: 0 0 10px #000000;
 	background: white;
+	border-radius: 3px;
 }
 
 .toolbar-button {
