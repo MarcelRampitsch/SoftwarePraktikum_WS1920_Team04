@@ -105,6 +105,7 @@ public class NewSurveyForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		inhalt.add(zurueckButton);
+		zurueckButton.addStyleName("backButtonStyle");
 		zurueckButton.addClickHandler(new BackHandler());
 		inhalt.add(name);
 		inhalt.add(umfrageNameBox);
@@ -120,8 +121,10 @@ public class NewSurveyForm extends VerticalPanel {
 		inhalt.add(spielzeit);
 		inhalt.add(spielzeitDropBox);
 		inhalt.add(vorstellungSuchenButton);
+		vorstellungSuchenButton.addStyleName("searchButtonStyle");
 		inhalt.add(vorstellungenDropBox);
 		inhalt.add(umfrageSichernButton);
+		umfrageSichernButton.addStyleName("saveButtonStyle");
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
 
@@ -218,19 +221,19 @@ public class NewSurveyForm extends VerticalPanel {
 			Presentation p = new Presentation(umfrageNameBox.getText(), c.getId(), m.getId(), user.getId(), t.getId(),
 					date);
 			/*
-			 * If Else Abfrage: Für den Fall, dass bei einem Feld kein Wert ausgewählt wurde, wird eine entsprechende Fehlermeldung ausgegeben.
+			 * If Else Abfrage: Fï¿½r den Fall, dass bei einem Feld kein Wert ausgewï¿½hlt wurde, wird eine entsprechende Fehlermeldung ausgegeben.
 			 */
 			if(kinogruppeDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Kinogruppe auswählen");
+				Window.alert("Bitte Kinogruppe auswï¿½hlen");
 			}
 			else if(kinoDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Kino auswählen");
+				Window.alert("Bitte Kino auswï¿½hlen");
 			}
 			else if(filmDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Film auswählen");
+				Window.alert("Bitte Film auswï¿½hlen");
 			}
 			else if(spielzeitDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Spielzeit auswählen");
+				Window.alert("Bitte Spielzeit auswï¿½hlen");
 			}
 			else {
 			 

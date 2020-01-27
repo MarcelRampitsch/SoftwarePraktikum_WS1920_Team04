@@ -88,8 +88,8 @@ public class GroupEditForm extends VerticalPanel {
 		
 		// Aufbau des GroupEditForm
 		main.add(back);
+		back.addStyleName("backButtonStyle");
 		back.addClickHandler(new backHandler());
-		
 		main.add(groupName);
 		main.add(groupBox);
 		main.add(memberNames);
@@ -98,8 +98,11 @@ public class GroupEditForm extends VerticalPanel {
 		listPanel.add(memberList);
 		main.add(listPanel);
 		searchPanel.add(search);
+		search.addStyleName("searchButtonStyle");
 		listPanel.add(delete);
+		delete.addStyleName("deleteButtonStyle");
 		main.add(save);
+		save.addStyleName("saveButtonStyle");
 		groupBox.setText(g.getName());
 		
 		//Hinzufuegen der ClickHandler

@@ -33,6 +33,12 @@
 	padding: 10px;	
 }
 
+.searchButtonStyle:hover {
+	background: #1c59ae;
+	color: #f2f2f2;
+	transition: 0.5s;
+}
+
 .yesButtonStyle:hover {
 	background: #169f11;
 	color: #f2f2f2;
@@ -70,7 +76,7 @@
 }
 
 .addButtonStyle:hover {
-	background: #169f11;
+	background: #1c59ae;
 	color: #f2f2f2;
 	transition: 0.5s;	
 }
