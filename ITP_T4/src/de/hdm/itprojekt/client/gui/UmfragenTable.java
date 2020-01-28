@@ -65,7 +65,7 @@ public class UmfragenTable extends VerticalPanel {
 		Window.alert(""+eintrag.size());
 		this.s = s;
 		for(SurveyEntry se : this.eintrag) {
-			new PrepareSurveyEntry(se, CellData, this);
+			new PrepareSurveyEntry(se, CellData, this, user);
 			
 		}
 	}
