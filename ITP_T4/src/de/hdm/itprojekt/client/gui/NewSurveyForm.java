@@ -294,6 +294,7 @@ public class NewSurveyForm extends VerticalPanel {
 
 						@Override
 						public void onSuccess(SurveyEntry result) {
+							RootPanel.get().clear();
 							EditorForm editform = new EditorForm(user, Gruppen);
 							RootPanel.get().add(editform);
 
@@ -304,7 +305,7 @@ public class NewSurveyForm extends VerticalPanel {
 					});
 					}
 			});
-			RootPanel.get().clear();
+			//RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
 		}
