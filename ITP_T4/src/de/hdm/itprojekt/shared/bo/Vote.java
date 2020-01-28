@@ -48,8 +48,7 @@ public class Vote extends BusinessObject {
 	/*
 	 * Default Konstruktor
 	 */
-	public Vote() {
-		
+	public Vote() {	
 	}
 	
 	/*
