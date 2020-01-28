@@ -179,9 +179,10 @@ public class UmfragenTable extends VerticalPanel {
 				}
 
 				@Override
-				public void onSuccess(Vote result) {					
-					consoleLog("You voted "+ result.getVoteResult());
-					Window.alert("You voted "+ result.getVoteResult() );
+				public void onSuccess(Vote result) {
+					main.clear();
+					UmfragenTable form = new UmfragenTable(user,eintrag,s);
+					RootPanel.get().add(form);
 				}
 				
 			});

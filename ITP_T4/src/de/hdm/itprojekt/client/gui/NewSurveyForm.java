@@ -58,7 +58,7 @@ public class NewSurveyForm extends VerticalPanel {
 	private Vector<Cinema> cine = null;
 	private Vector<Movie> movie = null;
 	private Vector<Timeslot> timesl = null;
-	private Vector<Presentation> prese = null;
+	private Vector<Presentation> prese = new Vector<Presentation>();
 
 	ListDataProvider<SurveyEntry> dataProvider;
 
@@ -72,7 +72,7 @@ public class NewSurveyForm extends VerticalPanel {
 	/*
 	 * Erstellung der Widgets
 	 */
-	Button zurueckButton = new Button("Zurueck");
+	Button zurueckButton = new Button("<--");
 	
 	Label name = new Label("Bitte Name der Umfrage eingeben:");
 	TextBox umfrageNameBox = new TextBox();
@@ -252,11 +252,15 @@ public class NewSurveyForm extends VerticalPanel {
 						Window.alert("Es konnte keine Vorstellung mit diesen Daten gefunden werden");
 					}
 					else {
-						for (int i = 0; i < result.size(); i++) {
-							vorstellungenDropBox.addItem(result.elementAt(i).getName());
-							prese = result;
-						}
+						prese.add(result.elementAt(0));
+						kinogruppeDropBox.setSelectedIndex(-1) ;
+						kinoDropBox.setSelectedIndex(-1);
+						filmDropBox.setSelectedIndex(-1);
+						spielzeitDropBox.setSelectedIndex(-1);
+						
+							
 					}
+					
 				}
 			});
 			}
@@ -272,6 +276,8 @@ public class NewSurveyForm extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			if(prese.size()!=0) {
+			
 			Survey s = new Survey(umfrageNameBox.getText(), user.getId(),group.getId());
 			editorAdministration.createSurvey(s, new AsyncCallback<Survey>(){
 
@@ -285,7 +291,11 @@ public class NewSurveyForm extends VerticalPanel {
 				public void onSuccess(Survey result) {
 						
 					
-					SurveyEntry se = new SurveyEntry(result.getId(),"Hier sollte die VeranstaltungsID stehen!" );
+					
+				
+					for(int i=0; i<prese.size(); i++) {
+						SurveyEntry se = new SurveyEntry(0,null,result.getId(),prese.elementAt(i).getId());
+					
 					editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
 
 						public void onFailure(Throwable caught) {
@@ -304,10 +314,14 @@ public class NewSurveyForm extends VerticalPanel {
 						}
 					});
 					}
+					}
 			});
 			//RootPanel.get().clear();
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
+			}else {
+				Window.alert("oweufh");
+			}
 		}
 	}
 }

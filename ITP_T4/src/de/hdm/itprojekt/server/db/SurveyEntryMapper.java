@@ -140,7 +140,7 @@ public class SurveyEntryMapper {
 
 				if (rs.next()) {
 					
-					return new SurveyEntry(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
+					return new SurveyEntry(rs.getInt("surveyEntryID"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
 				
 				}
 				

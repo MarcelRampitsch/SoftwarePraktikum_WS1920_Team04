@@ -102,7 +102,7 @@ public class PresentationMapper {
 		Vector<Presentation> result = new Vector<Presentation>();
 		try {
 			PreparedStatement getAllPresentationBySearchCriteria = con
-					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.presentation"
+					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.presentation "
 							+ "WHERE date=? AND cinemaID=? AND movieID=? AND timeslotID=?");
 			getAllPresentationBySearchCriteria.setDate(1, p.getDate());
 			getAllPresentationBySearchCriteria.setInt(2, p.getCinemaID());
