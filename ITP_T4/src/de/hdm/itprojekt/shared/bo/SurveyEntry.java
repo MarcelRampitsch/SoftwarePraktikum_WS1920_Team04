@@ -8,6 +8,7 @@ public class SurveyEntry extends BusinessObject {
 	
 	private int surveyID;
 	private int presentationID;
+	private int result;
 	
 	// TEST !!!!
 			private String name;
@@ -15,6 +16,13 @@ public class SurveyEntry extends BusinessObject {
 			private int userID;
 	//TEST !!!
 
+	public SurveyEntry(int id, int surveyID, int result) {
+		super(id);
+		this.surveyID = surveyID;
+		this.result = result;
+				
+	}		
+			
 	public SurveyEntry(int id, Timestamp creationDate, int surveyID, int presentationID) {
 		super(id, creationDate);
 		this.surveyID = surveyID;
@@ -45,6 +53,14 @@ public class SurveyEntry extends BusinessObject {
 	
 	public void setPresentationID(int presentationID) {
 		this.presentationID = presentationID;
+	}
+	
+	public int getResult() {
+		return result;
+	}
+	
+	public void setResult(int result) {
+		this.result = result;
 	}
 	
 }

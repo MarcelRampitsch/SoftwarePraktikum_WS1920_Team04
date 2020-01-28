@@ -12,8 +12,17 @@ private static final long serialversionUID = 1l;
 	//Fremdschl�sselattribute
 	private int userID;
 	private int groupID;
+	private int round;
 	
 	//Konstruktor
+	public Survey(int id, Timestamp creationDate, String name, int userID, int groupID, int round) {
+		super(id, creationDate);
+		this.name = name;
+		this.userID = userID;
+		this.groupID = groupID;
+		this.round = round;
+		}
+	
 	public Survey(int id, Timestamp creationDate, String name, int userID, int groupID) {
 		super(id, creationDate);
 		this.name = name;
@@ -51,5 +60,11 @@ private static final long serialversionUID = 1l;
 	}
 	public void setGroupID(int groupID) {
 		this.groupID = groupID;
+	}
+	public int getRound() {
+		return round;
+	}
+	public void setRound(int round) {
+		this.round = round;
 	}
 }

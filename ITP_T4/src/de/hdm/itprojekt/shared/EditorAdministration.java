@@ -154,6 +154,8 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Umfrageeintr�ge anhand der PresentationID.
 	public void deleteAllSurveyEntryByPresentationID(Presentation p) throws IllegalArgumentException;
 	
+	public Vector<SurveyEntry> secondVoteRound (Vector <SurveyEntry> se) throws IllegalArgumentException;
+	
 
 	// Vote Methoden
 	

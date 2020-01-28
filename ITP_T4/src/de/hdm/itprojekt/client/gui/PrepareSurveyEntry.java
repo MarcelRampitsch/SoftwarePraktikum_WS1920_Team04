@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -23,6 +24,7 @@ import de.hdm.itprojekt.shared.bo.Movie;
 import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.SurveyEntry;
 import de.hdm.itprojekt.shared.bo.Timeslot;
+import de.hdm.itprojekt.shared.bo.User;
 import de.hdm.itprojekt.shared.bo.Vote;
 
 public class PrepareSurveyEntry {
@@ -35,6 +37,7 @@ public class PrepareSurveyEntry {
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
 	//Erstellung der notwendigen Widgets und Variablen
+	User user = new User();
 	CinemaGroup cg = new CinemaGroup();
 	Cinema c = new Cinema();
 	Movie m = new Movie();
@@ -42,9 +45,10 @@ public class PrepareSurveyEntry {
 	Presentation p = new Presentation();
 //	String date = new String();
 	Vote v = new Vote();
+	int voteResulte = 0;
 	SafeHtmlBuilder shb = new SafeHtmlBuilder();
 	
-	
+	List<SurveyEntry> UmfragenEintrag;
 	SurveyEntry se;
 	List<SafeHtml> data;
 	int outstandingCalls = 4;
@@ -56,10 +60,11 @@ public class PrepareSurveyEntry {
 		
 	}
 	
-	public PrepareSurveyEntry (SurveyEntry se, List<SafeHtml> data, UmfragenTable ut) {
+	public PrepareSurveyEntry (SurveyEntry se, List<SafeHtml> data, UmfragenTable ut, User user) {
 		this.se = se;
 		this.data = data;
 		this.ut = ut;
+		this.user = user;
 		loadData(se);
 	}
 	
@@ -141,7 +146,6 @@ public class PrepareSurveyEntry {
 		@Override
 		public void onSuccess(Vector <Vote> result) {
 			votes = result;
-			Window.alert(result.size()+ "");
 			createSafeHtml();
 			
 		}
@@ -165,6 +169,14 @@ public class PrepareSurveyEntry {
 		boolean voted = false;
 		Vote vote =null;
 		
+		for (int i = 0; i < votes.size(); i++) {
+			if(votes.elementAt(i).getVoteResult()==1) {
+			voteResulte += 1;
+			}else {
+			voteResulte -= 1;	
+			}
+		}
+		
 		if(votes == null) {
 			
 
@@ -176,6 +188,7 @@ public class PrepareSurveyEntry {
 			}
 		}
 		}
+		shb.appendHtmlConstant("<div ");
 		shb.appendHtmlConstant("<div data-userID=\""+ut.user.getId()+"\" data-seID=\""+se.getId()+ "\" >");
 		// Kinoteil des SurvyEntrys
 		shb.appendHtmlConstant("<div>");
@@ -192,7 +205,7 @@ public class PrepareSurveyEntry {
 		// Zeit des SurvyEntrys	
 		shb.appendHtmlConstant("<div>");
 		shb.appendEscaped(p.getDate().toString());
-		shb.appendEscaped(t.getTime());
+		shb.appendEscaped(" um " + t.getTime());
 		shb.appendHtmlConstant("</div>");
 		
 		//Ergebniss des SurvyEntrys
@@ -226,7 +239,10 @@ public class PrepareSurveyEntry {
 		shb.appendHtmlConstant("<input type='radio' name='"+se.getId()+"'>");
 		//shb.appendHtmlConstant(rb_nein.toString());
 		shb.appendHtmlConstant(save.toString());
-		
+		shb.appendHtmlConstant("</div>");
+		shb.appendHtmlConstant("<div>");
+		shb.appendHtmlConstant("The vote result is " + voteResulte);
+		shb.appendHtmlConstant("</div>");
 		shb.appendHtmlConstant("</div>");
 		data.add(shb.toSafeHtml());
 		ut.updateTable();
@@ -237,7 +253,6 @@ public class PrepareSurveyEntry {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			//Window.alert("" + se.getId());
 		}
 	}
 }

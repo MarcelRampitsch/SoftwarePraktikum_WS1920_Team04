@@ -69,7 +69,7 @@ public class SurveyMapper {
 			ResultSet rs = findBySurveyID.executeQuery();
 
 			s = new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"), rs.getInt("userID"),
-					rs.getInt("groupID"));
+					rs.getInt("groupID"),rs.getInt("round"));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class SurveyMapper {
 			while (rs.next()) {
 				// Ergebnis-Tupel in Objekt umwandeln
 				s = new Survey(rs.getInt("surveyID"), rs.getTimestamp("creationDate"), rs.getString("name"),
-						rs.getInt("userID"), rs.getInt("groupID"));
+						rs.getInt("userID"), rs.getInt("groupID"), rs.getInt("round"));
 
 				// Objekt in einen Ergebinsvektor übergeben
 				result.addElement(s);
@@ -189,9 +189,11 @@ public class SurveyMapper {
 		Connection con = DBConnection.getConnection();
 
 		try {
-			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET name=?;");
+			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.survey SET name=?, round=? WHERE surveyID?;");
 
 			update.setString(1, survey.getName());
+			update.setInt(2, survey.getRound());
+			update.setInt(3, survey.getId());
 
 			update.executeUpdate();
 
@@ -204,7 +206,7 @@ public class SurveyMapper {
 
 			if (rs.next()) {
 				return new Survey(rs.getInt("id"), rs.getTimestamp("creationDate"), rs.getString("name"),
-						rs.getInt("userID"), rs.getInt("groupID"));
+						rs.getInt("userID"), rs.getInt("groupID"),rs.getInt("round"));
 			}
 
 		} catch (SQLException e) {

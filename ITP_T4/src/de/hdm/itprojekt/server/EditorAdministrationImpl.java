@@ -2,6 +2,7 @@ package de.hdm.itprojekt.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.EditorAdministration;
 import de.hdm.itprojekt.shared.bo.Cinema;
@@ -442,5 +443,31 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		rs = cMapper.findallCinemabyUserID(u);
 		return rs;
 	}
-
+	
+	public Vector<SurveyEntry> secondVoteRound(Vector <SurveyEntry> se) throws IllegalArgumentException{
+		Vector<SurveyEntry> newSe = new Vector<SurveyEntry>();
+		Vector<SurveyEntry> topVotes;
+		Vector<Vote> vote = null;
+		int g = 0;
+		
+		for (int i = 0; i < se.size(); i++) {
+			vote = vMapper.findAllVoteBySurveyEntryID(se.elementAt(i).getId());
+			for (int j = 0; j < vote.size(); j++) {
+				if(vote.elementAt(j).getVoteResult()==1) {
+				g += 1;
+				}
+				else {
+				g -= 1;
+				}
+			}
+		SurveyEntry entry = new SurveyEntry(se.elementAt(i).getId(), se.elementAt(i).getSurveyID(), g);
+		newSe.add(entry);
+		}
+		
+		for (int i = 0; i < newSe.size(); i++) {
+				
+			}
+		
+		return newSe;
+	}
 }
