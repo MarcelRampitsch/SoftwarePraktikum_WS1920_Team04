@@ -249,7 +249,7 @@ public class SurveyEntryMapper {
 		  try {
 				 
 			  PreparedStatement deleteAllByPresentationID = con
-					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE presentationID=?;");
+					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE presentationID=?");
 				 
 			  deleteAllByPresentationID.setInt(1, p.getId());
 			  deleteAllByPresentationID.executeUpdate();

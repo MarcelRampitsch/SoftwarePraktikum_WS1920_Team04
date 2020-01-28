@@ -115,6 +115,10 @@ public interface EditorAdministrationAsync {
 	void deleteAllSurveyEntryBySurveyID(Survey s, AsyncCallback<Void> callback);
 
 	void deleteAllSurveyEntryByPresentationID(Presentation p, AsyncCallback<Void> callback);
+	
+	void secondVoteRound(Vector<SurveyEntry> se, AsyncCallback<Vector<SurveyEntry>> callback);
+	
+	
 
 	// Vote
 	void createVote(Vote v, AsyncCallback<Vote> callback);
@@ -130,6 +134,7 @@ public interface EditorAdministrationAsync {
 	void deleteByVoteID(Vote v, AsyncCallback<Void> callback);
 
 	void deleteAllBySurveyEntryID(Vote v, AsyncCallback<Void> callback);
+
 
 	/*
 	 * 

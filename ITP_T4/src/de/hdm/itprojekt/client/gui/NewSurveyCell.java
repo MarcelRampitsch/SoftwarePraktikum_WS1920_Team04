@@ -39,7 +39,7 @@ public class NewSurveyCell extends AbstractCell<SurveyEntry> {
 		shb = sb;
 		
 		shb.appendHtmlConstant("<div>");
-		shb.appendHtmlConstant("<Umfrageeintr�ge:>");
+		shb.appendHtmlConstant("<Surveyentry:>");
 		
 		editorAdministration.getCinemaBySurveyEntry(value, new AsyncCallback<Cinema>() {
 			
