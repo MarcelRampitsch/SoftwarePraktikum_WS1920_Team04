@@ -16,7 +16,7 @@ public class DBConnection {
 	private static Connection con = null;
 
 	// AnmeldeName in MySQL-Workbench(local)-->root, Passwort dazu-->passwort
-	private static String localUrl = "jdbc:mysql://127.0.0.1:3306/?user=root&password=password&useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static String localUrl = "jdbc:mysql://35.198.110.129:3306/?user=root&password=password&useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 	private static String googleUrl = "";
 

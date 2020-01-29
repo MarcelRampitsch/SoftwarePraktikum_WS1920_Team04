@@ -20,6 +20,7 @@ import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -41,8 +42,6 @@ public class UmfragenTable extends VerticalPanel {
 	   */
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 
-
-	Button b= new Button("X");
 	User user = null;
 	List<SurveyEntry> eintrag;
 	
@@ -50,9 +49,11 @@ public class UmfragenTable extends VerticalPanel {
 	List<SafeHtml> CellData = new Vector<SafeHtml>();
 	Survey s = null;
 	
-	Button back = new Button("back");
+	Button back = new Button("<-");
 	Button secondVote = new Button("Start the second vote round");
 	Label name = new Label();
+	Button deleteSurvey = new Button("X");
+	HorizontalPanel surveyPanel = new HorizontalPanel();
 	UmfragenCell2 cell = new UmfragenCell2();
 	CellList<SafeHtml> list = new CellList<SafeHtml>(cell);
 	VerticalPanel main = new VerticalPanel();
@@ -88,7 +89,10 @@ public class UmfragenTable extends VerticalPanel {
 		name.setText(s.getName());
 		main.add(back);
 		back.addStyleName("backButtonStyle");
-		main.add(name);
+		surveyPanel.add(name);
+		surveyPanel.add(deleteSurvey);
+		deleteSurvey.addClickHandler(new deleteSurveyHandler());
+		main.add(surveyPanel);
 		secondVote.addClickHandler(new secondVoteHandler());
 		if(s.getRound()==1 && user.getId()==s.getUserID()) {
 		main.add(secondVote);
@@ -117,14 +121,11 @@ public class UmfragenTable extends VerticalPanel {
 		}
 	}
 	
-	private class secondVoteHandler implements ClickHandler{
+	private class deleteSurveyHandler implements ClickHandler{
 
 		@Override
 		public void onClick(ClickEvent event) {
-			for (int i = 0; i < eintrag.size(); i++) {
-			entrys.add(eintrag.get(i));
-			}
-			editorAdministration.secondVoteRound(entrys, new AsyncCallback<Vector<SurveyEntry>>() {
+			editorAdministration.deleteSurveyBySurveyID(s, new AsyncCallback<Void>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
@@ -133,12 +134,37 @@ public class UmfragenTable extends VerticalPanel {
 				}
 
 				@Override
-				public void onSuccess(Vector<SurveyEntry> result) {
-					main.clear();
-					UmfragenTable form = new UmfragenTable(user, eintrag, s);
+				public void onSuccess(Void result) {
+					RootPanel.get().clear();
+					EditorForm form = new EditorForm(user);
 					RootPanel.get().add(form);
 				}
 			});
+		}
+	}
+	
+	private class secondVoteHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			for (int i = 0; i < eintrag.size(); i++) {
+			entrys.add(eintrag.get(i));
+			}
+//			editorAdministration.secondVoteRound(entrys, new AsyncCallback<Vector<SurveyEntry>>() {
+//
+//				@Override
+//				public void onFailure(Throwable caught) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//
+//				@Override
+//				public void onSuccess(Vector<SurveyEntry> result) {
+//					main.clear();
+//					UmfragenTable form = new UmfragenTable(user, eintrag, s);
+//					RootPanel.get().add(form);
+//				}
+//			});
 		}
 	}
 	
