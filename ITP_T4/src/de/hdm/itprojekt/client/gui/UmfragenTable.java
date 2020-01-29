@@ -62,7 +62,7 @@ public class UmfragenTable extends VerticalPanel {
 	public UmfragenTable(User user, List<SurveyEntry> eintrag, Survey s) {
 		this.user = user;
 		this.eintrag = eintrag;	
-		Window.alert(""+eintrag.size());
+//		Window.alert(""+eintrag.size());
 		this.s = s;
 		for(SurveyEntry se : this.eintrag) {
 			new PrepareSurveyEntry(se, CellData, this, user);
@@ -88,7 +88,7 @@ public class UmfragenTable extends VerticalPanel {
 		main.add(list);
 		back.addClickHandler(new backHandler());
 		this.add(main);
-		Window.alert("" + eintrag.get(0).getId());
+//		Window.alert("" + eintrag.get(0).getId());
 		list.setRowCount(CellData.size(), true);
 		list.setRowData(0, CellData);
 	}

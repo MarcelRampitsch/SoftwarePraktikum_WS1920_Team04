@@ -74,28 +74,28 @@ public class NewSurveyForm extends VerticalPanel {
 	 */
 	Button zurueckButton = new Button("<--");
 	
-	Label name = new Label("Bitte Name der Umfrage eingeben:");
+	Label name = new Label("Enter a surveyname:");
 	TextBox umfrageNameBox = new TextBox();
 
-	Label datum = new Label("Datum auswaehlen:");
+	Label datum = new Label("Select date:");
 	DatePicker datumAuswahlPicker = new DatePicker();
 
-	Label kinogruppe = new Label("Kinogruppe auswaehlen");
+	Label kinogruppe = new Label("Select cinemagroup:");
 	ListBox kinogruppeDropBox = new ListBox();
 	
-	Label kino = new Label("Kino auswaehlen:");
+	Label kino = new Label("Select cinema:");
 	ListBox kinoDropBox = new ListBox();
 
-	Label film = new Label("Film auswaehlen:");
+	Label film = new Label("Select movie:");
 	ListBox filmDropBox = new ListBox();
 
-	Label spielzeit = new Label("Uhrzeit auswaehlen:");
+	Label spielzeit = new Label("Select timeslot:");
 	ListBox spielzeitDropBox = new ListBox();
 
-	Button vorstellungSuchenButton = new Button("Vorstellung suchen");
+	Button vorstellungSuchenButton = new Button("Add presentation");
 	ListBox vorstellungenDropBox = new ListBox();
 	
-	Button umfrageSichernButton = new Button("Umfrage speichern");
+	Button umfrageSichernButton = new Button("Save survey");
 
 	/*
 	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
@@ -109,7 +109,7 @@ public class NewSurveyForm extends VerticalPanel {
 		zurueckButton.addClickHandler(new BackHandler());
 		inhalt.add(name);
 		inhalt.add(umfrageNameBox);
-		umfrageNameBox.getElement().setPropertyString("placeholder", "Umfragename...");
+		umfrageNameBox.getElement().setPropertyString("placeholder", "Surveyname...");
 		inhalt.add(datum);
 		inhalt.add(datumAuswahlPicker);
 		inhalt.add(kinogruppe);
@@ -131,7 +131,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllCinemaGroupByUser(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
 			
 			public void onFailure(Throwable caught) {
-				Window.alert("Beim Laden der CinemaGroup ist etwas schief gelaufen");
+				Window.alert("Something went wrong with the loading");
 			}
 			
 			public void onSuccess(Vector<CinemaGroup> result) {
@@ -146,7 +146,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Beim Laden der Kinos ist etwas schief gelaufen");
+				Window.alert("Something went wrong with the loading");
 			}
 
 			public void onSuccess(Vector<Cinema> result) {
@@ -161,7 +161,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllMovieByUser(this.user, new AsyncCallback<Vector<Movie>>() {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Beim Laden der Filme ist etwas schief gelaufen");
+				Window.alert("Something went wrong with the loading");
 			}
 
 			public void onSuccess(Vector<Movie> result) {
@@ -176,7 +176,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllTimeslotByUser(this.user, new AsyncCallback<Vector<Timeslot>>() {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Beim Laden der Timeslots ist etwas schief gelaufen");
+				Window.alert("Something went wrong with the loading");
 			}
 
 			public void onSuccess(Vector<Timeslot> result) {
@@ -224,16 +224,16 @@ public class NewSurveyForm extends VerticalPanel {
 			 * If Else Abfrage: F�r den Fall, dass bei einem Feld kein Wert ausgew�hlt wurde, wird eine entsprechende Fehlermeldung ausgegeben.
 			 */
 			if(kinogruppeDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Kinogruppe ausw�hlen");
+				Window.alert("Please select a cinemagroup");
 			}
 			else if(kinoDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Kino ausw�hlen");
+				Window.alert("Please select a cinema");
 			}
 			else if(filmDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Film ausw�hlen");
+				Window.alert("Please select a movie");
 			}
 			else if(spielzeitDropBox.getSelectedIndex() == -1) {
-				Window.alert("Bitte Spielzeit ausw�hlen");
+				Window.alert("Please select a timeslot");
 			}
 			else {
 			 
@@ -241,7 +241,7 @@ public class NewSurveyForm extends VerticalPanel {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Bei der Suche der Vorstellungen ist etwas schief gelaufen");
+					Window.alert("Something went wrong");
 
 				}
 
@@ -249,7 +249,7 @@ public class NewSurveyForm extends VerticalPanel {
 				public void onSuccess(Vector<Presentation> result) {
 					vorstellungenDropBox.clear();
 					if (result.isEmpty()) {
-						Window.alert("Es konnte keine Vorstellung mit diesen Daten gefunden werden");
+						Window.alert("There is no Presentation with the selection");
 					}
 					else {
 						prese.add(result.elementAt(0));
@@ -289,17 +289,14 @@ public class NewSurveyForm extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Survey result) {
-						
 					
-					
-				
 					for(int i=0; i<prese.size(); i++) {
 						SurveyEntry se = new SurveyEntry(0,null,result.getId(),prese.elementAt(i).getId());
 					
 					editorAdministration.createSurveyEntry(se, new AsyncCallback<SurveyEntry>() {
 
 						public void onFailure(Throwable caught) {
-							Window.alert("Beim Hinzuf�gen des Umfrageeintrages ist etwas schief gelaufen.");
+							Window.alert("Something went wrong");
 						}
 
 						@Override
@@ -307,9 +304,9 @@ public class NewSurveyForm extends VerticalPanel {
 							RootPanel.get().clear();
 							EditorForm editform = new EditorForm(user, Gruppen);
 							RootPanel.get().add(editform);
-
-							List<SurveyEntry> liste = dataProvider.getList();
-							liste.add(se);
+//
+//							List<SurveyEntry> liste = dataProvider.getList();
+//							liste.add(se);
 							Window.alert("Eingabe gesichert");
 						}
 					});
@@ -320,7 +317,7 @@ public class NewSurveyForm extends VerticalPanel {
 			EditorForm ef = new EditorForm(user, Gruppen);
 			RootPanel.get().add(ef);
 			}else {
-				Window.alert("oweufh");
+				Window.alert("Survey has no entry");
 			}
 		}
 	}
