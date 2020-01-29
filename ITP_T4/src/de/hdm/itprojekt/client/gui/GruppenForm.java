@@ -54,8 +54,8 @@ public class GruppenForm extends VerticalPanel {
 	  
 	
 	  Label gruppenerstellung = new Label("Create group:");
-	  Label gruppenname = new Label("Groupname");
-	  Label nickname = new Label("Nickname");
+	  Label gruppenname = new Label("Groupname:");
+	  Label nickname = new Label("Nickname:");
 	  Label gruppenmitglieder = new Label("Groupmember:");
 	
 	  Button back  = new Button("back");

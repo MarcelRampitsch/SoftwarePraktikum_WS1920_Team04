@@ -54,11 +54,11 @@ public class GroupViewForm extends VerticalPanel {
 	List<Survey> Umfragen;
 	List<SurveyEntry> UmfragenEintrag;
 	
-	Button back = new Button("<--");
+	Button back = new Button("back");
 	Label groupNameLabel = new Label();
-	Button newSurveyButton = new Button("Create new Survey:");
+	Button newSurveyButton = new Button("Create survey");
 	Button editGroupButton = new Button("edit");
-	Button deleteGroupButton = new Button("X");
+	Button deleteGroupButton = new Button("delete");
 	CellTable<Survey> table = new CellTable<Survey>();
 	UmfragenCell umfragenCell = new UmfragenCell();
 	CellList<SurveyEntry> cellList = new CellList<SurveyEntry>(umfragenCell);
