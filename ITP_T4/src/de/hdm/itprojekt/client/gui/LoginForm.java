@@ -30,8 +30,8 @@ public class LoginForm extends VerticalPanel {
 	public void onLoad() {
 		//Aufbau des LoginForms sowie styling der Widgets
 		signInLink.setHref(user.getURL());
-		Label welcomeLabel = new Label("Herzlich Willkommen bei Kinofix!");
-		Label txtLabel = new Label("Bitte melden Sie ich sich mit Ihrem Google-Account an, um Kinofix zu nutzen.");
+		Label welcomeLabel = new Label("Welcome to Kinofix!");
+		Label txtLabel = new Label("Please sign in with your Google account to use Kinofix.");
 		HorizontalPanel loginPanel = new HorizontalPanel();
 		welcomeLabel.setStyleName("h1");
 		googleSignIn.setStylePrimaryName("signinwithgoogle");

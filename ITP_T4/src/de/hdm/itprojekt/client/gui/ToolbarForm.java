@@ -27,10 +27,10 @@ public class ToolbarForm extends HorizontalPanel {
 	Anchor logOutLink = new Anchor();
 	
 	Image logo = new Image("/images/kinofixLogo.png");
-	Label l = new HTML("<p>Möchten Sie zurück zum Login?</p><br>");
+	Label l = new HTML("<p>Back to the login screen?</p><br>");
 	
-	Button yB = new Button("Ja");
-	Button nB = new Button("Nein");
+	Button yB = new Button("yes");
+	Button nB = new Button("no");
 	
 	VerticalPanel vp = new VerticalPanel();
 	HorizontalPanel hp = new HorizontalPanel();	
