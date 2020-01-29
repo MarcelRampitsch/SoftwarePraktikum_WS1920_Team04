@@ -53,21 +53,21 @@ public class GruppenForm extends VerticalPanel {
 	  
 	  
 	
-	  Label gruppenerstellung = new Label("Gruppenerstellung:");
-	  Label gruppenname = new Label("Gruppenname");
+	  Label gruppenerstellung = new Label("Create group:");
+	  Label gruppenname = new Label("Groupname");
 	  Label nickname = new Label("Nickname");
-	  Label gruppenmitglieder = new Label("Gruppenmitglieder:");
+	  Label gruppenmitglieder = new Label("Groupmember:");
 	
-	  Button back  = new Button("<--");
+	  Button back  = new Button("back");
 	
 	  TextBox gruppennamebox = new TextBox();
 	  TextBox nicknamebox = new TextBox();
 	  
 	  ListBox mitglieder = new ListBox();
 	  
-	  Button hinzufuegen = new Button("+");
-	  Button loeschen = new Button("X");
-	  Button speichern = new Button("sichern");
+	  Button hinzufuegen = new Button("add");
+	  Button loeschen = new Button("delete");
+	  Button speichern = new Button("save");
 	
 	  GruppenForm gruppenForm = null;
 	

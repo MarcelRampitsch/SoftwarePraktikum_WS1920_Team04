@@ -50,7 +50,7 @@ public class UmfragenTable extends VerticalPanel {
 	List<SafeHtml> CellData = new Vector<SafeHtml>();
 	Survey s = null;
 	
-	Button back = new Button("<-");
+	Button back = new Button("back");
 	Button secondVote = new Button("Start the second vote round");
 	Label name = new Label();
 	UmfragenCell2 cell = new UmfragenCell2();
