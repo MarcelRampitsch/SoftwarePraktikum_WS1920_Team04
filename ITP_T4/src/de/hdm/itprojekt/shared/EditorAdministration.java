@@ -179,7 +179,7 @@ public interface EditorAdministration extends RemoteService {
 	public void deleteByVoteID(Vote v) throws IllegalArgumentException;
 	
 	// L�schen aller Votes anhand der UmfrageeintragID.
-	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException;
+	public void deleteAllBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException;
 
 	
 	

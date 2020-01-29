@@ -18,6 +18,7 @@ import de.hdm.itprojekt.server.db.PresentationMapper;
 import de.hdm.itprojekt.server.db.SurveyEntryMapper;
 import de.hdm.itprojekt.server.db.TimeslotMapper;
 import de.hdm.itprojekt.server.db.UserMapper;
+import de.hdm.itprojekt.server.db.VoteMapper;
 
 
 /**
@@ -34,6 +35,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	private UserMapper uMapper = null; 
 	private GroupMapper gMapper = null;
 	private SurveyEntryMapper seMapper = null;
+	private VoteMapper vMapper = null;
 
     //	Default-Konstruktor
 	public AdminAdministrationImpl() throws IllegalArgumentException{
@@ -49,7 +51,7 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 		this.uMapper = UserMapper.UserMapper();
 		this.gMapper = GroupMapper.GroupMapper();
 		this.seMapper = SurveyEntryMapper.SurveyEntryMapper();
-
+		this.vMapper = VoteMapper.VoteMapper();
 	}
 	
 	// Cinema
@@ -206,6 +208,11 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 
 
 	public void deletePresentation(Presentation p) throws IllegalArgumentException {
+		Vector <SurveyEntry> rs = new Vector<SurveyEntry>();
+		rs = seMapper.findAllSurveyEntryByPresentationID(p);
+		for (int i = 0; i < rs.size(); i++) {
+			vMapper.deleteAllVoteBySurveyEntryID(rs.elementAt(i));
+		}
 		seMapper.deleteAllByPresentationID(p);
 		pMapper.deleteByPresentationID(p);	
 	}

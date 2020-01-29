@@ -432,8 +432,8 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 	}
 
-	public void deleteAllBySurveyEntryID(Vote v) throws IllegalArgumentException {
-		vMapper.deleteAllVoteBySurveyEntryID(v.getId());
+	public void deleteAllBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException {
+		vMapper.deleteAllVoteBySurveyEntryID(se);
 		
 	}
 
@@ -445,29 +445,35 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	
 	public Vector<SurveyEntry> secondVoteRound(Vector <SurveyEntry> se) throws IllegalArgumentException{
+		SurveyEntry temp = new SurveyEntry();
 		Vector<SurveyEntry> newSe = new Vector<SurveyEntry>();
-		Vector<SurveyEntry> topVotes;
-		Vector<Vote> vote = null;
-		int g = 0;
+		Vector<SurveyEntry> topVotes = new Vector<SurveyEntry>();
+		Vector<Vote> vote = new Vector<Vote>();
+		int g;
 		
 		for (int i = 0; i < se.size(); i++) {
+			g = 0;
 			vote = vMapper.findAllVoteBySurveyEntryID(se.elementAt(i).getId());
 			for (int j = 0; j < vote.size(); j++) {
-				if(vote.elementAt(j).getVoteResult()==1) {
-				g += 1;
-				}
-				else {
-				g -= 1;
-				}
+				g+=vote.elementAt(j).getVoteResult();
 			}
 		SurveyEntry entry = new SurveyEntry(se.elementAt(i).getId(), se.elementAt(i).getSurveyID(), g);
 		newSe.add(entry);
 		}
 		
-		for (int i = 0; i < newSe.size(); i++) {
-				
+		for (int i = 0; i < 1; i++) {
+			if(newSe.elementAt(i).getResult()>temp.getResult()) {
+				temp = newSe.elementAt(i);
 			}
+			topVotes.add(temp);
+		}
 		
-		return newSe;
+		for (int i = 0; i < se.size(); i++) {
+			vMapper.deleteAllVoteBySurveyEntryID(se.elementAt(i));
+			if(se.elementAt(i)!=topVotes.elementAt(0)||se.elementAt(i)!=topVotes.elementAt(1)) {
+			seMapper.deleteSurveyEntryBySurveyEntryID(se.elementAt(i));
+			}
+		}
+		return topVotes;
 	}
 }

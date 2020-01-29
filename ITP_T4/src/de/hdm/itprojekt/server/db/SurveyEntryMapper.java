@@ -118,6 +118,31 @@ public class SurveyEntryMapper {
 		  
 	  }
 
+	  public Vector<SurveyEntry> findAllSurveyEntryByPresentationID(Presentation p) {
+
+			Connection con = DBConnection.getConnection();
+
+			SurveyEntry se = null;
+			Vector<SurveyEntry> result = new Vector<SurveyEntry>();
+			try {
+				
+				PreparedStatement findAllSurveyEntryBySurveyID = con.prepareStatement
+						("SELECT * From softwarepraktikum_ws1920.surveyentry WHERE presentationID=?");
+				findAllSurveyEntryBySurveyID.setInt(1, p.getId());
+
+				ResultSet rs = findAllSurveyEntryBySurveyID.executeQuery();
+
+				while (rs.next()) {
+					se = new SurveyEntry(rs.getInt("surveyEntryID"), rs.getTimestamp("creationDate"), rs.getInt("surveyID"), rs.getInt("presentationID"));
+					result.add(se);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			    return null;
+			}
+			return result;
+	  }
+
 	
 	  public SurveyEntry insert(SurveyEntry se) {
 		  
@@ -248,8 +273,7 @@ public class SurveyEntryMapper {
 			  
 		  try {
 				 
-			  PreparedStatement deleteAllByPresentationID = con
-					  .prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE presentationID=?");
+			  PreparedStatement deleteAllByPresentationID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE presentationID=?");
 				 
 			  deleteAllByPresentationID.setInt(1, p.getId());
 			  deleteAllByPresentationID.executeUpdate();

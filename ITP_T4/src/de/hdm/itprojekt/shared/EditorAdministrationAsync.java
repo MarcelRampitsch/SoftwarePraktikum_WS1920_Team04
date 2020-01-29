@@ -133,7 +133,7 @@ public interface EditorAdministrationAsync {
 
 	void deleteByVoteID(Vote v, AsyncCallback<Void> callback);
 
-	void deleteAllBySurveyEntryID(Vote v, AsyncCallback<Void> callback);
+	void deleteAllBySurveyEntryID(SurveyEntry se, AsyncCallback<Void> callback);
 
 
 	/*

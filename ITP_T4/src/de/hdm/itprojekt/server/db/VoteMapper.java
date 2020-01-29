@@ -267,16 +267,15 @@ public class VoteMapper {
 
 	}
 
-	public void deleteAllVoteBySurveyEntryID(int id) {
+	public void deleteAllVoteBySurveyEntryID(SurveyEntry se) {
 
 		Connection con = DBConnection.getConnection();
 
 		try {
 
-			PreparedStatement eleteAllVoteBySurveyEntryID = con
-					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE surveyentryID=?;");
+			PreparedStatement eleteAllVoteBySurveyEntryID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.vote WHERE surveyEntryID=?");
 
-			eleteAllVoteBySurveyEntryID.setInt(1, id);
+			eleteAllVoteBySurveyEntryID.setInt(1, se.getId());
 			eleteAllVoteBySurveyEntryID.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

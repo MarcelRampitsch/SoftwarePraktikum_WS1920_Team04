@@ -398,7 +398,7 @@ public class PresentationMapper {
 			// Prepared Statement zum Löschen einer bestimmten Präsentation in der
 			// Datenbank
 			PreparedStatement deleteByPresentationID = con
-					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE presentationID=?;");
+					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE presentationID=?");
 			deleteByPresentationID.setInt(1, p.getId());
 			deleteByPresentationID.executeUpdate();
 
