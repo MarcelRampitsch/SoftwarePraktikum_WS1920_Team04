@@ -323,6 +323,11 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 
 	public void deleteSurveyBySurveyID(Survey s) throws IllegalArgumentException {
+		Vector<SurveyEntry> rs = seMapper.findAllSurveyEntryBySurveyID(s);
+		for (int i = 0; i < rs.size(); i++) {
+			vMapper.deleteAllVoteBySurveyEntryID(rs.elementAt(i));
+		}
+		seMapper.deleteAllBySurveyID(s);
 		sMapper.deleteSurveyBySurveyID(s);
 		
 	}
