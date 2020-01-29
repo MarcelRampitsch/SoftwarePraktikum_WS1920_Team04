@@ -168,7 +168,7 @@ public class VoteMapper {
 		try {
 
 			PreparedStatement insert = con.prepareStatement(
-					"INSERT INTO softwarepraktikum_ws1920.vote(surveyentryID, userID, voteResult) VALUES(?,?,?);");
+					"INSERT INTO softwarepraktikum_ws1920.vote(surveyentryID, userID, voteResult) VALUES(?,?,?)");
 
 			insert.setInt(1, v.getSurveyEntryID());
 			insert.setInt(2, v.getUserID());

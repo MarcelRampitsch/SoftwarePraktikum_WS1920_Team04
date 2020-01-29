@@ -74,11 +74,16 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}	
 	// Methode zum Löschen eines bestimmten Kinos
 	public void deleteCinema (Cinema c) throws IllegalArgumentException {
-		Vector <Presentation> rs = pMapper.findAllByCinemaID(c);
-		for (int i = 0; i < rs.size(); i++) {
-			seMapper.deleteAllByPresentationID(rs.elementAt(i));
+		Vector <Presentation> pres = pMapper.findAllByCinemaID(c);
+		Vector <SurveyEntry> rs = new Vector<SurveyEntry>();
+		for (int j = 0; j < pres.size(); j++) {
+			rs = seMapper.findAllSurveyEntryByPresentationID(pres.elementAt(j));
+			for (int i = 0; i < rs.size(); i++) {
+				vMapper.deleteAllVoteBySurveyEntryID(rs.elementAt(i));
+			}
+			seMapper.deleteAllByPresentationID(pres.elementAt(j));
+			pMapper.deleteByPresentationID(pres.elementAt(j));
 		}
-		pMapper.deleteAllByCinemaID(c);
 		cMapper.deleteCinemaByCinemaID(c.getId());
 	}
 	
@@ -159,11 +164,16 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}		
 	
 	public void deleteMovie(Movie m) throws IllegalArgumentException{
-		Vector<Presentation> rs = pMapper.findAllByMovieID(m);
-		for (int i = 0; i < rs.size(); i++) {
-			seMapper.deleteAllByPresentationID(rs.elementAt(i));
+		Vector<Presentation> pres = pMapper.findAllByMovieID(m);
+		Vector <SurveyEntry> rs = new Vector<SurveyEntry>();
+		for (int j = 0; j < pres.size(); j++) {
+			rs = seMapper.findAllSurveyEntryByPresentationID(pres.elementAt(j));
+			for (int i = 0; i < rs.size(); i++) {
+				vMapper.deleteAllVoteBySurveyEntryID(rs.elementAt(i));
+			}
+			seMapper.deleteAllByPresentationID(pres.elementAt(j));
+			pMapper.deleteByPresentationID(pres.elementAt(j));
 		}
-		pMapper.deleteAllByMovieID(m);
 		mMapper.deleteByMovieID(m);
 	}
 	
@@ -178,11 +188,16 @@ public class AdminAdministrationImpl extends RemoteServiceServlet implements Adm
 	}
 
 	public void deleteTimeslot(Timeslot t) throws IllegalArgumentException {
-		Vector <Presentation> rs = pMapper.findAllByTimeslotID(t);
-		for (int i = 0; i < rs.size(); i++) {
-			seMapper.deleteAllByPresentationID(rs.elementAt(i));
+		Vector <Presentation> pres = pMapper.findAllByTimeslotID(t);
+		Vector <SurveyEntry> rs = new Vector<SurveyEntry>();
+		for (int j = 0; j < pres.size(); j++) {
+			rs = seMapper.findAllSurveyEntryByPresentationID(pres.elementAt(j));
+			for (int i = 0; i < rs.size(); i++) {
+				vMapper.deleteAllVoteBySurveyEntryID(rs.elementAt(i));
+			}
+			seMapper.deleteAllByPresentationID(pres.elementAt(j));
+			pMapper.deleteByPresentationID(pres.elementAt(j));
 		}
-		pMapper.deleteAllByTimeslotID(t);
 		tMapper.deleteByTimeslotID(t);
 	}
 
