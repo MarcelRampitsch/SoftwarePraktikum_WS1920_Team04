@@ -74,6 +74,8 @@ public class NewSurveyForm extends VerticalPanel {
 	 */
 	Button zurueckButton = new Button("back");
 	
+	Label createSurveyLabel = new Label("Create survey:");
+	
 	Label name = new Label("Enter a surveyname:");
 	TextBox umfrageNameBox = new TextBox();
 
@@ -92,10 +94,10 @@ public class NewSurveyForm extends VerticalPanel {
 	Label spielzeit = new Label("Select timeslot:");
 	ListBox spielzeitDropBox = new ListBox();
 
-	Button vorstellungSuchenButton = new Button("add presentation");
+	Button vorstellungSuchenButton = new Button("Add presentation");
 	ListBox vorstellungenDropBox = new ListBox();
 	
-	Button umfrageSichernButton = new Button("save survey");
+	Button umfrageSichernButton = new Button("Save survey");
 
 	/*
 	 * onLoad-Methode: Wird ausgeführt, wenn das Widget, dem Browser hinzugefügt wurde. 
@@ -105,6 +107,8 @@ public class NewSurveyForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		inhalt.add(zurueckButton);
+		inhalt.add(createSurveyLabel);
+		createSurveyLabel.addStyleName("text");
 		zurueckButton.addStyleName("backButtonStyle");
 		zurueckButton.addClickHandler(new BackHandler());
 		inhalt.add(name);

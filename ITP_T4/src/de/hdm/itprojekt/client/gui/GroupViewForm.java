@@ -13,6 +13,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -55,6 +56,7 @@ public class GroupViewForm extends VerticalPanel {
 	List<SurveyEntry> UmfragenEintrag;
 	
 	Button back = new Button("back");
+	Label selectedGroupLabel = new Label("Selected Group:");
 	Label groupNameLabel = new Label();
 	Button newSurveyButton = new Button("Create survey");
 	Button editGroupButton = new Button("edit");
@@ -166,6 +168,8 @@ public class GroupViewForm extends VerticalPanel {
 		mainPanel.add(back);
 		back.addStyleName("backButtonStyle");
 		back.addClickHandler(new backHandler());
+		mainPanel.add(selectedGroupLabel);
+		selectedGroupLabel.addStyleName("text");
 		mainPanel.add(groupNameLabel);
 		//Wenn group UserID = userID dann kann die Group editiert werden
 		if(group.getUserID()==user.getId()) {

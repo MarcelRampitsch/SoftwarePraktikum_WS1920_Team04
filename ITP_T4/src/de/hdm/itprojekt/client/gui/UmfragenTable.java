@@ -49,10 +49,11 @@ public class UmfragenTable extends VerticalPanel {
 	List<SafeHtml> CellData = new Vector<SafeHtml>();
 	Survey s = null;
 	
-	Button back = new Button("<-");
+	Button back = new Button("back");
 	Button secondVote = new Button("Start the second vote round");
+	Label selectedSurveyLabel = new Label("Selected survey:");
 	Label name = new Label();
-	Button deleteSurvey = new Button("X");
+	Button deleteSurvey = new Button("delete");
 	HorizontalPanel surveyPanel = new HorizontalPanel();
 	UmfragenCell2 cell = new UmfragenCell2();
 	CellList<SafeHtml> list = new CellList<SafeHtml>(cell);
@@ -88,9 +89,12 @@ public class UmfragenTable extends VerticalPanel {
 		super.onLoad();
 		name.setText(s.getName());
 		main.add(back);
+		main.add(selectedSurveyLabel);
+		selectedSurveyLabel.addStyleName("text");
 		back.addStyleName("backButtonStyle");
 		surveyPanel.add(name);
 		surveyPanel.add(deleteSurvey);
+		deleteSurvey.addStyleName("deleteButtonStyle");
 		deleteSurvey.addClickHandler(new deleteSurveyHandler());
 		main.add(surveyPanel);
 		secondVote.addClickHandler(new secondVoteHandler());

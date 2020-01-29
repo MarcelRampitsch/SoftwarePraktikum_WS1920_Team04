@@ -41,18 +41,19 @@ public class GroupEditForm extends VerticalPanel {
 	List <Group> Gruppen = null;
 	
 	//Initalisierung relevanter Variablen
-	Label groupName = new Label("Groupname");
+	Label groupName = new Label("Groupname:");
 	TextBox groupBox = new TextBox();
-	Label memberNames = new Label("Groupmember");
+	Label editGroupLabel = new Label("Edit group:");
+	Label memberNames = new Label("Groupmember:");
 	TextBox memberBox = new TextBox();
-	Button search = new Button("+"); 
-	Button delete = new Button("X");
+	Button search = new Button("add"); 
+	Button delete = new Button("delete");
 	ListBox memberList = new ListBox();
 	Button save = new Button("save");
 	HorizontalPanel searchPanel = new HorizontalPanel();
 	HorizontalPanel listPanel = new HorizontalPanel();
 	VerticalPanel main = new VerticalPanel();
-	Button back = new Button("<--");
+	Button back = new Button("back");
 	
 	// Erstellung der <code>GroupEditForm</code> Constructoren
 	public GroupEditForm(User user, Group g, Vector<User> groupMember, Vector<Groupmember> member) {
@@ -90,6 +91,8 @@ public class GroupEditForm extends VerticalPanel {
 		main.add(back);
 		back.addStyleName("backButtonStyle");
 		back.addClickHandler(new backHandler());
+		main.add(editGroupLabel);
+		editGroupLabel.addStyleName("text");
 		main.add(groupName);
 		main.add(groupBox);
 		main.add(memberNames);

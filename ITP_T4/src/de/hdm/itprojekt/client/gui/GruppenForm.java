@@ -51,8 +51,6 @@ public class GruppenForm extends VerticalPanel {
 	  HorizontalPanel suche = new HorizontalPanel();
 	  HorizontalPanel liste = new HorizontalPanel();
 	  
-	  
-	
 	  Label gruppenerstellung = new Label("Create group:");
 	  Label gruppenname = new Label("Groupname:");
 	  Label nickname = new Label("Nickname:");
@@ -98,6 +96,7 @@ public class GruppenForm extends VerticalPanel {
 		back.addStyleName("backButtonStyle");
 		back.addClickHandler(new backButtonHandler());
 		inhalt.add(gruppenerstellung);
+		gruppenerstellung.addStyleName("text");
 		
 		inhalt.add(gruppenname);
 		inhalt.add(gruppennamebox);
