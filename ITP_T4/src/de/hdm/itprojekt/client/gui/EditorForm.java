@@ -142,5 +142,6 @@ public class EditorForm extends VerticalPanel {
 		this.add(new ToolbarForm(user));
 		this.add(contentPanel);
 		this.add(new FooterForm());
+		this.addStyleName("center");
 	}
 }

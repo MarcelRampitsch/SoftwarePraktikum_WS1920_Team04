@@ -43,6 +43,7 @@ public class LoginForm extends VerticalPanel {
 		this.add(welcomeLabel);
 		this.add(txtLabel);
 		this.add(loginPanel);
+		this.addStyleName("login");
 	}
 
 }

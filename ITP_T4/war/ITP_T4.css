@@ -5,7 +5,6 @@ body {
 	left: 0;
 	padding: 0px;
 	margin: 0px !important;
-	font-family: 'Montserrat', sans-serif !important;
 }
 
 * {
@@ -83,6 +82,17 @@ body {
 	transition: 0.5s;	
 }
 
+.h1 {
+	display: block;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+	text-align: -webkit-center;
+}
+
 button.gwt-Button {
 	border: none;
 	background: #404040;
@@ -92,13 +102,14 @@ button.gwt-Button {
 	border-radius: 0px;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
+	padding: 5px;
+	margin: 5px;
 }
 
 .content {
-	height: 100%;
-	width: 100%;
-	padding: 0px;
-	margin: 0px;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 120px;
 	margin-bottom: 80px;
 	text-align: -webkit-center;
@@ -116,23 +127,12 @@ button.gwt-Button {
 	height: 30px;
 	color: rgb(25, 31, 31) !important;
 	box-shadow: 0px 0px 5px rgba(242, 210, 37);
-	font-size: 1.2em;
+	font-size: 1.2em !important;
 	border-style: none !important;
 	font-weight: bold !important;
 	/* Old browsers */
 	background: rgb(242, 210, 37) !important;
 	cursor: pointer;
-}
-
-.h1 {
-	display: block;
-	font-size: 2em;
-	margin-top: 0.67em;
-	margin-bottom: 0.67em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-	text-align: -webkit-center;
 }
 
 .signinwithgoogle {
@@ -171,7 +171,11 @@ button.gwt-Button {
 	z-index: 11;
 }
 
-.logo {
-	margin: 10px;
-	padding: 10px;	
+.login {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.center {
+	width: 100%;
 }
