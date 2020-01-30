@@ -142,7 +142,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllCinemaGroupByUser(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
 			
 			public void onFailure(Throwable caught) {
-				Window.alert("Something went wrong with the loading");
+				Window.alert("Something went wrong when loading the CinemaGroup");
 			}
 			
 			public void onSuccess(Vector<CinemaGroup> result) {
@@ -157,7 +157,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Something went wrong with the loading");
+				Window.alert("Something went wrong when loading the Cinema");
 			}
 
 			public void onSuccess(Vector<Cinema> result) {
@@ -172,7 +172,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllMovieByUser(this.user, new AsyncCallback<Vector<Movie>>() {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Something went wrong with the loading");
+				Window.alert("Something went wrong when loading the Movie");
 			}
 
 			public void onSuccess(Vector<Movie> result) {
@@ -187,7 +187,7 @@ public class NewSurveyForm extends VerticalPanel {
 		editorAdministration.getAllTimeslotByUser(this.user, new AsyncCallback<Vector<Timeslot>>() {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Something went wrong with the loading");
+				Window.alert("Something went wrong when loading the Timeslot");
 			}
 
 			public void onSuccess(Vector<Timeslot> result) {
@@ -260,7 +260,7 @@ public class NewSurveyForm extends VerticalPanel {
 				public void onSuccess(Vector<Presentation> result) {
 					vorstellungenDropBox.clear();
 					if (result.isEmpty()) {
-						Window.alert("There is no Presentation with the selection");
+						Window.alert("There is no Presentation with these selected values");
 						for (int i = 0; i < prese.size(); i++) {
 							vorstellungenDropBox.addItem(prese.elementAt(i).getName());
 						}
@@ -302,8 +302,7 @@ public class NewSurveyForm extends VerticalPanel {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
+					Window.alert("Something went wrong. Couldn't safe the surveyentry.");				
 				}
 
 				@Override
