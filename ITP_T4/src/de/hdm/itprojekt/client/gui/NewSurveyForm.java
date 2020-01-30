@@ -52,6 +52,12 @@ public class NewSurveyForm extends VerticalPanel {
 		this.user = user;
 		this.group = group;
 	}
+	
+	public NewSurveyForm(User user, Group group, Vector<Presentation> pres) {
+		this.user = user;
+		this.group = group;
+		this.prese = pres;
+	}
 
 	private User user = null;
 	private Vector<CinemaGroup> cinegroup = null;
@@ -131,6 +137,7 @@ public class NewSurveyForm extends VerticalPanel {
 		umfrageSichernButton.addStyleName("saveButtonStyle");
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
+		
 
 		editorAdministration.getAllCinemaGroupByUser(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
 			
@@ -254,6 +261,10 @@ public class NewSurveyForm extends VerticalPanel {
 					vorstellungenDropBox.clear();
 					if (result.isEmpty()) {
 						Window.alert("There is no Presentation with the selection");
+						for (int i = 0; i < prese.size(); i++) {
+							vorstellungenDropBox.addItem(prese.elementAt(i).getName());
+						}
+						vorstellungenDropBox.setVisibleItemCount(prese.size());
 					}
 					else {
 						prese.add(result.elementAt(0));
@@ -261,6 +272,10 @@ public class NewSurveyForm extends VerticalPanel {
 						kinoDropBox.setSelectedIndex(-1);
 						filmDropBox.setSelectedIndex(-1);
 						spielzeitDropBox.setSelectedIndex(-1);
+						for (int i = 0; i < prese.size(); i++) {
+							vorstellungenDropBox.addItem(prese.elementAt(i).getName());
+						}
+						vorstellungenDropBox.setVisibleItemCount(prese.size());
 						
 							
 					}
