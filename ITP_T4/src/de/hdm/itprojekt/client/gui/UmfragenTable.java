@@ -154,21 +154,21 @@ public class UmfragenTable extends VerticalPanel {
 			for (int i = 0; i < eintrag.size(); i++) {
 			entrys.add(eintrag.get(i));
 			}
-//			editorAdministration.secondVoteRound(entrys, new AsyncCallback<Vector<SurveyEntry>>() {
-//
-//				@Override
-//				public void onFailure(Throwable caught) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//
-//				@Override
-//				public void onSuccess(Vector<SurveyEntry> result) {
-//					main.clear();
-//					UmfragenTable form = new UmfragenTable(user, eintrag, s);
-//					RootPanel.get().add(form);
-//				}
-//			});
+			editorAdministration.secondVoteRound(entrys, new AsyncCallback<Vector<SurveyEntry>>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(Vector<SurveyEntry> result) {
+					main.clear();
+					UmfragenTable form = new UmfragenTable(user, result, s);
+					RootPanel.get().add(form);
+				}
+			});
 		}
 	}
 	

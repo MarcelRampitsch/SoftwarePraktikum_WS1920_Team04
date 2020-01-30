@@ -462,25 +462,29 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			for (int j = 0; j < vote.size(); j++) {
 				g+=vote.elementAt(j).getVoteResult();
 			}
-		SurveyEntry entry = new SurveyEntry(se.elementAt(i).getId(), se.elementAt(i).getSurveyID(), g);
-		newSe.add(entry);
+			SurveyEntry entry = new SurveyEntry(se.elementAt(i).getId(), se.elementAt(i).getSurveyID(),se.elementAt(i).getPresentationID(), g);
+			newSe.add(entry);
 		}
 		
 		for (int i = 0; i < 2; i++) {
+			temp.setResult(-100);;
 			for (int j = 0; j < newSe.size(); j++) {
-				if(newSe.elementAt(i).getResult()>temp.getResult()) {
-					temp = newSe.elementAt(i);
+				if(newSe.elementAt(j).getResult()>temp.getResult()) {
+					temp = newSe.elementAt(j);
 				}
-				topVotes.add(temp);
 			}
+			newSe.remove(temp);
+			topVotes.add(temp);
 		}
 		
-		for (int i = 0; i < se.size(); i++) {
-			vMapper.deleteAllVoteBySurveyEntryID(se.elementAt(i));
-			if(se.elementAt(i)!=topVotes.elementAt(0)||se.elementAt(i)!=topVotes.elementAt(1)) {
-			seMapper.deleteSurveyEntryBySurveyEntryID(se.elementAt(i));
-			}
+		for (int i = 0; i < newSe.size(); i++) {
+			vMapper.deleteAllVoteBySurveyEntryID(newSe.elementAt(i));
+			seMapper.deleteSurveyEntryBySurveyEntryID(newSe.elementAt(i));
 		}
+		
+		for (int i = 0; i < topVotes.size(); i++) {
+			vMapper.deleteAllVoteBySurveyEntryID(topVotes.elementAt(i));
+		}	
 		return topVotes;
 	}
 }

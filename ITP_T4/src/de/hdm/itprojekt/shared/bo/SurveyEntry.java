@@ -16,10 +16,11 @@ public class SurveyEntry extends BusinessObject {
 			private int userID;
 	//TEST !!!
 
-	public SurveyEntry(int id, int surveyID, int result) {
+	public SurveyEntry(int id, int surveyID, int presentationID, int result) {
 		super(id);
 		this.surveyID = surveyID;
 		this.result = result;
+		this.presentationID = presentationID;
 				
 	}		
 			
