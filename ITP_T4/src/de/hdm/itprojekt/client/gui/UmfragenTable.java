@@ -100,6 +100,7 @@ public class UmfragenTable extends VerticalPanel {
 		secondVote.addClickHandler(new secondVoteHandler());
 		if(s.getRound()==1 && user.getId()==s.getUserID()) {
 		main.add(secondVote);
+		secondVote.addStyleName("newButtonStyle");
 		}
 		main.add(list);
 		back.addClickHandler(new backHandler());
@@ -166,7 +167,7 @@ public class UmfragenTable extends VerticalPanel {
 				public void onSuccess(Vector<SurveyEntry> result) {
 					main.clear();
 					UmfragenTable form = new UmfragenTable(user, result, s);
-					RootPanel.get().add(form);
+					main.add(form);
 				}
 			});
 		}
@@ -245,7 +246,7 @@ public class UmfragenTable extends VerticalPanel {
 				public void onSuccess(Vote result) {
 					main.clear();
 					UmfragenTable form = new UmfragenTable(user,eintrag,s);
-					RootPanel.get().add(form);
+					main.add(form);
 				}
 				
 			});
