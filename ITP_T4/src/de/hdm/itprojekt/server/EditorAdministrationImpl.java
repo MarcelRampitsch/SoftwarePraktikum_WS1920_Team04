@@ -466,11 +466,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		newSe.add(entry);
 		}
 		
-		for (int i = 0; i < 1; i++) {
-			if(newSe.elementAt(i).getResult()>temp.getResult()) {
-				temp = newSe.elementAt(i);
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < newSe.size(); j++) {
+				if(newSe.elementAt(i).getResult()>temp.getResult()) {
+					temp = newSe.elementAt(i);
+				}
+				topVotes.add(temp);
 			}
-			topVotes.add(temp);
 		}
 		
 		for (int i = 0; i < se.size(); i++) {
