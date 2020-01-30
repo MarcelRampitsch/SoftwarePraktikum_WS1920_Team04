@@ -18,7 +18,7 @@ public class DBConnection {
 	// AnmeldeName in MySQL-Workbench(local)-->root, Passwort dazu-->passwort
 	private static String localUrl = "jdbc:mysql://35.198.110.129:3306/?user=root&password=password&useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-	private static String googleUrl = "";
+	private static String googleUrl = "jdbc:google:mysql://itprojektcloud:europe-west3:softwarepraktikumws1920/?user=root&password=password&useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 	/*
 	 * 
@@ -38,15 +38,15 @@ public class DBConnection {
 
 		if (con == null) {
 			try {
-				// DriverManager.registerDriver(new AppEngineDriver());
+				DriverManager.registerDriver(new AppEngineDriver());
 
 				/*
 				 * Neue Instanz mysl Konnektor (JDBC). Bisher nur localUrl, später durch
 				 * googleUrl ersetzt.
 				 */
 
-				Class.forName("com.mysql.jdbc.Driver"); // lädt den JDBC Driver Connector für mysql
-				con = DriverManager.getConnection(localUrl);
+				Class.forName("com.mysql.jdbc.GoogleDriver"); // lädt den JDBC Driver Connector für mysql
+				con = DriverManager.getConnection(googleUrl);
 
 				/*
 				 * Die Verbindung zur Datenbank wird in der Variablen con mit den dazugehoerigen

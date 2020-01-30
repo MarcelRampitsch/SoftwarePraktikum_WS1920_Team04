@@ -7,6 +7,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -45,6 +46,8 @@ public class ITP_T4 implements EntryPoint {
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler Login");	
+				Button b1 = new Button("Test");
+				RootPanel.get().add(b1);
 			}
 
 			@Override
@@ -72,5 +75,6 @@ public class ITP_T4 implements EntryPoint {
 	//	loginPanel.add(loginLabel);
 		loginPanel.add(signInLink);
 		RootPanel.get().add(loginPanel);
+	
 	}  
 }
