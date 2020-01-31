@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 /*
  * Realisierung der Umfragen Klasse. Umfragen besitzen einen Namen, zudem 
- * besitzen sie die Fremdschlüsselattribute userID, groupID und round.
+ * besitzen sie die Fremdschlï¿½sselattribute userID, groupID und round.
  * 
  */
 public class Survey extends BusinessObject {
@@ -47,6 +47,9 @@ public class Survey extends BusinessObject {
 	
 	public Survey (String name) {
 		this.name = name;
+	}
+	public Survey (int id) {
+		super(id);
 	}
 	
 	/*

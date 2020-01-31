@@ -32,11 +32,11 @@ public class SurveyEntry extends BusinessObject {
 	}
 	
 	// Konstruktur, der zum tragen kommt, wenn eine neue Group erstellt wird
-			public SurveyEntry(int userID, String name ) {
-				this.userID=userID;
-				this.name=name;
-					}
-	
+	public SurveyEntry(int userID, String name ) {
+		this.userID=userID;
+		this.name=name;
+	}
+		
 	public SurveyEntry() {
 		
 	}

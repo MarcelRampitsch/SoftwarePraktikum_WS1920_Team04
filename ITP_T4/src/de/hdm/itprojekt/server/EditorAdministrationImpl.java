@@ -476,6 +476,9 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 			newSe.remove(temp);
 			topVotes.add(temp);
 		}
+		if(topVotes.elementAt(0).getId()==topVotes.elementAt(1).getId()) {
+			topVotes.remove(1);
+			}
 		
 		for (int i = 0; i < newSe.size(); i++) {
 			vMapper.deleteAllVoteBySurveyEntryID(newSe.elementAt(i));
@@ -484,7 +487,13 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 		for (int i = 0; i < topVotes.size(); i++) {
 			vMapper.deleteAllVoteBySurveyEntryID(topVotes.elementAt(i));
-		}	
+		}
+		
+		Survey survey = new Survey(se.elementAt(0).getSurveyID());
+		Survey s = sMapper.findBySurveyID(survey);
+		s.setRound(2);
+		survey = sMapper.updateSurvey(s);
+		
 		return topVotes;
 	}
 }

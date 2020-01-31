@@ -166,6 +166,7 @@ public class UmfragenTable extends VerticalPanel {
 				@Override
 				public void onSuccess(Vector<SurveyEntry> result) {
 					main.clear();
+					s.setRound(2);
 					UmfragenTable form = new UmfragenTable(user, result, s);
 					main.add(form);
 				}
