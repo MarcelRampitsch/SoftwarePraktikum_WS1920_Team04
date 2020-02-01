@@ -86,24 +86,14 @@ public class EditorForm extends VerticalPanel {
 		
 		if(user.getNickname()== "zzzzzzzz") {
 			RegistrierungsForm form = new RegistrierungsForm(user);
+			form.addStyleName("RegistrierungsForm");
+			this.add(new ToolbarForm(user));
+			this.add(new FooterForm());
+
 			this.add(form);
 			
 			
 		}else {
-			
-		
-	//	Window.alert(user.getEmail());
-		
-		/*
-		 * CSS-StyleName-Vergabe, um Panels direkt anzusprechen.
-		 */
-		
-//		this.setStylePrimaryName("EditorForm");
-//		header.setStylePrimaryName("Header");
-//		main.setStylePrimaryName("Main");
-//		center.setStylePrimaryName("Center");
-//		west.setStylePrimaryName("West");
-//		east.setStylePrimaryName("East");
 		
 		//Methoden aufruf um alle Gruppen eines User zu bekommen
 		editorAdministration.getAllGroupByUserID(user, new AsyncCallback<Vector<Group>>() { 

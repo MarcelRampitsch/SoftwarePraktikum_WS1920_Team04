@@ -29,10 +29,6 @@ public class RegistrierungsForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 
-		this.addStyleName("RegistrierungsForm");
-		this.add(new FooterForm());
-		this.add(new ToolbarForm(user));
-
 		this.add(name);
 		this.add(box);
 		this.add(speichern);
