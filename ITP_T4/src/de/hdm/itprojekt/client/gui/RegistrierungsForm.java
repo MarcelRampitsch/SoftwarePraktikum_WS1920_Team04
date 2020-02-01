@@ -18,7 +18,7 @@ public class RegistrierungsForm extends VerticalPanel {
 	
 	User user = new User();
 	Label name = new Label("Bitte Nickname eingeben");
-	Button speichern = new Button("safe");
+	Button speichern = new Button("save");
 	TextBox box = new TextBox();
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
 	
@@ -30,14 +30,18 @@ public class RegistrierungsForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		
+		this.addStyleName("RegistrierungsForm");
+		this.add(new FooterForm());
+		this.add(new ToolbarForm(user));
+		
 		this.add(name);
 		this.add(box);
 		this.add(speichern);
-		speichern.addClickHandler(new safeHandler());
+		speichern.addClickHandler(new saveHandler());
 	}
 	
 	
-	public class safeHandler implements ClickHandler {
+	public class saveHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {

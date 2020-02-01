@@ -179,3 +179,7 @@ button.gwt-Button {
 .center {
 	width: 100%;
 }
+.RegistrierungsForm{
+	margin-left: auto;
+    margin-right: auto;
+}
