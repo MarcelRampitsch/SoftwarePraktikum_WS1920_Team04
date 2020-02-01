@@ -91,6 +91,7 @@ public class EditorForm extends VerticalPanel {
 			this.add(new FooterForm());
 
 			this.add(form);
+			this.addStyleName("center");
 			
 			
 		}else {
