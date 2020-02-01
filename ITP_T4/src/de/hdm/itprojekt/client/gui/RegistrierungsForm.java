@@ -15,64 +15,57 @@ import de.hdm.itprojekt.shared.EditorAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.User;
 
 public class RegistrierungsForm extends VerticalPanel {
-	
+
 	User user = new User();
 	Label name = new Label("Bitte Nickname eingeben");
 	Button speichern = new Button("save");
 	TextBox box = new TextBox();
 	EditorAdministrationAsync editorAdministration = ClientSideSettings.getEditorAdministration();
-	
+
 	public RegistrierungsForm(User user) {
 		this.user = user;
 	}
-	
-	
+
 	public void onLoad() {
 		super.onLoad();
-		
+
 		this.addStyleName("RegistrierungsForm");
 		this.add(new FooterForm());
 		this.add(new ToolbarForm(user));
-		
+
 		this.add(name);
 		this.add(box);
 		this.add(speichern);
 		speichern.addClickHandler(new saveHandler());
 	}
-	
-	
+
 	public class saveHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if(box.getText() != "") {
-				
-			User temp = new User(user.getId(),box.getText(), user.getEmail(),null); 
-			editorAdministration.updateUser(temp, new AsyncCallback<User>() {
+			if (box.getText() != "") {
 
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					Window.alert("Fehler safehandler");
-				}
+				User temp = new User(user.getId(), box.getText(), user.getEmail(), null);
+				editorAdministration.updateUser(temp, new AsyncCallback<User>() {
 
-				@Override
-				public void onSuccess(User result) {
-					EditorForm editForm = new EditorForm(result);
-					RootPanel.get().clear();
-					RootPanel.get().add(editForm);
-					
-				}
-			});
-		
-		}
-			
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("Fehler safehandler");
+					}
+
+					@Override
+					public void onSuccess(User result) {
+						EditorForm editForm = new EditorForm(result);
+						RootPanel.get().clear();
+						RootPanel.get().add(editForm);
+
+					}
+				});
+
+			}
+
 		}
 	}
-	
-	
-	
-	
-	
 
 }
