@@ -183,7 +183,7 @@ public class TimeslotMapper {
 		}
 	}
 
-	public void deleteAllTimeslotByUserID(Timeslot t) {
+	public void deleteAllTimeslotByUserID(User u) {
 		// DB-Verbindung holen
 		Connection con = DBConnection.getConnection();
 
@@ -191,7 +191,7 @@ public class TimeslotMapper {
 			// Prepared Statement zum Löschen aller Timeslots in der Datenbank
 			PreparedStatement deleteAllCinemaGroupByUserID = con
 					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.timeslot WHERE userID=?;");
-			deleteAllCinemaGroupByUserID.setInt(1, t.getUserID());
+			deleteAllCinemaGroupByUserID.setInt(1, u.getId());
 
 			// Statement ausfüllen und als Query an die DB schicken
 			deleteAllCinemaGroupByUserID.executeUpdate();

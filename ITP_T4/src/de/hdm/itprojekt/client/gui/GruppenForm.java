@@ -137,6 +137,7 @@ public class GruppenForm extends VerticalPanel {
 			if(user.getId() != groupMember.elementAt(mitglieder.getSelectedIndex()).getId()) {
 			groupMember.remove(mitglieder.getSelectedIndex());
 			mitglieder.removeItem(mitglieder.getSelectedIndex());
+			mitglieder.setVisibleItemCount(groupMember.size());
 			}
 			//Wenn der in der Liste Ausgewählt User gleich des Aktuellen User ist kommt eine FehlerMeldung
 			else {
@@ -169,9 +170,9 @@ public class GruppenForm extends VerticalPanel {
 						u = result;
 						groupMember.add(u);
 						gruppname = gruppennamebox.getText();
-						inhalt.clear();
-						GruppenForm form = new GruppenForm(user, groupMember, gruppname);
-						RootPanel.get().add(form);
+						mitglieder.addItem(result.getNickname());
+						mitglieder.setVisibleItemCount(groupMember.size());
+						nicknamebox.setText("");
 					}
 					//Wenn j = 0 Fehlerausgabe
 					else {

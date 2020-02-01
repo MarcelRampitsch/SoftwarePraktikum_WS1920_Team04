@@ -472,7 +472,7 @@ public class PresentationMapper {
 		try {
 			// Löschen aller Presentations die einen bestimmtes Cinema enthalten
 			PreparedStatement deleteAllByCinemaID = con
-					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.cinema WHERE userID =?;");
+					.prepareStatement("DELETE FROM softwarepraktikum_ws1920.presentation WHERE userID =?;");
 			deleteAllByCinemaID.setInt(1, u.getId());
 			// Statement ausfüllen und als Query an die DB schicken
 			deleteAllByCinemaID.executeUpdate();

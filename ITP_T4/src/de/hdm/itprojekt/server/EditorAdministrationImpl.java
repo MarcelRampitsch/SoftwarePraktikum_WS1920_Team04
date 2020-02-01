@@ -110,17 +110,20 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	// Methode zum L�schen eines bestimmten Users und der damit verbundenen Objekte.
 	public void deleteUser(User u) throws IllegalArgumentException{
-		gMapper.deleteAllByUserID(u);
-		gmMapper.deleteAllGroupmemberByUserID(u);
-		pMapper.deleteAllByUserID(u);
-		sMapper.deleteAllByUserID(u);
-		seMapper.deleteAllByUserID(u);
+		Vector <Group> temp= new Vector<Group>();
 		vMapper.deleteAllVoteByUserID(u);
-		cgMapper.deleteAllCinemaGroupByUserID(u);
+		temp = getAllGroupByUserID(u);
+		for (int i = 0; i < temp.size(); i++) {
+			deleteAllGroupmemberByGroupID(temp.elementAt(i));
+			deleteGroupByGroupID(temp.elementAt(i));
+		}
+		pMapper.deleteAllByUserID(u);
+		gmMapper.deleteAllGroupmemberByUserID(u);
 		cMapper.deleteAllCinemaByUserID(u);
+		cgMapper.deleteAllCinemaGroupByUserID(u);
 		mMapper.deleteAllByUserID(u);
+		tMapper.deleteAllTimeslotByUserID(u);
 		uMapper.deleteUserByUserID(u);
-		//TODO deleteUserByTimeslotID?
 	}
 	// Methode um alle Kinogruppen eines Users zu finden
 		public Vector<CinemaGroup> getAllCinemaGroupByUser(User u) throws IllegalArgumentException{

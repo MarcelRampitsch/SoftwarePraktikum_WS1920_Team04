@@ -142,9 +142,9 @@ public class GroupEditForm extends VerticalPanel {
 						if(j!=1) {
 						groupMember.add(result);
 						newMember.add(result);
-						main.clear();
-						GroupEditForm form = new GroupEditForm(user, g, deleteMember ,groupMember, newMember, member);
-						RootPanel.get().add(form);}
+						memberList.addItem(result.getNickname());
+						memberBox.setText("");
+						}
 						//Sonst kommt die Meldung das der User bereits vorhanden ist
 						else {
 						Window.alert("This User is already part of this group");}

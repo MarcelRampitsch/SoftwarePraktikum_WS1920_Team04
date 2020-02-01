@@ -256,7 +256,7 @@ public class SurveyEntryMapper {
 		  Connection con = DBConnection.getConnection();
 		  
 		  try {
-			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE userID=?;");
+			  PreparedStatement deleteAllByUserID = con.prepareStatement("DELETE FROM softwarepraktikum_ws1920.surveyentry WHERE userID=?");
 			  
 			  deleteAllByUserID.setInt(1, u.getId());
 			  deleteAllByUserID.executeUpdate();
