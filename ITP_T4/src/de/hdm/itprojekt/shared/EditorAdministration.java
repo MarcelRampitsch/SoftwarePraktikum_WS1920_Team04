@@ -181,7 +181,11 @@ public interface EditorAdministration extends RemoteService {
 	// L�schen aller Votes anhand der UmfrageeintragID.
 	public void deleteAllBySurveyEntryID(SurveyEntry se) throws IllegalArgumentException;
 
+	public Vector<Cinema> findAllCinema() throws IllegalArgumentException;
+
+	public Vector<Movie> findAllMovie() throws IllegalArgumentException;
 	
+	public Vector<Timeslot> findAllTimeslot() throws IllegalArgumentException;
 	
 	
 	/*

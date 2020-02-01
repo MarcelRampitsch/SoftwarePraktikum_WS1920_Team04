@@ -233,5 +233,36 @@ public class TimeslotMapper {
 		return result;
 
 	}
+	
+	public Vector<Timeslot> findAllTimeslot() {
+		// DB-Verbindung holen
+		Connection con = DBConnection.getConnection();
+		Timeslot t = null;
+		// Ergebnisvektor vorbereiten
+		Vector<Timeslot> result = new Vector<Timeslot>();
+		try { // Prepared Statement erstellen um alle Präsentationen eines bestimmten Cinema
+				// zu finden
+			PreparedStatement findAllByUSerID = con
+					.prepareStatement("SELECT * From softwarepraktikum_ws1920.timeslot");
+
+			// Ergebnis-Tupel erstellen
+
+			ResultSet rs = findAllByUSerID.executeQuery();
+
+			while (rs.next()) {
+				// Ergebnis-Tupel in Objekt umwandeln
+				t = new Timeslot(rs.getString("time"), rs.getInt("userID"), rs.getInt("timeslotID"),
+						rs.getTimestamp("creationDate"));
+
+				result.addElement(t);
+			} // Fehlerbehandlung hinzufügen
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		// Ergebnisvektor zurückgeben
+		return result;
+
+	}
 	// TODO DeleteAllByMovieID SINN?
 }

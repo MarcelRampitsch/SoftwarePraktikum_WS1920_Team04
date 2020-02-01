@@ -286,6 +286,35 @@ public class CinemaMapper {
 		return result;
 
 	}
+	
+	public Vector<Cinema> findallCinema() {
+
+		Connection con = DBConnection.getConnection();
+
+		Cinema cm = null;
+
+		Vector<Cinema> result = new Vector<Cinema>();
+
+		try {
+			PreparedStatement findallCinemabyUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.cinema");
+
+			ResultSet rs = findallCinemabyUserID.executeQuery();
+
+			while (rs.next()) {
+
+				cm = new Cinema(rs.getInt("cinemaID"), rs.getTimestamp("creationDate"), rs.getString("location"),
+						rs.getString("name"), rs.getInt("cinemaGroupID"), rs.getInt("userID"));
+
+				result.addElement(cm);
+			} // Fehlerbehandlung hinzufügen
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		// Ergebnisvektor zurückgeben
+		return result;
+
+	}
 
 	public Vector<Cinema> findAllCinemaByCinemaGroupID(int id) {
 

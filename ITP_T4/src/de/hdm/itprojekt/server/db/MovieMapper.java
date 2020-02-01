@@ -135,6 +135,32 @@ public class MovieMapper {
 		// Ergebnisvektor zur�ckgeben
 		return result;
 	}
+	
+	public Vector<Movie> findAllMovie() {
+
+		Connection con = DBConnection.getConnection();
+		Movie m = null;
+		// Ergebnisvektor vorbereiten
+		Vector<Movie> result = new Vector<Movie>();
+
+		try {
+			PreparedStatement findAllByUserID = con.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.movie");
+
+			ResultSet rs = findAllByUserID.executeQuery();
+
+			while (rs.next()) {
+				m = new Movie(rs.getInt("movieID"), rs.getTimestamp("creationDate"), rs.getString("name"),
+						rs.getInt("userID"));
+				result.addElement(m);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		// Ergebnisvektor zur�ckgeben
+		return result;
+	}
 
 	// Methode um der Datenbank Filme hinzuzuf�gen und den hinzugef�gten
 	// anzuzeigen

@@ -51,11 +51,17 @@ public interface EditorAdministrationAsync {
 	// Cinema
 	void findAllCinemaByUser1(User u, AsyncCallback<Vector<Cinema>> callback) ;
 	
+	void findAllCinema(AsyncCallback<Vector<Cinema>> callback);
+	
+	void findAllTimeslot(AsyncCallback<Vector<Timeslot>> callback);
+	
 	void getAllCinemaGroupByUser(User u, AsyncCallback<Vector<CinemaGroup>> callback);
 	
 	void getAllCinemaByUser(User u, AsyncCallback<Vector<Cinema>> callback);
 
 	void getAllMovieByUser(User u, AsyncCallback<Vector<Movie>> callback);
+	
+	void findAllMovie(AsyncCallback<Vector<Movie>> callback);
 
 	void getAllTimeslotByUser(User u, AsyncCallback<Vector<Timeslot>> callback);
 

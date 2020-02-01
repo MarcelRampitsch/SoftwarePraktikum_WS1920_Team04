@@ -132,7 +132,7 @@ public class NewSurveyForm extends VerticalPanel {
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
 		
-		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
+		editorAdministration.findAllCinema(new AsyncCallback<Vector<Cinema>>() {
 
 			public void onFailure(Throwable caught) {
 				Window.alert("Something went wrong when loading the Cinema");
@@ -147,7 +147,7 @@ public class NewSurveyForm extends VerticalPanel {
 			}
 		});
 
-		editorAdministration.getAllMovieByUser(this.user, new AsyncCallback<Vector<Movie>>() {
+		editorAdministration.findAllMovie(new AsyncCallback<Vector<Movie>>() {
 
 			public void onFailure(Throwable caught) {
 				Window.alert("Something went wrong when loading the Movie");
@@ -162,7 +162,7 @@ public class NewSurveyForm extends VerticalPanel {
 			}
 		});
 
-		editorAdministration.getAllTimeslotByUser(this.user, new AsyncCallback<Vector<Timeslot>>() {
+		editorAdministration.findAllTimeslot(new AsyncCallback<Vector<Timeslot>>() {
 
 			public void onFailure(Throwable caught) {
 				Window.alert("Something went wrong when loading the Timeslot");

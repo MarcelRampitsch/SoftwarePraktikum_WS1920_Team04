@@ -503,4 +503,24 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 		
 		return topVotes;
 	}
+
+	@Override
+	public Vector<Cinema> findAllCinema() throws IllegalArgumentException {
+		Vector<Cinema> rs = new Vector<Cinema>();
+		rs = cMapper.findallCinema();
+		return rs;
+	}
+	
+	public Vector<Movie> findAllMovie() throws IllegalArgumentException {
+		Vector<Movie> rs = new Vector<Movie>();
+		rs = mMapper.findAllMovie();
+		return rs;
+	}
+	
+	public Vector<Timeslot> findAllTimeslot() throws IllegalArgumentException {
+		Vector<Timeslot> rs = new Vector<Timeslot>();
+		rs = tMapper.findAllTimeslot();
+		return rs;
+	}
+	
 }
