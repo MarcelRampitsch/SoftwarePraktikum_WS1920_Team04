@@ -19,6 +19,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
@@ -47,6 +48,7 @@ public class CellListForm extends VerticalPanel {
 	List<Group> Gruppen;
 	Vector<Groupmember> member = new Vector<Groupmember>();
 	Vector<User> groupMember = new Vector<User>();
+	Button userManage = new Button("Manage user");
 	Button neueGruppe = new Button("Create group");
 	VerticalPanel inhalt = new VerticalPanel();
 	
@@ -61,6 +63,8 @@ public class CellListForm extends VerticalPanel {
 	
 	public void onLoad() {
 	   super.onLoad();
+	   userManage.addStyleName("createButtonStyle");
+	   userManage.addClickHandler(new userClickHandler());
 	   neueGruppe.addStyleName("createButtonStyle");
 	   neueGruppe.addClickHandler(new openGroupClickHandler());
 	   
@@ -129,6 +133,7 @@ public class CellListForm extends VerticalPanel {
 		for(Group group : Gruppen) {
 			list.add(group);
 		}
+		inhalt.add(userManage);
 		inhalt.add(neueGruppe);
 		inhalt.add(table);
 		this.add(inhalt);
@@ -149,6 +154,15 @@ public class CellListForm extends VerticalPanel {
 			GruppenForm gf = new GruppenForm(user, group);
 			inhalt.clear();
 			inhalt.add(gf);
+		}
+	}
+	
+	class userClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+		UserEdit form = new UserEdit(user);
+		form.openUser();
 		}
 	}
 }
