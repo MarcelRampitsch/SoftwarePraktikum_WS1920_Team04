@@ -60,7 +60,6 @@ public class NewSurveyForm extends VerticalPanel {
 	}
 
 	private User user = null;
-	private Vector<CinemaGroup> cinegroup = null;
 	private Vector<Cinema> cine = null;
 	private Vector<Movie> movie = null;
 	private Vector<Timeslot> timesl = null;
@@ -87,9 +86,6 @@ public class NewSurveyForm extends VerticalPanel {
 
 	Label datum = new Label("Select date:");
 	DatePicker datumAuswahlPicker = new DatePicker();
-
-	Label kinogruppe = new Label("Select cinemagroup:");
-	ListBox kinogruppeDropBox = new ListBox();
 	
 	Label kino = new Label("Select cinema:");
 	ListBox kinoDropBox = new ListBox();
@@ -122,8 +118,6 @@ public class NewSurveyForm extends VerticalPanel {
 		umfrageNameBox.getElement().setPropertyString("placeholder", "Surveyname...");
 		inhalt.add(datum);
 		inhalt.add(datumAuswahlPicker);
-		inhalt.add(kinogruppe);
-		inhalt.add(kinogruppeDropBox);
 		inhalt.add(kino);
 		inhalt.add(kinoDropBox);
 		inhalt.add(film);
@@ -137,22 +131,6 @@ public class NewSurveyForm extends VerticalPanel {
 		umfrageSichernButton.addStyleName("saveButtonStyle");
 		vorstellungSuchenButton.addClickHandler(new SearchHandler());
 		umfrageSichernButton.addClickHandler(new SafeHandler());
-		
-
-		editorAdministration.getAllCinemaGroupByUser(this.user, new AsyncCallback<Vector<CinemaGroup>>() {
-			
-			public void onFailure(Throwable caught) {
-				Window.alert("Something went wrong when loading the CinemaGroup");
-			}
-			
-			public void onSuccess(Vector<CinemaGroup> result) {
-				for (int i = 0; i < result.size(); i++) {
-					kinogruppeDropBox.addItem(result.elementAt(i).getName());
-					kinogruppeDropBox.setSelectedIndex(-1);
-					cinegroup = result;
-				}
-			}
-		});
 		
 		editorAdministration.getAllCinemaByUser(this.user, new AsyncCallback<Vector<Cinema>>() {
 
@@ -234,10 +212,8 @@ public class NewSurveyForm extends VerticalPanel {
 			/*
 			 * If Else Abfrage: F�r den Fall, dass bei einem Feld kein Wert ausgew�hlt wurde, wird eine entsprechende Fehlermeldung ausgegeben.
 			 */
-			if(kinogruppeDropBox.getSelectedIndex() == -1) {
-				Window.alert("Please select a cinemagroup");
-			}
-			else if(kinoDropBox.getSelectedIndex() == -1) {
+			
+			if(kinoDropBox.getSelectedIndex() == -1) {
 				Window.alert("Please select a cinema");
 			}
 			else if(filmDropBox.getSelectedIndex() == -1) {
@@ -268,7 +244,6 @@ public class NewSurveyForm extends VerticalPanel {
 					}
 					else {
 						prese.add(result.elementAt(0));
-						kinogruppeDropBox.setSelectedIndex(-1) ;
 						kinoDropBox.setSelectedIndex(-1);
 						filmDropBox.setSelectedIndex(-1);
 						spielzeitDropBox.setSelectedIndex(-1);
@@ -325,7 +300,6 @@ public class NewSurveyForm extends VerticalPanel {
 //
 //							List<SurveyEntry> liste = dataProvider.getList();
 //							liste.add(se);
-							Window.alert("Eingabe gesichert");
 						}
 					});
 					}

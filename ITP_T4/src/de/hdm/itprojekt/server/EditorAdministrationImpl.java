@@ -227,8 +227,12 @@ public class EditorAdministrationImpl extends RemoteServiceServlet implements Ed
 	}
 	
 	public void deleteGroupByGroupID(Group g) throws IllegalArgumentException {
+		Vector <Survey> survey = new Vector<Survey>();
+		survey = getAllSurveyByGroupID(g);
+		for (int i = 0; i < survey.size() ; i++) {
+			deleteSurveyBySurveyID(survey.elementAt(i));	
+		}
 		gMapper.deleteByGroupID(g);
-		
 	}
 		
 	
