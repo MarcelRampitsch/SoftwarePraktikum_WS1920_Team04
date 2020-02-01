@@ -93,7 +93,9 @@ public class UmfragenTable extends VerticalPanel {
 		selectedSurveyLabel.addStyleName("text");
 		back.addStyleName("backButtonStyle");
 		surveyPanel.add(name);
-		surveyPanel.add(deleteSurvey);
+		if(user.getId()==s.getUserID()) {
+			surveyPanel.add(deleteSurvey);
+		}
 		deleteSurvey.addStyleName("deleteButtonStyle");
 		deleteSurvey.addClickHandler(new deleteSurveyHandler());
 		main.add(surveyPanel);

@@ -198,9 +198,9 @@ public class SurveyMapper {
 			update.executeUpdate();
 
 			PreparedStatement stmt = con
-					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE 'surveyID'=?;");
+					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.survey WHERE surveyID=?;");
 
-			update.setInt(1, survey.getId());
+			stmt.setInt(1, survey.getId());
 
 			ResultSet rs = stmt.executeQuery();
 
