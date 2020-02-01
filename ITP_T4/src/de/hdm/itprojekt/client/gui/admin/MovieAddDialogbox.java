@@ -148,7 +148,7 @@ public class MovieAddDialogbox extends DialogBox {
 		moviebox.setFocus(true);
 
 		// Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
-		if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+		if (!symbol.matches("^[0-9A-Z\\\\.]{1,20}$")) {
 			moviebox.selectAll();
 			return 1;
 		} else

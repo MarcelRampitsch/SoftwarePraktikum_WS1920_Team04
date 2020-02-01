@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Group;
-import de.hdm.itprojekt.shared.bo.Presentation;
 import de.hdm.itprojekt.shared.bo.Survey;
 import de.hdm.itprojekt.shared.bo.User;
 

@@ -174,7 +174,7 @@ public class CinemaAddDialogBox extends DialogBox {
 		box.setFocus(true);
 
 		// Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
-		if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+		if (!symbol.matches("^[0-9A-Z\\\\.]{1,20}$")) {
 			box.selectAll();
 			return 1;
 		} else
@@ -187,7 +187,7 @@ public class CinemaAddDialogBox extends DialogBox {
 		box.setFocus(true);
 
 		// Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
-		if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+		if (!symbol.matches("^[0-9A-Z\\\\.]{1,20}$")) {
 			locationBox.selectAll();
 			return 1;
 		} else

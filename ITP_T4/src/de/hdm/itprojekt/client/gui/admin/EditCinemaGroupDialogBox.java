@@ -133,7 +133,7 @@ public class EditCinemaGroupDialogBox extends DialogBox {
 		cinemagroupbox.setFocus(true);
 
 		// Stock code must be between 1 and 10 chars that are numbers, letters, or dots.
-		if (!symbol.matches("^[0-9A-Z\\\\.]{1,10}$")) {
+		if (!symbol.matches("^[0-9A-Z\\\\.]{1,20}$")) {
 			cinemagroupbox.selectAll();
 			return 1;
 		} else
