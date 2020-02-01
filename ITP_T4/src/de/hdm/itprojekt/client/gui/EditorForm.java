@@ -83,6 +83,15 @@ public class EditorForm extends VerticalPanel {
 
 	public void onLoad() {
 		super.onLoad();
+		
+		if(user.getNickname()== "zzzzzzzz") {
+			RegistrierungsForm form = new RegistrierungsForm(user);
+			this.add(form);
+			
+			
+		}else {
+			
+		
 	//	Window.alert(user.getEmail());
 		
 		/*
@@ -143,5 +152,6 @@ public class EditorForm extends VerticalPanel {
 		this.add(contentPanel);
 		this.add(new FooterForm());
 		this.addStyleName("center");
+		}
 	}
 }

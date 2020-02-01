@@ -147,7 +147,7 @@ public class UserMapper {
 			ResultSet rs = getnewUser.executeQuery();
 			if (rs.next()) {
 
-				return new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"),
+				return new User(rs.getInt("userID"), rs.getString("nickname"), rs.getString("email"),
 						rs.getTimestamp("creationDate"));
 			}
 		} catch (SQLException e) {
@@ -162,21 +162,22 @@ public class UserMapper {
 		Connection con = DBConnection.getConnection();
 
 		try {
-			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.user SET nickname=?;");
+			PreparedStatement update = con.prepareStatement("UPDATE softwarepraktikum_ws1920.user SET nickname=? WHERE userID=?;");
 
 			update.setString(1, user.getNickname());
+			update.setInt(2, user.getId());
 
 			update.executeUpdate();
 
 			PreparedStatement stmt = con
-					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE 'userID'=?;");
+					.prepareStatement("SELECT * FROM softwarepraktikum_ws1920.user WHERE userID=?;");
 
-			update.setInt(1, user.getId());
+			stmt.setInt(1, user.getId());
 
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				return new User(rs.getInt("userID"), rs.getString("Nickname"), rs.getString("email"),
+				return new User(rs.getInt("userID"), rs.getString("nickname"), rs.getString("email"),
 						rs.getTimestamp("creationDate"));
 			}
 		} catch (SQLException e) {

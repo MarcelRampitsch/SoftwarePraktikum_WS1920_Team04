@@ -2,8 +2,10 @@ package de.hdm.itprojekt.server;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm.itprojekt.client.gui.RegistrierungsForm;
 import de.hdm.itprojekt.shared.LoginAdministration;
 import de.hdm.itprojekt.shared.bo.Group;
 import de.hdm.itprojekt.shared.bo.User;
@@ -31,7 +33,8 @@ public class LoginAdministrationImpl extends RemoteServiceServlet implements Log
 		}
 
 		try {
-			//System.out.println("Lade Google User");
+			System.out.println("Lade Google User");
+
 
 			UserService userService = UserServiceFactory.getUserService();
 			com.google.appengine.api.users.User clientApiUser = userService.getCurrentUser();
@@ -44,7 +47,9 @@ public class LoginAdministrationImpl extends RemoteServiceServlet implements Log
 
 					return u;
 				} else {
-					u = new User(clientApiUser.getNickname(), clientApiUser.getEmail());
+			//		RegistrierungsForm form = new RegistrierungsForm(u);
+			//		RootPanel.get().add(form);
+					u = new User("zzzzzzzz", clientApiUser.getEmail());
 					u = editorAdministration.createUser(u);
 					u.setIsLoggedIn(true);
 					u.setURL(userService.createLogoutURL(requestUri));
